@@ -53,7 +53,7 @@ public:
 
 	// Checks to see if the passed Game Object collides with any other object in the world.
 	// Returns the type of object hit or not hit
-	GameObjectType GameWorld::checkCollision(GameObject* objToCheck);
+	GameObjectType checkCollision(GameObject* objToCheck);
 
 	// Returns the number of render iterations performed so far
 	unsigned long getRenderCount();

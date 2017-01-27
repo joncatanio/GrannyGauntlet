@@ -4,7 +4,12 @@
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
 Camera::Camera()
-	: boundBox(Eigen::Vector3f(-1.0f, -1.0, -1.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f)) {}
+	: boundBox() {
+		Eigen::Vector3f minCameraBox(-1.0f, -1.0, -1.0f);
+		Eigen::Vector3f maxCameraBox(1.0f, 1.0f, 1.0f);
+
+		boundBox = BoundingBox(minCameraBox, maxCameraBox);
+	}
 
 Camera::~Camera() {}
 

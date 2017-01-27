@@ -5,6 +5,8 @@
 #include <vector>
 #include <memory>
 
+#include <cfloat>
+
 #define EIGEN_DONT_ALIGN_STATICALLY
 #include <Eigen/Dense>
 

@@ -47,7 +47,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		previousSpawnTime = totalTime;
 	}
 
-	for each (GameObject* obj in this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->nonStaticGameObjects_) {
 		obj->update(deltaTime);
 	}
 
@@ -80,12 +80,12 @@ void GameWorld::drawGameObjects() {
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
 	// Draw non-static objects
-	for each (GameObject* obj in this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->nonStaticGameObjects_) {
 		obj->draw(P, M, V);
 	}
 
 	// Draw static objects
-	for each (GameObject *obj in this->staticGameObjects_) {
+	for (GameObject *obj : this->staticGameObjects_) {
 		obj->draw(P, M, V);
 	}
 
@@ -102,14 +102,14 @@ GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
 	}
 
 	// Check against static objects
-	for each(GameObject* obj in staticGameObjects_) {
+	for (GameObject* obj : staticGameObjects_) {
 		if (objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}
 	}
 
 	// Check against other non-static objects
-	for each(GameObject* obj in nonStaticGameObjects_) {
+	for (GameObject* obj : nonStaticGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}

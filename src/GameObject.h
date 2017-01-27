@@ -30,7 +30,7 @@ public:
 
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
-	GameObject::GameObject(GameObjectType objType,
+	GameObject(GameObjectType objType,
 		Eigen::Vector3f startPosition,
 		Eigen::Vector3f startDirection,
 		float startVelocity,

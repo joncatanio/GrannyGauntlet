@@ -1,11 +1,10 @@
 #ifndef _SHAPE_H_
 #define _SHAPE_H_
 
+#include <cfloat>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
-
-#include <cfloat>
 
 #define EIGEN_DONT_ALIGN_STATICALLY
 #include <Eigen/Dense>

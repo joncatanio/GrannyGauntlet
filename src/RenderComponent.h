@@ -1,6 +1,9 @@
 #ifndef RENDER_COMPONENT_H
 #define RENDER_COMPONENT_H
 
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Shape.h"
 #include "MatrixStack.h"
 #include "ShaderHelper.h"

@@ -1,12 +1,15 @@
 #ifndef _SHAPE_H_
 #define _SHAPE_H_
 
+#include <cfloat>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
-#define EIGEN_DONT_ALIGN_STATICALLY
-#include <Eigen/Dense>
+#include "glm/glm.hpp"
+#include "glm/vec4.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 class Program;
 
@@ -20,8 +23,8 @@ public:
 	void init();
 	void resize();
 	void draw(const std::shared_ptr<Program> prog) const;
-	Eigen::Vector3f& getMin();
-	Eigen::Vector3f& getMax();
+	glm::vec3& getMin();
+	glm::vec3& getMax();
 	
 private:
 	std::vector<unsigned int> eleBuf;
@@ -34,8 +37,8 @@ private:
 	unsigned texBufID;
 	unsigned vaoID;
 
-	Eigen::Vector3f min;
-	Eigen::Vector3f max;
+	glm::vec3 min;
+	glm::vec3 max;
 
 	void findAndSetMinAndMax();
 };

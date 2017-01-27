@@ -96,6 +96,8 @@ int initializeGLFW(GLFWwindow **window) {
 
 	// Set the window resize call back
 	glfwSetFramebufferSizeCallback(*window, resize_callback);
+
+	return 0;
 }
 
 // Call before exiting the program

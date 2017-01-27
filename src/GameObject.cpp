@@ -2,15 +2,15 @@
 #include "GameManager.h"
 
 GameObject::GameObject(GameObjectType objType,
-	Eigen::Vector3f startPosition,
-	Eigen::Vector3f startDirection,
+	glm::vec3 startPosition,
+	glm::vec3 startDirection,
 	float startVelocity,
-	Eigen::Vector3f initialScale,
+	glm::vec3 initialScale,
 	InputHandler* input,
 	PhysicsComponent* physics,
 	RenderComponent* render)
 	: type(objType),
-	direction(startDirection.normalized()),
+	direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
 	input_(input),
 	physics_(physics),
@@ -47,11 +47,11 @@ GameObject::~GameObject() {
 
 }
 
-Eigen::Vector3f& GameObject::getPosition() {
+glm::vec3& GameObject::getPosition() {
 	return position_;
 }
 
-Eigen::Vector3f& GameObject::getScale() {
+glm::vec3& GameObject::getScale() {
 	return scale_;
 }
 
@@ -59,18 +59,18 @@ float GameObject::getYAxisRotation() {
 	return yRotationAngle_;
 }
 
-void GameObject::setPosition(Eigen::Vector3f& newPosition) {
+void GameObject::setPosition(glm::vec3& newPosition) {
 	position_ = newPosition;
 	transform.setTranslation(position_);
 }
 
-void GameObject::setScale(Eigen::Vector3f& newScale) {
+void GameObject::setScale(glm::vec3& newScale) {
 	scale_ = newScale;
 	transform.setScale(scale_);
 }
 
 void GameObject::setYAxisRotation(float angle) {
-	static Eigen::Vector3f yAxis(0.0f, 1.0f, 0.0f);
+	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
 
 	yRotationAngle_ = angle;
 	transform.setRotate(angle, yAxis);
@@ -78,21 +78,30 @@ void GameObject::setYAxisRotation(float angle) {
 
 void GameObject::calculateAndSetInitialRotation() {
 	if (velocity > 0.0f) {
-		float cosOfDir = Eigen::Vector3f(1.0f, 0.0f, 0.0f).dot(direction);
+		float cosOfDir = glm::dot(glm::vec3(-1.0f, 0.0f, 0.0f), direction);
+		float rotationAngle = (glm::acos(cosOfDir) * 180.0f / M_PI);
+
+		rotationAngle = direction.z < 0 ? -rotationAngle : rotationAngle;
+		setYAxisRotation(rotationAngle);
+	}
+
+	// TODO(rgarmsen2295): Old rotate implementation - delete when above working
+	/*if (velocity > 0.0f) {
+		float cosOfDir = glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), direction);
 
 		// If the dot between axis and orthog. vec. is negative then we know the angle is negative (since right-hand rule)
-		Eigen::Vector3f crossVec = Eigen::Vector3f(1.0f, 0.0f, 0.0f).cross(direction);
-		float angleDirection = Eigen::Vector3f(0.0f, 1.0f, 0.0f).dot(crossVec);
+		glm::vec3 crossVec = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), direction);
+		float angleDirection = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), crossVec);
 		if (angleDirection >= 0) {
-			setYAxisRotation((acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
+			setYAxisRotation((glm::acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
 		}
 		else {
-			setYAxisRotation((-acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
+			setYAxisRotation((glm::acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
 		}
 	}
 	else {
 		setYAxisRotation(0.0f);
-	}
+	}*/
 }
 
 void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {

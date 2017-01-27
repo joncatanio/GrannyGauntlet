@@ -1,9 +1,6 @@
 #include "Shape.h"
 #include <iostream>
 
-#define EIGEN_DONT_ALIGN_STATICALLY
-#include <Eigen/Dense>
-
 #include "GLSL.h"
 #include "Program.h"
 
@@ -18,8 +15,8 @@ Shape::Shape() :
 	norBufID(0),
 	texBufID(0), 
 	vaoID(0),
-	min(Eigen::Vector3f(0,0,0)),
-	max(Eigen::Vector3f(0, 0, 0))
+	min(glm::vec3(0,0,0)),
+	max(glm::vec3(0, 0, 0))
 {
 }
 
@@ -137,9 +134,9 @@ void Shape::resize() {
 
 	// From min and max compute necessary scale and shift for each dimension
 	float maxExtent, xExtent, yExtent, zExtent;
-	xExtent = max.x() - min.x();
-	yExtent = max.y() - min.y();
-	zExtent = max.z() - min.z();
+	xExtent = max.x - min.x;
+	yExtent = max.y - min.y;
+	zExtent = max.z - min.z;
 
 	if (xExtent >= yExtent && xExtent >= zExtent) {
 		maxExtent = xExtent;
@@ -152,11 +149,11 @@ void Shape::resize() {
 	}
 
 	scaleX = 2.0 / maxExtent;
-	shiftX = min.x() + (xExtent / 2.0);
+	shiftX = min.x + (xExtent / 2.0);
 	scaleY = 2.0 / maxExtent;
-	shiftY = min.y() + (yExtent / 2.0);
+	shiftY = min.y + (yExtent / 2.0);
 	scaleZ = 2.0 / maxExtent;
-	shiftZ = min.z() + (zExtent / 2.0);
+	shiftZ = min.z + (zExtent / 2.0);
 
 	// Go through all verticies shift and scale them
 	for (size_t v = 0; v < posBuf.size() / 3; v++) {
@@ -174,15 +171,15 @@ void Shape::resize() {
 	}
 
 	// Shift and scale min and max values
-	float minX = (min.x() - shiftX) * scaleX;
-	float minY = (min.y() - shiftY) * scaleY;
-	float minZ = (min.z() - shiftZ) * scaleZ;
-	min = Eigen::Vector3f(minX, minY, minZ);
+	float minX = (min.x - shiftX) * scaleX;
+	float minY = (min.y - shiftY) * scaleY;
+	float minZ = (min.z - shiftZ) * scaleZ;
+	min = glm::vec3(minX, minY, minZ);
 
-	float maxX = (max.x() - shiftX) * scaleX;
-	float maxY = (max.y() - shiftY) * scaleY;
-	float maxZ = (max.z() - shiftZ) * scaleZ;
-	max = Eigen::Vector3f(maxX, maxY, maxZ);
+	float maxX = (max.x - shiftX) * scaleX;
+	float maxY = (max.y - shiftY) * scaleY;
+	float maxZ = (max.z - shiftZ) * scaleZ;
+	max = glm::vec3(maxX, maxY, maxZ);
 }
 
 void Shape::init() {
@@ -273,11 +270,11 @@ void Shape::draw(const shared_ptr<Program> prog) const {
 }
 
 
-Eigen::Vector3f& Shape::getMin() {
+glm::vec3& Shape::getMin() {
 	return this->min;
 }
 
-Eigen::Vector3f& Shape::getMax() {
+glm::vec3& Shape::getMax() {
 	return this->max;
 }
 
@@ -300,6 +297,6 @@ void Shape::findAndSetMinAndMax() {
 		if (posBuf[3 * v + 2] > maxZ) maxZ = posBuf[3 * v + 2];
 	}
 
-	min = Eigen::Vector3f(minX, minY, minZ);
-	max = Eigen::Vector3f(maxX, maxY, maxZ);
+	min = glm::vec3(minX, minY, minZ);
+	max = glm::vec3(maxX, maxY, maxZ);
 }

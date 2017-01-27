@@ -12,7 +12,7 @@ public:
 
 	virtual void initObjectPhysics() = 0;
 
-	virtual void updatePhysics(double deltaTime) = 0;
+	virtual void updatePhysics(float deltaTime) = 0;
 
 	virtual void updateBoundingBox() = 0;
 

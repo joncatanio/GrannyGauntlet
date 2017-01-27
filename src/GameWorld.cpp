@@ -47,7 +47,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		previousSpawnTime = totalTime;
 	}
 
-	for each (GameObject* obj in this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->nonStaticGameObjects_) {
 		obj->update(deltaTime);
 	}
 
@@ -80,12 +80,12 @@ void GameWorld::drawGameObjects() {
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
 	// Draw non-static objects
-	for each (GameObject* obj in this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->nonStaticGameObjects_) {
 		obj->draw(P, M, V);
 	}
 
 	// Draw static objects
-	for each (GameObject *obj in this->staticGameObjects_) {
+	for (GameObject *obj : this->staticGameObjects_) {
 		obj->draw(P, M, V);
 	}
 
@@ -102,14 +102,14 @@ GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
 	}
 
 	// Check against static objects
-	for each(GameObject* obj in staticGameObjects_) {
+	for (GameObject* obj : staticGameObjects_) {
 		if (objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}
 	}
 
 	// Check against other non-static objects
-	for each(GameObject* obj in nonStaticGameObjects_) {
+	for (GameObject* obj : nonStaticGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}
@@ -151,14 +151,14 @@ void GameWorld::addBunnyToGameWorld() {
 	float randomStartX = (std::rand() % 20) - 10.0f;
 	float randomStartZ = (std::rand() % 20) - 10.0f;
 
-	Eigen::Vector3f startPosition(randomStartX, 1.0f, randomStartZ);
+	glm::vec3 startPosition(randomStartX, 1.0f, randomStartZ);
 
-	Eigen::Vector3f startDirection(randomStartX, 0.0f, randomStartZ);
-	startDirection.normalize();
+	glm::vec3 startDirection(randomStartX, 0.0f, randomStartZ);
+	glm::normalize(startDirection);
 
 	float startVelocity = 5.0f;
 
-	Eigen::Vector3f initialScale(1.0f, 1.0f, 1.0f);
+	glm::vec3 initialScale(1.0f, 1.0f, 1.0f);
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, progPhong, brass);

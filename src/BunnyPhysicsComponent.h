@@ -12,7 +12,7 @@ public:
 
 	void initObjectPhysics();
 
-	void updatePhysics(double deltaTime);
+	void updatePhysics(float deltaTime);
 
 	void updateBoundingBox();
 

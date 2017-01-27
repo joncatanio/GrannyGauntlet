@@ -8,12 +8,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#define EIGEN_DONT_ALIGN_STATICALLY
-#include <Eigen/Dense>
-
-#include "ShaderHelper.h"
-
 #include "BoundingBox.h"
+#include "ShaderHelper.h"
 
 class Camera {
 public:
@@ -31,33 +27,33 @@ public:
 
 	~Camera();
 
-	Eigen::Vector3f& getEye();
+	glm::vec3& getEye();
 
 	// Returns a reference to the current look-at vector for the camera
-	Eigen::Vector3f& getLookAt();
+	glm::vec3& getLookAt();
 
-	Eigen::Vector3f& getUp();
+	glm::vec3& getUp();
 
-	Eigen::Vector3f getTarget();
+	glm::vec3 getTarget();
 
-	void setEye(Eigen::Vector3f newEye);
+	void setEye(glm::vec3 newEye);
 
-	void setLookAt(Eigen::Vector3f newLA);
+	void setLookAt(glm::vec3 newLA);
 
-	void setUp(Eigen::Vector3f newUp);
+	void setUp(glm::vec3 newUp);
 
 	void changeAlpha(float deltaAlpha);
 
 	void changeBeta(float deltaBeta);
 
-	void update(double deltaTime);
+	void update(float deltaTime);
 
 private:
 
 	// Vector's the define the camera
-	Eigen::Vector3f Eye = Eigen::Vector3f(0, 1, 0);
-	Eigen::Vector3f LA;
-	Eigen::Vector3f Up = Eigen::Vector3f(0, 1, 0);
+	glm::vec3 Eye = glm::vec3(0, 1, 0);
+	glm::vec3 LA;
+	glm::vec3 Up = glm::vec3(0, 1, 0);
 
 	// Angle values used for pitch and yaw respectively
 	float alpha = 0;

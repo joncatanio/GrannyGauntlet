@@ -24,11 +24,11 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 		float randomStartX = (std::rand() % 20) - 10.0f;
 		float randomStartZ = (std::rand() % 20) - 10.0f;
 
-		Eigen::Vector3f startPosition(randomStartX, 1.0f, randomStartZ);
-		Eigen::Vector3f startDirection(randomStartX, 0.0f, randomStartZ);
+		glm::vec3 startPosition(randomStartX, 1.0f, randomStartZ);
+		glm::vec3 startDirection(randomStartX, 0.0f, randomStartZ);
 
 		holder_->setPosition(startPosition);
-		holder_->direction = startDirection.normalized();
+		holder_->direction = glm::normalize(startDirection);
 		holder_->calculateAndSetInitialRotation();
 
 		updateBoundingBox();
@@ -44,13 +44,13 @@ void BunnyPhysicsComponent::updateBoundingBox() {
 	boundBox.update(transform.getTransform());
 }
 
-void BunnyPhysicsComponent::updatePhysics(double deltaTime) {
+void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	GameWorld& world = GameManager::instance().getGameWorld();
 
-	Eigen::Vector3f oldPosition = holder_->getPosition();
+	glm::vec3 oldPosition = holder_->getPosition();
 
 	// Update position of GameObject (if a collision occurs, will reset to old position and update position again)
-	Eigen::Vector3f newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);
+	glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);
 	holder_->setPosition(newPosition);
 	updateBoundingBox();
 

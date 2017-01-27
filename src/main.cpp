@@ -165,10 +165,10 @@ static void setupStaticWorld(GameWorld& world) {
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, progPhong, green);
 	GameObject* floor = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		Eigen::Vector3f(0.0f, 0.0f, 0.0f), 
-		Eigen::Vector3f(0.0f, 1.0f, 0.0f), 
+		glm::vec3(0.0f, 0.0f, 0.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f, 
-		Eigen::Vector3f(30, 0.01, 30),
+		glm::vec3(30, 0.01, 30),
 		NULL,
 		NULL,
 		floorRenderComp);
@@ -178,10 +178,10 @@ static void setupStaticWorld(GameWorld& world) {
 	WallRenderComponent* leftWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
 	GameObject* leftWall = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		Eigen::Vector3f(-30.0f, 0.0f, 0.0f), 
-		Eigen::Vector3f(1.0f, 0.0f, 0.0f), 
+		glm::vec3(-30.0f, 0.0f, 0.0f), 
+		glm::vec3(1.0f, 0.0f, 0.0f), 
 		0.0f, 
-		Eigen::Vector3f(0.01, 30, 30),
+		glm::vec3(0.01, 30, 30),
 		NULL, 
 		NULL, 
 		leftWallRenderComp);
@@ -191,10 +191,10 @@ static void setupStaticWorld(GameWorld& world) {
 	WallRenderComponent* rightWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
 	GameObject* rightWall = new GameObject(
 		GameObjectType::STATIC_OBJECT,
-		Eigen::Vector3f(30.0f, 0.0f, 0.0f),
-		Eigen::Vector3f(-1.0f, 0.0f, 0.0f),
+		glm::vec3(30.0f, 0.0f, 0.0f),
+		glm::vec3(-1.0f, 0.0f, 0.0f),
 		0.0f,
-		Eigen::Vector3f(0.01, 30, 30),
+		glm::vec3(0.01, 30, 30),
 		NULL,
 		NULL,
 		rightWallRenderComp);
@@ -204,10 +204,10 @@ static void setupStaticWorld(GameWorld& world) {
 	WallRenderComponent* frontWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
 	GameObject* frontWall = new GameObject(
 		GameObjectType::STATIC_OBJECT,
-		Eigen::Vector3f(0.0f, 0.0f, -30.0f),
-		Eigen::Vector3f(0.0f, 0.0f, 1.0f),
+		glm::vec3(0.0f, 0.0f, -30.0f),
+		glm::vec3(0.0f, 0.0f, 1.0f),
 		0.0f,
-		Eigen::Vector3f(30, 30, 0.01),
+		glm::vec3(30, 30, 0.01),
 		NULL,
 		NULL,
 		frontWallRenderComp);
@@ -217,10 +217,10 @@ static void setupStaticWorld(GameWorld& world) {
 	WallRenderComponent* backWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
 	GameObject* backWall = new GameObject(
 		GameObjectType::STATIC_OBJECT,
-		Eigen::Vector3f(0.0f, 0.0f, 30.0f),
-		Eigen::Vector3f(0.0f, 0.0f, -1.0f),
+		glm::vec3(0.0f, 0.0f, 30.0f),
+		glm::vec3(0.0f, 0.0f, -1.0f),
 		0.0f,
-		Eigen::Vector3f(30, 30, 0.01),
+		glm::vec3(30, 30, 0.01),
 		NULL,
 		NULL,
 		backWallRenderComp);
@@ -312,7 +312,9 @@ int main(int argc, char **argv) {
 
 		// Print info roughly every second
 		if (secondClock >= 1.0) {
-			gameManager.printInfoToConsole(numFramesInSecond / secondClock);
+
+			// TODO(rgarmsen2295): Currently acting kinda funky on linux and not really necessary so disabling for now
+			// gameManager.printInfoToConsole(numFramesInSecond / secondClock);
 
 			secondClock = 0.0;
 			numFramesInSecond = 0;

@@ -14,13 +14,13 @@ file(GLOB_RECURSE GLSL "resources/*.glsl")
 # Set the executable.
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS} ${GLSL})
 
-# Get the Eigen environment variable. Since Eigen is a header-only library, we
+# Get the GLM environment variable. Since GLM is a header-only library, we
 # just need to add it to the include directory.
-set(EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}")
-if(NOT EIGEN3_INCLUDE_DIR)
-  MESSAGE(FATAL_ERROR "Please point the environment variable EIGEN3_INCLUDE_DIR to the include directory of your Eigen3 installation.")
+set(GLM_INCLUDE_DIR "$ENV{GLM_INCLUDE_DIR}")
+if(NOT GLM_INCLUDE_DIR)
+  MESSAGE(FATAL_ERROR "Please point the environment variable GLM_INCLUDE_DIR to the include directory of your GLM installation.")
 endif()
-include_directories(${EIGEN3_INCLUDE_DIR})
+include_directories(${GLM_INCLUDE_DIR})
 
 # Get the GLFW environment variable. There should be a CMakeLists.txt in the 
 # specified directory.

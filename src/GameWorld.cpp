@@ -151,14 +151,14 @@ void GameWorld::addBunnyToGameWorld() {
 	float randomStartX = (std::rand() % 20) - 10.0f;
 	float randomStartZ = (std::rand() % 20) - 10.0f;
 
-	Eigen::Vector3f startPosition(randomStartX, 1.0f, randomStartZ);
+	glm::vec3 startPosition(randomStartX, 1.0f, randomStartZ);
 
-	Eigen::Vector3f startDirection(randomStartX, 0.0f, randomStartZ);
-	startDirection.normalize();
+	glm::vec3 startDirection(randomStartX, 0.0f, randomStartZ);
+	glm::normalize(startDirection);
 
 	float startVelocity = 5.0f;
 
-	Eigen::Vector3f initialScale(1.0f, 1.0f, 1.0f);
+	glm::vec3 initialScale(1.0f, 1.0f, 1.0f);
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, progPhong, brass);

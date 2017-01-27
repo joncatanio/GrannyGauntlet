@@ -5,34 +5,34 @@ constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
 Camera::Camera()
 	: boundBox() {
-		Eigen::Vector3f minCameraBox(-1.0f, -1.0, -1.0f);
-		Eigen::Vector3f maxCameraBox(1.0f, 1.0f, 1.0f);
+		glm::vec3 minCameraBox(-1.0f, -1.0, -1.0f);
+		glm::vec3 maxCameraBox(1.0f, 1.0f, 1.0f);
 
 		boundBox = BoundingBox(minCameraBox, maxCameraBox);
 	}
 
 Camera::~Camera() {}
 
-Eigen::Vector3f& Camera::getEye() {
+glm::vec3& Camera::getEye() {
 	return Eye;
 }
 
-Eigen::Vector3f& Camera::getLookAt() {
-	Eigen::Vector3f tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad), cos(alphaRad) * cos(ninetyRad - betaRad));
+glm::vec3& Camera::getLookAt() {
+	glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad), cos(alphaRad) * cos(ninetyRad - betaRad));
 	LA = tempLA;
 
 	return LA;
 }
 
-Eigen::Vector3f& Camera::getUp() {
+glm::vec3& Camera::getUp() {
 	return Up;
 }
 
-Eigen::Vector3f Camera::getTarget() {
+glm::vec3 Camera::getTarget() {
 	return getEye() + getLookAt();
 }
 
-void Camera::setEye(Eigen::Vector3f newEye) {
+void Camera::setEye(glm::vec3 newEye) {
 	Eye = newEye;
 
 	// Update bounding box with new camera position
@@ -40,11 +40,11 @@ void Camera::setEye(Eigen::Vector3f newEye) {
 	boundBox.max_ = boundBox.objMax_ + newEye;
 }
 
-void Camera::setLookAt(Eigen::Vector3f newLA) {
+void Camera::setLookAt(glm::vec3 newLA) {
 	LA = newLA;
 }
 
-void Camera::setUp(Eigen::Vector3f newUp) {
+void Camera::setUp(glm::vec3 newUp) {
 	Up = newUp;
 }
 
@@ -67,16 +67,16 @@ void Camera::changeBeta(float deltaBeta) {
 	betaRad = beta * M_PI / 180.0;
 }
 
-void Camera::update(double deltaTime) {
-	Eigen::Vector3f gazeVec = LA;
-	gazeVec.normalize();
+void Camera::update(float deltaTime) {
+	glm::vec3 gazeVec = LA;
+	glm::normalize(gazeVec);
 
-	Eigen::Vector3f w = -gazeVec;
+	glm::vec3 w = -gazeVec;
 
-	Eigen::Vector3f upCrossW = Up.cross(w);
-	upCrossW.normalize();
+	glm::vec3 upCrossW = glm::cross(Up, w);
+	glm::normalize(upCrossW);
 
-	Eigen::Vector3f u = upCrossW;
+	glm::vec3 u = upCrossW;
 
 	int letterState = glfwGetKey(window, GLFW_KEY_W);
 	int arrowState = glfwGetKey(window, GLFW_KEY_UP);
@@ -111,7 +111,7 @@ void Camera::update(double deltaTime) {
 	}
 
 	// Don't allow the player to go below the ground
-	if (Eye.y() < 1) {
-		setEye(Eigen::Vector3f(Eye.x(), 1, Eye.z()));
+	if (Eye.y < 1) {
+		setEye(glm::vec3(Eye.x, 1, Eye.z));
 	}
 }

@@ -14,8 +14,8 @@ void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<
 
 	// TODO(rgarmsen2295): Add boilerplate to standard method call - probably in ShaderManager or similar
 	// Bind perspective and view tranforms
-	glUniformMatrix4fv(progPhong->getUniform("P"), 1, GL_FALSE, P->topMatrix().data());
-	glUniformMatrix4fv(progPhong->getUniform("V"), 1, GL_FALSE, V->topMatrix().data());
+	glUniformMatrix4fv(progPhong->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
+	glUniformMatrix4fv(progPhong->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
 
 	// Bind light properties
 	glUniform3f(progPhong->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
@@ -32,7 +32,7 @@ void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<
 	M->loadIdentity();
 
 	M->multMatrix(holder_->transform.getTransform());
-	glUniformMatrix4fv(progPhong->getUniform("M"), 1, GL_FALSE, M->topMatrix().data());
+	glUniformMatrix4fv(progPhong->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
 	// Draw bunny
 	shape_->draw(shaderProgram_);

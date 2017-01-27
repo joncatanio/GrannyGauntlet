@@ -22,7 +22,7 @@ class GameObject {
 public:
 
 	// Direct object properties
-	Eigen::Vector3f direction;
+	glm::vec3 direction;
 	float velocity;
 	MatrixTransform transform;
 	BoundingBox boundBox;
@@ -31,25 +31,25 @@ public:
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
-		Eigen::Vector3f startPosition,
-		Eigen::Vector3f startDirection,
+		glm::vec3 startPosition,
+		glm::vec3 startDirection,
 		float startVelocity,
-		Eigen::Vector3f initialScale,
+		glm::vec3 initialScale,
 		InputHandler* input,
 		PhysicsComponent* physics,
 		RenderComponent* render);
 
 	~GameObject();
 
-	Eigen::Vector3f& getPosition();
+	glm::vec3& getPosition();
 
-	Eigen::Vector3f& getScale();
+	glm::vec3& getScale();
 
 	float getYAxisRotation();
 
-	void setPosition(Eigen::Vector3f& newPosition);
+	void setPosition(glm::vec3& newPosition);
 
-	void setScale(Eigen::Vector3f& newScale);
+	void setScale(glm::vec3& newScale);
 
 	void setYAxisRotation(float angle);
 
@@ -66,10 +66,10 @@ public:
 private:
 
 	// The current position of the object in world space
-	Eigen::Vector3f position_;
+	glm::vec3 position_;
 
 	// The current scale of the object relative to it's original size
-	Eigen::Vector3f scale_;
+	glm::vec3 scale_;
 
 	// The current y-axis rotation of the object relative to it's original orientation
 	float yRotationAngle_;

@@ -32,13 +32,15 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
     yVelocity -= gravity * deltaTime;
 
+    //TODO(nurgan) make the cookie "spin" when it is in the air
+
     // Update position of GameObject (if a collision occurs, will reset to old position and update position again)
     glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);
     newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
     holder_->setPosition(newPosition);
     updateBoundingBox();
 
-    // If we hit someone or we're at the edge of the acceptable "world", then reverse direction
+    // If we hit anything, stop "forward" movement
     GameObjectType objTypeHit = world.checkCollision(holder_);
 
     if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::NONSTATIC_OBJECT) {

@@ -12,6 +12,7 @@
 
 #include "BunnyPhysicsComponent.h"
 #include "BunnyRenderComponent.h"
+#include "CookiePhysicsComponent.h"
 
 /* 
  * The holder class for anything that could be considered "in" or pertaining
@@ -83,6 +84,9 @@ private:
 
 	// Adds a bunny model to the game world under the rules of 476 Lab 1
 	void addBunnyToGameWorld();
+
+    // Throw a cookie.
+    void throwCookie();
 };
 
 #endif

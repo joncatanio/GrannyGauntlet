@@ -13,6 +13,7 @@
 #include "BunnyPhysicsComponent.h"
 #include "BunnyRenderComponent.h"
 #include "CookiePhysicsComponent.h"
+#include "PlayerPhysicsComponent.h"
 
 /* 
  * The holder class for anything that could be considered "in" or pertaining

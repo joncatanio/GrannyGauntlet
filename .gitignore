@@ -1,6 +1,9 @@
 # Directories not to be tracked
 build/
 
+# MAC_OSX stuff
+*.swp
+
 # Compiled object files
 *.o
 *.obj

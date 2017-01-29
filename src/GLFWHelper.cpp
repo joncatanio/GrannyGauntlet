@@ -85,6 +85,9 @@ int initializeGLFW(GLFWwindow **window) {
 	// Set keyboard callback.
 	glfwSetKeyCallback(*window, key_callback);
 
+   // Set sticky keys for more accurate polling
+   glfwSetInputMode(*window, GLFW_STICKY_KEYS, 1);
+
 	// Set the mouse call back
 	glfwSetMouseButtonCallback(*window, mouse_callback);
 

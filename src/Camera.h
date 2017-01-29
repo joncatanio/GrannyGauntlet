@@ -11,6 +11,8 @@
 #include "BoundingBox.h"
 #include "ShaderHelper.h"
 
+class GameObject;
+
 class Camera {
 public:
 
@@ -23,7 +25,7 @@ public:
 	// TODO(rgarmsen): Add an easy way to toggle collision detection on the camera if desired (mid-game too)
 	BoundingBox boundBox;
 
-	Camera();
+	Camera(GameObject* player);
 
 	~Camera();
 
@@ -49,9 +51,11 @@ public:
 	void update(float deltaTime);
 
 private:
+   // The player the camera is following
+   GameObject* player;
 
 	// Vector's the define the camera
-	glm::vec3 Eye = glm::vec3(0, 1, 0);
+	glm::vec3 Eye = glm::vec3(0, 2, 0);
 	glm::vec3 LA;
 	glm::vec3 Up = glm::vec3(0, 1, 0);
 

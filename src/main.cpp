@@ -246,11 +246,25 @@ int main(int argc, char **argv) {
 	initShaders();
 	initMaterials();
 
+   PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
+   BunnyRenderComponent* playerRenderComp = new BunnyRenderComponent(shapeCube, progPhong, jade);
+   GameObject* player = new GameObject(
+      GameObjectType::NONSTATIC_OBJECT,
+      glm::vec3(0.0f, 1.0f, 0.0f),
+      glm::vec3(0.0f, 0.0f, -1.0f),
+      20.0f,
+      glm::vec3(1.0f, 1.0f, 1.0f),
+      NULL,
+      playerPhysicsComp,
+      playerRenderComp
+   );
+
 	// The current game camera
-	Camera camera;
+	Camera camera(player);
 
 	// The current game world
 	GameWorld world;
+   world.addNonStaticGameObject(player);
 
 	// Initialize the GameManager and get its instance
 	GameManager& gameManager = GameManager::instance();

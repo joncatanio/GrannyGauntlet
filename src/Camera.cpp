@@ -1,11 +1,14 @@
 #include "Camera.h"
+#include "GameObject.h"
 
 // Ninety degrees in radians
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
-Camera::Camera()
+Camera::Camera(GameObject* player)
 	: boundBox() {
-		glm::vec3 minCameraBox(-1.0f, -1.0, -1.0f);
+      // TODO (noj) handle null input at some point.
+      this->player = player;
+		glm::vec3 minCameraBox(-1.0f, -1.0f, -1.0f);
 		glm::vec3 maxCameraBox(1.0f, 1.0f, 1.0f);
 
 		boundBox = BoundingBox(minCameraBox, maxCameraBox);
@@ -18,7 +21,8 @@ glm::vec3& Camera::getEye() {
 }
 
 glm::vec3& Camera::getLookAt() {
-	glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad), cos(alphaRad) * cos(ninetyRad - betaRad));
+   glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad),
+      cos(alphaRad) * cos(ninetyRad - betaRad));
 	LA = tempLA;
 
 	return LA;
@@ -78,40 +82,8 @@ void Camera::update(float deltaTime) {
 
 	glm::vec3 u = upCrossW;
 
-	int letterState = glfwGetKey(window, GLFW_KEY_W);
-	int arrowState = glfwGetKey(window, GLFW_KEY_UP);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the neg dir along the w camera axis (forward) 
-		setEye(Eye - (WSScale * w * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_A);
-	arrowState = glfwGetKey(window, GLFW_KEY_LEFT);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the neg dir along the u camera axis (left)
-		setEye(Eye - (ADScale * u * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_S);
-	arrowState = glfwGetKey(window, GLFW_KEY_DOWN);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the pos dir along the w camera axis (backwards)
-		setEye(Eye + (WSScale * w * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_D);
-	arrowState = glfwGetKey(window, GLFW_KEY_RIGHT);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the pos dir along the u camera axis (right)
-		setEye(Eye + (ADScale * u * deltaTime));
-	}
-
-	// Don't allow the player to go below the ground
-	if (Eye.y < 1) {
-		setEye(glm::vec3(Eye.x, 1, Eye.z));
-	}
+   setEye(player->getPosition() + w * 5.0f);
+   if (Eye.y < 1) {
+      setEye(glm::vec3(Eye.x, 1, Eye.z));
+   }
 }

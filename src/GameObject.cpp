@@ -20,8 +20,6 @@ GameObject::GameObject(GameObjectType objType,
 	setPosition(startPosition);
 	setScale(initialScale);
 
-	//calculateAndSetInitialRotation();
-
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);
 		boundBox = BoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());

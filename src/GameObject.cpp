@@ -20,7 +20,7 @@ GameObject::GameObject(GameObjectType objType,
 	setPosition(startPosition);
 	setScale(initialScale);
 
-	calculateAndSetInitialRotation();
+	//calculateAndSetInitialRotation();
 
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);
@@ -76,15 +76,6 @@ void GameObject::setYAxisRotation(float angle) {
 	transform.setRotate(angle, yAxis);
 }
 
-void GameObject::calculateAndSetInitialRotation() {
-	if (velocity > 0.0f) {
-		float cosOfDir = glm::dot(glm::vec3(-1.0f, 0.0f, 0.0f), direction);
-		float rotationAngle = glm::acos(cosOfDir);
-
-		rotationAngle = direction.z < 0 ? -rotationAngle : rotationAngle;
-		setYAxisRotation(rotationAngle);
-	}
-}
 
 void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {
 	if (newMaterial != render_->getMaterial()) {

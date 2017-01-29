@@ -14,6 +14,10 @@ BunnyPhysicsComponent::~BunnyPhysicsComponent() {
 
 void BunnyPhysicsComponent::initObjectPhysics() {
 	GameWorld& world = GameManager::instance().getGameWorld();
+
+	setupInitialRotation();
+	updateBoundingBox();
+
 	GameObjectType objTypeHit = world.checkCollision(holder_);
 
 	// Don't randomly place a bunny on another bunny
@@ -29,12 +33,22 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 
 		holder_->setPosition(startPosition);
 		holder_->direction = glm::normalize(startDirection);
-		holder_->calculateAndSetInitialRotation();
 
+		// Rotate early in-case it affects bounding box collision
+		setupInitialRotation();
 		updateBoundingBox();
 
 		objTypeHit = world.checkCollision(holder_);
 	}
+}
+
+void BunnyPhysicsComponent::setupInitialRotation() {
+	float cosOfDir = glm::dot(glm::vec3(-1.0f, 0.0f, 0.0f), holder_->direction);
+
+	float rotationAngle = glm::acos(cosOfDir);
+	rotationAngle = holder_->direction.z < 0 ? -rotationAngle : rotationAngle;
+
+	holder_->setYAxisRotation(rotationAngle);
 }
 
 void BunnyPhysicsComponent::updateBoundingBox() {

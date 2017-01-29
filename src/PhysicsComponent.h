@@ -10,10 +10,13 @@ public:
 
 	virtual ~PhysicsComponent() {}
 
+	// Initializes the object's physics specific to the implementing component
 	virtual void initObjectPhysics() = 0;
 
+	// Updates the object's physics by the given timestep |deltaTime|
 	virtual void updatePhysics(float deltaTime) = 0;
 
+	// Updates the object's bounding box according to it's current MatrixStack
 	virtual void updateBoundingBox() = 0;
 
 private:

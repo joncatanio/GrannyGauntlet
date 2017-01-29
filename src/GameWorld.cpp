@@ -66,14 +66,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 void GameWorld::drawGameObjects() {
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
-
-	// TODO(rgarmsen): Move these two into some manager class from main
-	// Update the frame buffer in-case of resizing, etc.
-	//updateFrameBuffer();
-
-	// Get the current aspect ratio
-	//aspect = getAspectRatio();
-
+	
 	// Create the matrix stacks
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
 	std::shared_ptr<MatrixStack> M = std::make_shared<MatrixStack>();

@@ -79,29 +79,11 @@ void GameObject::setYAxisRotation(float angle) {
 void GameObject::calculateAndSetInitialRotation() {
 	if (velocity > 0.0f) {
 		float cosOfDir = glm::dot(glm::vec3(-1.0f, 0.0f, 0.0f), direction);
-		float rotationAngle = (glm::acos(cosOfDir) * 180.0f / M_PI);
+		float rotationAngle = glm::acos(cosOfDir);
 
 		rotationAngle = direction.z < 0 ? -rotationAngle : rotationAngle;
 		setYAxisRotation(rotationAngle);
 	}
-
-	// TODO(rgarmsen2295): Old rotate implementation - delete when above working
-	/*if (velocity > 0.0f) {
-		float cosOfDir = glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), direction);
-
-		// If the dot between axis and orthog. vec. is negative then we know the angle is negative (since right-hand rule)
-		glm::vec3 crossVec = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), direction);
-		float angleDirection = glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), crossVec);
-		if (angleDirection >= 0) {
-			setYAxisRotation((glm::acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
-		}
-		else {
-			setYAxisRotation((glm::acos(cosOfDir) * 180.0f / M_PI) + 180.0f);
-		}
-	}
-	else {
-		setYAxisRotation(0.0f);
-	}*/
 }
 
 void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {

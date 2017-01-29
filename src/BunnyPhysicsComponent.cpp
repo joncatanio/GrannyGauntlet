@@ -68,7 +68,7 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 		if (holder_->velocity != 0.0f) {
 			// Only update bunny on hit if moving
 			holder_->direction = -holder_->direction;
-			holder_->setYAxisRotation(180.0f + holder_->getYAxisRotation());
+			holder_->setYAxisRotation(M_PI + holder_->getYAxisRotation());
 
 			// Update position of GameObject
 			newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);

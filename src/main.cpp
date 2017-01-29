@@ -246,15 +246,16 @@ int main(int argc, char **argv) {
 	initShaders();
 	initMaterials();
 
+   PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
-   BunnyRenderComponent* playerRenderComp = new BunnyRenderComponent(shapeCube, progPhong, jade);
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeCube, progPhong, jade);
    GameObject* player = new GameObject(
       GameObjectType::NONSTATIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),
       glm::vec3(0.0f, 0.0f, -1.0f),
       20.0f,
       glm::vec3(1.0f, 1.0f, 1.0f),
-      NULL,
+      playerInputComp,
       playerPhysicsComp,
       playerRenderComp
    );

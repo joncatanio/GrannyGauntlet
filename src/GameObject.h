@@ -12,7 +12,7 @@
 #include "MatrixTransform.h"
 
 #include "BoundingBox.h"
-#include "InputHandler.h"
+#include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
 
@@ -28,6 +28,10 @@ public:
 	BoundingBox boundBox;
 	GameObjectType type;
 
+   // Properties for player moveable objects
+   bool toggleXMovement;
+   bool toggleZMovement;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
@@ -35,7 +39,7 @@ public:
 		glm::vec3 startDirection,
 		float startVelocity,
 		glm::vec3 initialScale,
-		InputHandler* input,
+		InputComponent* input,
 		PhysicsComponent* physics,
 		RenderComponent* render);
 
@@ -78,7 +82,7 @@ private:
 	RenderComponent* render_;
 
 	// Stuff necessary to control object
-	InputHandler* input_;
+	InputComponent* input_;
 
 	// Physics Component that handles collision reactions
 	PhysicsComponent *physics_;

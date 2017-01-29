@@ -6,12 +6,14 @@ GameObject::GameObject(GameObjectType objType,
 	glm::vec3 startDirection,
 	float startVelocity,
 	glm::vec3 initialScale,
-	InputHandler* input,
+	InputComponent* input,
 	PhysicsComponent* physics,
 	RenderComponent* render)
 	: type(objType),
 	direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
+   toggleXMovement(false),
+   toggleZMovement(false),
 	input_(input),
 	physics_(physics),
 	render_(render) {
@@ -20,7 +22,11 @@ GameObject::GameObject(GameObjectType objType,
 	setPosition(startPosition);
 	setScale(initialScale);
 
-	calculateAndSetInitialRotation();
+	//calculateAndSetInitialRotation();
+
+   if (input_ != NULL) {
+      input_->setGameObjectHolder(this);
+   }
 
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);
@@ -112,7 +118,7 @@ void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {
 
 void GameObject::update(double deltaTime) {
 	if (input_ != NULL) {
-		input_->handleInput();
+		input_->pollInput();
 	}
 
 	if (physics_ != NULL) {

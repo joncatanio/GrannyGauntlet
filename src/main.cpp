@@ -29,10 +29,6 @@ std::string RESOURCE_DIR = "../resources/";
 // Main application window
 GLFWwindow *window;
 
-// Shader pointers
-// TODO(rgarmsen2295): Move into shader manager class
-std::shared_ptr<Program> progPhong;
-
 // Material pointers
 // TODO(rgarmsen2295): Move into shader manager class
 std::shared_ptr<Material> obsidian;
@@ -100,29 +96,6 @@ static void initMaterials() {
 	*brass = { 0.329412f, 0.223529f, 0.027451f, 0.780392f, 0.568627f, 0.113725f, 0.992157f, 0.941176f, 0.807843f, 10.0f };
 }
 
-// TODO(rgarmsen2295): Move into ShaderManager class
-static void initShaders() {
-
-	// Initialize the Phong GLSL program
-	progPhong = std::make_shared<Program>();
-	progPhong->setVerbose(true);
-	progPhong->setShaderNames(RESOURCE_DIR + "phong_vert.glsl", RESOURCE_DIR + "phong_frag.glsl");
-	progPhong->init();
-	progPhong->addUniform("P");
-	progPhong->addUniform("M");
-	progPhong->addUniform("V");
-	progPhong->addAttribute("vertPos");
-	progPhong->addAttribute("vertNor");
-
-	progPhong->addUniform("lightPos");
-	progPhong->addUniform("lightClr");
-
-	progPhong->addUniform("MatAmb");
-	progPhong->addUniform("MatDif");
-	progPhong->addUniform("MatSpc");
-	progPhong->addUniform("MatShiny");
-}
-
 static void updateFrameBuffer() {
 
 	// Get current frame buffer size
@@ -163,6 +136,8 @@ int parseArgs(int argc, char **argv) {
 
 // Sets up a simple static world/room used in Lab 1 for CPE 476
 static void setupStaticWorld(GameWorld& world) {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	// Floor "Wall"
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, progPhong, green);
@@ -246,7 +221,6 @@ int main(int argc, char **argv) {
 	// Initialize scene data
 	initMisc();
 	initGeometry();
-	initShaders();
 	initMaterials();
 
 	// Initialize the ResourceManager and get its instance
@@ -256,7 +230,18 @@ int main(int argc, char **argv) {
 	// Initialize the ShaderManager and get its instance
 	// TODO(rgarmsen2295): Load shaders using resource manager and save them here
 	ShaderManager& shaderManager = ShaderManager::instance();
-	shaderManager.addVertexShader("PhongVertex", resourceManager.loadShader("phong_vert.glsl"));
+	
+	if (shaderManager.createVertexShader("Phong", resourceManager.loadShader("phong_vert.glsl")) == 0) {
+		return EXIT_FAILURE;
+	}
+
+	if (shaderManager.createFragmentShader("Phong", resourceManager.loadShader("phong_frag.glsl")) == 0) {
+		return EXIT_FAILURE;
+	}
+
+	if (shaderManager.createShaderProgram("Phong", "Phong", "Phong") == 0) {
+		return EXIT_FAILURE;
+	}
 
 	// The current game camera
 	Camera camera;

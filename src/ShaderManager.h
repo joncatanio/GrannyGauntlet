@@ -19,26 +19,53 @@ public:
 	// Returns the single instance of the ShaderManager
 	static ShaderManager& instance();
 
+	// Returns the currently bound shader program name
+	const std::string& getBoundShaderName();
+
+	// Gets a shared pointer to the shader program with the given name.
+	// Throws an |out_of_range| exception if no shader program with that name is found
 	std::shared_ptr<Program> getShaderProgram(const std::string& shaderProgramName);
 
-	int addVertexShader(const std::string& vertexShaderName, std::shared_ptr<std::string> shaderSource);
+	// Creates a vertex shader from the passed source string with the given name.
+	// Returns the vertex handle on success, 0 on failure
+	GLuint createVertexShader(const std::string& vertexShaderName, std::shared_ptr<std::string> shaderSource);
 
-	int addFragmentShader(const std::string& fragmentShaderName, std::shared_ptr<std::string> shaderSource);
+	// Creates a fragment shader from the passed source string with the given name.
+	// Returns the fragment handle on success, 0 on failure
+	GLuint createFragmentShader(const std::string& fragmentShaderName, std::shared_ptr<std::string> shaderSource);
 
-	void createShaderProgram(const std::string& shaderProgramName, const std::string& vertexShaderName, const std::string& fragmentShaderName);
+	// Creates a shader program by linking a compiled vertex and fragment shader.
+	// Returns the program ID on success, 0 on failure
+	GLuint createShaderProgram(const std::string& shaderProgramName, const std::string& vertexShaderName, const std::string& fragmentShaderName);
+
+	// Finds the shader program with the given name and binds it.
+	// Throws an |out_of_range| exception if no shader program with that name is found
+	void bindShader(const std::string& shaderProgramName);
+
+	// Unbinds the current shader from use
+	void unbindShader();
 
 private:
 
+	const GLuint NO_SHADER = 0;
+
+	// The currently bound shader program name.  If none is bound, then it is set to the empty string
+	std::string boundShaderName;
+
+	// A hash map of the currently compiled vertex shaders. The key is the shader name and the value is the handle
 	std::unordered_map<std::string, GLuint> vertexShaderHandles;
 
+	// A hash map of the currently compiled fragment shaders. The key is the shader name and the value is the handle
 	std::unordered_map<std::string, GLuint> fragmentShaderHandles;
 
+	// A hash map of the currently linked shader programs. The key is the shader program name and the value is a pointer to the Program
 	std::unordered_map<std::string, std::shared_ptr<Program>> shaderPrograms;
 
-	ShaderManager() {}
+	ShaderManager();
 
 };
 
-int createAndCompileShader(const std::string& shaderName, std::shared_ptr<std::string> shaderSource, GLenum shaderType);
+// Helper function for shared code used to compile new shaders
+GLuint createAndCompileShader(const std::string& shaderName, std::shared_ptr<std::string> shaderSource, GLenum shaderType);
 
 #endif

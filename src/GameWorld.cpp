@@ -125,6 +125,9 @@ unsigned long GameWorld::getRenderCount() {
 }
 
 void GameWorld::throwCookie() {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
+
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
 	static std::shared_ptr<Shape> cookieShape = std::make_shared<Shape>();
@@ -170,6 +173,9 @@ void GameWorld::registerBunnyHit() {
 
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class
 void GameWorld::addBunnyToGameWorld() {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
+
 	static std::shared_ptr<Shape> bunnyShape = std::make_shared<Shape>();
 	static bool hasBunnyLoaded = false;
 

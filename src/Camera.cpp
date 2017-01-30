@@ -5,13 +5,14 @@
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
 Camera::Camera(GameObject* player)
-	: boundBox() {
+   : springConstant(25.0f),
+   cameraDistance(5.0f),
+   cameraVelocity(glm::vec3(0.0f, 0.0f, 0.0f)) {
       // TODO (noj) handle null input at some point.
       this->player = player;
-		glm::vec3 minCameraBox(-1.0f, -1.0f, -1.0f);
-		glm::vec3 maxCameraBox(1.0f, 1.0f, 1.0f);
-
-		boundBox = BoundingBox(minCameraBox, maxCameraBox);
+      
+      // Calculate damping constant in critically-damped system
+      dampingConstant = 2.0f * sqrt(springConstant);
 	}
 
 Camera::~Camera() {}
@@ -38,10 +39,6 @@ glm::vec3 Camera::getTarget() {
 
 void Camera::setEye(glm::vec3 newEye) {
 	Eye = newEye;
-
-	// Update bounding box with new camera position
-	boundBox.min_ = boundBox.objMin_ + newEye;
-	boundBox.max_ = boundBox.objMax_ + newEye;
 }
 
 void Camera::setLookAt(glm::vec3 newLA) {
@@ -82,7 +79,18 @@ void Camera::update(float deltaTime) {
 
 	glm::vec3 u = upCrossW;
 
-   setEye(player->getPosition() + w * 5.0f);
+   /* Make spring calculations */
+   // Ideal resting camera position
+   glm::vec3 restDist = player->getPosition() + w * cameraDistance;
+   // Displacement from equilibrium
+   glm::vec3 displacement = Eye - restDist;
+   // Hooke's Law with damping
+   glm::vec3 springAccel = (-springConstant * displacement) -
+      (dampingConstant * cameraVelocity);
+
+   cameraVelocity += springAccel * deltaTime;
+   setEye(Eye + (cameraVelocity * deltaTime));
+   
    if (Eye.y < 1) {
       setEye(glm::vec3(Eye.x, 1, Eye.z));
    }

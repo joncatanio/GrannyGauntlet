@@ -248,12 +248,12 @@ int main(int argc, char **argv) {
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
-   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeCube, progPhong, jade);
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeCube, progPhong, pearl);
    GameObject* player = new GameObject(
       GameObjectType::NONSTATIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),
       glm::vec3(0.0f, 0.0f, -1.0f),
-      20.0f,
+      12.0f,
       glm::vec3(1.0f, 1.0f, 1.0f),
       playerInputComp,
       playerPhysicsComp,
@@ -275,6 +275,9 @@ int main(int argc, char **argv) {
 
 	// Set the manager to the current camera
 	gameManager.setCamera(&camera);
+
+   // Set the manager to the current player object
+   gameManager.setPlayer(player);
 
 	setupStaticWorld(world);
 

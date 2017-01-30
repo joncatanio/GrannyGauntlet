@@ -13,6 +13,14 @@ void GameManager::setCamera(Camera* newCamera) {
 	currentCamera_ = newCamera;
 }
 
+GameObject& GameManager::getPlayer() {
+   return *currentPlayer_;
+}
+
+void GameManager::setPlayer(GameObject* newPlayer) {
+   currentPlayer_ = newPlayer;
+}
+
 GameWorld& GameManager::getGameWorld() {
 	return *currentWorld_;
 }

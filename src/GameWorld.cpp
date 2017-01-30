@@ -96,11 +96,11 @@ void GameWorld::drawGameObjects() {
 
 GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
 	GameManager& gameManager = GameManager::instance();
-	Camera& camera = gameManager.getCamera();
+   GameObject& player = gameManager.getPlayer();
 
-	// Check the camera against the object
-	if (objToCheck->boundBox.checkIntersection(camera.boundBox)) {
-		return GameObjectType::CAMERA;
+	// Check the player against the object
+	if (objToCheck->boundBox.checkIntersection(player.boundBox)) {
+		return GameObjectType::PLAYER;
 	}
 
 	// Check against static objects

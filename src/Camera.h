@@ -22,9 +22,6 @@ public:
 	// Scale for the A and S key movements
 	const float ADScale = 10.0f;
 
-	// TODO(rgarmsen): Add an easy way to toggle collision detection on the camera if desired (mid-game too)
-	BoundingBox boundBox;
-
 	Camera(GameObject* player);
 
 	~Camera();
@@ -58,6 +55,12 @@ private:
 	glm::vec3 Eye = glm::vec3(0, 2, 0);
 	glm::vec3 LA;
 	glm::vec3 Up = glm::vec3(0, 1, 0);
+
+   // Weak spring values
+   float springConstant;
+   float dampingConstant;
+   float cameraDistance;
+   glm::vec3 cameraVelocity;
 
 	// Angle values used for pitch and yaw respectively
 	float alpha = 0;

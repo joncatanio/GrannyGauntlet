@@ -66,7 +66,7 @@ void Camera::changeBeta(float deltaBeta) {
     * input component at some point. */
    float newOrient = -(betaRad - M_PI / 2);
    player->setYAxisRotation(newOrient);
-   player->direction = glm::rotateY(player->direction, beta);
+   player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);
 }
 
 void Camera::update(float deltaTime) {

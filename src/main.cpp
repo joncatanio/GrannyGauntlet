@@ -243,7 +243,8 @@ int main(int argc, char **argv) {
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
-   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl, progPhong, pearl);
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
+      shaderManager.getShaderProgram("Phong"), pearl);
    GameObject* player = new GameObject(
       GameObjectType::NONSTATIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),

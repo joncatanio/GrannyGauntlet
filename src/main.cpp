@@ -7,6 +7,8 @@
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "GLFWHelper.h"
+#include "ResourceManager.h"
+#include "ShaderManager.h"
 
 #include "WallRenderComponent.h"
 
@@ -21,6 +23,7 @@ float prevX = 0;
 float prevY = 0;
 
 // Where the resources are loaded from
+std::string resourceDirectory = "../resources/";
 std::string RESOURCE_DIR = "../resources/";
 
 // Main application window
@@ -57,7 +60,6 @@ static void initMisc() {
 	prevY = posY;
 
 	// Set background color
-	//glClearColor(0.1f, 0.3f, 0.7f, 1.0f);
 	glClearColor(0.25f, 0.875f, 0.924f, 1.0f);
 
 	// Enable z-buffer test
@@ -75,6 +77,7 @@ static void initGeometry() {
 }
 
 // Values sourced from - http://devernay.free.fr/cours/opengl/materials.html
+// TODO(rgarmsen2295): Move into MaterialManager or ShaderManager class
 static void initMaterials() {
 
 	// Initialize the obsidian material
@@ -245,6 +248,15 @@ int main(int argc, char **argv) {
 	initGeometry();
 	initShaders();
 	initMaterials();
+
+	// Initialize the ResourceManager and get its instance
+	ResourceManager& resourceManager = ResourceManager::instance();
+	resourceManager.setResourceDirectory(resourceDirectory);
+
+	// Initialize the ShaderManager and get its instance
+	// TODO(rgarmsen2295): Load shaders using resource manager and save them here
+	ShaderManager& shaderManager = ShaderManager::instance();
+	shaderManager.addVertexShader("PhongVertex", resourceManager.loadShader("phong_vert.glsl"));
 
 	// The current game camera
 	Camera camera;

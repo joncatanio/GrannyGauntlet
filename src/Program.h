@@ -1,6 +1,5 @@
-#pragma  once
-#ifndef __Program__
-#define __Program__
+#ifndef PROGRAM_H
+#define PROGRAM_H
 
 #include <map>
 #include <string>
@@ -33,8 +32,8 @@ protected:
 	
 private:
 	GLuint pid;
-	std::map<std::string,GLint> attributes;
-	std::map<std::string,GLint> uniforms;
+	std::map<std::string, GLint> attributes;
+	std::map<std::string, GLint> uniforms;
 	bool verbose;
 };
 

@@ -14,6 +14,7 @@ static void mouse_callback(GLFWwindow *window, int button, int action, int mods)
 static void cursor_pos_callback(GLFWwindow* window, double posX, double posY) {
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
+   GameObject& player = gameManager.getPlayer();
 
 	float deltaAlphaScale = 180.0f / g_height;
 	float deltaBetaScale = 360.0f / g_width;
@@ -58,7 +59,7 @@ int initializeGLFW(GLFWwindow **window) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 	// Create a windowed mode window and its OpenGL context.
-	*window = glfwCreateWindow(1920, 1080, "Reed Garmsen", NULL, NULL);
+	*window = glfwCreateWindow(600, 480, "Granny Gauntlet", NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		return -1;

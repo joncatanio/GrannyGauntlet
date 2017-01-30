@@ -41,6 +41,7 @@ std::shared_ptr<Material> brass;
 // Shape pointers
 // TODO(rgarmsen2295): Move into shader manager class
 std::shared_ptr<Shape> shapeCube;
+std::shared_ptr<Shape> shapeGirl;
 
 // Main directional light properties
 // TODO(rgarmsen2295): Move into shader manager class
@@ -72,6 +73,11 @@ static void initGeometry() {
 	shapeCube->loadMesh(RESOURCE_DIR + "cube.obj");
 	shapeCube->resize();
 	shapeCube->init();
+
+	shapeGirl = std::make_shared<Shape>();
+	shapeGirl->loadMesh(RESOURCE_DIR + "girl.obj");
+	shapeGirl->resize();
+	shapeGirl->init();
 }
 
 // Values sourced from - http://devernay.free.fr/cours/opengl/materials.html
@@ -248,17 +254,18 @@ int main(int argc, char **argv) {
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
-   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeCube, progPhong, pearl);
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl, progPhong, pearl);
    GameObject* player = new GameObject(
       GameObjectType::NONSTATIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),
-      glm::vec3(0.0f, 0.0f, -1.0f),
+      glm::vec3(-1.0f, 0.0f, 0.0f),
       12.0f,
       glm::vec3(1.0f, 1.0f, 1.0f),
       playerInputComp,
       playerPhysicsComp,
       playerRenderComp
    );
+   player->setYAxisRotation(-M_PI / 2);
 
 	// The current game camera
 	Camera camera(player);

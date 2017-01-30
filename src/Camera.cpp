@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "GameObject.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 // Ninety degrees in radians
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
@@ -53,19 +54,19 @@ void Camera::changeAlpha(float deltaAlpha) {
 	alpha += deltaAlpha;
 
 	// Prevents cross product explosions
-	if (alpha >= 80) {
-		alpha = 80;
-	}
-	else if (alpha <= -80) {
-		alpha = -80;
-	}
-
+   alpha = glm::clamp(alpha, -80.0f, 80.0f);
 	alphaRad = alpha * M_PI / 180.0;
 }
 
 void Camera::changeBeta(float deltaBeta) {
 	beta += deltaBeta;
 	betaRad = beta * M_PI / 180.0;
+   /* TODO (noj) write function that takes this angle `betaRad` and add it
+    * to the objects natural orientation angle. Need to move this into player
+    * input component at some point. */
+   float newOrient = -(betaRad - M_PI / 2);
+   player->setYAxisRotation(newOrient);
+   player->direction = glm::rotateY(player->direction, beta);
 }
 
 void Camera::update(float deltaTime) {

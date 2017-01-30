@@ -108,6 +108,18 @@ GLuint ShaderManager::createShaderProgram(const std::string& shaderProgramName, 
 	return pid;
 }
 
+GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, const std::string& shaderName, const std::string& shaderResourcePrefix) {
+	if (createVertexShader(shaderName, resourceManager.loadShader(shaderResourcePrefix + "_vert.glsl")) == 0) {
+		return 0;
+	}
+
+	if (createFragmentShader(shaderName, resourceManager.loadShader(shaderResourcePrefix + "_frag.glsl")) == 0) {
+		return 0;
+	}
+
+	return createShaderProgram(shaderName, shaderName, shaderName);
+}
+
 void ShaderManager::bindShader(const std::string& shaderProgramName) {
 	std::shared_ptr<Program>& shaderToBind = shaderPrograms.at(shaderProgramName);
 	boundShaderName = shaderProgramName;

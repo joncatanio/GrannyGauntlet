@@ -9,6 +9,7 @@
 
 #include "GLSL.h"
 #include "Program.h"
+#include "ResourceManager.h"
 
 // Manages shaders used by the geometry of the world
 class ShaderManager {
@@ -38,6 +39,11 @@ public:
 	// Returns the program ID on success, 0 on failure
 	GLuint createShaderProgram(const std::string& shaderProgramName, const std::string& vertexShaderName, const std::string& fragmentShaderName);
 
+	// Builds a shader program under the assumption that all parts of the shader (vertex, fragment, program) will have the same name.
+	// Also, each shader resource file should have the same prefix (e.g. |shaderResourcePrefix| + "_frag.glsl").
+	// Returns the program ID on success, 0 on failure
+	GLuint createIsomorphicShader(ResourceManager& resourceManager, const std::string& shaderName, const std::string& shaderResourcePrefix);
+
 	// Finds the shader program with the given name and binds it.
 	// Throws an |out_of_range| exception if no shader program with that name is found
 	void bindShader(const std::string& shaderProgramName);
@@ -47,6 +53,7 @@ public:
 
 private:
 
+	// Special program ID that represents a no/null program shader
 	const GLuint NO_SHADER = 0;
 
 	// The currently bound shader program name.  If none is bound, then it is set to the empty string

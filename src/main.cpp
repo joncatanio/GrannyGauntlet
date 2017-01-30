@@ -228,18 +228,10 @@ int main(int argc, char **argv) {
 	resourceManager.setResourceDirectory(resourceDirectory);
 
 	// Initialize the ShaderManager and get its instance
-	// TODO(rgarmsen2295): Load shaders using resource manager and save them here
 	ShaderManager& shaderManager = ShaderManager::instance();
-	
-	if (shaderManager.createVertexShader("Phong", resourceManager.loadShader("phong_vert.glsl")) == 0) {
-		return EXIT_FAILURE;
-	}
 
-	if (shaderManager.createFragmentShader("Phong", resourceManager.loadShader("phong_frag.glsl")) == 0) {
-		return EXIT_FAILURE;
-	}
-
-	if (shaderManager.createShaderProgram("Phong", "Phong", "Phong") == 0) {
+	// Load a phong shader
+	if (shaderManager.createIsomorphicShader(resourceManager, "Phong", "phong") == 0) {
 		return EXIT_FAILURE;
 	}
 

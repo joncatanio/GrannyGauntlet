@@ -31,7 +31,10 @@ void WallRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<M
 	M->pushMatrix();
 	M->loadIdentity();
 
-	M->multMatrix(holder_->transform.getTransform());
+	M->translate(holder_->getPosition());
+	M->scale(holder_->getScale());
+	M->rotate(holder_->getYAxisRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
+
 	glUniformMatrix4fv(progPhong->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
 	// Draw wall

@@ -10,22 +10,23 @@ BunnyRenderComponent::~BunnyRenderComponent() {
 }
 
 void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
-	shaderProgram_->bind();
+	ShaderManager& shaderManager = ShaderManager::instance();
+	shaderManager.bindShader(shaderProgram_->name);
 
 	// TODO(rgarmsen2295): Add boilerplate to standard method call - probably in ShaderManager or similar
 	// Bind perspective and view tranforms
-	glUniformMatrix4fv(progPhong->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
-	glUniformMatrix4fv(progPhong->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
+	glUniformMatrix4fv(shaderProgram_->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
+	glUniformMatrix4fv(shaderProgram_->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
 
 	// Bind light properties
-	glUniform3f(progPhong->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
-	glUniform3f(progPhong->getUniform("lightClr"), curLight.r, curLight.g, curLight.b);
+	glUniform3f(shaderProgram_->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
+	glUniform3f(shaderProgram_->getUniform("lightClr"), curLight.r, curLight.g, curLight.b);
 
 	// Bind material properties
-	glUniform3f(progPhong->getUniform("MatAmb"), material_->rAmb, material_->gAmb, material_->bAmb);
-	glUniform3f(progPhong->getUniform("MatDif"), material_->rDif, material_->gDif, material_->bDif);
-	glUniform3f(progPhong->getUniform("MatSpc"), material_->rSpc, material_->gSpc, material_->bSpc);
-	glUniform1f(progPhong->getUniform("MatShiny"), material_->shininess);
+	glUniform3f(shaderProgram_->getUniform("MatAmb"), material_->rAmb, material_->gAmb, material_->bAmb);
+	glUniform3f(shaderProgram_->getUniform("MatDif"), material_->rDif, material_->gDif, material_->bDif);
+	glUniform3f(shaderProgram_->getUniform("MatSpc"), material_->rSpc, material_->gSpc, material_->bSpc);
+	glUniform1f(shaderProgram_->getUniform("MatShiny"), material_->shininess);
 
 	// Set up and bind model transform
 	M->pushMatrix();
@@ -35,12 +36,12 @@ void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<
 	M->scale(holder_->getScale());
 	M->rotate(holder_->getYAxisRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	glUniformMatrix4fv(progPhong->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+	glUniformMatrix4fv(shaderProgram_->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
 	// Draw bunny
 	shape_->draw(shaderProgram_);
 
 	M->popMatrix();
 
-	shaderProgram_->unbind();
+	shaderManager.unbindShader();
 }

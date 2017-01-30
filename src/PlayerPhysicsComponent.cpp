@@ -26,6 +26,5 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->setPosition(newPosition);
       updateBoundingBox();
    }
-   std::cout << "Direction: x - " << holder_->direction.x << " y - " << holder_->direction.y << " z - " << holder_->direction.z << std::endl;
    // TODO (noj) update bounding box here.
 }

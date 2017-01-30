@@ -7,6 +7,8 @@
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "GLFWHelper.h"
+#include "ResourceManager.h"
+#include "ShaderManager.h"
 
 #include "WallRenderComponent.h"
 
@@ -21,14 +23,11 @@ float prevX = 0;
 float prevY = 0;
 
 // Where the resources are loaded from
+std::string resourceDirectory = "../resources/";
 std::string RESOURCE_DIR = "../resources/";
 
 // Main application window
 GLFWwindow *window;
-
-// Shader pointers
-// TODO(rgarmsen2295): Move into shader manager class
-std::shared_ptr<Program> progPhong;
 
 // Material pointers
 // TODO(rgarmsen2295): Move into shader manager class
@@ -58,7 +57,6 @@ static void initMisc() {
 	prevY = posY;
 
 	// Set background color
-	//glClearColor(0.1f, 0.3f, 0.7f, 1.0f);
 	glClearColor(0.25f, 0.875f, 0.924f, 1.0f);
 
 	// Enable z-buffer test
@@ -81,6 +79,7 @@ static void initGeometry() {
 }
 
 // Values sourced from - http://devernay.free.fr/cours/opengl/materials.html
+// TODO(rgarmsen2295): Move into MaterialManager or ShaderManager class
 static void initMaterials() {
 
 	// Initialize the obsidian material
@@ -101,29 +100,6 @@ static void initMaterials() {
 	// modified shininess from given value (0.21794872f)
 	brass = std::make_shared<Material>();
 	*brass = { 0.329412f, 0.223529f, 0.027451f, 0.780392f, 0.568627f, 0.113725f, 0.992157f, 0.941176f, 0.807843f, 10.0f };
-}
-
-// TODO(rgarmsen2295): Move into ShaderManager class
-static void initShaders() {
-
-	// Initialize the Phong GLSL program
-	progPhong = std::make_shared<Program>();
-	progPhong->setVerbose(true);
-	progPhong->setShaderNames(RESOURCE_DIR + "phong_vert.glsl", RESOURCE_DIR + "phong_frag.glsl");
-	progPhong->init();
-	progPhong->addUniform("P");
-	progPhong->addUniform("M");
-	progPhong->addUniform("V");
-	progPhong->addAttribute("vertPos");
-	progPhong->addAttribute("vertNor");
-
-	progPhong->addUniform("lightPos");
-	progPhong->addUniform("lightClr");
-
-	progPhong->addUniform("MatAmb");
-	progPhong->addUniform("MatDif");
-	progPhong->addUniform("MatSpc");
-	progPhong->addUniform("MatShiny");
 }
 
 static void updateFrameBuffer() {
@@ -166,6 +142,8 @@ int parseArgs(int argc, char **argv) {
 
 // Sets up a simple static world/room used in Lab 1 for CPE 476
 static void setupStaticWorld(GameWorld& world) {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	// Floor "Wall"
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, progPhong, green);
@@ -249,8 +227,19 @@ int main(int argc, char **argv) {
 	// Initialize scene data
 	initMisc();
 	initGeometry();
-	initShaders();
 	initMaterials();
+
+	// Initialize the ResourceManager and get its instance
+	ResourceManager& resourceManager = ResourceManager::instance();
+	resourceManager.setResourceDirectory(resourceDirectory);
+
+	// Initialize the ShaderManager and get its instance
+	ShaderManager& shaderManager = ShaderManager::instance();
+
+	// Load a phong shader
+	if (shaderManager.createIsomorphicShader(resourceManager, "Phong", "phong") == 0) {
+		return EXIT_FAILURE;
+	}
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();

@@ -1,9 +1,6 @@
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
 
-#include <memory>
-#include <string>
-
 #include "Camera.h"
 #include "GameWorld.h"
 

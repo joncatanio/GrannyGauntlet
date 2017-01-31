@@ -1,5 +1,7 @@
 #include "GameWorld.h"
 #include "GameManager.h"
+#include "CookieThrower.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 GameWorld::GameWorld()
 	: updateCount(0),
@@ -40,21 +42,10 @@ void GameWorld::resetWorld() {
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	// Keep track of the last spawn time internally to know when to spawn next
 	static double previousSpawnTime = 0.0;
-    static double previousCookieTime = 0.0;
 
-	// Spawn a new bunny every ~3 seconds, and max out at 30 bunnies
-	if (totalTime >= previousSpawnTime + 3.0 && getNumNonStaticGameObjects() < 30) {
-		addBunnyToGameWorld();
-		previousSpawnTime = totalTime;
-	}
 
-    //TODO(nurgan) use Input Handler, when it is implemented
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        if(totalTime >= previousCookieTime + 0.5) {
-            throwCookie();
-            previousCookieTime = totalTime;
-        }
-    }
+    static CookieThrower* cookieThrower = new CookieThrower();
+    cookieThrower->pollAndThrow(deltaTime, totalTime);
 
 	for (GameObject* obj : this->nonStaticGameObjects_) {
 		obj->update(deltaTime);
@@ -122,40 +113,6 @@ GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
 
 unsigned long GameWorld::getRenderCount() {
 	return renderCount;
-}
-
-void GameWorld::throwCookie() {
-	GameManager& gameManager = GameManager::instance();
-	Camera& camera = gameManager.getCamera();
-	static std::shared_ptr<Shape> cookieShape = std::make_shared<Shape>();
-	static bool hasCookieLoaded = false;
-
-	if (!hasCookieLoaded) {
-		cookieShape->loadMesh(RESOURCE_DIR + "sphere.obj");
-		cookieShape->resize();
-		cookieShape->init();
-
-		hasCookieLoaded = true;
-	}
-
-	float startVelocity = 20.0f;
-
-	glm::vec3 initialScale(0.5f, 0.5f, 0.5f);
-
-    CookiePhysicsComponent* cookiePhysicsComp = new CookiePhysicsComponent();
-	BunnyRenderComponent* renderComp = new BunnyRenderComponent(cookieShape, progPhong, obsidian);
-
-	GameObject* cookieObj = new GameObject(
-			GameObjectType::NONSTATIC_OBJECT,
-			camera.getEye(),
-			camera.getLookAt(),
-			startVelocity,
-			initialScale,
-			NULL,
-            cookiePhysicsComp,
-			renderComp);
-
-	this->addNonStaticGameObject(cookieObj);
 }
 
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class

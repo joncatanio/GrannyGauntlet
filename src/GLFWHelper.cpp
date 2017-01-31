@@ -58,7 +58,7 @@ int initializeGLFW(GLFWwindow **window) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 	// Create a windowed mode window and its OpenGL context.
-	*window = glfwCreateWindow(1920, 1080, "Reed Garmsen", NULL, NULL);
+	*window = glfwCreateWindow(1920, 1080, "Granny Gauntlet", NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		return -1;
@@ -84,6 +84,9 @@ int initializeGLFW(GLFWwindow **window) {
 
 	// Set keyboard callback.
 	glfwSetKeyCallback(*window, key_callback);
+
+   // Set sticky keys for more accurate polling
+   glfwSetInputMode(*window, GLFW_STICKY_KEYS, 1);
 
 	// Set the mouse call back
 	glfwSetMouseButtonCallback(*window, mouse_callback);

@@ -12,11 +12,11 @@
 #include "MatrixTransform.h"
 
 #include "BoundingBox.h"
-#include "InputHandler.h"
+#include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
 
-enum class GameObjectType { CAMERA, STATIC_OBJECT, NONSTATIC_OBJECT, NO_OBJECT };
+enum class GameObjectType { PLAYER, STATIC_OBJECT, NONSTATIC_OBJECT, NO_OBJECT };
 
 class GameObject {
 public:
@@ -28,6 +28,9 @@ public:
 	BoundingBox boundBox;
 	GameObjectType type;
 
+   // Properties for player moveable objects
+   bool toggleMovement;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
@@ -35,7 +38,7 @@ public:
 		glm::vec3 startDirection,
 		float startVelocity,
 		glm::vec3 initialScale,
-		InputHandler* input,
+		InputComponent* input,
 		PhysicsComponent* physics,
 		RenderComponent* render);
 
@@ -44,6 +47,10 @@ public:
 	glm::vec3& getPosition();
 
 	glm::vec3& getScale();
+
+   void setOrientAngle(float orientAngle);
+
+   float getOrientAngle();
 
 	float getYAxisRotation();
 
@@ -71,6 +78,9 @@ private:
 	// The current scale of the object relative to it's original size
 	glm::vec3 scale_;
 
+   // The orientation angle to orient the object correctly from it's original
+   float orientAngle_;
+
 	// The current y-axis rotation of the object relative to it's original orientation
 	float yRotationAngle_;
 
@@ -78,7 +88,7 @@ private:
 	RenderComponent* render_;
 
 	// Stuff necessary to control object
-	InputHandler* input_;
+	InputComponent* input_;
 
 	// Physics Component that handles collision reactions
 	PhysicsComponent *physics_;

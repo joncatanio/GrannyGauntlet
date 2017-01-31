@@ -1,14 +1,19 @@
 #include "Camera.h"
+#include "GameObject.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 // Ninety degrees in radians
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
-Camera::Camera()
-	: boundBox() {
-		glm::vec3 minCameraBox(-1.0f, -1.0, -1.0f);
-		glm::vec3 maxCameraBox(1.0f, 1.0f, 1.0f);
-
-		boundBox = BoundingBox(minCameraBox, maxCameraBox);
+Camera::Camera(GameObject* player)
+   : springConstant(25.0f),
+   cameraDistance(5.0f),
+   cameraVelocity(glm::vec3(0.0f, 0.0f, 0.0f)) {
+      // TODO (noj) handle null input at some point.
+      this->player = player;
+      
+      // Calculate damping constant in critically-damped system
+      dampingConstant = 2.0f * sqrt(springConstant);
 	}
 
 Camera::~Camera() {}
@@ -17,8 +22,12 @@ glm::vec3& Camera::getEye() {
 	return Eye;
 }
 
+/* Eye is not added to LookAt because gaze will ultimately be LA - Eye + Eye
+ * therefore we separate the LA completely. `getTarget()` will then add Eye
+ * in order to create our view matrix. */
 glm::vec3& Camera::getLookAt() {
-	glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad), cos(alphaRad) * cos(ninetyRad - betaRad));
+   glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad),
+      cos(alphaRad) * cos(ninetyRad - betaRad));
 	LA = tempLA;
 
 	return LA;
@@ -34,10 +43,6 @@ glm::vec3 Camera::getTarget() {
 
 void Camera::setEye(glm::vec3 newEye) {
 	Eye = newEye;
-
-	// Update bounding box with new camera position
-	boundBox.min_ = boundBox.objMin_ + newEye;
-	boundBox.max_ = boundBox.objMax_ + newEye;
 }
 
 void Camera::setLookAt(glm::vec3 newLA) {
@@ -52,19 +57,21 @@ void Camera::changeAlpha(float deltaAlpha) {
 	alpha += deltaAlpha;
 
 	// Prevents cross product explosions
-	if (alpha >= 80) {
-		alpha = 80;
-	}
-	else if (alpha <= -80) {
-		alpha = -80;
-	}
-
+   alpha = glm::clamp(alpha, -80.0f, 80.0f);
 	alphaRad = alpha * M_PI / 180.0;
 }
 
 void Camera::changeBeta(float deltaBeta) {
 	beta += deltaBeta;
 	betaRad = beta * M_PI / 180.0;
+   /* Keep the player and camera in sync in regards to their orientation.
+    * `betaRad` already has a 180 degree rotation baked into it so I just
+    * deal with it by subracting `M_PI` from `betaRad`, this lets us let use
+    * the player's orientation angle. We still want to rotate the direction
+    * vector to point in the direction of the camera. */
+   float newOrient = player->getOrientAngle() - (betaRad - M_PI);
+   player->setYAxisRotation(newOrient);
+   player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);
 }
 
 void Camera::update(float deltaTime) {
@@ -78,40 +85,19 @@ void Camera::update(float deltaTime) {
 
 	glm::vec3 u = upCrossW;
 
-	int letterState = glfwGetKey(window, GLFW_KEY_W);
-	int arrowState = glfwGetKey(window, GLFW_KEY_UP);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
+   /* Make spring calculations */
+   // Ideal resting camera position
+   glm::vec3 restDist = player->getPosition() + w * cameraDistance;
+   // Displacement from equilibrium
+   glm::vec3 displacement = Eye - restDist;
+   // Hooke's Law with damping
+   glm::vec3 springAccel = (-springConstant * displacement) -
+      (dampingConstant * cameraVelocity);
 
-		// Move in the neg dir along the w camera axis (forward) 
-		setEye(Eye - (WSScale * w * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_A);
-	arrowState = glfwGetKey(window, GLFW_KEY_LEFT);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the neg dir along the u camera axis (left)
-		setEye(Eye - (ADScale * u * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_S);
-	arrowState = glfwGetKey(window, GLFW_KEY_DOWN);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the pos dir along the w camera axis (backwards)
-		setEye(Eye + (WSScale * w * deltaTime));
-	}
-
-	letterState = glfwGetKey(window, GLFW_KEY_D);
-	arrowState = glfwGetKey(window, GLFW_KEY_RIGHT);
-	if (letterState == GLFW_PRESS || arrowState == GLFW_PRESS) {
-
-		// Move in the pos dir along the u camera axis (right)
-		setEye(Eye + (ADScale * u * deltaTime));
-	}
-
-	// Don't allow the player to go below the ground
-	if (Eye.y < 1) {
-		setEye(glm::vec3(Eye.x, 1, Eye.z));
-	}
+   cameraVelocity += springAccel * deltaTime;
+   setEye(Eye + (cameraVelocity * deltaTime));
+   
+   if (Eye.y < 1) {
+      setEye(glm::vec3(Eye.x, 1, Eye.z));
+   }
 }

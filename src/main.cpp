@@ -40,6 +40,7 @@ std::shared_ptr<Material> brass;
 // Shape pointers
 // TODO(rgarmsen2295): Move into shader manager class
 std::shared_ptr<Shape> shapeCube;
+std::shared_ptr<Shape> shapeGirl;
 
 // Main directional light properties
 // TODO(rgarmsen2295): Move into shader manager class
@@ -70,6 +71,11 @@ static void initGeometry() {
 	shapeCube->loadMesh(RESOURCE_DIR + "cube.obj");
 	shapeCube->resize();
 	shapeCube->init();
+
+	shapeGirl = std::make_shared<Shape>();
+	shapeGirl->loadMesh(RESOURCE_DIR + "girl.obj");
+	shapeGirl->resize();
+	shapeGirl->init();
 }
 
 // Values sourced from - http://devernay.free.fr/cours/opengl/materials.html
@@ -235,11 +241,31 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+   PlayerInputComponent* playerInputComp = new PlayerInputComponent();
+   PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
+      shaderManager.getShaderProgram("Phong"), pearl);
+   GameObject* player = new GameObject(
+      GameObjectType::NONSTATIC_OBJECT,
+      glm::vec3(0.0f, 1.0f, 0.0f),
+      glm::vec3(-1.0f, 0.0f, 0.0f),
+      12.0f,
+      glm::vec3(1.0f, 1.0f, 1.0f),
+      playerInputComp,
+      playerPhysicsComp,
+      playerRenderComp
+   );
+   /* Set the orient angle to orient the object correctly from it's starting pos.
+    * This is specific to each obj file. Positive values are cw, negative ccw */ 
+   player->setYAxisRotation(-M_PI / 2);
+   player->setOrientAngle(-M_PI / 2);
+
 	// The current game camera
-	Camera camera;
+	Camera camera(player);
 
 	// The current game world
 	GameWorld world;
+   world.addNonStaticGameObject(player);
 
 	// Initialize the GameManager and get its instance
 	GameManager& gameManager = GameManager::instance();
@@ -249,6 +275,9 @@ int main(int argc, char **argv) {
 
 	// Set the manager to the current camera
 	gameManager.setCamera(&camera);
+
+   // Set the manager to the current player object
+   gameManager.setPlayer(player);
 
 	setupStaticWorld(world);
 

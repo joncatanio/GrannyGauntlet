@@ -22,6 +22,12 @@ public:
 	// Sets a new reference to the current Camera
 	void setCamera(Camera* newCamera);
 
+   // Gets the reference to the current Player
+   GameObject& getPlayer();
+
+   // Sets a new reference to the current Player
+   void setPlayer(GameObject* newPlayer);
+
 	// Gets the reference to the current GameWorld
 	GameWorld& getGameWorld();
 
@@ -36,6 +42,8 @@ private:
 	GameManager() {}
 
 	Camera* currentCamera_;
+
+   GameObject* currentPlayer_;
 
 	GameWorld* currentWorld_;
 };

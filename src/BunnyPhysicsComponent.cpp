@@ -71,7 +71,7 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	// If we hit someone or we're at the edge of the acceptable "world", then reverse direction
 	GameObjectType objTypeHit = world.checkCollision(holder_);
 	
-	if (objTypeHit == GameObjectType::CAMERA) {
+	if (objTypeHit == GameObjectType::PLAYER) {
 		if (holder_->velocity != 0.0f) {
 			// Only update bunny on hit once
 			holder_->velocity = 0.0f;

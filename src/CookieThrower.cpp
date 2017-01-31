@@ -1,5 +1,6 @@
 #include "CookieThrower.h"
 #include "GameManager.h"
+#include "ShaderManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 /*

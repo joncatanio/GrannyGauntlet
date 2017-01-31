@@ -14,10 +14,6 @@ CookieThrower::CookieThrower() {
     cookieShape->resize();
     cookieShape->init();
 
-    //
-    ShaderManager& shaderManager = ShaderManager::instance();
-    std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
-
     static std::shared_ptr<Shape> shape = std::make_shared<Shape>();
     static bool hasLoaded = false;
 
@@ -28,9 +24,9 @@ CookieThrower::CookieThrower() {
         hasLoaded = true;
     }
 
-    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(shape, progPhong, brass);
-    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, progPhong, brass);
-    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, progPhong, brass);
+    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(shape, "Phong", brass);
+    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, "Phong", brass);
+    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, "Phong", brass);
 
     gameObj = new GameObject(
             GameObjectType::DYNAMIC_OBJECT,

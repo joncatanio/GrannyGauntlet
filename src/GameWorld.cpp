@@ -40,6 +40,8 @@ void GameWorld::resetWorld() {
 }
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
+	
+#ifdef DEBUG
 	// Keep track of the last spawn time internally to know when to spawn next
 	static double previousSpawnTime = 0.0;
 
@@ -48,6 +50,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		addBunnyToGameWorld();
 		previousSpawnTime = totalTime;
 	}
+#endif
 
     static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);

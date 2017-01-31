@@ -64,8 +64,16 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
+//
+
+
     static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);
+
+    // create a GamoObj
+    // give it to Cookie Thrower
+    // also add to the list
+    // modify it in Cookie Thrower (should be automatically rendered)
 
 	for (GameObject* obj : this->dynamicGameObjects_) {
 		obj->update(deltaTime);
@@ -105,7 +113,6 @@ void GameWorld::drawGameObjects() {
 	for (GameObject *obj : this->staticGameObjects_) {
 		obj->draw(P, M, V);
 	}
-
 	renderCount++;
 }
 
@@ -190,7 +197,7 @@ void GameWorld::addBunnyToGameWorld() {
 		startVelocity, 
 		initialScale,
 		NULL, 
-		bunnyPhysicsComp, 
+		bunnyPhysicsComp,
 		bunnyRenderComp);
 
 	this->addDynamicGameObject(bunnyObj);

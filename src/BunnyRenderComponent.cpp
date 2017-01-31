@@ -1,5 +1,6 @@
 #include "BunnyRenderComponent.h"
 #include "GameObject.h"
+#include "ShaderManager.h"
 
 BunnyRenderComponent::BunnyRenderComponent(std::shared_ptr<Shape> shape, std::shared_ptr<Program> shaderProgram, std::shared_ptr<Material> material)
 	: RenderComponent(shape, shaderProgram, material) {
@@ -11,7 +12,9 @@ BunnyRenderComponent::~BunnyRenderComponent() {
 
 void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 	ShaderManager& shaderManager = ShaderManager::instance();
-	shaderManager.bindShader(shaderProgram_->name);
+	shaderManager.renderObject(holder_, shaderProgram_->name, shape_, material_, P, V, M);
+
+	/*shaderManager.bindShader(shaderProgram_->name);
 
 	// TODO(rgarmsen2295): Add boilerplate to standard method call - probably in ShaderManager or similar
 	// Bind perspective and view tranforms
@@ -43,5 +46,5 @@ void BunnyRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<
 
 	M->popMatrix();
 
-	shaderManager.unbindShader();
+	shaderManager.unbindShader();*/
 }

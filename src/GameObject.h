@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
+
 #include "GLSL.h"
 #include "Program.h"
 #include "MatrixStack.h"
@@ -15,8 +17,6 @@
 #include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
-
-enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 
 class GameObject {
 public:

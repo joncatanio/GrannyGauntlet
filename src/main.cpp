@@ -3,12 +3,12 @@
  * Beginnings of a Game Engine
  */
 
+#include "ShaderManager.h"
 #include "ShaderHelper.h"
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "GLFWHelper.h"
 #include "ResourceManager.h"
-#include "ShaderManager.h"
 
 #include "WallRenderComponent.h"
 

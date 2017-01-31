@@ -1,6 +1,7 @@
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "CookieThrower.h"
+#include "ShaderManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 GameWorld::GameWorld()
@@ -10,6 +11,9 @@ GameWorld::GameWorld()
 
 	// Seed the PRNG with the current time for any random elements in the world
 	std::srand(std::time(NULL));
+
+	// TODO(rgarmsen2295): Make this look nicer
+	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 });
 }
 
 GameWorld::~GameWorld() {}
@@ -22,12 +26,20 @@ void GameWorld::addStaticGameObject(GameObject* obj) {
 	this->staticGameObjects_.push_back(obj);
 }
 
+void GameWorld::addLight(const Light& newLight) {
+	lights.push_back(newLight);
+}
+
 int GameWorld::getNumDynamicGameObjects() {
 	return this->dynamicGameObjects_.size();
 }
 
 int GameWorld::getNumStaticGameObjects() {
 	return this->staticGameObjects_.size();
+}
+
+const std::vector<Light>& GameWorld::getLights() {
+	return lights;
 }
 
 void GameWorld::clearGameObjects() {

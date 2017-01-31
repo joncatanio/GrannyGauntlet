@@ -7,7 +7,6 @@
 #include "Shape.h"
 #include "MatrixStack.h"
 #include "ShaderHelper.h"
-#include "ShaderManager.h"
 
 #include "Component.h"
 

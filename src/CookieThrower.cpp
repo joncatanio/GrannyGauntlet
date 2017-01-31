@@ -114,10 +114,10 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
         }
     }
 
-    glm::vec3 aimTarget = player.getPosition() + throwDirection * 1.5f;
+    glm::vec3 aimTarget = player.getPosition() + throwDirection * 1.0f;
     gameObj->setPosition(aimTarget);
 
-    glm::vec3 aimTarget1 = player.getPosition() + throwDirection * 1.0f;
+    glm::vec3 aimTarget1 = player.getPosition() + throwDirection * 1.5f;
     gameObj1->setPosition(aimTarget1);
 
     glm::vec3 aimTarget2 = player.getPosition() + throwDirection * 0.5f;

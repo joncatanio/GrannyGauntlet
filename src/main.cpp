@@ -10,6 +10,7 @@
 #include "ResourceManager.h"
 #include "ShaderManager.h"
 
+#include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
 
 // Global height and width variables representing the view resolution
@@ -41,10 +42,6 @@ std::shared_ptr<Material> brass;
 // TODO(rgarmsen2295): Move into shader manager class
 std::shared_ptr<Shape> shapeCube;
 std::shared_ptr<Shape> shapeGirl;
-
-// Main directional light properties
-// TODO(rgarmsen2295): Move into shader manager class
-Light curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 };
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {
@@ -141,8 +138,6 @@ int parseArgs(int argc, char **argv) {
 
 // Sets up a simple static world/room used in Lab 1 for CPE 476
 static void setupStaticWorld(GameWorld& world) {
-	ShaderManager& shaderManager = ShaderManager::instance();
-	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	// Floor "Wall"
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, "Phong", green);
@@ -158,41 +153,44 @@ static void setupStaticWorld(GameWorld& world) {
 	world.addStaticGameObject(floor);
 
 	// Cube House 1
-	WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
+	WallPhysicsComponent* house1PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
 	GameObject* house1 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		glm::vec3(-25.0f, 5.0f, -20.0f), 
+		glm::vec3(-25.0f, 5.1f, -20.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f,
 		glm::vec3(5, 5, 5),
 		NULL,
-		NULL,
+		house1PhysicsComp,
 		house1RenderComp);
 	world.addStaticGameObject(house1);
 
 	// Cube House 2
-	WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
+	WallPhysicsComponent* house2PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
 	GameObject* house2 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		glm::vec3(-30.0f, 5.0f, 20.0f), 
+		glm::vec3(-30.0f, 5.1f, 20.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
 		glm::vec3(5, 5, 5),
 		NULL,
-		NULL,
+		house2PhysicsComp,
 		house2RenderComp);
 	world.addStaticGameObject(house2);
 
 	// Cube House 3
-	WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
+	WallPhysicsComponent* house3PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
 	GameObject* house3 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		glm::vec3(-40.0f, 5.0f, -20.0f), 
+		glm::vec3(-40.0f, 5.1f, -20.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
 		glm::vec3(5, 5, 5),
 		NULL,
-		NULL,
+		house3PhysicsComp,
 		house3RenderComp);
 	world.addStaticGameObject(house3);
 }
@@ -224,6 +222,19 @@ int main(int argc, char **argv) {
 
 	// Load a phong shader
 	if (shaderManager.createIsomorphicShader(resourceManager, "Phong", "phong") == 0) {
+		return EXIT_FAILURE;
+	}
+
+	// Load temporary hard color shaders
+	if (shaderManager.createIsomorphicShader(resourceManager, "Blue", "dummyBlue") == 0) {
+		return EXIT_FAILURE;
+	}
+
+	if (shaderManager.createIsomorphicShader(resourceManager, "Green", "dummyGreen") == 0) {
+		return EXIT_FAILURE;
+	}
+
+	if (shaderManager.createIsomorphicShader(resourceManager, "Red", "dummyRed") == 0) {
 		return EXIT_FAILURE;
 	}
 

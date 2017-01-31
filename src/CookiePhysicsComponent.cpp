@@ -30,24 +30,24 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
     glm::vec3 oldPosition = holder_->getPosition();
 
-    yVelocity -= gravity * deltaTime;
+    if (holder_->getPosition().y > 0.2f) {
+        yVelocity -= gravity * deltaTime;
+    } else {
+        yVelocity = 0.0f;
+        holder_->velocity = 0.0f;
+    }
 
     //TODO(nurgan) make the cookie "spin" when it is in the air
-
-    // Update position of GameObject (if a collision occurs, will reset to old position and update position again)
-    glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);
-    newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
-    holder_->setPosition(newPosition);
-    updateBoundingBox();
 
     // If we hit anything, stop "forward" movement
     GameObjectType objTypeHit = world.checkCollision(holder_);
 
     if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
             holder_->velocity = 0.0f;
-            newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
-            newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
-            holder_->setPosition(newPosition);
-            updateBoundingBox();
     }
+
+    glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);
+    newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
+    holder_->setPosition(newPosition);
+    updateBoundingBox();
 }

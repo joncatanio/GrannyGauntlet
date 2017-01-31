@@ -20,7 +20,7 @@ void PlayerPhysicsComponent::updateBoundingBox() {
 }
 
 void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
-   if (holder_->toggleXMovement || holder_->toggleZMovement) {
+   if (holder_->toggleMovement) {
       glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *
          glm::normalize(holder_->direction) * deltaTime);
       holder_->setPosition(newPosition);

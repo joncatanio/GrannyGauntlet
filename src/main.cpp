@@ -255,7 +255,10 @@ int main(int argc, char **argv) {
       playerPhysicsComp,
       playerRenderComp
    );
+   /* Set the orient angle to orient the object correctly from it's starting pos.
+    * This is specific to each obj file. Positive values are cw, negative ccw */ 
    player->setYAxisRotation(-M_PI / 2);
+   player->setOrientAngle(-M_PI / 2);
 
 	// The current game camera
 	Camera camera(player);

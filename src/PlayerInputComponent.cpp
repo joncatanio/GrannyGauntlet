@@ -20,17 +20,17 @@ void PlayerInputComponent::pollInput() {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS ||
       glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
 
-      holder_->toggleXMovement = true;
+      holder_->toggleMovement = true;
       holder_->velocity = 12.0f;
 
 	} else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS ||
       glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
 
-      holder_->toggleXMovement = true;
+      holder_->toggleMovement = true;
       holder_->velocity = -5.0f;
 
 	} else {
-      holder_->toggleXMovement = false;
+      holder_->toggleMovement = false;
    }
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS ||
@@ -43,7 +43,5 @@ void PlayerInputComponent::pollInput() {
 
       camera.changeBeta(0.5);
 
-	} else {
-      holder_->toggleZMovement = false;
-   }
+	}
 }

@@ -40,15 +40,6 @@ void GameWorld::resetWorld() {
 }
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
-	// Keep track of the last spawn time internally to know when to spawn next
-	static double previousSpawnTime = 0.0;
-
-	// Spawn a new bunny every ~3 seconds, and max out at 30 bunnies
-	if (totalTime >= previousSpawnTime + 3.0 && getNumDynamicGameObjects() < 30) {
-		addBunnyToGameWorld();
-		previousSpawnTime = totalTime;
-	}
-
     static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);
 

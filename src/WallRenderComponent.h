@@ -5,7 +5,7 @@
 
 class WallRenderComponent : public RenderComponent {
 public:
-	WallRenderComponent(std::shared_ptr<Shape> shape, std::shared_ptr<Program> shaderProgram, std::shared_ptr<Material> material);
+	WallRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material);
 
 	~WallRenderComponent();
 

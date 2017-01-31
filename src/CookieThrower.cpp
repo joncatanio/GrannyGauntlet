@@ -21,6 +21,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
     GameManager& gameManager = GameManager::instance();
     Camera& camera = gameManager.getCamera();
     GameObject& player = gameManager.getPlayer();
+    ShaderManager& shaderManager = ShaderManager::instance();
     glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
 
     aimInputComponent->pollInput();
@@ -36,7 +37,8 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
         if (totalTime >= previousCookieTime + 0.5) {
 
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
-            BunnyRenderComponent *renderComp = new BunnyRenderComponent(cookieShape, progPhong, obsidian);
+            BunnyRenderComponent *renderComp = new BunnyRenderComponent(cookieShape,
+               shaderManager.getShaderProgram("Phong"), obsidian);
 
             glm::vec3 upDownRotAxis = glm::cross(player.direction, glm::vec3(0.0, 1.0, 0.0));
             glm::vec3 throwDirection = glm::rotate(player.direction, xRot, upDownRotAxis);

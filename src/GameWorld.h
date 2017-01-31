@@ -32,13 +32,13 @@ public:
 	~GameWorld();
 
 	// Adds a GameObject to the World's internal list of non-static GameObjects (could move)
-	void addNonStaticGameObject(GameObject* obj);
+	void addDynamicGameObject(GameObject* obj);
 	
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
 	void addStaticGameObject(GameObject* obj);
 
 	// Gets the current total number of non-static GameObjects in the world
-	int getNumNonStaticGameObjects();
+	int getNumDynamicGameObjects();
 
 	// Gets the current total number of static objects in the world
 	int getNumStaticGameObjects();
@@ -71,7 +71,7 @@ public:
 
 private:
 	// Collection of GameObjects in the world
-	std::vector<GameObject*> nonStaticGameObjects_;
+	std::vector<GameObject*> dynamicGameObjects_;
 
 	// Collection of static geometry in the world - these should never move
 	std::vector<GameObject*> staticGameObjects_;

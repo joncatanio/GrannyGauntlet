@@ -31,6 +31,6 @@ void GameManager::setGameWorld(GameWorld* newWorld) {
 
 void GameManager::printInfoToConsole(float currentFPS) {
 	printf("Current FPS: %-10.2lf", currentFPS);
-	std::cout << " Number of non-static objects in world: " << currentWorld_->getNumNonStaticGameObjects();
-	std::cout << " Number of non-static objects hit: " << currentWorld_->getNumBunniesHit() << '\r' <<  std::flush;
+	std::cout << " Number of dynamic objects in world: " << currentWorld_->getNumDynamicGameObjects();
+	std::cout << " Number of dynamic objects hit: " << currentWorld_->getNumBunniesHit() << '\r' <<  std::flush;
 }

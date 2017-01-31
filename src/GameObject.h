@@ -16,7 +16,7 @@
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
 
-enum class GameObjectType { PLAYER, STATIC_OBJECT, NONSTATIC_OBJECT, NO_OBJECT };
+enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 
 class GameObject {
 public:

@@ -78,7 +78,7 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 			holder_->changeMaterial(jade);
 			world.registerBunnyHit();
 		}
-	} else if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::NONSTATIC_OBJECT) {
+	} else if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
 		if (holder_->velocity != 0.0f) {
 			// Only update bunny on hit if moving
 			holder_->direction = -holder_->direction;

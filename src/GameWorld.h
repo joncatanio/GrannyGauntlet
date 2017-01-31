@@ -88,8 +88,6 @@ private:
 	// Adds a bunny model to the game world under the rules of 476 Lab 1
 	void addBunnyToGameWorld();
 
-    // Throw a cookie.
-    void throwCookie();
 };
 
 #endif

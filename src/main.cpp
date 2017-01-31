@@ -44,7 +44,7 @@ std::shared_ptr<Shape> shapeGirl;
 
 // Main directional light properties
 // TODO(rgarmsen2295): Move into shader manager class
-Light curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f };
+Light curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 };
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {

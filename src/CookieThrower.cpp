@@ -45,7 +45,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
             throwDirection = glm::rotateY(throwDirection, yRot);
 
             GameObject *cookieObj = new GameObject(
-                    GameObjectType::NONSTATIC_OBJECT,
+                    GameObjectType::DYNAMIC_OBJECT,
                     player.getPosition(),
                     throwDirection,
                     startVelocity,
@@ -54,7 +54,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
                     cookiePhysicsComp,
                     renderComp);
 
-            gameManager.getGameWorld().addNonStaticGameObject(cookieObj);
+            gameManager.getGameWorld().addDynamicGameObject(cookieObj);
 
             previousCookieTime = totalTime;
         }

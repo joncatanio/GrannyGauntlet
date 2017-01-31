@@ -120,46 +120,6 @@ unsigned long GameWorld::getRenderCount() {
 	return renderCount;
 }
 
-<<<<<<< HEAD
-void GameWorld::throwCookie() {
-	ShaderManager& shaderManager = ShaderManager::instance();
-	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
-
-	GameManager& gameManager = GameManager::instance();
-	Camera& camera = gameManager.getCamera();
-	static std::shared_ptr<Shape> cookieShape = std::make_shared<Shape>();
-	static bool hasCookieLoaded = false;
-
-	if (!hasCookieLoaded) {
-		cookieShape->loadMesh(RESOURCE_DIR + "sphere.obj");
-		cookieShape->resize();
-		cookieShape->init();
-
-		hasCookieLoaded = true;
-	}
-
-	float startVelocity = 20.0f;
-
-	glm::vec3 initialScale(0.5f, 0.5f, 0.5f);
-
-    CookiePhysicsComponent* cookiePhysicsComp = new CookiePhysicsComponent();
-	BunnyRenderComponent* renderComp = new BunnyRenderComponent(cookieShape, progPhong, obsidian);
-
-	GameObject* cookieObj = new GameObject(
-			GameObjectType::DYNAMIC_OBJECT,
-			camera.getEye(),
-			camera.getLookAt(),
-			startVelocity,
-			initialScale,
-			NULL,
-            cookiePhysicsComp,
-			renderComp);
-
-	this->addDynamicGameObject(cookieObj);
-}
-
-=======
->>>>>>> master
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class
 int GameWorld::getNumBunniesHit() {
 	return numBunniesHit;

@@ -38,8 +38,12 @@ void Shape::loadMesh(const string &meshName) {
 		posBuf = shapes[0].mesh.positions;
 		//texBuf = shapes[0].mesh.texcoords;
 		eleBuf = shapes[0].mesh.indices;
+		norBuf = shapes[0].mesh.normals;
 
-		calculateNormals();
+		// If no normals are given, calculate them ourselves
+		if (norBuf.size() == 0) {
+			calculateNormals();
+		}
 
 		findAndSetMinAndMax();
 	}

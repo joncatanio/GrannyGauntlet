@@ -70,6 +70,9 @@ public:
 	// Performs any render/draw updates necessary for the object
 	void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
+	// TODO(rgarmsen2295): Move this logic to be done via message passing or similar...
+	void changeShader(const std::string& newShaderName);
+
 private:
 
 	// The current position of the object in world space

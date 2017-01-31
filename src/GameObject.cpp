@@ -110,3 +110,9 @@ void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStac
 		render_->draw(P, M, V);
 	}
 }
+
+void GameObject::changeShader(const std::string& newShaderName) {
+	if (render_ != NULL) {
+		render_->changeShader(newShaderName);
+	}
+}

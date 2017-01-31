@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Shape.h"
+#include "MatrixStack.h"
+#include "ShaderHelper.h"
+#include "ShaderManager.h"
 #include "AimInputComponent.h"
 
 class Shape;
@@ -21,6 +25,9 @@ public:
     void pollAndThrow(double deltaTime, double totalTime);
 
 private:
+    GameObject* gameObj;
+    GameObject* gameObj1;
+    GameObject* gameObj2;
     AimInputComponent* aimInputComponent;
     std::shared_ptr<Shape> cookieShape;
     float xRot = 0.0;

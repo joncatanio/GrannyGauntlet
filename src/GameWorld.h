@@ -36,12 +36,18 @@ public:
 	
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
 	void addStaticGameObject(GameObject* obj);
+	
+	// Adds a new light to the current world
+	void addLight(const Light& newLight);
 
 	// Gets the current total number of non-static GameObjects in the world
 	int getNumDynamicGameObjects();
 
 	// Gets the current total number of static objects in the world
 	int getNumStaticGameObjects();
+
+	// Returns a reference to the list of lights currently in the world
+	const std::vector<Light>& getLights();
 
 	// Clears the world of all GameObjects
 	void clearGameObjects();
@@ -75,6 +81,9 @@ private:
 
 	// Collection of static geometry in the world - these should never move
 	std::vector<GameObject*> staticGameObjects_;
+
+	// List of the lights currently in the world
+	std::vector<Light> lights;
 
 	// Number of "hit" bunnies
 	int numBunniesHit;

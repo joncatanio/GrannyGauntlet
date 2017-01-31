@@ -120,15 +120,69 @@ GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, c
 	return createShaderProgram(shaderName, shaderName, shaderName);
 }
 
-void ShaderManager::bindShader(const std::string& shaderProgramName) {
-	std::shared_ptr<Program>& shaderToBind = shaderPrograms.at(shaderProgramName);
+const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shaderProgramName) {
+	std::shared_ptr<Program> shaderToBind = shaderPrograms.at(shaderProgramName);
 	boundShaderName = shaderProgramName;
 	glUseProgram(shaderToBind->getPid());
+
+	return shaderToBind;
 }
 
 void ShaderManager::unbindShader() {
 	boundShaderName = "";
 	glUseProgram(NO_SHADER);
+}
+
+void ShaderManager::renderObject(GameObject* objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
+ const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
+	if (objToRender != NULL) {
+		GameManager& gameManager = GameManager::instance();
+		GameWorld& gameWorld = gameManager.getGameWorld();
+		const std::vector<Light>& lights = gameWorld.getLights();
+
+		// TODO(rgarmsen2295): Add support for multiple lights
+		Light curLight;
+		if (lights.size() > 0) {
+			curLight = lights[0];
+		} 
+		else {
+			curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 };
+		}
+
+		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
+
+		// Bind perspective and view tranforms
+		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
+
+		// Bind light properties
+		glUniform3f(shaderProgram->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
+		glUniform3f(shaderProgram->getUniform("lightClr"), curLight.r, curLight.g, curLight.b);
+
+		// Bind material properties
+		glUniform3f(shaderProgram->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);
+		glUniform3f(shaderProgram->getUniform("MatDif"), material->rDif, material->gDif, material->bDif);
+		glUniform3f(shaderProgram->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
+		glUniform1f(shaderProgram->getUniform("MatShiny"), material->shininess);
+
+		// Set up and bind model transform
+		M->pushMatrix();
+		M->loadIdentity();
+
+		M->translate(objToRender->getPosition());
+		M->scale(objToRender->getScale());
+		M->rotate(objToRender->getYAxisRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+
+		// Draw bunny
+		// TODO(rgarmsen): Make shape not need the shader program
+		shape->draw(shaderProgram);
+
+		M->popMatrix();
+
+		unbindShader();
+	}
 }
 
 ShaderManager::ShaderManager() {

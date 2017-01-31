@@ -5,7 +5,7 @@
 
 class BunnyRenderComponent : public RenderComponent {
 public:
-	BunnyRenderComponent(std::shared_ptr<Shape> shape, std::shared_ptr<Program> shaderProgram, std::shared_ptr<Material> material);
+	BunnyRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material);
 
 	~BunnyRenderComponent();
 

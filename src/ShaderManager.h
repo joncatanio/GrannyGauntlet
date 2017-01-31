@@ -1,12 +1,21 @@
 #ifndef SHADER_MANAGER_H
 #define SHADER_MANAGER_H
 
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include <cassert>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <unordered_map>
 
+#include "ShaderHelper.h"
+
+#include "GameManager.h"
+#include "GameObject.h"
+#include "GameWorld.h"
 #include "GLSL.h"
 #include "Program.h"
 #include "ResourceManager.h"
@@ -46,10 +55,14 @@ public:
 
 	// Finds the shader program with the given name and binds it.
 	// Throws an |out_of_range| exception if no shader program with that name is found
-	void bindShader(const std::string& shaderProgramName);
+	const std::shared_ptr<Program> bindShader(const std::string& shaderProgramName);
 
 	// Unbinds the current shader from use
 	void unbindShader();
+
+	// Renders the given object
+	void renderObject(GameObject* objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
+ 	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 private:
 

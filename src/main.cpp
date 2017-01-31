@@ -246,7 +246,7 @@ int main(int argc, char **argv) {
    PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
       shaderManager.getShaderProgram("Phong"), pearl);
    GameObject* player = new GameObject(
-      GameObjectType::NONSTATIC_OBJECT,
+      GameObjectType::DYNAMIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),
       glm::vec3(-1.0f, 0.0f, 0.0f),
       12.0f,
@@ -265,7 +265,7 @@ int main(int argc, char **argv) {
 
 	// The current game world
 	GameWorld world;
-   world.addNonStaticGameObject(player);
+   world.addDynamicGameObject(player);
 
 	// Initialize the GameManager and get its instance
 	GameManager& gameManager = GameManager::instance();

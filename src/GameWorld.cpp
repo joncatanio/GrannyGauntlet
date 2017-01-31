@@ -14,16 +14,16 @@ GameWorld::GameWorld()
 
 GameWorld::~GameWorld() {}
 
-void GameWorld::addNonStaticGameObject(GameObject* obj) {
-	this->nonStaticGameObjects_.push_back(obj);
+void GameWorld::addDynamicGameObject(GameObject* obj) {
+	this->dynamicGameObjects_.push_back(obj);
 }
 
 void GameWorld::addStaticGameObject(GameObject* obj) {
 	this->staticGameObjects_.push_back(obj);
 }
 
-int GameWorld::getNumNonStaticGameObjects() {
-	return this->nonStaticGameObjects_.size();
+int GameWorld::getNumDynamicGameObjects() {
+	return this->dynamicGameObjects_.size();
 }
 
 int GameWorld::getNumStaticGameObjects() {
@@ -31,7 +31,7 @@ int GameWorld::getNumStaticGameObjects() {
 }
 
 void GameWorld::clearGameObjects() {
-	this->nonStaticGameObjects_.clear();
+	this->dynamicGameObjects_.clear();
 }
 
 void GameWorld::resetWorld() {
@@ -43,11 +43,16 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	// Keep track of the last spawn time internally to know when to spawn next
 	static double previousSpawnTime = 0.0;
 
+	// Spawn a new bunny every ~3 seconds, and max out at 30 bunnies
+	if (totalTime >= previousSpawnTime + 3.0 && getNumDynamicGameObjects() < 30) {
+		addBunnyToGameWorld();
+		previousSpawnTime = totalTime;
+	}
 
     static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);
 
-	for (GameObject* obj : this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->dynamicGameObjects_) {
 		obj->update(deltaTime);
 	}
 
@@ -73,7 +78,7 @@ void GameWorld::drawGameObjects() {
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
 	// Draw non-static objects
-	for (GameObject* obj : this->nonStaticGameObjects_) {
+	for (GameObject* obj : this->dynamicGameObjects_) {
 		obj->draw(P, M, V);
 	}
 
@@ -102,7 +107,7 @@ GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
 	}
 
 	// Check against other non-static objects
-	for (GameObject* obj : nonStaticGameObjects_) {
+	for (GameObject* obj : dynamicGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}
@@ -115,6 +120,46 @@ unsigned long GameWorld::getRenderCount() {
 	return renderCount;
 }
 
+<<<<<<< HEAD
+void GameWorld::throwCookie() {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
+
+	GameManager& gameManager = GameManager::instance();
+	Camera& camera = gameManager.getCamera();
+	static std::shared_ptr<Shape> cookieShape = std::make_shared<Shape>();
+	static bool hasCookieLoaded = false;
+
+	if (!hasCookieLoaded) {
+		cookieShape->loadMesh(RESOURCE_DIR + "sphere.obj");
+		cookieShape->resize();
+		cookieShape->init();
+
+		hasCookieLoaded = true;
+	}
+
+	float startVelocity = 20.0f;
+
+	glm::vec3 initialScale(0.5f, 0.5f, 0.5f);
+
+    CookiePhysicsComponent* cookiePhysicsComp = new CookiePhysicsComponent();
+	BunnyRenderComponent* renderComp = new BunnyRenderComponent(cookieShape, progPhong, obsidian);
+
+	GameObject* cookieObj = new GameObject(
+			GameObjectType::DYNAMIC_OBJECT,
+			camera.getEye(),
+			camera.getLookAt(),
+			startVelocity,
+			initialScale,
+			NULL,
+            cookiePhysicsComp,
+			renderComp);
+
+	this->addDynamicGameObject(cookieObj);
+}
+
+=======
+>>>>>>> master
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class
 int GameWorld::getNumBunniesHit() {
 	return numBunniesHit;
@@ -160,7 +205,7 @@ void GameWorld::addBunnyToGameWorld() {
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, progPhong, brass);
 
 	GameObject* bunnyObj = new GameObject(
-		GameObjectType::NONSTATIC_OBJECT, 
+		GameObjectType::DYNAMIC_OBJECT, 
 		startPosition, 
 		startDirection, 
 		startVelocity, 
@@ -169,5 +214,5 @@ void GameWorld::addBunnyToGameWorld() {
 		bunnyPhysicsComp, 
 		bunnyRenderComp);
 
-	this->addNonStaticGameObject(bunnyObj);
+	this->addDynamicGameObject(bunnyObj);
 }

@@ -43,7 +43,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     // If we hit anything, stop "forward" movement
     GameObjectType objTypeHit = world.checkCollision(holder_);
 
-    if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::NONSTATIC_OBJECT) {
+    if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
             holder_->velocity = 0.0f;
             newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
             newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);

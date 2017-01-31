@@ -6,7 +6,7 @@
 class PlayerRenderComponent : public RenderComponent {
 public:
    PlayerRenderComponent(std::shared_ptr<Shape> shape,
-      std::shared_ptr<Program> shaderProgram,
+      const std::string& shaderName,
       std::shared_ptr<Material> material);
 
    ~PlayerRenderComponent();

@@ -39,7 +39,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
 
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
             BunnyRenderComponent *renderComp = new BunnyRenderComponent(cookieShape,
-               shaderManager.getShaderProgram("Phong"), obsidian);
+               "Phong", obsidian);
 
             glm::vec3 upDownRotAxis = glm::cross(player.direction, glm::vec3(0.0, 1.0, 0.0));
             glm::vec3 throwDirection = glm::rotate(player.direction, xRot, upDownRotAxis);

@@ -14,9 +14,9 @@ class RenderComponent : public Component {
 public:
 
 	// Constructs a new RenderComponent using the passed shader program
-	RenderComponent(std::shared_ptr<Shape> shape, std::shared_ptr<Program> shaderProgram, std::shared_ptr<Material> material)
+	RenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material)
 		: shape_(shape), 
-		shaderProgram_(shaderProgram),
+		shaderName_(shaderName),
 		material_(material) {}
 
 	virtual ~RenderComponent() {}
@@ -36,8 +36,8 @@ protected:
 	// Shape information that is needed to draw the object
 	std::shared_ptr<Shape> shape_;
 
-	// Shader program data to use with the object
-	std::shared_ptr<Program> shaderProgram_;
+	// Shader program name set with the object
+	std::string shaderName_;
 
 	// Material that is currently in use for this object
 	std::shared_ptr<Material> material_;

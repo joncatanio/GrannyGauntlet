@@ -1,7 +1,7 @@
 #include "GameWorld.h"
 #include "GameManager.h"
-#include "CookieThrower.h"
 #include "ShaderManager.h"
+#include "CookieThrower.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 GameWorld::GameWorld()
@@ -177,7 +177,7 @@ void GameWorld::addBunnyToGameWorld() {
 	glm::vec3 initialScale(1.0f, 1.0f, 1.0f);
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
-	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, progPhong, brass);
+	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, "Phong", brass);
 
 	GameObject* bunnyObj = new GameObject(
 		GameObjectType::DYNAMIC_OBJECT, 

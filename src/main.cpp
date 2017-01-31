@@ -3,12 +3,12 @@
  * Beginnings of a Game Engine
  */
 
-#include "ShaderManager.h"
 #include "ShaderHelper.h"
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "GLFWHelper.h"
 #include "ResourceManager.h"
+#include "ShaderManager.h"
 
 #include "WallRenderComponent.h"
 
@@ -145,7 +145,7 @@ static void setupStaticWorld(GameWorld& world) {
 	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	// Floor "Wall"
-	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, progPhong, green);
+	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, "Phong", green);
 	GameObject* floor = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(0.0f, 0.0f, 0.0f), 
@@ -158,7 +158,7 @@ static void setupStaticWorld(GameWorld& world) {
 	world.addStaticGameObject(floor);
 
 	// Cube House 1
-	WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
 	GameObject* house1 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(-25.0f, 5.0f, -20.0f), 
@@ -171,7 +171,7 @@ static void setupStaticWorld(GameWorld& world) {
 	world.addStaticGameObject(house1);
 
 	// Cube House 2
-	WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
 	GameObject* house2 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(-30.0f, 5.0f, 20.0f), 
@@ -184,7 +184,7 @@ static void setupStaticWorld(GameWorld& world) {
 	world.addStaticGameObject(house2);
 
 	// Cube House 3
-	WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, "Phong", obsidian);
 	GameObject* house3 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(-40.0f, 5.0f, -20.0f), 
@@ -230,7 +230,7 @@ int main(int argc, char **argv) {
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
    PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
-      shaderManager.getShaderProgram("Phong"), pearl);
+      "Phong", pearl);
    GameObject* player = new GameObject(
       GameObjectType::DYNAMIC_OBJECT,
       glm::vec3(0.0f, 1.0f, 0.0f),

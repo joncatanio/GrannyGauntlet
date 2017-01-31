@@ -82,7 +82,7 @@ private:
 	// Collection of static geometry in the world - these should never move
 	std::vector<GameObject*> staticGameObjects_;
 
-	// A list of the lights currently in the world
+	// List of the lights currently in the world
 	std::vector<Light> lights;
 
 	// Number of "hit" bunnies

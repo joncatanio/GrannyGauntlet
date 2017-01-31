@@ -12,8 +12,8 @@ GameObject::GameObject(GameObjectType objType,
 	: type(objType),
 	direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
-   toggleXMovement(false),
-   toggleZMovement(false),
+   orientAngle_(0),
+   toggleMovement(false),
 	input_(input),
 	physics_(physics),
 	render_(render) {
@@ -57,6 +57,14 @@ glm::vec3& GameObject::getPosition() {
 
 glm::vec3& GameObject::getScale() {
 	return scale_;
+}
+
+void GameObject::setOrientAngle(float orientAngle) {
+   orientAngle_ = orientAngle;
+}
+
+float GameObject::getOrientAngle() {
+   return orientAngle_;
 }
 
 float GameObject::getYAxisRotation() {

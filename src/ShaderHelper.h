@@ -59,8 +59,6 @@ extern int g_width, g_height;
 extern float prevX;
 extern float prevY;
 
-extern std::shared_ptr<Program> progPhong;
-
 // Materials
 extern std::shared_ptr<Material> obsidian;
 extern std::shared_ptr<Material> green;

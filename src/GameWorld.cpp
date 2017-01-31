@@ -127,6 +127,9 @@ void GameWorld::registerBunnyHit() {
 
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class
 void GameWorld::addBunnyToGameWorld() {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
+
 	static std::shared_ptr<Shape> bunnyShape = std::make_shared<Shape>();
 	static bool hasBunnyLoaded = false;
 

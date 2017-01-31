@@ -22,6 +22,9 @@ glm::vec3& Camera::getEye() {
 	return Eye;
 }
 
+/* Eye is not added to LookAt because gaze will ultimately be LA - Eye + Eye
+ * therefore we separate the LA completely. `getTarget()` will then add Eye
+ * in order to create our view matrix. */
 glm::vec3& Camera::getLookAt() {
    glm::vec3 tempLA(cos(alphaRad) * cos(betaRad), sin(alphaRad),
       cos(alphaRad) * cos(ninetyRad - betaRad));
@@ -61,10 +64,12 @@ void Camera::changeAlpha(float deltaAlpha) {
 void Camera::changeBeta(float deltaBeta) {
 	beta += deltaBeta;
 	betaRad = beta * M_PI / 180.0;
-   /* TODO (noj) write function that takes this angle `betaRad` and add it
-    * to the objects natural orientation angle. Need to move this into player
-    * input component at some point. */
-   float newOrient = -(betaRad - M_PI / 2);
+   /* Keep the player and camera in sync in regards to their orientation.
+    * `betaRad` already has a 180 degree rotation baked into it so I just
+    * deal with it by subracting `M_PI` from `betaRad`, this lets us let use
+    * the player's orientation angle. We still want to rotate the direction
+    * vector to point in the direction of the camera. */
+   float newOrient = player->getOrientAngle() - (betaRad - M_PI);
    player->setYAxisRotation(newOrient);
    player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);
 }

@@ -3,6 +3,7 @@ build/
 
 # MAC_OSX stuff
 *.swp
+.DS_Store
 
 # Compiled object files
 *.o

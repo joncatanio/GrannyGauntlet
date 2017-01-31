@@ -29,8 +29,7 @@ public:
 	GameObjectType type;
 
    // Properties for player moveable objects
-   bool toggleXMovement;
-   bool toggleZMovement;
+   bool toggleMovement;
 
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
@@ -48,6 +47,10 @@ public:
 	glm::vec3& getPosition();
 
 	glm::vec3& getScale();
+
+   void setOrientAngle(float orientAngle);
+
+   float getOrientAngle();
 
 	float getYAxisRotation();
 
@@ -74,6 +77,9 @@ private:
 
 	// The current scale of the object relative to it's original size
 	glm::vec3 scale_;
+
+   // The orientation angle to orient the object correctly from it's original
+   float orientAngle_;
 
 	// The current y-axis rotation of the object relative to it's original orientation
 	float yRotationAngle_;

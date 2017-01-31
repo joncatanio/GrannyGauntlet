@@ -5,123 +5,58 @@
 
 #include "GLSL.h"
 
-using namespace std;
+Program::Program(const std::string shaderProgramName, const std::string vertexShaderName, const std::string fragmentShaderName, const GLuint pid)
+	: name(shaderProgramName),
+	vertexShaderName(vertexShaderName),
+	fragmentShaderName(fragmentShaderName),
+	pid(pid) {
+	addDefaultAttributesAndUniforms();
+}
 
-Program::Program() :
-	vShaderName(""),
-	fShaderName(""),
-	pid(0),
-	verbose(true)
-{
+Program::~Program() {
 	
 }
 
-Program::~Program()
-{
-	
+void Program::addAttribute(const std::string& name) {
+	attributes[name] = GLSL::getAttribLocation(pid, name.c_str(), true);
 }
 
-void Program::setShaderNames(const string &v, const string &f)
-{
-	vShaderName = v;
-	fShaderName = f;
+void Program::addUniform(const std::string& name) {
+	uniforms[name] = GLSL::getUniformLocation(pid, name.c_str(),true);
 }
 
-bool Program::init()
-{
-	GLint rc;
-	
-	// Create shader handles
-	GLuint VS = glCreateShader(GL_VERTEX_SHADER);
-	GLuint FS = glCreateShader(GL_FRAGMENT_SHADER);
-	
-	// Read shader sources
-	const char *vshader = GLSL::textFileRead(vShaderName.c_str());
-	const char *fshader = GLSL::textFileRead(fShaderName.c_str());
-	glShaderSource(VS, 1, &vshader, NULL);
-	glShaderSource(FS, 1, &fshader, NULL);
-	
-	// Compile vertex shader
-	glCompileShader(VS);
-	glGetShaderiv(VS, GL_COMPILE_STATUS, &rc);
-	if(!rc) {
-		if(isVerbose()) {
-			GLSL::printShaderInfoLog(VS);
-			cout << "Error compiling vertex shader " << vShaderName << endl;
-		}
-		return false;
-	}
-	
-	// Compile fragment shader
-	glCompileShader(FS);
-	glGetShaderiv(FS, GL_COMPILE_STATUS, &rc);
-	if(!rc) {
-		if(isVerbose()) {
-			GLSL::printShaderInfoLog(FS);
-			cout << "Error compiling fragment shader " << fShaderName << endl;
-		}
-		return false;
-	}
-	
-	// Create the program and link
-	pid = glCreateProgram();
-	glAttachShader(pid, VS);
-	glAttachShader(pid, FS);
-	glLinkProgram(pid);
-	glGetProgramiv(pid, GL_LINK_STATUS, &rc);
-	if(!rc) {
-		if(isVerbose()) {
-			GLSL::printProgramInfoLog(pid);
-			cout << "Error linking shaders " << vShaderName << " and " << fShaderName << endl;
-		}
-		return false;
-	}
-	
-	GLSL::printError();
-	assert(glGetError() == GL_NO_ERROR);
-	return true;
+GLuint Program::getPid() {
+	return pid;
 }
 
-void Program::bind()
-{
-	glUseProgram(pid);
+GLint Program::getAttribute(const std::string& name) const {
+	GLint attributeLocation = attributes.at(name);
+	return attributeLocation;
 }
 
-void Program::unbind()
-{
-	glUseProgram(0);
+GLint Program::getUniform(const std::string& name) const {
+	GLint uniformLocation = uniforms.at(name);
+	return uniformLocation;
 }
 
-void Program::addAttribute(const string &name)
-{
-	attributes[name] = GLSL::getAttribLocation(pid, name.c_str(), isVerbose());
-}
+void Program::addDefaultAttributesAndUniforms() {
 
-void Program::addUniform(const string &name)
-{
-	uniforms[name] = GLSL::getUniformLocation(pid, name.c_str(), isVerbose());
-}
+	// Adds transform uniforms
+	addUniform("M");
+	addUniform("V");
+	addUniform("P");
 
-GLint Program::getAttribute(const string &name) const
-{
-	map<string,GLint>::const_iterator attribute = attributes.find(name.c_str());
-	if(attribute == attributes.end()) {
-		if(isVerbose()) {
-			cout << name << " is not an attribute variable" << endl;
-		}
-		return 0;
-	}
-	return attribute->second;
-}
+	// Adds light uniforms
+	addUniform("lightPos");
+	addUniform("lightClr");
 
-GLint Program::getUniform(const string &name) const
-{
-	map<string,GLint>::const_iterator uniform = uniforms.find(name.c_str());
-	if(uniform == uniforms.end()) {
-		if(isVerbose()) {
-			cout << name << " is not a uniform variable" << endl;
-		}
-		return 0;
-	}
-	return uniform->second;
+	// Adds material uniforms
+	addUniform("MatAmb");
+	addUniform("MatDif");
+	addUniform("MatSpc");
+	addUniform("MatShiny");
+
+	// Adds vertex position and normal uniforms
+	addAttribute("vertPos");
+	addAttribute("vertNor");
 }

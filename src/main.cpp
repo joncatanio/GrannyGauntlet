@@ -44,8 +44,7 @@ std::shared_ptr<Shape> shapeGirl;
 
 // Main directional light properties
 // TODO(rgarmsen2295): Move into shader manager class
-//Light curLight = {-1.75, 10, -1.75, 1, 1, 1, 0, 1};
-Light curLight = { 0, 10, 0, 1, 1, 1, 0, 1 };
+Light curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f };
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {
@@ -152,63 +151,50 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(0.0f, 0.0f, 0.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f, 
-		glm::vec3(30, 0.01, 30),
+		glm::vec3(50, 0.01, 50),
 		NULL,
 		NULL,
 		floorRenderComp);
 	world.addStaticGameObject(floor);
-	
-	// Left Wall
-	WallRenderComponent* leftWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
-	GameObject* leftWall = new GameObject(
+
+	// Cube House 1
+	WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	GameObject* house1 = new GameObject(
 		GameObjectType::STATIC_OBJECT, 
-		glm::vec3(-30.0f, 0.0f, 0.0f), 
-		glm::vec3(1.0f, 0.0f, 0.0f), 
-		0.0f, 
-		glm::vec3(0.01, 30, 30),
-		NULL, 
-		NULL, 
-		leftWallRenderComp);
-	world.addStaticGameObject(leftWall);
-
-	// Right Wall
-	WallRenderComponent* rightWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
-	GameObject* rightWall = new GameObject(
-		GameObjectType::STATIC_OBJECT,
-		glm::vec3(30.0f, 0.0f, 0.0f),
-		glm::vec3(-1.0f, 0.0f, 0.0f),
+		glm::vec3(-25.0f, 5.0f, -20.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f,
-		glm::vec3(0.01, 30, 30),
+		glm::vec3(5, 5, 5),
 		NULL,
 		NULL,
-		rightWallRenderComp);
-	world.addStaticGameObject(rightWall);
+		house1RenderComp);
+	world.addStaticGameObject(house1);
 
-	// Front Wall
-	WallRenderComponent* frontWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
-	GameObject* frontWall = new GameObject(
-		GameObjectType::STATIC_OBJECT,
-		glm::vec3(0.0f, 0.0f, -30.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f),
+	// Cube House 2
+	WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	GameObject* house2 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-30.0f, 5.0f, 20.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
-		glm::vec3(30, 30, 0.01),
+		glm::vec3(5, 5, 5),
 		NULL,
 		NULL,
-		frontWallRenderComp);
-	world.addStaticGameObject(frontWall);
+		house2RenderComp);
+	world.addStaticGameObject(house2);
 
-	// Back Wall
-	WallRenderComponent* backWallRenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
-	GameObject* backWall = new GameObject(
-		GameObjectType::STATIC_OBJECT,
-		glm::vec3(0.0f, 0.0f, 30.0f),
-		glm::vec3(0.0f, 0.0f, -1.0f),
+	// Cube House 3
+	WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, progPhong, obsidian);
+	GameObject* house3 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-40.0f, 5.0f, -20.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
-		glm::vec3(30, 30, 0.01),
+		glm::vec3(5, 5, 5),
 		NULL,
 		NULL,
-		backWallRenderComp);
-	world.addStaticGameObject(backWall);
+		house3RenderComp);
+	world.addStaticGameObject(house3);
 }
 
 int main(int argc, char **argv) {

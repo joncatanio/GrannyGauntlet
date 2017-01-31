@@ -38,8 +38,12 @@ void Shape::loadMesh(const string &meshName) {
 		posBuf = shapes[0].mesh.positions;
 		//texBuf = shapes[0].mesh.texcoords;
 		eleBuf = shapes[0].mesh.indices;
+		norBuf = shapes[0].mesh.normals;
 
-		calculateNormals();
+		// If no normals are given, calculate them ourselves
+		if (norBuf.size() == 0) {
+			calculateNormals();
+		}
 
 		findAndSetMinAndMax();
 	}
@@ -50,6 +54,8 @@ void Shape::loadMesh(const string &meshName) {
  *
  * Taken and modified from provided "lighting slides" pdf on PolyLearn along
  * with tips given on the PolyLearn forms by Prof. Wood
+ *
+ * Currently not used since models should have normals.
  */
 void Shape::calculateNormals() {
 	float v1[3], v2[3], nor[3];

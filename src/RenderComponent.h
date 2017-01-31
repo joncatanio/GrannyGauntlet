@@ -31,6 +31,8 @@ public:
 	// Draws the object using the passed Perspective (P), Model (M), and View (V) matrices
 	virtual void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) = 0;
 
+	inline void changeShader(const std::string& newShaderName) { shaderName_ = newShaderName; }
+
 protected:
 
 	// Shape information that is needed to draw the object

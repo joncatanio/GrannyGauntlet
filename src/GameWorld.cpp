@@ -71,6 +71,10 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		obj->update(deltaTime);
 	}
 
+	for (GameObject* obj : this->staticGameObjects_) {
+		obj->update(deltaTime);
+	}
+
 	updateCount++;
 }
 
@@ -110,19 +114,19 @@ GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
    GameObject& player = gameManager.getPlayer();
 
 	// Check the player against the object
-	if (objToCheck->boundBox.checkIntersection(player.boundBox)) {
+	if (&player != objToCheck && objToCheck->boundBox.checkIntersection(player.boundBox)) {
 		return GameObjectType::PLAYER;
 	}
 
-	// Check against static objects
-	for (GameObject* obj : staticGameObjects_) {
-		if (objToCheck->boundBox.checkIntersection(obj->boundBox)) {
+	// Check against dynamic objects
+	for (GameObject* obj : dynamicGameObjects_) {
+		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}
 	}
 
-	// Check against other non-static objects
-	for (GameObject* obj : dynamicGameObjects_) {
+	// Check against static objects
+	for (GameObject* obj : staticGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
 			return obj->type;
 		}

@@ -48,7 +48,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		addBunnyToGameWorld();
 		previousSpawnTime = totalTime;
 	}
-	
+
     static CookieThrower* cookieThrower = new CookieThrower();
     cookieThrower->pollAndThrow(deltaTime, totalTime);
 

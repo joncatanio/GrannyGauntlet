@@ -54,8 +54,6 @@ void Shape::loadMesh(const string &meshName) {
  *
  * Taken and modified from provided "lighting slides" pdf on PolyLearn along
  * with tips given on the PolyLearn forms by Prof. Wood
- *
- * Currently not used since models should have normals.
  */
 void Shape::calculateNormals() {
 	float v1[3], v2[3], nor[3];

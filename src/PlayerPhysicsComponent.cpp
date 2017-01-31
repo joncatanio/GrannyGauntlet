@@ -26,5 +26,4 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->setPosition(newPosition);
       updateBoundingBox();
    }
-   // TODO (noj) update bounding box here.
 }

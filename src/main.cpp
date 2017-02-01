@@ -146,7 +146,7 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(0.0f, 0.0f, 0.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f, 
-		glm::vec3(50, 0.01, 50),
+		glm::vec3(100, 0.01, 100),
 		NULL,
 		NULL,
 		floorRenderComp);
@@ -193,6 +193,76 @@ static void setupStaticWorld(GameWorld& world) {
 		house3PhysicsComp,
 		house3RenderComp);
 	world.addStaticGameObject(house3);
+
+	// Cube House 4
+	WallPhysicsComponent* house4PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house4RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
+	GameObject* house4 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-10.0f, 5.1f, 20.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 5, 5),
+		NULL,
+		house4PhysicsComp,
+		house4RenderComp);
+	world.addStaticGameObject(house4);
+
+	// Cube House 5
+	WallPhysicsComponent* house5PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house5RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
+	GameObject* house5 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-60.0f, 5.1f, -5.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 5, 5),
+		NULL,
+		house5PhysicsComp,
+		house5RenderComp);
+	world.addStaticGameObject(house5);
+
+	// Cube House 6
+	WallPhysicsComponent* house6PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house6RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
+	GameObject* house6 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-60.0f, 5.1f, 15.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 5, 5),
+		NULL,
+		house6PhysicsComp,
+		house6RenderComp);
+	world.addStaticGameObject(house6);
+
+	// Cube House 7
+	WallPhysicsComponent* house7PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house7RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
+	GameObject* house7 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-60.0f, 5.1f, 35.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 5, 5),
+		NULL,
+		house7PhysicsComp,
+		house7RenderComp);
+	world.addStaticGameObject(house7);
+
+	// Cube House 8
+	WallPhysicsComponent* house8PhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* house8RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
+	GameObject* house8 = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-30.0f, 5.1f, 45.0f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 5, 5),
+		NULL,
+		house8PhysicsComp,
+		house8RenderComp);
+	world.addStaticGameObject(house8);
 }
 
 int main(int argc, char **argv) {

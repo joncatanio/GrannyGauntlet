@@ -14,10 +14,6 @@ CookieThrower::CookieThrower() {
     cookieShape->resize();
     cookieShape->init();
 
-    //
-    ShaderManager& shaderManager = ShaderManager::instance();
-    std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
-
     static std::shared_ptr<Shape> shape = std::make_shared<Shape>();
     static bool hasLoaded = false;
 
@@ -28,9 +24,9 @@ CookieThrower::CookieThrower() {
         hasLoaded = true;
     }
 
-    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(shape, progPhong, brass);
-    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, progPhong, brass);
-    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, progPhong, brass);
+    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(shape, "Phong", brass);
+    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, "Phong", brass);
+    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, "Phong", brass);
 
     gameObj = new GameObject(
             GameObjectType::DYNAMIC_OBJECT,
@@ -79,12 +75,15 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
     glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
 
     aimInputComponent->pollInput();
+    double timeDown = aimInputComponent->pressTime;
+    timeDown = std::min(timeDown, 1.0) / 2.0;
+    timeDown = 0.5 + timeDown;
 
     if(aimInputComponent->toggleXRotation){
-        xRot += aimInputComponent->velocity * deltaTime;
+        xRot += aimInputComponent->rotationDirection * deltaTime;
     }
     if(aimInputComponent->toggleYRotation){
-        yRot += aimInputComponent->velocity * deltaTime;
+        yRot += aimInputComponent->rotationDirection * deltaTime;
     }
 
     glm::vec3 upDownRotAxis = glm::cross(player.direction, glm::vec3(0.0, 1.0, 0.0));
@@ -102,7 +101,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
                     GameObjectType::DYNAMIC_OBJECT,
                     player.getPosition(),
                     throwDirection,
-                    startVelocity,
+                    startVelocity * timeDown,
                     initialScale,
                     NULL,
                     cookiePhysicsComp,

@@ -56,6 +56,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
         glm::vec3 n;
 
+        //check on which side of the bounding box of the object the cookie hit and create normal for reflection
         if((objBB.min_.x - epsilon <= cookieBB.max_.x && objBB.min_.x + epsilon >= cookieBB.max_.x) ||
                 (objBB.max_.x - epsilon <= cookieBB.min_.x && objBB.max_.x + epsilon >= cookieBB.min_.x)) {
             n = glm::vec3(1.0, 0.0, 0.0);
@@ -76,6 +77,9 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
         holder_->setPosition(newPosition);
         updateBoundingBox();
 
+        // The color cahnge has to be done here,
+        // due to the bouncing off, the cookie never really hits the object.
+        // TODO(nurgan) implement checking for object type and only change color if it is a "house"
         if(objHit->getShader().compare("Green")) {
             objHit->changeShader("Green");
         }

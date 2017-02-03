@@ -7,6 +7,7 @@
 AimInputComponent::AimInputComponent() {
     toggleXRotation = false;
     toggleYRotation = false;
+    spaceHoldDown = false;
 }
 
 AimInputComponent::~AimInputComponent() {
@@ -18,27 +19,36 @@ AimInputComponent::~AimInputComponent() {
 void AimInputComponent::pollInput() {
     if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
         toggleXRotation = true;
-        velocity = 1.0f;
+        rotationDirection = 1.0f;
     } else if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
         toggleXRotation = true;
-        velocity = -1.0f;
+        rotationDirection = -1.0f;
     } else {
         toggleXRotation = false;
     }
 
     if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) {
         toggleYRotation = true;
-        velocity = 1.0f;
+        rotationDirection = 1.0f;
     } else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
         toggleYRotation = true;
-        velocity = -1.0f;
+        rotationDirection = -1.0f;
     } else {
         toggleYRotation = false;
     }
 
+    toggleThrow = false;
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        toggleThrow = true;
+        if(!spaceHoldDown){
+            spaceHoldDown = true;
+            pressStart = glfwGetTime();
+        }
+        //toggleThrow = true;
     } else {
-        toggleThrow = false;
+        if(spaceHoldDown){
+            toggleThrow = true;
+            pressTime = glfwGetTime() - pressStart;
+            spaceHoldDown = false;
+        }
     }
 }

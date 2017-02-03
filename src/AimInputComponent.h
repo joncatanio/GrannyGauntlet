@@ -14,10 +14,13 @@ public:
     bool toggleXRotation;
     bool toggleYRotation;
     bool toggleThrow;
-    float velocity;
+    float timePressed;
+    float rotationDirection;
+    double pressTime;
 
 private:
-
+    bool spaceHoldDown;
+    double pressStart;
 
 };
 

@@ -72,6 +72,7 @@ public:
 
 	// TODO(rgarmsen2295): Move this logic to be done via message passing or similar...
 	void changeShader(const std::string& newShaderName);
+	std::string getShader();
 
 private:
 
@@ -95,6 +96,9 @@ private:
 
 	// Physics Component that handles collision reactions
 	PhysicsComponent *physics_;
+
+	//Currenlty active shader
+	std::string shaderName_;
 };
 
 #endif

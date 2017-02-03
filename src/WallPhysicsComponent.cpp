@@ -30,7 +30,7 @@ void WallPhysicsComponent::updatePhysics(float deltaTime) {
     if (objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
         if (!hasCookie) {
             hasCookie = true;
-            holder_->changeShader("Green"); 
+            //holder_->changeShader("Green");
         }
     }
 }

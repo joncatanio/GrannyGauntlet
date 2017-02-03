@@ -7,7 +7,7 @@
 AimInputComponent::AimInputComponent() {
     toggleXRotation = false;
     toggleYRotation = false;
-    spacePressed = false;
+    spaceHoldDown = false;
 }
 
 AimInputComponent::~AimInputComponent() {
@@ -39,16 +39,16 @@ void AimInputComponent::pollInput() {
 
     toggleThrow = false;
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        if(!spacePressed){
-            spacePressed = true;
+        if(!spaceHoldDown){
+            spaceHoldDown = true;
             pressStart = glfwGetTime();
         }
         //toggleThrow = true;
     } else {
-        if(spacePressed){
+        if(spaceHoldDown){
             toggleThrow = true;
             pressTime = glfwGetTime() - pressStart;
-            spacePressed = false;
+            spaceHoldDown = false;
         }
     }
 }

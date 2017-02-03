@@ -19,7 +19,7 @@ public:
     double pressTime;
 
 private:
-    bool spacePressed;
+    bool spaceHoldDown;
     double pressStart;
 
 };

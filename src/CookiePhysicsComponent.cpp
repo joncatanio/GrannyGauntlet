@@ -39,11 +39,14 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
     //TODO(nurgan) make the cookie "spin" when it is in the air
 
-    // If we hit anything, stop "forward" movement
-    GameObjectType objTypeHit = world.checkCollision(holder_);
+    // If we hit anything, stop "forward"
+    GameObject* objHit = world.checkCollision(holder_);
+    GameObjectType objTypeHit = objHit->type;
 
     if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-            holder_->velocity = 0.0f;
+
+
+        holder_->velocity = 0.0f;
     }
 
     glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity * holder_->direction * deltaTime);

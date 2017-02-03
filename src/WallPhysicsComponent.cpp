@@ -26,7 +26,7 @@ void WallPhysicsComponent::updateBoundingBox() {
 void WallPhysicsComponent::updatePhysics(float deltaTime) {
     // If we hit someone or we're at the edge of the acceptable "world", then reverse direction
     GameWorld& world = GameManager::instance().getGameWorld();
-    GameObjectType objTypeHit = world.checkCollision(holder_);
+    GameObjectType objTypeHit = world.checkCollision(holder_)->type;
     if (objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
         if (!hasCookie) {
             hasCookie = true;

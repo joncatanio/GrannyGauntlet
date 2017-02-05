@@ -48,14 +48,6 @@ typedef struct {
 } Material;
 
 // TODO(rgarmsen2295): EXTERMINATE ALL GLOBALS
-//extern float aspect;
-
-// Global height and width variables representing the view resolution
-//extern int g_width, g_height;
-
-// Previous x & y pos for the mouse
-//extern float prevX;
-//extern float prevY;
 
 // Materials
 extern std::shared_ptr<Material> obsidian;
@@ -67,9 +59,6 @@ extern std::shared_ptr<Material> brass;
 extern Light curLight;
 
 extern std::string RESOURCE_DIR;
-
-// Main application window
-//extern GLFWwindow *window;
 
 // TODO(rgarmsen2295): END GLOBALS
 

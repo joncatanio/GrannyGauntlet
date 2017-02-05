@@ -81,12 +81,4 @@ private:
 	int initializeGLFW();
 };
 
-// Various callbacks that are set within |initializeGLFW| to be called upon user action
-// when necessary by GLFW
-static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-static void mouseCallback(GLFWwindow* window, int button, int action, int mods);
-static void cursorPositionCallback(GLFWwindow* window, double posX, double posY);
-static void resizeCallback(GLFWwindow* window, int width, int height);
-static void errorCallback(int error, const char* description);
-
 #endif

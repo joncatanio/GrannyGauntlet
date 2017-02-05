@@ -21,6 +21,8 @@ int WindowManager::initialize() {
 	double posX, posY;
 	glfwGetCursorPos(window_, &posX, &posY);
 	updateCursorPosition(posX, posY);
+
+	return 0;
 }
 
 void WindowManager::pollEvents() {
@@ -93,6 +95,14 @@ void WindowManager::updateFramebuffer() {
 	// Clear the framebuffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
+
+// Various callbacks that are set within |initializeGLFW| to be called upon user action
+// when necessary by GLFW
+static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+static void mouseCallback(GLFWwindow* window, int button, int action, int mods);
+static void cursorPositionCallback(GLFWwindow* window, double posX, double posY);
+static void resizeCallback(GLFWwindow* window, int width, int height);
+static void errorCallback(int error, const char* description);
 
 int WindowManager::initializeGLFW() {
     // Set error callback.

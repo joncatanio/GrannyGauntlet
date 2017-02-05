@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
+#include "WindowManager.h"
 
 AimInputComponent::AimInputComponent() {
     toggleXRotation = false;
@@ -17,6 +18,7 @@ AimInputComponent::~AimInputComponent() {
 }
 
 void AimInputComponent::pollInput() {
+<<<<<<< 9697d05b55175b4e19e1b56d9e5bf26ea42793a9
    if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
       pollGamepad();
    } else {
@@ -70,20 +72,22 @@ void AimInputComponent::pollGamepad() {
 
 // rotate direction with rotate if pressed
 void AimInputComponent::pollKeyboard() {
+    WindowManager& windowManager = WindowManager::instance();
+
     if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
         toggleXRotation = true;
         rotationXDirection = 1.0f;
-    } else if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
+    } else if (windowManager.isKeyPressed(GLFW_KEY_K)) {
         toggleXRotation = true;
         rotationXDirection = -1.0f;
     } else {
         toggleXRotation = false;
     }
 
-    if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) {
+    if (windowManager.isKeyPressed(GLFW_KEY_J)) {
         toggleYRotation = true;
         rotationYDirection = 1.0f;
-    } else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+    } else if (windowManager.isKeyPressed(GLFW_KEY_L)) {
         toggleYRotation = true;
         rotationYDirection = -1.0f;
     } else {
@@ -91,7 +95,7 @@ void AimInputComponent::pollKeyboard() {
     }
 
     toggleThrow = false;
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+    if (windowManager.isKeyPressed(GLFW_KEY_SPACE)) {
         if(!actionHoldDown){
             actionHoldDown = true;
             pressStart = glfwGetTime();

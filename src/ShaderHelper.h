@@ -19,8 +19,6 @@
 #include "MatrixStack.h"
 #include "Shape.h"
 
-#define NUM_MATERIALS	  5
-
 /**
  * Data structure that represents a prescence of light
  *
@@ -50,14 +48,14 @@ typedef struct {
 } Material;
 
 // TODO(rgarmsen2295): EXTERMINATE ALL GLOBALS
-extern float aspect;
+//extern float aspect;
 
 // Global height and width variables representing the view resolution
-extern int g_width, g_height;
+//extern int g_width, g_height;
 
 // Previous x & y pos for the mouse
-extern float prevX;
-extern float prevY;
+//extern float prevX;
+//extern float prevY;
 
 // Materials
 extern std::shared_ptr<Material> obsidian;
@@ -71,7 +69,7 @@ extern Light curLight;
 extern std::string RESOURCE_DIR;
 
 // Main application window
-extern GLFWwindow *window;
+//extern GLFWwindow *window;
 
 // TODO(rgarmsen2295): END GLOBALS
 

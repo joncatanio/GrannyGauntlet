@@ -85,14 +85,14 @@ private:
 	// List of the lights currently in the world
 	std::vector<Light> lights;
 
-	// Number of "hit" bunnies
-	int numBunniesHit;
-
 	// Number of update iterations
 	unsigned long updateCount;
 
 	// Number of render iterations
 	unsigned long renderCount;
+
+	// Number of "hit" bunnies
+	int numBunniesHit;
 
 	// Adds a bunny model to the game world under the rules of 476 Lab 1
 	void addBunnyToGameWorld();

@@ -19,13 +19,6 @@ void CookiePhysicsComponent::initObjectPhysics() {
     epsilon = 0.5;
 }
 
-void CookiePhysicsComponent::updateBoundingBox() {
-    BoundingBox& boundBox = holder_->boundBox;
-    MatrixTransform transform = holder_->transform;
-
-    boundBox.update(transform.getTransform());
-}
-
 void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     GameWorld& world = GameManager::instance().getGameWorld();
 

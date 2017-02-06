@@ -118,20 +118,20 @@ GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
 
 
 	// Check the player against the object
-	if (player != objToCheck && objToCheck->boundBox.checkIntersection(player->boundBox)) {
+	if (player != objToCheck && objToCheck->checkIntersection(&player)) {
 		return player;
 	}
 
 	// Check against dynamic objects
 	for (GameObject* obj : dynamicGameObjects_) {
-		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
+		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
 			return obj;
 		}
 	}
 
 	// Check against static objects
 	for (GameObject* obj : staticGameObjects_) {
-		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
+		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
 			return obj;
 		}
 	}

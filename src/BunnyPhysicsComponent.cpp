@@ -51,13 +51,6 @@ void BunnyPhysicsComponent::setupInitialRotation() {
 	holder_->setYAxisRotation(rotationAngle);
 }
 
-void BunnyPhysicsComponent::updateBoundingBox() {
-	BoundingBox& boundBox = holder_->boundBox;
-	MatrixTransform transform = holder_->transform;
-
-	boundBox.update(transform.getTransform());
-}
-
 void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	GameWorld& world = GameManager::instance().getGameWorld();
 

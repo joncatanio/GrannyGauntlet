@@ -15,11 +15,16 @@ public:
     bool toggleYRotation;
     bool toggleThrow;
     float timePressed;
-    float rotationDirection;
+    float rotationXDirection;
+    float rotationYDirection;
     double pressTime;
 
 private:
-    bool spaceHoldDown;
+    void pollGamepad();
+    void pollKeyboard();
+
+    bool triggerAvailable;
+    bool actionHoldDown;
     double pressStart;
 
 };

@@ -79,11 +79,22 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
     timeDown = std::min(timeDown, 1.0) / 2.0;
     timeDown = 0.5 + timeDown;
 
+    /* Restrict the aim motion to the half-sphere in front of the player. */
     if(aimInputComponent->toggleXRotation){
-        xRot += aimInputComponent->rotationDirection * deltaTime;
+        // Up and down
+        if ((-M_PI / 4.0 <= xRot && xRot <= M_PI / 3.0) ||
+            (xRot > M_PI / 3.0 && aimInputComponent->rotationXDirection < 0) ||
+            (xRot < -M_PI / 4.0 && aimInputComponent->rotationXDirection > 0)) {
+            xRot += aimInputComponent->rotationXDirection * deltaTime;
+        }
     }
     if(aimInputComponent->toggleYRotation){
-        yRot += aimInputComponent->rotationDirection * deltaTime;
+        // Left and right
+        if ((-M_PI / 2.0 <= yRot && yRot <= M_PI / 2.0) ||
+            (yRot > M_PI / 2.0 && aimInputComponent->rotationYDirection < 0) ||
+            (yRot < -M_PI / 2.0 && aimInputComponent->rotationYDirection > 0)) {
+            yRot += aimInputComponent->rotationYDirection * deltaTime;
+        }
     }
 
     glm::vec3 upDownRotAxis = glm::cross(player.direction, glm::vec3(0.0, 1.0, 0.0));
@@ -101,7 +112,7 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
                     GameObjectType::DYNAMIC_OBJECT,
                     player.getPosition(),
                     throwDirection,
-                    startVelocity * timeDown,
+                    (player.velocity + startVelocity) * timeDown,
                     initialScale,
                     NULL,
                     cookiePhysicsComp,

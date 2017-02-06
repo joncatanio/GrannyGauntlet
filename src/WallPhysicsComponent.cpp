@@ -13,7 +13,7 @@ WallPhysicsComponent::~WallPhysicsComponent() {
 }
 
 void WallPhysicsComponent::initObjectPhysics() {
-    hasCookie = false;
+
 }
 
 void WallPhysicsComponent::updateBoundingBox() {
@@ -24,13 +24,5 @@ void WallPhysicsComponent::updateBoundingBox() {
 }
 
 void WallPhysicsComponent::updatePhysics(float deltaTime) {
-    // If we hit someone or we're at the edge of the acceptable "world", then reverse direction
-    GameWorld& world = GameManager::instance().getGameWorld();
-    GameObjectType objTypeHit = world.checkCollision(holder_);
-    if (objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-        if (!hasCookie) {
-            hasCookie = true;
-            holder_->changeShader("Green"); 
-        }
-    }
+
 }

@@ -116,30 +116,39 @@ void GameWorld::drawGameObjects() {
 	renderCount++;
 }
 
-GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
+GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
 	GameManager& gameManager = GameManager::instance();
-   GameObject& player = gameManager.getPlayer();
+   GameObject* player = &gameManager.getPlayer();
+
 
 	// Check the player against the object
-	if (&player != objToCheck && objToCheck->boundBox.checkIntersection(player.boundBox)) {
-		return GameObjectType::PLAYER;
+	if (player != objToCheck && objToCheck->boundBox.checkIntersection(player->boundBox)) {
+		return player;
 	}
 
 	// Check against dynamic objects
 	for (GameObject* obj : dynamicGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
-			return obj->type;
+			return obj;
 		}
 	}
 
 	// Check against static objects
 	for (GameObject* obj : staticGameObjects_) {
 		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
-			return obj->type;
+			return obj;
 		}
 	}
 
-	return GameObjectType::NO_OBJECT;
+	return new GameObject(
+            GameObjectType::NO_OBJECT,
+            glm::vec3(0.0),
+            glm::vec3(0.0),
+            0.0,
+            glm::vec3(1.0),
+            NULL,
+            NULL,
+            NULL);
 }
 
 unsigned long GameWorld::getRenderCount() {

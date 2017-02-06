@@ -17,7 +17,7 @@ public:
     void updateBoundingBox();
 
 private:
-    bool hasCookie;
+
 };
 
 #endif

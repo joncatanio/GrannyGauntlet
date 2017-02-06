@@ -114,10 +114,10 @@ void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStac
 void GameObject::changeShader(const std::string& newShaderName) {
 	if (render_ != NULL) {
 		render_->changeShader(newShaderName);
-        shaderName_ = newShaderName;
 	}
 }
 
-std::string GameObject::getShader() {
-    return shaderName_;
+RenderComponent* GameObject::getRenderComponent() {
+    return render_;
 }
+

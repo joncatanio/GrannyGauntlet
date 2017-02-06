@@ -64,6 +64,8 @@ public:
 
 	void changeMaterial(std::shared_ptr<Material> newMaterial);
 
+    RenderComponent* getRenderComponent();
+
 	// Performs any non-render related updates to the object
 	void update(double deltaTime);
 
@@ -96,9 +98,6 @@ private:
 
 	// Physics Component that handles collision reactions
 	PhysicsComponent *physics_;
-
-	//Currenlty active shader
-	std::string shaderName_;
 };
 
 #endif

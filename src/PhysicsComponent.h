@@ -16,7 +16,7 @@ public:
 	// Initializes the internal bounding box based off the passed min and max points
 	void initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt);
 
-	// Updates the object's bounding box according to it's current MatrixStack
+	// Updates the object's bounding box according to the holding object's current transform
 	void updateBoundingBox();
 
 	// Returns a reference to the object's bounding box

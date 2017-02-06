@@ -19,6 +19,7 @@ public:
 private:
     float gravity;
     float yVelocity;
+    float epsilon;
 };
 
 #endif

@@ -28,6 +28,8 @@ public:
 
 	inline void setMaterial(std::shared_ptr<Material> newMaterial) { material_ = newMaterial; }
 
+	inline std::string getShader() { return shaderName_; }
+
 	// Draws the object using the passed Perspective (P), Model (M), and View (V) matrices
 	virtual void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) = 0;
 

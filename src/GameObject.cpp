@@ -116,3 +116,8 @@ void GameObject::changeShader(const std::string& newShaderName) {
 		render_->changeShader(newShaderName);
 	}
 }
+
+RenderComponent* GameObject::getRenderComponent() {
+    return render_;
+}
+

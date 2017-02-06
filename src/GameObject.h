@@ -64,6 +64,8 @@ public:
 
 	void changeMaterial(std::shared_ptr<Material> newMaterial);
 
+    RenderComponent* getRenderComponent();
+
 	// Performs any non-render related updates to the object
 	void update(double deltaTime);
 

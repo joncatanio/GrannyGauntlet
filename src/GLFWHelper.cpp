@@ -58,7 +58,7 @@ int initializeGLFW(GLFWwindow **window) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 	// Create a windowed mode window and its OpenGL context.
-	*window = glfwCreateWindow(1920, 1080, "Granny Gauntlet", NULL, NULL);
+	*window = glfwCreateWindow(600, 480, "Granny Gauntlet", NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		return -1;

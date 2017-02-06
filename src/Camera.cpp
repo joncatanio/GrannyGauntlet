@@ -61,6 +61,7 @@ void Camera::changeAlpha(float deltaAlpha) {
 	alphaRad = alpha * M_PI / 180.0;
 }
 
+// Specifically for trackpad input.
 void Camera::changeBeta(float deltaBeta) {
 	beta += deltaBeta;
 	betaRad = beta * M_PI / 180.0;
@@ -69,6 +70,22 @@ void Camera::changeBeta(float deltaBeta) {
     * deal with it by subracting `M_PI` from `betaRad`, this lets us let use
     * the player's orientation angle. We still want to rotate the direction
     * vector to point in the direction of the camera. */
+   float newOrient = player->getOrientAngle() - (betaRad - M_PI);
+   player->setYAxisRotation(newOrient);
+   player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);
+}
+
+// For Gamepads, simply calculates the angle to rotate based on player dir.
+void Camera::calcFollowOrient(glm::vec3 dirOrigOrient) {
+   glm::vec3 origDirection = glm::vec3(-1.0f, 0.0f, 0.0f);
+   float dotAB = glm::dot(dirOrigOrient, origDirection);
+   float angle = glm::acos(dotAB);
+
+   std::cout << "Angle: " << angle << std::endl;
+   angle = dirOrigOrient.z < 0 ? -angle : angle;
+   beta -= angle;
+   betaRad = beta * M_PI / 180.0f;
+
    float newOrient = player->getOrientAngle() - (betaRad - M_PI);
    player->setYAxisRotation(newOrient);
    player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);

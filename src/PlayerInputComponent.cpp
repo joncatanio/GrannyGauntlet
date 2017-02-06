@@ -5,8 +5,8 @@
 #include "GameWorld.h"
 #include <glm/gtx/rotate_vector.hpp>
 
-PlayerInputComponent::PlayerInputComponent() {
-
+PlayerInputComponent::PlayerInputComponent() :
+   inReverse(false) {
 }
 
 PlayerInputComponent::~PlayerInputComponent() {
@@ -14,6 +14,60 @@ PlayerInputComponent::~PlayerInputComponent() {
 }
 
 void PlayerInputComponent::pollInput() {
+   if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
+      pollGamepad();
+   } else {
+      pollKeyboard();
+   }
+}
+
+void PlayerInputComponent::pollGamepad() {
+   GameManager& gameManager = GameManager::instance();
+   Camera& camera = gameManager.getCamera();
+   int count;
+   const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+
+   /* For PS4 and Xbox One controllers the axes count will be 6.
+    * Indices [0, 1] refer to the left joysticks x and y axes respectively.
+    * Indices [2, 3] refer to the right joysticks x and y axes respectively.
+    * Indices [4, 5] refer to the left and right triggers respectively.
+    * For our purposes x-joy = y-world & y-joy = z-world
+    */
+   float xComponent = axes[1], zComponent = -axes[0];
+   // Two driving modes: reverse and drive.
+   bool modeChangeAvailable = !holder_->toggleMovement;
+
+   /*
+   std::cout << "Leftstick - x: " << xComponent << " z: " << zComponent << std::endl;
+   std::cout << "Rightstick - x: " << axes[2] << " y: " << axes[3] << std::endl;
+   std::cout << "Left Trigger: " << axes[4] << " Right Trigger: " << axes[5] << std::endl;
+   std::cout << "Drive Mode Available: " << modeChangeAvailable << std::endl;
+   */
+   // Clamp deadspace out so the character doesn't move around.
+   if (-0.1f < xComponent && xComponent < 0.1f &&
+       -0.1f < zComponent && zComponent < 0.1f) {
+      holder_->toggleMovement = false;
+      inReverse = false;
+   } else {
+      // The direction vector in Gamepad space.
+      glm::vec3 dirGamepad = glm::normalize(glm::vec3(xComponent, 0.0f, zComponent));
+      camera.calcFollowOrient(dirGamepad);
+      holder_->toggleMovement = true;
+
+      // Determing driving mode and set velocity based on mode.
+      if ((modeChangeAvailable && xComponent > 0) || inReverse) {
+         inReverse = true;
+         holder_->velocity = 5.0f; // Reverse
+      } else {
+         inReverse = false;
+         holder_->velocity = 12.0f; // Drive
+      }
+   }
+
+   std::cout << "Player Direction - x: " << holder_->direction.x << " y: " << holder_->direction.y << " z: " << holder_->direction.z << std::endl;
+}
+
+void PlayerInputComponent::pollKeyboard() {
    GameManager& gameManager = GameManager::instance();
    Camera& camera = gameManager.getCamera();
 
@@ -42,6 +96,5 @@ void PlayerInputComponent::pollInput() {
       glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
 
       camera.changeBeta(0.5);
-
 	}
 }

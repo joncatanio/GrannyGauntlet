@@ -15,7 +15,6 @@ public:
       std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
 private:
-   void calculateOrientation();
 
 };
 

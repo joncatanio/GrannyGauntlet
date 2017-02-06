@@ -94,7 +94,6 @@ void Camera::calcCamAndPlayerOrient(glm::vec3 dirOrigOrient, bool reverse) {
    float angle = glm::acos(dotAB);
 
    angle = unitDir.z < 0 ? -angle : angle;
-   std::cout << "Angle: " << angle << std::endl;
    beta -= angle;
    betaRad = beta * M_PI / 180.0f;
 

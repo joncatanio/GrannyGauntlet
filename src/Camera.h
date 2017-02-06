@@ -45,7 +45,7 @@ public:
 
 	void changeBeta(float deltaBeta);
 
-   void calcFollowOrient(glm::vec3 dirOrigOrient);
+   void calcCamAndPlayerOrient(glm::vec3 dirOrigOrient, bool reverse);
 
 	void update(float deltaTime);
 

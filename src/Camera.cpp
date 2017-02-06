@@ -75,14 +75,26 @@ void Camera::changeBeta(float deltaBeta) {
    player->direction = glm::rotateY(glm::vec3(1.0f, 0.0f, 0.0f), -betaRad);
 }
 
-// For Gamepads, simply calculates the angle to rotate based on player dir.
-void Camera::calcFollowOrient(glm::vec3 dirOrigOrient) {
-   glm::vec3 origDirection = glm::vec3(-1.0f, 0.0f, 0.0f);
-   float dotAB = glm::dot(dirOrigOrient, origDirection);
+/* Calculates the angle of the given direction and the original direction vector
+ * to determine the rotation angle to apply to the current direction vector.
+ * Note: The dot product doesn't specify sign therefore if the z component
+ * of the given vector is negative the angle will be negated.
+ * Note: If the player is in reverse the base direction for the angle
+ * calculation is reversed.
+ */
+void Camera::calcCamAndPlayerOrient(glm::vec3 dirOrigOrient, bool reverse) {
+   glm::vec3 origDirection, unitDir = glm::normalize(dirOrigOrient);
+   if (reverse) {
+      origDirection = glm::vec3(1.0f, 0.0f, 0.0f);
+   } else {
+      origDirection = glm::vec3(-1.0f, 0.0f, 0.0f);
+   }
+
+   float dotAB = glm::dot(unitDir, origDirection);
    float angle = glm::acos(dotAB);
 
+   angle = unitDir.z < 0 ? -angle : angle;
    std::cout << "Angle: " << angle << std::endl;
-   angle = dirOrigOrient.z < 0 ? -angle : angle;
    beta -= angle;
    betaRad = beta * M_PI / 180.0f;
 

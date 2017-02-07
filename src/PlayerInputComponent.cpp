@@ -31,7 +31,7 @@ void PlayerInputComponent::pollGamepad() {
     * Indices [0, 1] refer to the left joysticks x and y axes respectively.
     * Indices [2, 3] refer to the right joysticks x and y axes respectively.
     * Indices [4, 5] refer to the left and right triggers respectively.
-    * For our purposes x-joy = y-world & y-joy = z-world
+    * For our purposes y-joy = x-world & x-joy = z-world
     */
    float xComponent = axes[1], zComponent = -axes[0];
    // Two driving modes: reverse and drive.

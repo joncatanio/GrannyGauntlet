@@ -9,7 +9,6 @@ Camera::Camera(GameObject* player)
    : springConstant(25.0f),
    cameraDistance(5.0f),
    cameraVelocity(glm::vec3(0.0f, 0.0f, 0.0f)) {
-      // TODO (noj) handle null input at some point.
       this->player = player;
       
       // Calculate damping constant in critically-damped system

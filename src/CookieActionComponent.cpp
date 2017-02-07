@@ -121,7 +121,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
                     GameObjectType::DYNAMIC_OBJECT,
                     holder_->getPosition(),
                     throwDirection,
-                    (player.velocity + startVelocity) * timeDown,
+                    (holder_->velocity + startVelocity) * timeDown,
                     initialScale,
                     NULL,
                     cookiePhysicsComp,

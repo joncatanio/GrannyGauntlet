@@ -47,7 +47,7 @@ void AimInputComponent::pollGamepad() {
       rotationYDirection = 2.5 * yComponent;
    }
 
-   // Restrict cookie throwing to a trigger engage basis, no holding.
+   // Restrict cookie throwing to single and charged shot, no automatic mode.
    if (triggerAvailable && rightTrigger == 1) {
 
       triggerAvailable = false;

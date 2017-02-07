@@ -82,7 +82,9 @@ void Camera::changeBeta(float deltaBeta) {
  * calculation is reversed.
  */
 void Camera::calcCamAndPlayerOrient(glm::vec3 dirOrigOrient, bool reverse) {
-   glm::vec3 origDirection, unitDir = glm::normalize(dirOrigOrient);
+   glm::vec3 origDirection;
+   glm::vec3 unitDir = glm::normalize(dirOrigOrient);
+
    if (reverse) {
       origDirection = glm::vec3(1.0f, 0.0f, 0.0f);
    } else {

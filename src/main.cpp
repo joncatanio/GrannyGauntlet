@@ -12,6 +12,7 @@
 
 #include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
+#include "CookieActionComponent.h"
 
 // Global height and width variables representing the view resolution
 int g_width, g_height;
@@ -149,7 +150,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(100, 0.01, 100),
 		NULL,
 		NULL,
-		floorRenderComp);
+		floorRenderComp,
+        NULL);
 	world.addStaticGameObject(floor);
 
 	// Cube House 1
@@ -163,7 +165,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house1PhysicsComp,
-		house1RenderComp);
+		house1RenderComp,
+        NULL);
 	world.addStaticGameObject(house1);
 
 	// Cube House 2
@@ -177,7 +180,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house2PhysicsComp,
-		house2RenderComp);
+		house2RenderComp,
+        NULL);
 	world.addStaticGameObject(house2);
 
 	// Cube House 3
@@ -191,7 +195,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house3PhysicsComp,
-		house3RenderComp);
+		house3RenderComp,
+        NULL);
 	world.addStaticGameObject(house3);
 
 	// Cube House 4
@@ -205,7 +210,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house4PhysicsComp,
-		house4RenderComp);
+		house4RenderComp,
+        NULL);
 	world.addStaticGameObject(house4);
 
 	// Cube House 5
@@ -219,7 +225,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house5PhysicsComp,
-		house5RenderComp);
+		house5RenderComp,
+        NULL);
 	world.addStaticGameObject(house5);
 
 	// Cube House 6
@@ -233,7 +240,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house6PhysicsComp,
-		house6RenderComp);
+		house6RenderComp,
+        NULL);
 	world.addStaticGameObject(house6);
 
 	// Cube House 7
@@ -247,7 +255,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house7PhysicsComp,
-		house7RenderComp);
+		house7RenderComp,
+        NULL);
 	world.addStaticGameObject(house7);
 
 	// Cube House 8
@@ -261,7 +270,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house8PhysicsComp,
-		house8RenderComp);
+		house8RenderComp,
+        NULL);
 	world.addStaticGameObject(house8);
 }
 
@@ -310,8 +320,19 @@ int main(int argc, char **argv) {
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
+    CookieActionComponent* cookieAction = new CookieActionComponent();
    PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
       "Phong", pearl);
+
+    // The current game world
+    GameWorld world;
+
+    // Initialize the GameManager and get its instance
+    GameManager& gameManager = GameManager::instance();
+
+    // Set the manager to the current game world
+    gameManager.setGameWorld(&world);
+
    GameObject* player = new GameObject(
       GameObjectType::PLAYER,
       glm::vec3(0.0f, 1.0f, 0.0f),
@@ -320,7 +341,8 @@ int main(int argc, char **argv) {
       glm::vec3(1.0f, 1.0f, 1.0f),
       playerInputComp,
       playerPhysicsComp,
-      playerRenderComp
+      playerRenderComp,
+	  cookieAction
    );
    /* Set the orient angle to orient the object correctly from it's starting pos.
     * This is specific to each obj file. Positive values are cw, negative ccw */ 
@@ -330,18 +352,10 @@ int main(int argc, char **argv) {
 	// The current game camera
 	Camera camera(player);
 
-	// The current game world
-	GameWorld world;
    world.addDynamicGameObject(player);
 
-	// Initialize the GameManager and get its instance
-	GameManager& gameManager = GameManager::instance();
-
-	// Set the manager to the current game world
-	gameManager.setGameWorld(&world);
-
 	// Set the manager to the current camera
-	gameManager.setCamera(&camera);
+    gameManager.setCamera(&camera);
 
    // Set the manager to the current player object
    gameManager.setPlayer(player);

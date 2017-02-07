@@ -8,7 +8,8 @@ GameObject::GameObject(GameObjectType objType,
 	glm::vec3 initialScale,
 	InputComponent* input,
 	PhysicsComponent* physics,
-	RenderComponent* render)
+	RenderComponent* render,
+	ActionComponent* action)
 	: type(objType),
 	direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
@@ -16,7 +17,8 @@ GameObject::GameObject(GameObjectType objType,
    toggleMovement(false),
 	input_(input),
 	physics_(physics),
-	render_(render) {
+	render_(render),
+	action_(action){
 
 	// Set initial position and scale values
 	setPosition(startPosition);
@@ -45,6 +47,12 @@ GameObject::GameObject(GameObjectType objType,
 		// TODO(rgarmsen2295): Move all bounding box stuff to base physics component class
 		boundBox.update(transform.getTransform());
 	}
+
+    if(action_ != NULL) {
+        action_->setGameObjectHolder(this);
+        action_->initActionComponent();
+    }
+
 }
 
 GameObject::~GameObject() {
@@ -109,6 +117,12 @@ void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStac
 	if (render_ != NULL) {
 		render_->draw(P, M, V);
 	}
+}
+
+void GameObject::performAction(double deltaTime, double totalTime) {
+    if (action_ != NULL) {
+        action_->checkAndPerformAction(deltaTime, totalTime);
+    }
 }
 
 void GameObject::changeShader(const std::string& newShaderName) {

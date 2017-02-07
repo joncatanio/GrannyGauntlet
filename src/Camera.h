@@ -45,6 +45,8 @@ public:
 
 	void changeBeta(float deltaBeta);
 
+   void calcCamAndPlayerOrient(glm::vec3 dirOrigOrient, bool reverse);
+
 	void update(float deltaTime);
 
 private:
@@ -63,7 +65,7 @@ private:
    glm::vec3 cameraVelocity;
 
 	// Angle values used for pitch and yaw respectively
-	float alpha = 0;
+	float alpha = -15;
 	float beta = 180;
 
 	// Radian equivalents for alpha and beta

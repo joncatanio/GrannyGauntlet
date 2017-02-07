@@ -1,7 +1,7 @@
 #include "GameWorld.h"
 #include "GameManager.h"
 #include "ShaderManager.h"
-#include "CookieThrower.h"
+#include "CookieActionComponent.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 GameWorld::GameWorld()
@@ -64,19 +64,9 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-//
-
-
-    static CookieThrower* cookieThrower = new CookieThrower();
-    cookieThrower->pollAndThrow(deltaTime, totalTime);
-
-    // create a GamoObj
-    // give it to Cookie Thrower
-    // also add to the list
-    // modify it in Cookie Thrower (should be automatically rendered)
-
 	for (GameObject* obj : this->dynamicGameObjects_) {
 		obj->update(deltaTime);
+        obj->performAction(deltaTime, totalTime);
 	}
 
 	for (GameObject* obj : this->staticGameObjects_) {
@@ -148,6 +138,7 @@ GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
             glm::vec3(1.0),
             NULL,
             NULL,
+            NULL,
             NULL);
 }
 
@@ -207,7 +198,8 @@ void GameWorld::addBunnyToGameWorld() {
 		initialScale,
 		NULL, 
 		bunnyPhysicsComp,
-		bunnyRenderComp);
+		bunnyRenderComp,
+        NULL);
 
 	this->addDynamicGameObject(bunnyObj);
 }

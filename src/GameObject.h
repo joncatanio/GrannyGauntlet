@@ -15,6 +15,7 @@
 #include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
+#include "ActionComponent.h"
 
 enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 
@@ -40,7 +41,8 @@ public:
 		glm::vec3 initialScale,
 		InputComponent* input,
 		PhysicsComponent* physics,
-		RenderComponent* render);
+		RenderComponent* render,
+		ActionComponent* action);
 
 	~GameObject();
 
@@ -72,6 +74,9 @@ public:
 	// Performs any render/draw updates necessary for the object
 	void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
+    // Perform the any actions that are bound to the object, if any and if applicable at that moment
+    void performAction(double deltaTime, double totalTime);
+
 	// TODO(rgarmsen2295): Move this logic to be done via message passing or similar...
 	void changeShader(const std::string& newShaderName);
 
@@ -97,6 +102,9 @@ private:
 
 	// Physics Component that handles collision reactions
 	PhysicsComponent *physics_;
+
+    // Action Component to control actions performed by objects
+    ActionComponent* action_;
 };
 
 #endif

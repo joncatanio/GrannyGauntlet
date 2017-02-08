@@ -21,20 +21,11 @@ enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 class GameObject {
 public:
 
-<<<<<<< 2d57080e041e99406e183e33394437b8a8831724
-    // Direct object properties
-    GameObjectType type;
-    glm::vec3 direction;
-    float velocity;
-    MatrixTransform transform;
-    BoundingBox boundBox;
-=======
 	// Direct object properties
 	glm::vec3 direction;
 	float velocity;
 	MatrixTransform transform;
 	GameObjectType type;
->>>>>>> Initial refactor of bounding box logic
 
     // Properties for player moveable objects
     bool toggleMovement;
@@ -89,6 +80,10 @@ public:
 
 	// Checks if the object intersects with the passed object
 	bool checkIntersection(GameObject* otherObj);
+
+    // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
+    // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
+    BoundingBox* getBoundingBox();
 
 private:
 

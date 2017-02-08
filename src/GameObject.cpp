@@ -10,9 +10,9 @@ GameObject::GameObject(GameObjectType objType,
 	PhysicsComponent* physics,
 	RenderComponent* render,
 	ActionComponent* action)
-	: type(objType),
-	direction(glm::normalize(startDirection)),
+	: direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
+	type(objType),
 	toggleMovement(false),
 	orientAngle_(0),
 	render_(render),
@@ -136,4 +136,8 @@ bool GameObject::checkIntersection(GameObject* otherObj) {
 	}
 
 	return false;
+}
+
+BoundingBox* GameObject::getBoundingBox() {
+	return &physics_->getBoundingBox();
 }

@@ -118,7 +118,7 @@ GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
 
 
 	// Check the player against the object
-	if (player != objToCheck && objToCheck->checkIntersection(&player)) {
+	if (player != objToCheck && objToCheck->checkIntersection(player)) {
 		return player;
 	}
 

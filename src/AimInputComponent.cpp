@@ -99,7 +99,6 @@ void AimInputComponent::pollKeyboard() {
             actionHoldDown = true;
             pressStart = glfwGetTime();
         }
-        //toggleThrow = true;
     } else {
         if(actionHoldDown){
             toggleThrow = true;

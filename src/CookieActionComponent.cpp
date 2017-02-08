@@ -78,9 +78,6 @@ void CookieActionComponent::initActionComponent() {
 void CookieActionComponent::checkAndPerformAction(double deltaTime, double totalTime) {
 
     GameManager& gameManager = GameManager::instance();
-    Camera& camera = gameManager.getCamera();
-    //GameObject& player = gameManager.getPlayer();
-    ShaderManager& shaderManager = ShaderManager::instance();
     glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
 
     aimInputComponent->pollInput();

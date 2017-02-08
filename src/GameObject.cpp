@@ -18,7 +18,6 @@ GameObject::GameObject(GameObjectType objType,
 	render_(render),
 	input_(input),
 	physics_(physics),
-	render_(render),
 	action_(action) {
 
 	// Set initial position and scale values

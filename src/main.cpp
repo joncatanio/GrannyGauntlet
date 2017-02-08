@@ -323,15 +323,6 @@ int main(int argc, char **argv) {
 	// Set the manager to the current camera
     gameManager.setCamera(&camera);
 
-    // Initialize the GameManager
-    GameManager& gameManager = GameManager::instance();
-
-    // Set the manager to the current game world
-    gameManager.setGameWorld(&world);
-
-    // Set the manager to the current camera
-    gameManager.setCamera(&camera);
-
     // Set the manager to the current player object
     gameManager.setPlayer(player);
 

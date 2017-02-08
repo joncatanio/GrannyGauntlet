@@ -18,7 +18,6 @@ AimInputComponent::~AimInputComponent() {
 }
 
 void AimInputComponent::pollInput() {
-<<<<<<< 9697d05b55175b4e19e1b56d9e5bf26ea42793a9
    if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
       pollGamepad();
    } else {
@@ -31,7 +30,7 @@ void AimInputComponent::pollGamepad() {
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
    float xComponent = -axes[3], yComponent = -axes[2];
    // A trigger at rest has a value of -1.0, fully engaged is 1.0.
-   float leftTrigger = axes[4], rightTrigger = axes[5];
+   float rightTrigger = axes[5];
 
    if (-0.1f < xComponent && xComponent < 0.1f) {
       toggleXRotation = false;
@@ -74,7 +73,7 @@ void AimInputComponent::pollGamepad() {
 void AimInputComponent::pollKeyboard() {
     WindowManager& windowManager = WindowManager::instance();
 
-    if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+    if (windowManager.isKeyPressed(GLFW_KEY_I)) {
         toggleXRotation = true;
         rotationXDirection = 1.0f;
     } else if (windowManager.isKeyPressed(GLFW_KEY_K)) {

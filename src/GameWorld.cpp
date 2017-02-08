@@ -3,7 +3,6 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 #include "CookieActionComponent.h"
-#include "CookieThrower.h"
 #include "GameManager.h"
 #include "GameWorld.h"
 #include "ShaderManager.h"

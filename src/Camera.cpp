@@ -109,11 +109,6 @@ void Camera::update(float deltaTime) {
 
 	glm::vec3 w = -gazeVec;
 
-	glm::vec3 upCrossW = glm::cross(Up, w);
-	glm::normalize(upCrossW);
-
-	glm::vec3 u = upCrossW;
-
    /* Make spring calculations */
    // Ideal resting camera position
    glm::vec3 restDist = player->getPosition() + w * cameraDistance;

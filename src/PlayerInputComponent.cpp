@@ -1,9 +1,11 @@
 #include "PlayerInputComponent.h"
 
+#include <glm/gtx/rotate_vector.hpp>
+
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
-#include <glm/gtx/rotate_vector.hpp>
+#include "WindowManager.h"
 
 PlayerInputComponent::PlayerInputComponent() :
    inReverse(false) {
@@ -73,14 +75,16 @@ void PlayerInputComponent::pollKeyboard() {
    GameManager& gameManager = GameManager::instance();
    Camera& camera = gameManager.getCamera();
 
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS ||
-      glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+   WindowManager& windowManager = WindowManager::instance();
+
+	if (windowManager.isKeyPressed(GLFW_KEY_W) ||
+      windowManager.isKeyPressed(GLFW_KEY_UP)) {
 
       holder_->toggleMovement = true;
       holder_->velocity = 12.0f;
 
-	} else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS ||
-      glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+	} else if (windowManager.isKeyPressed(GLFW_KEY_S) ||
+      windowManager.isKeyPressed(GLFW_KEY_DOWN)) {
 
       holder_->toggleMovement = true;
       holder_->velocity = -5.0f;
@@ -89,13 +93,13 @@ void PlayerInputComponent::pollKeyboard() {
       holder_->toggleMovement = false;
    }
 
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS ||
-      glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+	if (windowManager.isKeyPressed(GLFW_KEY_A) ||
+      windowManager.isKeyPressed(GLFW_KEY_LEFT)) {
 
       camera.changeBeta(-0.5);
 
-	} else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS ||
-      glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+	} else if (windowManager.isKeyPressed(GLFW_KEY_D) ||
+      windowManager.isKeyPressed(GLFW_KEY_RIGHT)) {
 
       camera.changeBeta(0.5);
 	}

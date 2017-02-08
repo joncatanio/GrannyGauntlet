@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
+#include "WindowManager.h"
 
 AimInputComponent::AimInputComponent() {
     toggleXRotation = false;
@@ -29,7 +30,7 @@ void AimInputComponent::pollGamepad() {
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
    float xComponent = -axes[3], yComponent = -axes[2];
    // A trigger at rest has a value of -1.0, fully engaged is 1.0.
-   float leftTrigger = axes[4], rightTrigger = axes[5];
+   float rightTrigger = axes[5];
 
    if (-0.1f < xComponent && xComponent < 0.1f) {
       toggleXRotation = false;
@@ -70,20 +71,22 @@ void AimInputComponent::pollGamepad() {
 
 // rotate direction with rotate if pressed
 void AimInputComponent::pollKeyboard() {
-    if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+    WindowManager& windowManager = WindowManager::instance();
+
+    if (windowManager.isKeyPressed(GLFW_KEY_I)) {
         toggleXRotation = true;
         rotationXDirection = 1.0f;
-    } else if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
+    } else if (windowManager.isKeyPressed(GLFW_KEY_K)) {
         toggleXRotation = true;
         rotationXDirection = -1.0f;
     } else {
         toggleXRotation = false;
     }
 
-    if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) {
+    if (windowManager.isKeyPressed(GLFW_KEY_J)) {
         toggleYRotation = true;
         rotationYDirection = 1.0f;
-    } else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+    } else if (windowManager.isKeyPressed(GLFW_KEY_L)) {
         toggleYRotation = true;
         rotationYDirection = -1.0f;
     } else {
@@ -91,12 +94,11 @@ void AimInputComponent::pollKeyboard() {
     }
 
     toggleThrow = false;
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+    if (windowManager.isKeyPressed(GLFW_KEY_SPACE)) {
         if(!actionHoldDown){
             actionHoldDown = true;
             pressStart = glfwGetTime();
         }
-        //toggleThrow = true;
     } else {
         if(actionHoldDown){
             toggleThrow = true;

@@ -1,8 +1,12 @@
-#include "GameWorld.h"
-#include "GameManager.h"
-#include "ShaderManager.h"
-#include "CookieActionComponent.h"
 #include <glm/gtx/rotate_vector.hpp>
+
+#include <glm/gtx/rotate_vector.hpp>
+
+#include "CookieActionComponent.h"
+#include "GameManager.h"
+#include "GameWorld.h"
+#include "ShaderManager.h"
+#include "WindowManager.h"
 
 GameWorld::GameWorld()
 	: updateCount(0),
@@ -53,7 +57,7 @@ void GameWorld::resetWorld() {
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	
-#ifdef DEBUG
+#ifdef DEBUG_BUNNIES
 	// Keep track of the last spawn time internally to know when to spawn next
 	static double previousSpawnTime = 0.0;
 
@@ -79,6 +83,8 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 void GameWorld::drawGameObjects() {
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
+
+	WindowManager& windowManager = WindowManager::instance();
 	
 	// Create the matrix stacks
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
@@ -87,7 +93,7 @@ void GameWorld::drawGameObjects() {
 
 	// Apply perspective projection
 	P->pushMatrix();
-	P->perspective(45.0f, aspect, 0.01f, 100.0f);
+	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 100.0f);
 
 	// Set up view Matrix
 	V->pushMatrix();

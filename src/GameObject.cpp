@@ -1,4 +1,4 @@
-#include "GameObject.h"
+	#include "GameObject.h"
 #include "GameManager.h"
 
 GameObject::GameObject(GameObjectType objType,
@@ -13,20 +13,20 @@ GameObject::GameObject(GameObjectType objType,
 	: type(objType),
 	direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
-   orientAngle_(0),
-   toggleMovement(false),
+	toggleMovement(false),
+	orientAngle_(0),
+	render_(render),
 	input_(input),
 	physics_(physics),
-	render_(render),
-	action_(action){
+	action_(action) {
 
 	// Set initial position and scale values
 	setPosition(startPosition);
 	setScale(initialScale);
 
-   if (input_ != NULL) {
-      input_->setGameObjectHolder(this);
-   }
+	if (input_ != NULL) {
+	  input_->setGameObjectHolder(this);
+	}
 
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);

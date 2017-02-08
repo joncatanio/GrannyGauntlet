@@ -10,9 +10,9 @@ GameObject::GameObject(GameObjectType objType,
 	PhysicsComponent* physics,
 	RenderComponent* render,
 	ActionComponent* action)
-	: type(objType),
-	direction(glm::normalize(startDirection)),
+	: direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
+	type(objType),
 	toggleMovement(false),
 	orientAngle_(0),
 	render_(render),
@@ -28,31 +28,25 @@ GameObject::GameObject(GameObjectType objType,
 	  input_->setGameObjectHolder(this);
 	}
 
+   glm::vec3 minBoundBoxPt(0.0f, 0.0f, 0.0f);
+   glm::vec3 maxBoundBoxPt(0.0f, 0.0f, 0.0f);
+
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);
-		boundBox = BoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
-	}
-	else {
-
-		// If no render component, set BoundingBox to min(0,0,0) -> max(0,0,0)
-		boundBox = BoundingBox();
+		minBoundBoxPt = render_->getShape()->getMin();
+		maxBoundBoxPt = render_->getShape()->getMax();
 	}
 
 	if (physics_ != NULL) {
 		physics_->setGameObjectHolder(this);
-		physics_->updateBoundingBox();
+		physics_->initBoundingBox(minBoundBoxPt, maxBoundBoxPt);
 		physics_->initObjectPhysics();
-	}
-	else {
-		// TODO(rgarmsen2295): Move all bounding box stuff to base physics component class
-		boundBox.update(transform.getTransform());
 	}
 
     if(action_ != NULL) {
         action_->setGameObjectHolder(this);
         action_->initActionComponent();
     }
-
 }
 
 GameObject::~GameObject() {
@@ -135,3 +129,15 @@ RenderComponent* GameObject::getRenderComponent() {
     return render_;
 }
 
+bool GameObject::checkIntersection(GameObject* otherObj) {	
+	PhysicsComponent* otherObjPhysics = otherObj->physics_;
+	if (physics_ != NULL && otherObjPhysics != NULL) {
+		return physics_->getBoundingBox().checkIntersection(otherObjPhysics->getBoundingBox());
+	}
+
+	return false;
+}
+
+BoundingBox* GameObject::getBoundingBox() {
+	return &physics_->getBoundingBox();
+}

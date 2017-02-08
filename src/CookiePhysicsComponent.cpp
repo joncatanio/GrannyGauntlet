@@ -19,13 +19,6 @@ void CookiePhysicsComponent::initObjectPhysics() {
     epsilon = 0.5;
 }
 
-void CookiePhysicsComponent::updateBoundingBox() {
-    BoundingBox& boundBox = holder_->boundBox;
-    MatrixTransform transform = holder_->transform;
-
-    boundBox.update(transform.getTransform());
-}
-
 void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     GameWorld& world = GameManager::instance().getGameWorld();
 
@@ -51,22 +44,22 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
     if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
 
-        BoundingBox objBB = objHit->boundBox;
-        BoundingBox cookieBB = holder_->boundBox;
+        BoundingBox* objBB = objHit->getBoundingBox();
+        BoundingBox* cookieBB = holder_->getBoundingBox();
 
         glm::vec3 n;
 
         //check on which side of the bounding box of the object the cookie hit and create normal for reflection
-        if((objBB.min_.x - epsilon <= cookieBB.max_.x && objBB.min_.x + epsilon >= cookieBB.max_.x) ||
-                (objBB.max_.x - epsilon <= cookieBB.min_.x && objBB.max_.x + epsilon >= cookieBB.min_.x)) {
+        if((objBB->min_.x - epsilon <= cookieBB->max_.x && objBB->min_.x + epsilon >= cookieBB->max_.x) ||
+                (objBB->max_.x - epsilon <= cookieBB->min_.x && objBB->max_.x + epsilon >= cookieBB->min_.x)) {
             n = glm::vec3(1.0, 0.0, 0.0);
         }
-        if((objBB.min_.y - epsilon <= cookieBB.max_.y && objBB.min_.y + epsilon >= cookieBB.max_.y) ||
-                (objBB.max_.y - epsilon <= cookieBB.min_.y && objBB.max_.y + epsilon >= cookieBB.min_.y)){
+        if((objBB->min_.y - epsilon <= cookieBB->max_.y && objBB->min_.y + epsilon >= cookieBB->max_.y) ||
+                (objBB->max_.y - epsilon <= cookieBB->min_.y && objBB->max_.y + epsilon >= cookieBB->min_.y)){
             n = glm::vec3(0.0, 1.0, 0.0);
         }
-        if((objBB.min_.z - epsilon <= cookieBB.max_.z && objBB.min_.z + epsilon >= cookieBB.max_.z) ||
-                (objBB.max_.z - epsilon <= cookieBB.min_.z && objBB.max_.z + epsilon >= cookieBB.min_.z)){
+        if((objBB->min_.z - epsilon <= cookieBB->max_.z && objBB->min_.z + epsilon >= cookieBB->max_.z) ||
+                (objBB->max_.z - epsilon <= cookieBB->min_.z && objBB->max_.z + epsilon >= cookieBB->min_.z)){
             n = glm::vec3(0.0, 0.0, 1.0);
         }
 

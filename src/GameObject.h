@@ -9,7 +9,6 @@
 #include "GLSL.h"
 #include "Program.h"
 #include "MatrixStack.h"
-#include "MatrixTransform.h"
 
 #include "BoundingBox.h"
 #include "InputComponent.h"
@@ -22,12 +21,11 @@ enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 class GameObject {
 public:
 
-    // Direct object properties
-    GameObjectType type;
-    glm::vec3 direction;
-    float velocity;
-    MatrixTransform transform;
-    BoundingBox boundBox;
+	// Direct object properties
+	glm::vec3 direction;
+	float velocity;
+	MatrixTransform transform;
+	GameObjectType type;
 
     // Properties for player moveable objects
     bool toggleMovement;
@@ -77,8 +75,15 @@ public:
     // Perform the any actions that are bound to the object, if any and if applicable at that moment
     void performAction(double deltaTime, double totalTime);
 
-	// Changes the shader used to draw the game object
+	// Changes the active shader for the object
 	void changeShader(const std::string& newShaderName);
+
+	// Checks if the object intersects with the passed object
+	bool checkIntersection(GameObject* otherObj);
+
+    // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
+    // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
+    BoundingBox* getBoundingBox();
 
 private:
 

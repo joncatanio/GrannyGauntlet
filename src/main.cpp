@@ -137,7 +137,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house1PhysicsComp,
 			house1RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house1);
 
 		// Cube House 2
@@ -152,7 +153,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house2PhysicsComp,
 			house2RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house2);
 
 		// Cube House 3
@@ -167,7 +169,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house3PhysicsComp,
 			house3RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house3);
 
 		// Cube House 4
@@ -182,7 +185,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house4PhysicsComp,
 			house4RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house4);
 
 		// Cube House 5
@@ -197,7 +201,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house5PhysicsComp,
 			house5RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house5);
 
 		// Cube House 6
@@ -212,7 +217,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house6PhysicsComp,
 			house6RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house6);
 
 		// Cube House 7
@@ -227,7 +233,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house7PhysicsComp,
 			house7RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house7);
 
 		// Cube House 8
@@ -242,7 +249,8 @@ static void setupStaticWorld(GameWorld& world) {
 			NULL,
 			house8PhysicsComp,
 			house8RenderComp,
-	        NULL);
+	        NULL,
+            true);
 		world.addStaticGameObject(house8);
 
 		// Draw walls on opposite ends of map

@@ -46,10 +46,8 @@ void GameManager::setTime(float time) {
 
 void GameManager::decreaseTime(float deltaTime) {
     time_ -= deltaTime;
-    std::cout << "Remaining time: " << time_ << std::endl;
 }
 
 void GameManager::increaseTime(float deltaTime) {
     time_ += deltaTime;
-    std::cout << "Remaining time: " << time_ << std::endl;
 }

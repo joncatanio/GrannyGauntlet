@@ -1,4 +1,5 @@
 #include "ViewFrustum.h"
+#include "BoundingBox.h"
 
 using namespace glm;
 
@@ -70,15 +71,15 @@ void ViewFrustum::extractPlanes(glm::mat4 P, glm::mat4 V) {
 }
 
 // See 'www.txutxi.com/?p=584' for detailed algorithm explanation
-bool ViewFrustum::cull(BoundingBox* b) {
+bool ViewFrustum::cull(GameObject* obj) {
    /* Every object needs to have a bounding box in order to cull.
     * If an object doesn't have a bounding box, cull it so we don't create
     * unseen problems with culling. */
-   // TODO (noj) when bounding boxes get thrown in for all objs change to true
-   if (b == NULL) {
+   BoundingBox* objBox = obj->getBoundingBox();
+   if (objBox == NULL) {
       return false;
    }
-   vec3 box[] = {b->min_, b->max_};
+   vec3 box[] = {objBox->min_, objBox->max_};
 
    vec4 plane;
    int px, py, pz;

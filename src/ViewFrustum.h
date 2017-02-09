@@ -1,7 +1,7 @@
 #ifndef VIEW_FRUSTUM_H
 #define VIEW_FRUSTUM_H
 
-#include "BoundingBox.h"
+#include "GameObject.h"
 #include <array>
 
 class ViewFrustum {
@@ -12,7 +12,7 @@ public:
 
    void extractPlanes(glm::mat4 P, glm::mat4 V);
 
-   bool cull(BoundingBox* box);
+   bool cull(GameObject* obj);
 
 private:
    std::array<glm::vec4, 6> planes;

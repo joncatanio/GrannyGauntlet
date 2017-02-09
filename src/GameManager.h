@@ -41,6 +41,18 @@ public:
 	// Prints information such as the number of non-static objects in the current world, fps, etc. to console
 	void printInfoToConsole(float currentFPS);
 
+	//Reports the state of a cookie to count the score
+	void reportScore(float score);
+
+    //Sets the initial timelimit
+    void setTime(float time);
+
+    //Counts down the remaining time
+    void decreaseTime(float deltaTime);
+
+    //Increases the remaining time
+    void increaseTime(float deltaTime);
+
 private:
 
 	GameManager() {}
@@ -52,6 +64,10 @@ private:
 	GameWorld* currentWorld_;
 
    ViewFrustum* currentViewFrustum_;
+
+	float score_ = 0.0;
+
+    float time_;
 };
 
 #endif

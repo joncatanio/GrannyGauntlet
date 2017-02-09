@@ -15,6 +15,7 @@ GameObject::GameObject(GameObjectType objType,
 	type(objType),
 	toggleMovement(false),
 	orientAngle_(0),
+	yRotationAngle_(0),
 	render_(render),
 	input_(input),
 	physics_(physics),
@@ -142,5 +143,5 @@ BoundingBox* GameObject::getBoundingBox() {
    if (physics_) {
       return &physics_->getBoundingBox();
    }
-	return NULL;
+   return NULL;
 }

@@ -95,7 +95,7 @@ void GameWorld::drawGameObjects() {
 
 	// Apply perspective projection
 	P->pushMatrix();
-	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 100.0f);
+	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 200.0f);
 
 	// Set up view Matrix
 	V->pushMatrix();
@@ -107,14 +107,14 @@ void GameWorld::drawGameObjects() {
 
 	// Draw non-static objects
 	for (GameObject* obj : this->dynamicGameObjects_) {
-      if (!viewFrustum.cull(obj->getBoundingBox())) {
+      if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
 	for (GameObject *obj : this->staticGameObjects_) {
-      if (!viewFrustum.cull(obj->getBoundingBox())) {
+      if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
@@ -149,14 +149,14 @@ void GameWorld::drawVFCViewport() {
 
 	// Draw non-static objects
 	for (GameObject* obj : this->dynamicGameObjects_) {
-      if (!viewFrustum.cull(obj->getBoundingBox())) {
+      if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
 	for (GameObject *obj : this->staticGameObjects_) {
-      if (!viewFrustum.cull(obj->getBoundingBox())) {
+      if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}

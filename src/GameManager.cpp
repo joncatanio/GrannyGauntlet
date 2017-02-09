@@ -21,6 +21,14 @@ void GameManager::setPlayer(GameObject* newPlayer) {
    currentPlayer_ = newPlayer;
 }
 
+ViewFrustum& GameManager::getViewFrustum() {
+   return *currentViewFrustum_;
+}
+
+void GameManager::setViewFrustum(ViewFrustum* newViewFrustum) {
+   currentViewFrustum_ = newViewFrustum;
+}
+
 GameWorld& GameManager::getGameWorld() {
 	return *currentWorld_;
 }

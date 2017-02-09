@@ -61,6 +61,9 @@ public:
 	// Calls the draw function on all GameObjects in the world
 	void drawGameObjects();
 
+   // Draws a small view port to see view frustum culling
+   void drawVFCViewport();
+
 	// Checks to see if the passed Game Object collides with any other object in the world.
 	// Returns the type of object hit or not hit
 	GameObject* checkCollision(GameObject* objToCheck);

@@ -139,5 +139,8 @@ bool GameObject::checkIntersection(GameObject* otherObj) {
 }
 
 BoundingBox* GameObject::getBoundingBox() {
-	return &physics_->getBoundingBox();
+   if (physics_) {
+      return &physics_->getBoundingBox();
+   }
+	return NULL;
 }

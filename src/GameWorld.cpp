@@ -5,6 +5,7 @@
 #include "CookieActionComponent.h"
 #include "GameManager.h"
 #include "GameWorld.h"
+#include "ViewFrustum.h"
 #include "ShaderManager.h"
 #include "WindowManager.h"
 
@@ -83,6 +84,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 void GameWorld::drawGameObjects() {
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
+   ViewFrustum& viewFrustum = gameManager.getViewFrustum();
 
 	WindowManager& windowManager = WindowManager::instance();
 	
@@ -100,16 +102,64 @@ void GameWorld::drawGameObjects() {
 	V->loadIdentity();
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
+   // Calculate view frustum planes
+   viewFrustum.extractPlanes(P->topMatrix(), V->topMatrix());
+
 	// Draw non-static objects
 	for (GameObject* obj : this->dynamicGameObjects_) {
-		obj->draw(P, M, V);
+      if (!viewFrustum.cull(obj->getBoundingBox())) {
+		   obj->draw(P, M, V);
+      }
 	}
 
 	// Draw static objects
 	for (GameObject *obj : this->staticGameObjects_) {
-		obj->draw(P, M, V);
+      if (!viewFrustum.cull(obj->getBoundingBox())) {
+		   obj->draw(P, M, V);
+      }
 	}
 	renderCount++;
+
+   #ifdef DEBUG
+   drawVFCViewport();
+   #endif
+}
+
+// For debugging view frustum culling. This is mostly magic.
+void GameWorld::drawVFCViewport() {
+	GameManager& gameManager = GameManager::instance();
+	Camera& camera = gameManager.getCamera();
+   ViewFrustum& viewFrustum = gameManager.getViewFrustum();
+	WindowManager& windowManager = WindowManager::instance();
+	
+	// Create the matrix stacks
+	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
+	std::shared_ptr<MatrixStack> M = std::make_shared<MatrixStack>();
+	std::shared_ptr<MatrixStack> V = std::make_shared<MatrixStack>();
+
+   glClear(GL_DEPTH_BUFFER_BIT);
+   glViewport(0, 0, (windowManager.getViewHeight() / 3.0),
+      windowManager.getViewHeight() / 3.0);
+   P->pushMatrix();
+   P->ortho(-15.0f, 15.0f, -15.0f, 15.0f, 2.1f, 100.0f);
+   V->pushMatrix();
+   V->loadIdentity();
+   V->lookAt(camera.getEye() + glm::vec3(0, 8, 0), camera.getEye(),
+      camera.getLookAt() - camera.getEye());
+
+	// Draw non-static objects
+	for (GameObject* obj : this->dynamicGameObjects_) {
+      if (!viewFrustum.cull(obj->getBoundingBox())) {
+		   obj->draw(P, M, V);
+      }
+	}
+
+	// Draw static objects
+	for (GameObject *obj : this->staticGameObjects_) {
+      if (!viewFrustum.cull(obj->getBoundingBox())) {
+		   obj->draw(P, M, V);
+      }
+	}
 }
 
 GameObject* GameWorld::checkCollision(GameObject* objToCheck) {

@@ -7,6 +7,7 @@
 #include "ShaderHelper.h"
 #include "GameWorld.h"
 #include "GameManager.h"
+#include "ViewFrustum.h"
 #include "ResourceManager.h"
 #include "ShaderManager.h"
 #include "WindowManager.h"
@@ -325,6 +326,9 @@ int main(int argc, char **argv) {
 
     // Set the manager to the current player object
     gameManager.setPlayer(player);
+
+    // Set the current view frustum
+    gameManager.setViewFrustum(new ViewFrustum());
 
     setupStaticWorld(world);
 

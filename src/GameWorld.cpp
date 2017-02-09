@@ -93,7 +93,7 @@ void GameWorld::drawGameObjects() {
 
 	// Apply perspective projection
 	P->pushMatrix();
-	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 100.0f);
+	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 200.0f);
 
 	// Set up view Matrix
 	V->pushMatrix();

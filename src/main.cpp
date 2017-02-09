@@ -328,6 +328,8 @@ int main(int argc, char **argv) {
 
     setupStaticWorld(world);
 
+    gameManager.setTime(30.0);
+
     // Loop until the user closes the window
     int numFramesInSecond = 0;
     constexpr double dt = 1.0 / 60.0;
@@ -350,6 +352,8 @@ int main(int argc, char **argv) {
             // Update all game objects
             world.updateGameObjects(deltaTime, totalTime);
             camera.update(deltaTime);
+
+            gameManager.decreaseTime(deltaTime);
 
             elapsedTime -= deltaTime;
             totalTime += deltaTime;

@@ -14,6 +14,9 @@ file(GLOB_RECURSE GLSL "resources/*.glsl")
 # Set the executable.
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS} ${GLSL})
 
+# Add any preprocessor definitions.
+add_definitions(-DDEBUG)
+
 # Get the GLM environment variable. Since GLM is a header-only library, we
 # just need to add it to the include directory.
 set(GLM_INCLUDE_DIR "$ENV{GLM_INCLUDE_DIR}")

@@ -28,6 +28,8 @@ public:
 
 	glm::vec3& getEye();
 
+   glm::vec3& getNoSpringEye();
+
 	// Returns a reference to the current look-at vector for the camera
 	glm::vec3& getLookAt();
 
@@ -55,6 +57,7 @@ private:
 
 	// Vector's the define the camera
 	glm::vec3 Eye = glm::vec3(0, 2, 0);
+   glm::vec3 NoSpringEye;
 	glm::vec3 LA;
 	glm::vec3 Up = glm::vec3(0, 1, 0);
 

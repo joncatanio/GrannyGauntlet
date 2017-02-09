@@ -119,9 +119,10 @@ static void setupStaticWorld(GameWorld& world) {
         NULL);
 	world.addStaticGameObject(floor);
 
-	for (int i = 1; i <= 2; ++i) {
-		if (i == 2) {
-			i = -1;
+	// Both sides of the current world 'miror' each other
+	for (int i = -1; i < 2; ++i) {
+		if (i == 0) {
+			continue;
 		}
 
 		// Cube House 1
@@ -243,12 +244,81 @@ static void setupStaticWorld(GameWorld& world) {
 			house8RenderComp,
 	        NULL);
 		world.addStaticGameObject(house8);
-	
-		if (i == -1) {
-			i = 2;
-		}
+
+		// Draw walls on opposite ends of map
+		WallPhysicsComponent* shortWall1PhysicsComp = new WallPhysicsComponent();
+		WallRenderComponent* shortWall1RenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
+		GameObject* shortWall1 = new GameObject(
+			GameObjectType::STATIC_OBJECT, 
+			glm::vec3(-40.0f * i, 0.5f, 45.0f * i), 
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			0.0f,
+			glm::vec3(0.75, 1.0, 35),
+			NULL,
+			shortWall1PhysicsComp,
+			shortWall1RenderComp,
+	        NULL);
+		world.addStaticGameObject(shortWall1);
+
+		WallPhysicsComponent* shortWall2PhysicsComp = new WallPhysicsComponent();
+		WallRenderComponent* shortWall2RenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
+		GameObject* shortWall2 = new GameObject(
+			GameObjectType::STATIC_OBJECT, 
+			glm::vec3(-50.0f * i, 0.5f, 35.0f * i), 
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			0.0f,
+			glm::vec3(0.75, 1.0, 45),
+			NULL,
+			shortWall2PhysicsComp,
+			shortWall2RenderComp,
+	        NULL);
+		world.addStaticGameObject(shortWall2);
+
+		// Draw wall along center driveway
+		WallPhysicsComponent* longWallPhysicsComp = new WallPhysicsComponent();
+		WallRenderComponent* longWallRenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
+		GameObject* longWall = new GameObject(
+			GameObjectType::STATIC_OBJECT, 
+			glm::vec3(5.0f * i, 0.5f, 10.75f * i), 
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			0.0f,
+			glm::vec3(45.5, 1.0, 0.75),
+			NULL,
+			longWallPhysicsComp,
+			longWallRenderComp,
+	        NULL);
+		world.addStaticGameObject(longWall);
 	}
-	
+
+	// Back wall to start location
+	WallPhysicsComponent* startWallPhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* startWallRenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
+	GameObject* startWall = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(45.0f, 0.5f, -79.25f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 1.0, 0.75),
+		NULL,
+		startWallPhysicsComp,
+		startWallRenderComp,
+        NULL);
+	world.addStaticGameObject(startWall);
+
+	// 'Finish' wall
+	WallPhysicsComponent* finishWallPhysicsComp = new WallPhysicsComponent();
+	WallRenderComponent* finishWallRenderComp = new WallRenderComponent(shapeCube, "Red", obsidian);
+	GameObject* finishWall = new GameObject(
+		GameObjectType::STATIC_OBJECT, 
+		glm::vec3(-45.0f, 0.5f, 79.25f), 
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		glm::vec3(5, 1.0, 0.75),
+		NULL,
+		finishWallPhysicsComp,
+		finishWallRenderComp,
+        NULL);
+	world.addStaticGameObject(finishWall);
 }
 
 int main(int argc, char **argv) {
@@ -312,7 +382,7 @@ int main(int argc, char **argv) {
 
    GameObject* player = new GameObject(
       GameObjectType::PLAYER,
-      glm::vec3(0.0f, 1.0f, 0.0f),
+      glm::vec3(45.0f, 1.0f, -70.0f),
       glm::vec3(-1.0f, 0.0f, 0.0f),
       12.0f,
       glm::vec3(1.0f, 1.0f, 1.0f),

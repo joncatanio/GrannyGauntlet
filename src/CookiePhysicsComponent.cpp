@@ -74,7 +74,8 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
         // The color change has to be done here,
         // due to the bouncing off, the cookie never really hits the object.
         // TODO(nurgan) implement checking for object type and only change color if it is a "house"
-        if( objHit->getRenderComponent()->getShader().compare("Green")) {
+        //if( objHit->getRenderComponent()->getShader().compare("Green")) {
+        if( objHit->cookieDeliverable) {
             objHit->changeShader("Green");
             cookieState.hits++;
             cookieState.hitPosition = holder_->getPosition();

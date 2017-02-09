@@ -30,6 +30,9 @@ public:
     // Properties for player moveable objects
     bool toggleMovement;
 
+	// Can a Cookie be delivered to this object
+	bool cookieDeliverable;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
@@ -40,7 +43,8 @@ public:
 		InputComponent* input,
 		PhysicsComponent* physics,
 		RenderComponent* render,
-		ActionComponent* action);
+		ActionComponent* action,
+		bool deliverable = false);
 
     ~GameObject();
 
@@ -110,6 +114,7 @@ private:
 
     // Action Component to control actions performed by objects
     ActionComponent* action_;
+
 };
 
 #endif

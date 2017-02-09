@@ -14,10 +14,8 @@ public:
 
     void updatePhysics(float deltaTime);
 
-    void updateBoundingBox();
-
 private:
-    bool hasCookie;
+
 };
 
 #endif

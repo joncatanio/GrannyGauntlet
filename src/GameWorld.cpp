@@ -1,8 +1,12 @@
-#include "GameWorld.h"
-#include "GameManager.h"
-#include "ShaderManager.h"
-#include "CookieThrower.h"
 #include <glm/gtx/rotate_vector.hpp>
+
+#include <glm/gtx/rotate_vector.hpp>
+
+#include "CookieActionComponent.h"
+#include "GameManager.h"
+#include "GameWorld.h"
+#include "ShaderManager.h"
+#include "WindowManager.h"
 
 GameWorld::GameWorld()
 	: updateCount(0),
@@ -53,7 +57,7 @@ void GameWorld::resetWorld() {
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	
-#ifdef DEBUG
+#ifdef DEBUG_BUNNIES
 	// Keep track of the last spawn time internally to know when to spawn next
 	static double previousSpawnTime = 0.0;
 
@@ -64,19 +68,9 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-//
-
-
-    static CookieThrower* cookieThrower = new CookieThrower();
-    cookieThrower->pollAndThrow(deltaTime, totalTime);
-
-    // create a GamoObj
-    // give it to Cookie Thrower
-    // also add to the list
-    // modify it in Cookie Thrower (should be automatically rendered)
-
 	for (GameObject* obj : this->dynamicGameObjects_) {
 		obj->update(deltaTime);
+        obj->performAction(deltaTime, totalTime);
 	}
 
 	for (GameObject* obj : this->staticGameObjects_) {
@@ -89,6 +83,8 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 void GameWorld::drawGameObjects() {
 	GameManager& gameManager = GameManager::instance();
 	Camera& camera = gameManager.getCamera();
+
+	WindowManager& windowManager = WindowManager::instance();
 	
 	// Create the matrix stacks
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
@@ -97,7 +93,7 @@ void GameWorld::drawGameObjects() {
 
 	// Apply perspective projection
 	P->pushMatrix();
-	P->perspective(45.0f, aspect, 0.01f, 100.0f);
+	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 100.0f);
 
 	// Set up view Matrix
 	V->pushMatrix();
@@ -116,30 +112,40 @@ void GameWorld::drawGameObjects() {
 	renderCount++;
 }
 
-GameObjectType GameWorld::checkCollision(GameObject* objToCheck) {
+GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
 	GameManager& gameManager = GameManager::instance();
-   GameObject& player = gameManager.getPlayer();
+   GameObject* player = &gameManager.getPlayer();
+
 
 	// Check the player against the object
-	if (&player != objToCheck && objToCheck->boundBox.checkIntersection(player.boundBox)) {
-		return GameObjectType::PLAYER;
+	if (player != objToCheck && objToCheck->checkIntersection(player)) {
+		return player;
 	}
 
 	// Check against dynamic objects
 	for (GameObject* obj : dynamicGameObjects_) {
-		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
-			return obj->type;
+		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
+			return obj;
 		}
 	}
 
 	// Check against static objects
 	for (GameObject* obj : staticGameObjects_) {
-		if (obj != objToCheck && objToCheck->boundBox.checkIntersection(obj->boundBox)) {
-			return obj->type;
+		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
+			return obj;
 		}
 	}
 
-	return GameObjectType::NO_OBJECT;
+	return new GameObject(
+            GameObjectType::NO_OBJECT,
+            glm::vec3(0.0),
+            glm::vec3(0.0),
+            0.0,
+            glm::vec3(1.0),
+            NULL,
+            NULL,
+            NULL,
+            NULL);
 }
 
 unsigned long GameWorld::getRenderCount() {
@@ -198,7 +204,8 @@ void GameWorld::addBunnyToGameWorld() {
 		initialScale,
 		NULL, 
 		bunnyPhysicsComp,
-		bunnyRenderComp);
+		bunnyRenderComp,
+        NULL);
 
 	this->addDynamicGameObject(bunnyObj);
 }

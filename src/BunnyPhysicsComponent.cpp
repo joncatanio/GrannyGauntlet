@@ -18,7 +18,7 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 	setupInitialRotation();
 	updateBoundingBox();
 
-	GameObjectType objTypeHit = world.checkCollision(holder_);
+	GameObjectType objTypeHit = world.checkCollision(holder_)->type;
 
 	// Don't randomly place a bunny on another bunny
 	// Bunnies with no direction (static at 0, 0, 0) are currently OK - rare and adds an interesting twist
@@ -38,7 +38,7 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 		setupInitialRotation();
 		updateBoundingBox();
 
-		objTypeHit = world.checkCollision(holder_);
+		objTypeHit = world.checkCollision(holder_)->type;
 	}
 }
 
@@ -49,13 +49,6 @@ void BunnyPhysicsComponent::setupInitialRotation() {
 	rotationAngle = holder_->direction.z < 0 ? -rotationAngle : rotationAngle;
 
 	holder_->setYAxisRotation(rotationAngle);
-}
-
-void BunnyPhysicsComponent::updateBoundingBox() {
-	BoundingBox& boundBox = holder_->boundBox;
-	MatrixTransform transform = holder_->transform;
-
-	boundBox.update(transform.getTransform());
 }
 
 void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
@@ -69,7 +62,7 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	updateBoundingBox();
 
 	// If we hit someone or we're at the edge of the acceptable "world", then reverse direction
-	GameObjectType objTypeHit = world.checkCollision(holder_);
+	GameObjectType objTypeHit = world.checkCollision(holder_)->type;
 	
 	if (objTypeHit == GameObjectType::PLAYER) {
 		if (holder_->velocity != 0.0f) {

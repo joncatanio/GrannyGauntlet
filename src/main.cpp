@@ -1,34 +1,23 @@
 /*
- * CPE 476, Lab 1 - Reed Garmsen
- * Beginnings of a Game Engine
+ * CPE 476 - Jon Catanio, Alex Ehm, Reed Garmsen
+ *
+ * Application code for "Granny Gauntlet"
  */
 
 #include "ShaderHelper.h"
 #include "GameWorld.h"
 #include "GameManager.h"
-#include "GLFWHelper.h"
 #include "ResourceManager.h"
 #include "ShaderManager.h"
+#include "WindowManager.h"
 
 #include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
-
-// Global height and width variables representing the view resolution
-int g_width, g_height;
-
-// Aspect ratio of the window
-float aspect;
-
-// Previous x & y pos for the mouse
-float prevX = 0;
-float prevY = 0;
+#include "CookieActionComponent.h"
 
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
 std::string RESOURCE_DIR = "../resources/";
-
-// Main application window
-GLFWwindow *window;
 
 // Material pointers
 // TODO(rgarmsen2295): Move into shader manager class
@@ -45,100 +34,77 @@ std::shared_ptr<Shape> shapeGirl;
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {
-	GLSL::checkVersion();
+    GLSL::checkVersion();
 
-	double posX, posY;
-	glfwGetCursorPos(window, &posX, &posY);
-	prevX = posX;
-	prevY = posY;
+    // Set background color
+    glClearColor(0.25f, 0.875f, 0.924f, 1.0f);
 
-	// Set background color
-	glClearColor(0.25f, 0.875f, 0.924f, 1.0f);
-
-	// Enable z-buffer test
-	glEnable(GL_DEPTH_TEST);
+    // Enable z-buffer test
+    glEnable(GL_DEPTH_TEST);
 }
 
 // TODO(rgarmsen2295): Move into GeometryManager class
 static void initGeometry() {
 
-	// Initialize the cube mesh
-	shapeCube = std::make_shared<Shape>();
-	shapeCube->loadMesh(RESOURCE_DIR + "cube.obj");
-	shapeCube->resize();
-	shapeCube->init();
+    // Initialize the cube mesh
+    shapeCube = std::make_shared<Shape>();
+    shapeCube->loadMesh(RESOURCE_DIR + "cube.obj");
+    shapeCube->resize();
+    shapeCube->init();
 
-	shapeGirl = std::make_shared<Shape>();
-	shapeGirl->loadMesh(RESOURCE_DIR + "girl.obj");
-	shapeGirl->resize();
-	shapeGirl->init();
+    shapeGirl = std::make_shared<Shape>();
+    shapeGirl->loadMesh(RESOURCE_DIR + "girl.obj");
+    shapeGirl->resize();
+    shapeGirl->init();
 }
 
 // Values sourced from - http://devernay.free.fr/cours/opengl/materials.html
 // TODO(rgarmsen2295): Move into MaterialManager or ShaderManager class
 static void initMaterials() {
 
-	// Initialize the obsidian material
-	obsidian = std::make_shared<Material>();
-	*obsidian = { 0.05375f, 0.05f, 0.06625f, 0.18275f, 0.17f, 0.22525f, 0.332741f, 0.328634f, 0.346435f, 38.4f };
+    // Initialize the obsidian material
+    obsidian = std::make_shared<Material>();
+    *obsidian = { 0.05375f, 0.05f, 0.06625f, 0.18275f, 0.17f, 0.22525f, 0.332741f, 0.328634f, 0.346435f, 38.4f };
 
-	// Changed to be less "normal" green
-	green = std::make_shared<Material>();
-	*green = { 0.4f, 0.7f, 0.4f, 0.4f, 1.0f, 0.1f, 0.0225f, 0.0225f, 0.0225f, 12.8f };
+    // Changed to be less "normal" green
+    green = std::make_shared<Material>();
+    *green = { 0.4f, 0.7f, 0.4f, 0.4f, 1.0f, 0.1f, 0.0225f, 0.0225f, 0.0225f, 12.8f };
 
-	// modified shininess from given value (0.1f)
-	jade = std::make_shared<Material>();
-	*jade = { 0.135f, 0.2225f, 0.1575f, 0.54f, 0.89f, 0.63f, 0.316228f, 0.316228f, 0.316228f, 10.0f };
+    // modified shininess from given value (0.1f)
+    jade = std::make_shared<Material>();
+    *jade = { 0.135f, 0.2225f, 0.1575f, 0.54f, 0.89f, 0.63f, 0.316228f, 0.316228f, 0.316228f, 10.0f };
 
-	pearl = std::make_shared<Material>();
-	*pearl = { 0.25f, 0.20725f, 0.20725f, 1.0f, 0.829f, 0.296648f, 0.296648f, 0.296648f, 0.296648f, 0.088f };
+    pearl = std::make_shared<Material>();
+    *pearl = { 0.25f, 0.20725f, 0.20725f, 1.0f, 0.829f, 0.296648f, 0.296648f, 0.296648f, 0.296648f, 0.088f };
 
-	// modified shininess from given value (0.21794872f)
-	brass = std::make_shared<Material>();
-	*brass = { 0.329412f, 0.223529f, 0.027451f, 0.780392f, 0.568627f, 0.113725f, 0.992157f, 0.941176f, 0.807843f, 10.0f };
-}
-
-static void updateFrameBuffer() {
-
-	// Get current frame buffer size
-	int width, height;
-	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
-
-	g_width = width;
-	g_height = height;
-
-	// Clear framebuffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-static float getAspectRatio() {
-	return g_width / (float) g_height;
+    // modified shininess from given value (0.21794872f)
+    brass = std::make_shared<Material>();
+    *brass = { 0.329412f, 0.223529f, 0.027451f, 0.780392f, 0.568627f, 0.113725f, 0.992157f, 0.941176f, 0.807843f, 10.0f };
 }
 
 int parseArgs(int argc, char **argv) {
 #ifdef linux
-	// Assume default resource directory if none is given
-	if (argc >= 2) {
-		RESOURCE_DIR = argv[1] + string("/");
-	}
+    // Assume default resource directory if none is given
+    if (argc >= 2) {
+        RESOURCE_DIR = argv[1] + string("/");
+    }
 #elif _WIN32
-	// Don't even try to guess default directory with Windows
-	if (argc < 2) {
-		std::cerr << "Error: No specified resource directory in arguments" << std::endl;
-		std::cerr << "Expected: ./a.out [RESOURCE_DIR]" << std::endl;
-		return -1;
-	}
+    // Don't even try to guess default directory with Windows
+    if (argc < 2) {
+        std::cerr << "Error: No specified resource directory in arguments" << std::endl;
+        std::cerr << "Expected: ./a.out [RESOURCE_DIR]" << std::endl;
+        return -1;
+    }
 
-	RESOURCE_DIR = argv[1] + std::string("/");
+    RESOURCE_DIR = argv[1] + std::string("/");
 #endif
 
-	return 0;
+    return 0;
 }
 
-// Sets up a simple static world/room used in Lab 1 for CPE 476
+// Sets up a simple static world/room for a simple level in Granny Gauntlet
 static void setupStaticWorld(GameWorld& world) {
-
+    
 	// Floor "Wall"
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, "Phong", green);
 	GameObject* floor = new GameObject(
@@ -149,7 +115,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(100, 0.01, 100),
 		NULL,
 		NULL,
-		floorRenderComp);
+		floorRenderComp,
+        NULL);
 	world.addStaticGameObject(floor);
 
 	// Cube House 1
@@ -163,7 +130,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house1PhysicsComp,
-		house1RenderComp);
+		house1RenderComp,
+        NULL);
 	world.addStaticGameObject(house1);
 
 	// Cube House 2
@@ -177,7 +145,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house2PhysicsComp,
-		house2RenderComp);
+		house2RenderComp,
+        NULL);
 	world.addStaticGameObject(house2);
 
 	// Cube House 3
@@ -191,7 +160,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house3PhysicsComp,
-		house3RenderComp);
+		house3RenderComp,
+        NULL);
 	world.addStaticGameObject(house3);
 
 	// Cube House 4
@@ -205,7 +175,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house4PhysicsComp,
-		house4RenderComp);
+		house4RenderComp,
+        NULL);
 	world.addStaticGameObject(house4);
 
 	// Cube House 5
@@ -219,7 +190,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house5PhysicsComp,
-		house5RenderComp);
+		house5RenderComp,
+        NULL);
 	world.addStaticGameObject(house5);
 
 	// Cube House 6
@@ -233,7 +205,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house6PhysicsComp,
-		house6RenderComp);
+		house6RenderComp,
+        NULL);
 	world.addStaticGameObject(house6);
 
 	// Cube House 7
@@ -247,7 +220,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house7PhysicsComp,
-		house7RenderComp);
+		house7RenderComp,
+        NULL);
 	world.addStaticGameObject(house7);
 
 	// Cube House 8
@@ -261,7 +235,8 @@ static void setupStaticWorld(GameWorld& world) {
 		glm::vec3(5, 5, 5),
 		NULL,
 		house8PhysicsComp,
-		house8RenderComp);
+		house8RenderComp,
+        NULL);
 	world.addStaticGameObject(house8);
 }
 
@@ -273,9 +248,10 @@ int main(int argc, char **argv) {
 	}
 
 	// Initialize boilerplate glfw, etc. code and check for failure
-	if (initializeGLFW(&window) == -1) {
-		return EXIT_FAILURE;
-	}
+    WindowManager& windowManager = WindowManager::instance();    
+    if (windowManager.initialize() == -1) {
+        return EXIT_FAILURE;
+    }
 
 	// TODO(rgarmsen2295): Move into some central manager class
 	// Initialize scene data
@@ -310,17 +286,29 @@ int main(int argc, char **argv) {
 
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
+    CookieActionComponent* cookieAction = new CookieActionComponent();
    PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
       "Phong", pearl);
+
+    // The current game world
+    GameWorld world;
+
+    // Initialize the GameManager and get its instance
+    GameManager& gameManager = GameManager::instance();
+
+    // Set the manager to the current game world
+    gameManager.setGameWorld(&world);
+
    GameObject* player = new GameObject(
-      GameObjectType::DYNAMIC_OBJECT,
+      GameObjectType::PLAYER,
       glm::vec3(0.0f, 1.0f, 0.0f),
       glm::vec3(-1.0f, 0.0f, 0.0f),
       12.0f,
       glm::vec3(1.0f, 1.0f, 1.0f),
       playerInputComp,
       playerPhysicsComp,
-      playerRenderComp
+      playerRenderComp,
+	  cookieAction
    );
    /* Set the orient angle to orient the object correctly from it's starting pos.
     * This is specific to each obj file. Positive values are cw, negative ccw */ 
@@ -330,83 +318,69 @@ int main(int argc, char **argv) {
 	// The current game camera
 	Camera camera(player);
 
-	// The current game world
-	GameWorld world;
    world.addDynamicGameObject(player);
 
-	// Initialize the GameManager and get its instance
-	GameManager& gameManager = GameManager::instance();
-
-	// Set the manager to the current game world
-	gameManager.setGameWorld(&world);
-
 	// Set the manager to the current camera
-	gameManager.setCamera(&camera);
+    gameManager.setCamera(&camera);
 
-   // Set the manager to the current player object
-   gameManager.setPlayer(player);
+    // Set the manager to the current player object
+    gameManager.setPlayer(player);
 
-	setupStaticWorld(world);
+    setupStaticWorld(world);
 
-	// Loop until the user closes the window
-	int numFramesInSecond = 0;
-	constexpr double dt = 1.0 / 60.0;
-	double totalTime = 0.0;
-	double secondClock = 0.0;
-	double startTime = glfwGetTime();
-	double previousTime = startTime;
+    gameManager.setTime(30.0);
 
-	while (!glfwWindowShouldClose(window)) {
-		double currentTime = glfwGetTime();
-		double elapsedTime = currentTime - previousTime;
-		previousTime = currentTime;
+    // Loop until the user closes the window
+    int numFramesInSecond = 0;
+    constexpr double dt = 1.0 / 60.0;
+    double totalTime = 0.0;
+    double secondClock = 0.0;
+    double startTime = glfwGetTime();
+    double previousTime = startTime;
 
-		// Poll for and process events
-		// TODO(rgarmsen2295): Remove and switch to a more maintainable polling system
-		glfwPollEvents();
+    while (!windowManager.isClosed()) {
+        double currentTime = glfwGetTime();
+        double elapsedTime = currentTime - previousTime;
+        previousTime = currentTime;
 
-		while (elapsedTime > 0.0) {
-			double deltaTime = std::min(elapsedTime, dt);
+        // Poll for and process events
+        windowManager.pollEvents();
 
-			// Update all game objects
-			world.updateGameObjects(deltaTime, totalTime);
-			camera.update(deltaTime);
+        while (elapsedTime > 0.0) {
+            double deltaTime = std::min(elapsedTime, dt);
 
-			elapsedTime -= deltaTime;
-			totalTime += deltaTime;
-			secondClock += deltaTime;
-		}
+            // Update all game objects
+            world.updateGameObjects(deltaTime, totalTime);
+            camera.update(deltaTime);
 
-		// Render scene
+            gameManager.decreaseTime(deltaTime);
 
-		// Update the frame buffer in-case of resizing, etc.
-		// TODO(rgarmsen2295): Remove and refactor out to WindowManager
-		updateFrameBuffer();
+            elapsedTime -= deltaTime;
+            totalTime += deltaTime;
+            secondClock += deltaTime;
+        }
 
-		// Get the current aspect ratio
-		// TODO(rgarmsen2295): Remove and refactor out to WindowManager
-		aspect = getAspectRatio();
+        // Update the window in-case of resizing, etc.
+        windowManager.update();
 
-		// Draw all objects in the world
-		world.drawGameObjects();
+        // Draw all objects in the world
+        world.drawGameObjects();
 
-		// Swap front and back buffers
-		glfwSwapBuffers(window);
+        // Swap front and back buffers
+        windowManager.swapBuffers();
 
-		numFramesInSecond++;
+        // Print info roughly every second
+        numFramesInSecond++;
+        if (secondClock >= 1.0) {
 
-		// Print info roughly every second
-		if (secondClock >= 1.0) {
+            // TODO(rgarmsen2295): Currently acting kinda funky on linux and not 
+            // really necessary so disabling for now
+            // gameManager.printInfoToConsole(numFramesInSecond / secondClock);
 
-			// TODO(rgarmsen2295): Currently acting kinda funky on linux and not really necessary so disabling for now
-			// gameManager.printInfoToConsole(numFramesInSecond / secondClock);
+            secondClock = 0.0;
+            numFramesInSecond = 0;
+        }
+    }
 
-			secondClock = 0.0;
-			numFramesInSecond = 0;
-		}
-	}
-
-	// Quit program
-	cleanupGLFW(&window);
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

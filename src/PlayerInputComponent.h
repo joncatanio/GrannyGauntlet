@@ -11,7 +11,11 @@ public:
 
    void pollInput();
 private: 
+   void pollGamepad();
 
+   void pollKeyboard();
+
+   bool inReverse;
 };
 
 #endif

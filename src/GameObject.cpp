@@ -1,4 +1,4 @@
-#include "GameObject.h"
+	#include "GameObject.h"
 #include "GameManager.h"
 
 GameObject::GameObject(GameObjectType objType,
@@ -8,43 +8,45 @@ GameObject::GameObject(GameObjectType objType,
 	glm::vec3 initialScale,
 	InputComponent* input,
 	PhysicsComponent* physics,
-	RenderComponent* render)
-	: type(objType),
-	direction(glm::normalize(startDirection)),
+	RenderComponent* render,
+	ActionComponent* action)
+	: direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
-   orientAngle_(0),
-   toggleMovement(false),
+	type(objType),
+	toggleMovement(false),
+	orientAngle_(0),
+	render_(render),
 	input_(input),
 	physics_(physics),
-	render_(render) {
+	action_(action) {
 
 	// Set initial position and scale values
 	setPosition(startPosition);
 	setScale(initialScale);
 
-   if (input_ != NULL) {
-      input_->setGameObjectHolder(this);
-   }
+	if (input_ != NULL) {
+	  input_->setGameObjectHolder(this);
+	}
+
+   glm::vec3 minBoundBoxPt(0.0f, 0.0f, 0.0f);
+   glm::vec3 maxBoundBoxPt(0.0f, 0.0f, 0.0f);
 
 	if (render_ != NULL) {
 		render_->setGameObjectHolder(this);
-		boundBox = BoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
-	}
-	else {
-
-		// If no render component, set BoundingBox to min(0,0,0) -> max(0,0,0)
-		boundBox = BoundingBox();
+		minBoundBoxPt = render_->getShape()->getMin();
+		maxBoundBoxPt = render_->getShape()->getMax();
 	}
 
 	if (physics_ != NULL) {
 		physics_->setGameObjectHolder(this);
-		physics_->updateBoundingBox();
+		physics_->initBoundingBox(minBoundBoxPt, maxBoundBoxPt);
 		physics_->initObjectPhysics();
 	}
-	else {
-		// TODO(rgarmsen2295): Move all bounding box stuff to base physics component class
-		boundBox.update(transform.getTransform());
-	}
+
+    if(action_ != NULL) {
+        action_->setGameObjectHolder(this);
+        action_->initActionComponent();
+    }
 }
 
 GameObject::~GameObject() {
@@ -111,8 +113,31 @@ void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStac
 	}
 }
 
+void GameObject::performAction(double deltaTime, double totalTime) {
+    if (action_ != NULL) {
+        action_->checkAndPerformAction(deltaTime, totalTime);
+    }
+}
+
 void GameObject::changeShader(const std::string& newShaderName) {
 	if (render_ != NULL) {
 		render_->changeShader(newShaderName);
 	}
+}
+
+RenderComponent* GameObject::getRenderComponent() {
+    return render_;
+}
+
+bool GameObject::checkIntersection(GameObject* otherObj) {	
+	PhysicsComponent* otherObjPhysics = otherObj->physics_;
+	if (physics_ != NULL && otherObjPhysics != NULL) {
+		return physics_->getBoundingBox().checkIntersection(otherObjPhysics->getBoundingBox());
+	}
+
+	return false;
+}
+
+BoundingBox* GameObject::getBoundingBox() {
+	return &physics_->getBoundingBox();
 }

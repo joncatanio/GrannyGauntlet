@@ -1,4 +1,4 @@
-#include "CookieThrower.h"
+#include "CookieActionComponent.h"
 #include "GameManager.h"
 #include "ShaderManager.h"
 #include <glm/gtx/rotate_vector.hpp>
@@ -7,7 +7,8 @@
  * Poll input from the given input handler, and throws a throwable
  * dependent on the input and according constraints.
  */
-CookieThrower::CookieThrower() {
+CookieActionComponent::CookieActionComponent() {
+
     aimInputComponent = new AimInputComponent();
     cookieShape = std::make_shared<Shape>();
     cookieShape->loadMesh(RESOURCE_DIR + "sphere.obj");
@@ -36,7 +37,8 @@ CookieThrower::CookieThrower() {
             glm::vec3(0.1),
             NULL,
             NULL,
-            bunnyRenderComp);
+            bunnyRenderComp,
+            NULL);
 
     gameObj1 = new GameObject(
             GameObjectType::DYNAMIC_OBJECT,
@@ -46,7 +48,8 @@ CookieThrower::CookieThrower() {
             glm::vec3(0.1),
             NULL,
             NULL,
-            bunnyRenderComp1);
+            bunnyRenderComp1,
+            NULL);
 
     gameObj2 = new GameObject(
             GameObjectType::DYNAMIC_OBJECT,
@@ -56,7 +59,15 @@ CookieThrower::CookieThrower() {
             glm::vec3(0.1),
             NULL,
             NULL,
-            bunnyRenderComp2);
+            bunnyRenderComp2,
+            NULL);
+
+
+}
+
+CookieActionComponent::~CookieActionComponent() {}
+
+void CookieActionComponent::initActionComponent() {
 
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj1);
@@ -64,14 +75,9 @@ CookieThrower::CookieThrower() {
 
 }
 
-CookieThrower::~CookieThrower() {}
-
-void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
+void CookieActionComponent::checkAndPerformAction(double deltaTime, double totalTime) {
 
     GameManager& gameManager = GameManager::instance();
-    Camera& camera = gameManager.getCamera();
-    GameObject& player = gameManager.getPlayer();
-    ShaderManager& shaderManager = ShaderManager::instance();
     glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
 
     aimInputComponent->pollInput();
@@ -79,15 +85,26 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
     timeDown = std::min(timeDown, 1.0) / 2.0;
     timeDown = 0.5 + timeDown;
 
+    /* Restrict the aim motion to the half-sphere in front of the player. */
     if(aimInputComponent->toggleXRotation){
-        xRot += aimInputComponent->rotationDirection * deltaTime;
+        // Up and down
+        if ((-M_PI / 4.0 <= xRot && xRot <= M_PI / 3.0) ||
+            (xRot > M_PI / 3.0 && aimInputComponent->rotationXDirection < 0) ||
+            (xRot < -M_PI / 4.0 && aimInputComponent->rotationXDirection > 0)) {
+            xRot += aimInputComponent->rotationXDirection * deltaTime;
+        }
     }
     if(aimInputComponent->toggleYRotation){
-        yRot += aimInputComponent->rotationDirection * deltaTime;
+        // Left and right
+        if ((-M_PI / 2.0 <= yRot && yRot <= M_PI / 2.0) ||
+            (yRot > M_PI / 2.0 && aimInputComponent->rotationYDirection < 0) ||
+            (yRot < -M_PI / 2.0 && aimInputComponent->rotationYDirection > 0)) {
+            yRot += aimInputComponent->rotationYDirection * deltaTime;
+        }
     }
 
-    glm::vec3 upDownRotAxis = glm::cross(player.direction, glm::vec3(0.0, 1.0, 0.0));
-    glm::vec3 throwDirection = glm::rotate(player.direction, xRot, upDownRotAxis);
+    glm::vec3 upDownRotAxis = glm::cross(holder_->direction, glm::vec3(0.0, 1.0, 0.0));
+    glm::vec3 throwDirection = glm::rotate(holder_->direction, xRot, upDownRotAxis);
     throwDirection = glm::rotateY(throwDirection, yRot);
 
     if (aimInputComponent->toggleThrow) {
@@ -99,13 +116,14 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
 
             GameObject *cookieObj = new GameObject(
                     GameObjectType::DYNAMIC_OBJECT,
-                    player.getPosition(),
+                    holder_->getPosition(),
                     throwDirection,
-                    startVelocity * timeDown,
+                    (holder_->velocity + startVelocity) * timeDown,
                     initialScale,
                     NULL,
                     cookiePhysicsComp,
-                    renderComp);
+                    renderComp,
+                    NULL);
 
             gameManager.getGameWorld().addDynamicGameObject(cookieObj);
 
@@ -113,13 +131,13 @@ void CookieThrower::pollAndThrow(double deltaTime, double totalTime) {
         }
     }
 
-    glm::vec3 aimTarget = player.getPosition() + throwDirection * 1.0f;
+    glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 1.0f;
     gameObj->setPosition(aimTarget);
 
-    glm::vec3 aimTarget1 = player.getPosition() + throwDirection * 1.5f;
+    glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.5f;
     gameObj1->setPosition(aimTarget1);
 
-    glm::vec3 aimTarget2 = player.getPosition() + throwDirection * 0.5f;
+    glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 0.5f;
     gameObj2->setPosition(aimTarget2);
 
 }

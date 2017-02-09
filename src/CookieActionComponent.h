@@ -1,10 +1,11 @@
-#ifndef COOKIE_THROWER_H
-#define COOKIE_THROWER_H
+#ifndef COOKIE_ACTION_COMPONENT_H
+#define COOKIE_ACTION_COMPONENT_H
 
 #include <memory>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "ActionComponent.h"
 #include "Shape.h"
 #include "MatrixStack.h"
 #include "ShaderHelper.h"
@@ -13,16 +14,18 @@
 
 class Shape;
 
-class CookieThrower {
+class CookieActionComponent : public ActionComponent {
 public:
 
-    // Constructs a new CookieThrower
-    CookieThrower();
+    // Constructs a new CookieActionComponent
+    CookieActionComponent();
 
-    ~CookieThrower();
+    ~CookieActionComponent();
+
+    void initActionComponent();
 
     // checks for user input and throws a Cookie
-    void pollAndThrow(double deltaTime, double totalTime);
+    void checkAndPerformAction(double deltaTime, double totalTime);
 
 private:
     GameObject* gameObj;

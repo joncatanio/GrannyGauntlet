@@ -34,3 +34,22 @@ void GameManager::printInfoToConsole(float currentFPS) {
 	std::cout << " Number of dynamic objects in world: " << currentWorld_->getNumDynamicGameObjects();
 	std::cout << " Number of dynamic objects hit: " << currentWorld_->getNumBunniesHit() << '\r' <<  std::flush;
 }
+
+void GameManager::reportScore(float score) {
+	score_ += score;
+    std::cout << "Score: " << score_ << " (+" << score << ")" << std::endl;
+}
+
+void GameManager::setTime(float time) {
+    time_ = time;
+}
+
+void GameManager::decreaseTime(float deltaTime) {
+    time_ -= deltaTime;
+    std::cout << "Remaining time: " << time_ << std::endl;
+}
+
+void GameManager::increaseTime(float deltaTime) {
+    time_ += deltaTime;
+    std::cout << "Remaining time: " << time_ << std::endl;
+}

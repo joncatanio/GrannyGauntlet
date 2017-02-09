@@ -15,8 +15,10 @@ public:
 	// Returns the single instance of the ResourceManager
 	static ResourceManager& instance();
 
+	// Sets the root resource directory (can be relative to the executable or fully defined)
 	void setResourceDirectory(const std::string& newResourceDirectory);
 
+	// Reads shader source from a file and returns a pointer to the in-memory string
 	std::shared_ptr<std::string> loadShader(const std::string& shaderFileName);
 
 private:

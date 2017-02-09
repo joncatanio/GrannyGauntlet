@@ -12,13 +12,6 @@ void PlayerPhysicsComponent::initObjectPhysics() {
    updateBoundingBox();
 }
 
-void PlayerPhysicsComponent::updateBoundingBox() {
-	BoundingBox& boundBox = holder_->boundBox;
-	MatrixTransform transform = holder_->transform;
-
-	boundBox.update(transform.getTransform());
-}
-
 void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
    if (holder_->toggleMovement) {
       glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *

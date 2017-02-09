@@ -14,8 +14,6 @@ public:
 
 	void updatePhysics(float deltaTime);
 
-	void updateBoundingBox();
-
 private:
 
 	// Sets the initial rotation of the bunny according to it's direction vector

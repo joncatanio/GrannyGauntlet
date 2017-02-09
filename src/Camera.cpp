@@ -21,6 +21,10 @@ glm::vec3& Camera::getEye() {
 	return Eye;
 }
 
+glm::vec3& Camera::getNoSpringEye() {
+   return NoSpringEye;
+}
+
 /* Eye is not added to LookAt because gaze will ultimately be LA - Eye + Eye
  * therefore we separate the LA completely. `getTarget()` will then add Eye
  * in order to create our view matrix. */
@@ -108,6 +112,7 @@ void Camera::update(float deltaTime) {
 	glm::normalize(gazeVec);
 
 	glm::vec3 w = -gazeVec;
+   NoSpringEye = player->getPosition() + w;
 
    /* Make spring calculations */
    // Ideal resting camera position

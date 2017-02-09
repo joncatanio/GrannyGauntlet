@@ -144,8 +144,8 @@ void GameWorld::drawVFCViewport() {
    P->ortho(-15.0f, 15.0f, -15.0f, 15.0f, 2.1f, 100.0f);
    V->pushMatrix();
    V->loadIdentity();
-   V->lookAt(camera.getEye() + glm::vec3(0, 8, 0), camera.getEye(),
-      camera.getLookAt() - camera.getEye());
+   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 8, 0), camera.getNoSpringEye(),
+      camera.getLookAt() - camera.getNoSpringEye());
 
 	// Draw non-static objects
 	for (GameObject* obj : this->dynamicGameObjects_) {

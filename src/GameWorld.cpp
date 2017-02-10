@@ -70,12 +70,16 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 #endif
 
 	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
-		obj->update(deltaTime);
-        obj->performAction(deltaTime, totalTime);
+		if (obj != NULL) {
+			obj->update(deltaTime);
+	        obj->performAction(deltaTime, totalTime);
+		}
 	}
 
 	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
-		obj->update(deltaTime);
+		if (obj != NULL) {
+			obj->update(deltaTime);
+		}
 	}
 
 	updateCount++;

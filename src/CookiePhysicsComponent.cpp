@@ -40,7 +40,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     //TODO(nurgan) make the cookie "spin" when it is in the air
 
     // If we hit anything, stop "forward"
-    GameObject* objHit = world.checkCollision(holder_);
+    std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
     GameObjectType objTypeHit = objHit->type;
 
     if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {

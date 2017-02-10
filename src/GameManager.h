@@ -21,10 +21,10 @@ public:
 	void setCamera(Camera* newCamera);
 
    // Gets the reference to the current Player
-   GameObject& getPlayer();
+   std::shared_ptr<GameObject> getPlayer();
 
    // Sets a new reference to the current Player
-   void setPlayer(GameObject* newPlayer);
+   void setPlayer(std::shared_ptr<GameObject> newPlayer);
 
    // Gets the reference to the current View Frustum
    ViewFrustum& getViewFrustum();
@@ -59,7 +59,7 @@ private:
 
 	Camera* currentCamera_;
 
-   GameObject* currentPlayer_;
+   std::shared_ptr<GameObject> currentPlayer_;
 
 	GameWorld* currentWorld_;
 

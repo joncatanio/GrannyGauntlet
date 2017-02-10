@@ -108,16 +108,17 @@ static void setupStaticWorld(GameWorld& world) {
     
 	// Floor "Wall"
 	WallRenderComponent* floorRenderComp = new WallRenderComponent(shapeCube, "Phong", green);
-	GameObject* floor = new GameObject(
+	std::shared_ptr<GameObject> floor = std::make_shared<GameObject>(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(0.0f, 0.0f, 0.0f), 
 		glm::vec3(0.0f, 1.0f, 0.0f), 
 		0.0f, 
 		glm::vec3(1000, 0.01, 1000),
-		NULL,
-		NULL,
+		nullptr,
+		nullptr,
 		floorRenderComp,
-        NULL);
+        nullptr);
+	floor->initComponents();
 	world.addStaticGameObject(floor);
 
 	// Both sides of the current world 'miror' each other
@@ -129,196 +130,209 @@ static void setupStaticWorld(GameWorld& world) {
 		// Cube House 1
 		WallPhysicsComponent* house1PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house1RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house1 = new GameObject(
+		std::shared_ptr<GameObject> house1 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-25.0f * i, 5.1f, -20.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f), 
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house1PhysicsComp,
 			house1RenderComp,
-	        NULL);
+	        nullptr);
+		house1->initComponents();
 		world.addStaticGameObject(house1);
 
 		// Cube House 2
 		WallPhysicsComponent* house2PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house2RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house2 = new GameObject(
+		std::shared_ptr<GameObject> house2 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-30.0f * i, 5.1f, 20.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house2PhysicsComp,
 			house2RenderComp,
-	        NULL);
+	        nullptr);
+		house2->initComponents();
 		world.addStaticGameObject(house2);
 
 		// Cube House 3
 		WallPhysicsComponent* house3PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house3RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house3 = new GameObject(
+		std::shared_ptr<GameObject> house3 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-40.0f * i, 5.1f, -20.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house3PhysicsComp,
 			house3RenderComp,
-	        NULL);
+	        nullptr);
+		house3->initComponents();
 		world.addStaticGameObject(house3);
 
 		// Cube House 4
 		WallPhysicsComponent* house4PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house4RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house4 = new GameObject(
+		std::shared_ptr<GameObject> house4 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-10.0f * i, 5.1f, 20.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house4PhysicsComp,
 			house4RenderComp,
-	        NULL);
+	        nullptr);
+		house4->initComponents();
 		world.addStaticGameObject(house4);
 
 		// Cube House 5
 		WallPhysicsComponent* house5PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house5RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house5 = new GameObject(
+		std::shared_ptr<GameObject> house5 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-60.0f * i, 5.1f, -5.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house5PhysicsComp,
 			house5RenderComp,
-	        NULL);
+	        nullptr);
+		house5->initComponents();
 		world.addStaticGameObject(house5);
 
 		// Cube House 6
 		WallPhysicsComponent* house6PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house6RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house6 = new GameObject(
+		std::shared_ptr<GameObject> house6 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-60.0f * i, 5.1f, 15.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house6PhysicsComp,
 			house6RenderComp,
-	        NULL);
+	        nullptr);
+		house6->initComponents();
 		world.addStaticGameObject(house6);
 
 		// Cube House 7
 		WallPhysicsComponent* house7PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house7RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house7 = new GameObject(
+		std::shared_ptr<GameObject> house7 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-60.0f * i, 5.1f, 35.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house7PhysicsComp,
 			house7RenderComp,
-	        NULL);
+	        nullptr);
+		house7->initComponents();
 		world.addStaticGameObject(house7);
 
 		// Cube House 8
 		WallPhysicsComponent* house8PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* house8RenderComp = new WallRenderComponent(shapeCube, "Blue", obsidian);
-		GameObject* house8 = new GameObject(
+		std::shared_ptr<GameObject> house8 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-30.0f * i, 5.1f, 45.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(5, 5, 5),
-			NULL,
+			nullptr,
 			house8PhysicsComp,
 			house8RenderComp,
-	        NULL);
+	        nullptr);
+		house8->initComponents();
 		world.addStaticGameObject(house8);
 
 		// Draw walls on opposite ends of map
 		WallPhysicsComponent* shortWall1PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* shortWall1RenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
-		GameObject* shortWall1 = new GameObject(
+		std::shared_ptr<GameObject> shortWall1 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-40.0f * i, 0.5f, 45.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(0.75, 1.0, 35),
-			NULL,
+			nullptr,
 			shortWall1PhysicsComp,
 			shortWall1RenderComp,
-	        NULL);
+	        nullptr);
+		shortWall1->initComponents();
 		world.addStaticGameObject(shortWall1);
 
 		WallPhysicsComponent* shortWall2PhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* shortWall2RenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
-		GameObject* shortWall2 = new GameObject(
+		std::shared_ptr<GameObject> shortWall2 = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(-50.0f * i, 0.5f, 35.0f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(0.75, 1.0, 45),
-			NULL,
+			nullptr,
 			shortWall2PhysicsComp,
 			shortWall2RenderComp,
-	        NULL);
+	        nullptr);
+		shortWall2->initComponents();
 		world.addStaticGameObject(shortWall2);
 
 		// Draw wall along center driveway
 		WallPhysicsComponent* longWallPhysicsComp = new WallPhysicsComponent();
 		WallRenderComponent* longWallRenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
-		GameObject* longWall = new GameObject(
+		std::shared_ptr<GameObject> longWall = std::make_shared<GameObject>(
 			GameObjectType::STATIC_OBJECT, 
 			glm::vec3(5.0f * i, 0.5f, 10.75f * i), 
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.0f,
 			glm::vec3(45.5, 1.0, 0.75),
-			NULL,
+			nullptr,
 			longWallPhysicsComp,
 			longWallRenderComp,
-	        NULL);
+	        nullptr);
+		longWall->initComponents();
 		world.addStaticGameObject(longWall);
 	}
 
 	// Back wall to start location
 	WallPhysicsComponent* startWallPhysicsComp = new WallPhysicsComponent();
 	WallRenderComponent* startWallRenderComp = new WallRenderComponent(shapeCube, "Green", obsidian);
-	GameObject* startWall = new GameObject(
+	std::shared_ptr<GameObject> startWall = std::make_shared<GameObject>(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(45.0f, 0.5f, -79.25f), 
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
 		glm::vec3(5, 1.0, 0.75),
-		NULL,
+		nullptr,
 		startWallPhysicsComp,
 		startWallRenderComp,
-        NULL);
+        nullptr);
+	startWall->initComponents();
 	world.addStaticGameObject(startWall);
 
 	// 'Finish' wall
 	WallPhysicsComponent* finishWallPhysicsComp = new WallPhysicsComponent();
 	WallRenderComponent* finishWallRenderComp = new WallRenderComponent(shapeCube, "Red", obsidian);
-	GameObject* finishWall = new GameObject(
+	std::shared_ptr<GameObject> finishWall = std::make_shared<GameObject>(
 		GameObjectType::STATIC_OBJECT, 
 		glm::vec3(-45.0f, 0.5f, 79.25f), 
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		0.0f,
 		glm::vec3(5, 1.0, 0.75),
-		NULL,
+		nullptr,
 		finishWallPhysicsComp,
 		finishWallRenderComp,
-        NULL);
+        nullptr);
+	finishWall->initComponents();
 	world.addStaticGameObject(finishWall);
 }
 
@@ -381,7 +395,7 @@ int main(int argc, char **argv) {
     // Set the manager to the current game world
     gameManager.setGameWorld(&world);
 
-   GameObject* player = new GameObject(
+   std::shared_ptr<GameObject> player = std::make_shared<GameObject>(
       GameObjectType::PLAYER,
       glm::vec3(45.0f, 1.0f, -70.0f),
       glm::vec3(-1.0f, 0.0f, 0.0f),
@@ -392,6 +406,8 @@ int main(int argc, char **argv) {
       playerRenderComp,
 	  cookieAction
    );
+   player->initComponents();
+
    /* Set the orient angle to orient the object correctly from it's starting pos.
     * This is specific to each obj file. Positive values are cw, negative ccw */ 
    player->setYAxisRotation(-M_PI / 2);

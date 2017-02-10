@@ -12,7 +12,7 @@ public:
 
    void extractPlanes(glm::mat4 P, glm::mat4 V);
 
-   bool cull(GameObject* obj);
+   bool cull(std::shared_ptr<GameObject> obj);
 
 private:
    std::array<glm::vec4, 6> planes;

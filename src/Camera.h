@@ -22,7 +22,7 @@ public:
 	// Scale for the A and S key movements
 	const float ADScale = 10.0f;
 
-	Camera(GameObject* player);
+	Camera(std::shared_ptr<GameObject> player);
 
 	~Camera();
 
@@ -53,7 +53,7 @@ public:
 
 private:
    // The player the camera is following
-   GameObject* player;
+   std::shared_ptr<GameObject> player;
 
 	// Vector's the define the camera
 	glm::vec3 Eye = glm::vec3(0, 2, 0);

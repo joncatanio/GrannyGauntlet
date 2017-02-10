@@ -71,7 +71,7 @@ void ViewFrustum::extractPlanes(glm::mat4 P, glm::mat4 V) {
 }
 
 // See 'www.txutxi.com/?p=584' for detailed algorithm explanation
-bool ViewFrustum::cull(GameObject* obj) {
+bool ViewFrustum::cull(std::shared_ptr<GameObject> obj) {
    /* Every object needs to have a bounding box in order to cull.
     * If an object doesn't have a bounding box, cull it so we don't create
     * unseen problems with culling. */

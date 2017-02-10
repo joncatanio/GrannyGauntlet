@@ -23,11 +23,11 @@ GameWorld::GameWorld()
 
 GameWorld::~GameWorld() {}
 
-void GameWorld::addDynamicGameObject(GameObject* obj) {
+void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 	this->dynamicGameObjects_.push_back(obj);
 }
 
-void GameWorld::addStaticGameObject(GameObject* obj) {
+void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	this->staticGameObjects_.push_back(obj);
 }
 
@@ -69,12 +69,12 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-	for (GameObject* obj : this->dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
 		obj->update(deltaTime);
         obj->performAction(deltaTime, totalTime);
 	}
 
-	for (GameObject* obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
 		obj->update(deltaTime);
 	}
 
@@ -106,14 +106,14 @@ void GameWorld::drawGameObjects() {
    viewFrustum.extractPlanes(P->topMatrix(), V->topMatrix());
 
 	// Draw non-static objects
-	for (GameObject* obj : this->dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
-	for (GameObject *obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
@@ -148,23 +148,23 @@ void GameWorld::drawVFCViewport() {
       camera.getLookAt() - camera.getNoSpringEye());
 
 	// Draw non-static objects
-	for (GameObject* obj : this->dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
-	for (GameObject *obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 }
 
-GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
+std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {
 	GameManager& gameManager = GameManager::instance();
-   GameObject* player = &gameManager.getPlayer();
+   std::shared_ptr<GameObject> player = gameManager.getPlayer();
 
 
 	// Check the player against the object
@@ -173,29 +173,29 @@ GameObject* GameWorld::checkCollision(GameObject* objToCheck) {
 	}
 
 	// Check against dynamic objects
-	for (GameObject* obj : dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
 			return obj;
 		}
 	}
 
 	// Check against static objects
-	for (GameObject* obj : staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
 		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
 			return obj;
 		}
 	}
 
-	return new GameObject(
+	return std::make_shared<GameObject>(
             GameObjectType::NO_OBJECT,
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
             glm::vec3(1.0),
-            NULL,
-            NULL,
-            NULL,
-            NULL);
+            nullptr,
+            nullptr,
+            nullptr,
+            nullptr);
 }
 
 unsigned long GameWorld::getRenderCount() {
@@ -246,16 +246,17 @@ void GameWorld::addBunnyToGameWorld() {
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, "Phong", brass);
 
-	GameObject* bunnyObj = new GameObject(
+	std::shared_ptr<GameObject> bunnyObj = std::make_shared<GameObject>(
 		GameObjectType::DYNAMIC_OBJECT, 
 		startPosition, 
 		startDirection, 
 		startVelocity, 
 		initialScale,
-		NULL, 
+		nullptr, 
 		bunnyPhysicsComp,
 		bunnyRenderComp,
-        NULL);
+        nullptr);
+	bunnyObj->initComponents();
 
 	this->addDynamicGameObject(bunnyObj);
 }

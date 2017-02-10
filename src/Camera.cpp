@@ -5,7 +5,7 @@
 // Ninety degrees in radians
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
-Camera::Camera(GameObject* player)
+Camera::Camera(std::shared_ptr<GameObject> player)
    : springConstant(25.0f),
    cameraDistance(5.0f),
    cameraVelocity(glm::vec3(0.0f, 0.0f, 0.0f)) {

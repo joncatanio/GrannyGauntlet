@@ -27,14 +27,14 @@ public:
 	glm::vec3& getMax();
 	
 private:
-	std::vector<unsigned int> eleBuf;
-	std::vector<float> posBuf;
-	std::vector<float> norBuf;
-	std::vector<float> texBuf;
-	unsigned eleBufID;
-	unsigned posBufID;
-	unsigned norBufID;
-	unsigned texBufID;
+	std::vector<std::vector<unsigned>> eleBuf = std::vector<std::vector<unsigned>>();
+	std::vector<std::vector<float>> posBuf = std::vector<std::vector<float>>();
+	std::vector<std::vector<float>> norBuf = std::vector<std::vector<float>>();
+	std::vector<std::vector<float>> texBuf = std::vector<std::vector<float>>();
+	std::vector<unsigned> eleBufID = std::vector<unsigned>();
+	std::vector<unsigned> posBufID = std::vector<unsigned>();
+	std::vector<unsigned> norBufID = std::vector<unsigned>();
+	std::vector<unsigned> texBufID = std::vector<unsigned>();
 	unsigned vaoID;
 
 	glm::vec3 min;

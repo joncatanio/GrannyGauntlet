@@ -24,11 +24,11 @@ GameWorld::GameWorld()
 GameWorld::~GameWorld() {}
 
 void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
-	this->dynamicGameObjects_.push_back(obj);
+	this->dynamicGameObjectsToAdd_.push(obj);
 }
 
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
-	this->staticGameObjects_.push_back(obj);
+	this->staticGameObjectsToAdd_.push(obj);
 }
 
 void GameWorld::addLight(const Light& newLight) {
@@ -78,6 +78,7 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		obj->update(deltaTime);
 	}
 
+	updateInternalGameObjectLists();
 	updateCount++;
 }
 
@@ -259,4 +260,16 @@ void GameWorld::addBunnyToGameWorld() {
 	bunnyObj->initComponents();
 
 	this->addDynamicGameObject(bunnyObj);
+}
+
+void GameWorld::updateInternalGameObjectLists() {
+	while (!dynamicGameObjectsToAdd_.empty()) {
+		dynamicGameObjects_.push_back(dynamicGameObjectsToAdd_.front());
+		dynamicGameObjectsToAdd_.pop();
+	}
+
+	while (!staticGameObjectsToAdd_.empty()) {
+		staticGameObjects_.push_back(staticGameObjectsToAdd_.front());
+		staticGameObjectsToAdd_.pop();
+	}
 }

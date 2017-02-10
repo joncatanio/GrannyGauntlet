@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <queue>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,6 +86,12 @@ private:
 	// Collection of static geometry in the world - these should never move
 	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
 
+	// Queue of dynamic objects added to the world but that have yet to be added to the vector
+	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToAdd_;
+
+	// Queue of static objects added to the world but that have yet to be added to the vector
+	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToAdd_;
+
 	// List of the lights currently in the world
 	std::vector<Light> lights;
 
@@ -99,6 +106,9 @@ private:
 
 	// Adds a bunny model to the game world under the rules of 476 Lab 1
 	void addBunnyToGameWorld();
+
+	// Updates the GameObject lists from the incoming object queues
+	void updateInternalGameObjectLists();
 
 };
 

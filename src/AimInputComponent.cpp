@@ -31,7 +31,7 @@ void AimInputComponent::pollGamepad() {
    float xComponent, yComponent, rightTrigger;
 
    /* GLFW Gamepad input is annoying. */
-   #ifdef linux
+   #ifdef __linux__
    xComponent = -axes[5];
    yComponent = -axes[2];
    // A trigger at rest has a value of -1.0, fully engaged is 1.0.

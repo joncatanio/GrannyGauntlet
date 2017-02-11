@@ -35,7 +35,7 @@ private:
 	std::vector<unsigned> posBufID = std::vector<unsigned>();
 	std::vector<unsigned> norBufID = std::vector<unsigned>();
 	std::vector<unsigned> texBufID = std::vector<unsigned>();
-	unsigned vaoID;
+	std::vector<unsigned> vaoID = std::vector<unsigned>();
 
 	glm::vec3 min;
 	glm::vec3 max;

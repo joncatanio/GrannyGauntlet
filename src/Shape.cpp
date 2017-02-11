@@ -216,7 +216,7 @@ void Shape::init() {
         glGenBuffers(1, &posBufIDRef);
         posBufID.push_back(posBufIDRef);
         glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
-        glBufferData(GL_ARRAY_BUFFER, posBuf[i].size() * sizeof(float), &posBuf[i][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, posBuf[i].size() * sizeof(float), &(posBuf[i][0]), GL_STATIC_DRAW);
 
         // Send the normal array to the GPU
         if (norBuf[i].empty()) {
@@ -226,7 +226,7 @@ void Shape::init() {
             glGenBuffers(1, &norBufIDRef);
             norBufID.push_back(norBufIDRef);
             glBindBuffer(GL_ARRAY_BUFFER, norBufID[i]);
-            glBufferData(GL_ARRAY_BUFFER, norBuf[i].size() * sizeof(float), &norBuf[i][0], GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, norBuf[i].size() * sizeof(float), &(norBuf[i][0]), GL_STATIC_DRAW);
         }
 
         // Send the texture array to the GPU
@@ -237,7 +237,7 @@ void Shape::init() {
             glGenBuffers(1, &texBufIDRef);
             texBufID.push_back(texBufIDRef);
             glBindBuffer(GL_ARRAY_BUFFER, texBufID[i]);
-            glBufferData(GL_ARRAY_BUFFER, texBuf[i].size() * sizeof(float), &texBuf[i][0], GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, texBuf[i].size() * sizeof(float), &(texBuf[i][0]), GL_STATIC_DRAW);
         }
 
         // Send the element array to the GPU
@@ -245,14 +245,17 @@ void Shape::init() {
         glGenBuffers(1, &eleBufIDRef);
         eleBufID.push_back(eleBufIDRef);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, eleBuf[i].size() * sizeof(unsigned int), &eleBuf[i][0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, eleBuf[i].size() * sizeof(unsigned int), &(eleBuf[i][0]), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+        assert(glGetError() == GL_NO_ERROR);
+
     }
 
 	// Unbind the arrays
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	
-	assert(glGetError() == GL_NO_ERROR);
+
 }
 
 void Shape::draw(const shared_ptr<Program> prog) const {
@@ -260,7 +263,7 @@ void Shape::draw(const shared_ptr<Program> prog) const {
 	h_pos = h_nor = h_tex = -1;
 
 
-
+    //std::cout << "size " << posBuf.size() << std::endl;
 
     int bufNum = posBuf.size();
     // Send the position array to the GPU
@@ -274,6 +277,7 @@ void Shape::draw(const shared_ptr<Program> prog) const {
         GLSL::enableVertexAttribArray(h_pos);
         glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
         glVertexAttribPointer(h_pos, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+        //std::cout << "pos " << posBufID[i] << std::endl;
 
         // Bind normal buffer
         h_nor = prog->getAttribute("vertNor");
@@ -296,6 +300,8 @@ void Shape::draw(const shared_ptr<Program> prog) const {
 
         // Bind element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
+        //std::cout << "ele " << eleBufID[i] << std::endl;
+        //std::cout << "ele size " << eleBuf[i].size() << std::endl;
 
         // Draw
         glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);

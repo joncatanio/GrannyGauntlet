@@ -54,7 +54,7 @@ static void initGeometry() {
     shapeCube->init();
 
     shapeGirl = std::make_shared<Shape>();
-    shapeGirl->loadMesh(RESOURCE_DIR + "girl.obj");
+    shapeGirl->loadMesh(RESOURCE_DIR + "lowpolycar.obj");
     shapeGirl->resize();
     shapeGirl->init();
 }

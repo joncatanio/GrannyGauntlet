@@ -10,11 +10,11 @@
 using namespace std;
 
 Shape::Shape() :
-	eleBufID(0),
-	posBufID(0),
-	norBufID(0),
-	texBufID(0), 
-	vaoID(0),
+	//eleBufID(new vector<vector<unsigned int> > (vector<unsigned int>()) ),
+	//posBufID(0),
+	//norBufID(0),
+	//texBufID(0),
+	//vaoID(0),
 	min(glm::vec3(0,0,0)),
 	max(glm::vec3(0, 0, 0))
 {
@@ -35,14 +35,20 @@ void Shape::loadMesh(const string &meshName) {
 	if(!rc) {
 		cerr << errStr << endl;
 	} else {
-		posBuf = shapes[0].mesh.positions;
-		//texBuf = shapes[0].mesh.texcoords;
-		eleBuf = shapes[0].mesh.indices;
-		norBuf = shapes[0].mesh.normals;
-
+        for(int i = 0; i < shapes.size(); i++) {
+            //posBuf[i] = shapes[i].mesh.positions;
+            posBuf.push_back(shapes[i].mesh.positions);
+            //texBuf.push_back(shapes[i].mesh.texcoords);
+            texBuf.push_back(vector<float>());
+            //texBuf = shapes[0].mesh.texcoords;
+            //eleBuf[i] = shapes[i].mesh.indices;
+            eleBuf.push_back(shapes[i].mesh.indices);
+            //norBuf[i] = shapes[i].mesh.normals;
+            norBuf.push_back(shapes[i].mesh.normals);
+        }
 		// If no normals are given, calculate them ourselves
 		if (norBuf.size() == 0) {
-			calculateNormals();
+			//calculateNormals();
 		}
 
 		findAndSetMinAndMax();
@@ -55,6 +61,7 @@ void Shape::loadMesh(const string &meshName) {
  * Taken and modified from provided "lighting slides" pdf on PolyLearn along
  * with tips given on the PolyLearn forms by Prof. Wood
  */
+ /*
 void Shape::calculateNormals() {
 	float v1[3], v2[3], nor[3];
 	static const int x = 0;
@@ -130,7 +137,7 @@ void Shape::calculateNormals() {
 		norBuf[(v*3)+z] = nor[z];
 	}
 }
-
+*/
 void Shape::resize() {
 	float scaleX, scaleY, scaleZ;
 	float shiftX, shiftY, shiftZ;
@@ -159,20 +166,23 @@ void Shape::resize() {
 	scaleZ = 2.0 / maxExtent;
 	shiftZ = min.z + (zExtent / 2.0);
 
+    int bufNum = posBuf.size();
 	// Go through all verticies shift and scale them
-	for (size_t v = 0; v < posBuf.size() / 3; v++) {
-		posBuf[3*v+0] = (posBuf[3*v+0] - shiftX) * scaleX;
-		assert(posBuf[3*v+0] >= -1.0 - epsilon);
-		assert(posBuf[3*v+0] <= 1.0 + epsilon);
+    for(int i = 0; i < bufNum; i++) {
+        for (size_t v = 0; v < posBuf[i].size() / 3; v++) {
+            posBuf[i][3 * v + 0] = (posBuf[i][3 * v + 0] - shiftX) * scaleX;
+            assert(posBuf[i][3 * v + 0] >= -1.0 - epsilon);
+            assert(posBuf[i][3 * v + 0] <= 1.0 + epsilon);
 
-		posBuf[3*v+1] = (posBuf[3*v+1] - shiftY) * scaleY;
-		assert(posBuf[3*v+1] >= -1.0 - epsilon);
-		assert(posBuf[3*v+1] <= 1.0 + epsilon);
+            posBuf[i][3 * v + 1] = (posBuf[i][3 * v + 1] - shiftY) * scaleY;
+            assert(posBuf[i][3 * v + 1] >= -1.0 - epsilon);
+            assert(posBuf[i][3 * v + 1] <= 1.0 + epsilon);
 
-		posBuf[3*v+2] = (posBuf[3*v+2] - shiftZ) * scaleZ;
-		assert(posBuf[3*v+2] >= -1.0 - epsilon);
-		assert(posBuf[3*v+2] <= 1.0 + epsilon);
-	}
+            posBuf[i][3 * v + 2] = (posBuf[i][3 * v + 2] - shiftZ) * scaleZ;
+            assert(posBuf[i][3 * v + 2] >= -1.0 - epsilon);
+            assert(posBuf[i][3 * v + 2] <= 1.0 + epsilon);
+        }
+    }
 
 	// Shift and scale min and max values
 	float minX = (min.x - shiftX) * scaleX;
@@ -184,93 +194,131 @@ void Shape::resize() {
 	float maxY = (max.y - shiftY) * scaleY;
 	float maxZ = (max.z - shiftZ) * scaleZ;
 	max = glm::vec3(maxX, maxY, maxZ);
+
 }
 
 void Shape::init() {
 	// Initialize the vertex array object
-	glGenVertexArrays(1, &vaoID);
-	glBindVertexArray(vaoID);
 
-	// Send the position array to the GPU
-	glGenBuffers(1, &posBufID);
-	glBindBuffer(GL_ARRAY_BUFFER, posBufID);
-	glBufferData(GL_ARRAY_BUFFER, posBuf.size()*sizeof(float), &posBuf[0], GL_STATIC_DRAW);
-	
-	// Send the normal array to the GPU
-	if (norBuf.empty()) {
-		norBufID = 0;
-	} else {
-		glGenBuffers(1, &norBufID);
-		glBindBuffer(GL_ARRAY_BUFFER, norBufID);
-		glBufferData(GL_ARRAY_BUFFER, norBuf.size()*sizeof(float), &norBuf[0], GL_STATIC_DRAW);
-	}
-	
-	// Send the texture array to the GPU
-	if (texBuf.empty()) {
-		texBufID = 0;
-	} else {
-		glGenBuffers(1, &texBufID);
-		glBindBuffer(GL_ARRAY_BUFFER, texBufID);
-		glBufferData(GL_ARRAY_BUFFER, texBuf.size()*sizeof(float), &texBuf[0], GL_STATIC_DRAW);
-	}
-	
-	// Send the element array to the GPU
-	glGenBuffers(1, &eleBufID);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, eleBuf.size()*sizeof(unsigned int), &eleBuf[0], GL_STATIC_DRAW);
-	
+
+    int bufNum = posBuf.size();
+
+
+    for(int i = 0; i < bufNum; i++) {
+
+        unsigned vaoIDRef;
+        glGenVertexArrays(1, &vaoIDRef);
+        vaoID.push_back(vaoIDRef);
+        glBindVertexArray(vaoID[i]);
+
+        // Send the position array to the GPU
+        unsigned posBufIDRef;
+        glGenBuffers(1, &posBufIDRef);
+        posBufID.push_back(posBufIDRef);
+        glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
+        glBufferData(GL_ARRAY_BUFFER, posBuf[i].size() * sizeof(float), &(posBuf[i][0]), GL_STATIC_DRAW);
+
+        // Send the normal array to the GPU
+        if (norBuf[i].empty()) {
+            norBufID[i] = 0;
+        } else {
+            unsigned norBufIDRef;
+            glGenBuffers(1, &norBufIDRef);
+            norBufID.push_back(norBufIDRef);
+            glBindBuffer(GL_ARRAY_BUFFER, norBufID[i]);
+            glBufferData(GL_ARRAY_BUFFER, norBuf[i].size() * sizeof(float), &(norBuf[i][0]), GL_STATIC_DRAW);
+        }
+
+        // Send the texture array to the GPU
+        if (texBuf[i].empty()) {
+            texBufID.push_back(0);
+        } else {
+            unsigned texBufIDRef;
+            glGenBuffers(1, &texBufIDRef);
+            texBufID.push_back(texBufIDRef);
+            glBindBuffer(GL_ARRAY_BUFFER, texBufID[i]);
+            glBufferData(GL_ARRAY_BUFFER, texBuf[i].size() * sizeof(float), &(texBuf[i][0]), GL_STATIC_DRAW);
+        }
+
+        // Send the element array to the GPU
+        unsigned eleBufIDRef;
+        glGenBuffers(1, &eleBufIDRef);
+        eleBufID.push_back(eleBufIDRef);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, eleBuf[i].size() * sizeof(unsigned int), &(eleBuf[i][0]), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+        assert(glGetError() == GL_NO_ERROR);
+
+    }
+
 	// Unbind the arrays
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	
-	assert(glGetError() == GL_NO_ERROR);
+
 }
 
 void Shape::draw(const shared_ptr<Program> prog) const {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 
-	glBindVertexArray(vaoID);
-	// Bind position buffer
-	h_pos = prog->getAttribute("vertPos");
-	GLSL::enableVertexAttribArray(h_pos);
-	glBindBuffer(GL_ARRAY_BUFFER, posBufID);
-	glVertexAttribPointer(h_pos, 3, GL_FLOAT, GL_FALSE, 0, (const void *)0);
-	
-	// Bind normal buffer
-	h_nor = prog->getAttribute("vertNor");
-	if (h_nor != -1 && norBufID != 0) {
-		GLSL::enableVertexAttribArray(h_nor);
-		glBindBuffer(GL_ARRAY_BUFFER, norBufID);
-		glVertexAttribPointer(h_nor, 3, GL_FLOAT, GL_FALSE, 0, (const void *)0);
-	}
 
-	if (texBufID != 0) {	
-		// Bind texcoords buffer
-		h_tex = prog->getAttribute("vertTex");
-		if (h_tex != -1 && texBufID != 0) {
-			GLSL::enableVertexAttribArray(h_tex);
-			glBindBuffer(GL_ARRAY_BUFFER, texBufID);
-			glVertexAttribPointer(h_tex, 2, GL_FLOAT, GL_FALSE, 0, (const void *)0);
-		}
-	}
-	
-	// Bind element buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID);
-	
-	// Draw
-	glDrawElements(GL_TRIANGLES, (int)eleBuf.size(), GL_UNSIGNED_INT, (const void *)0);
-	
-	// Disable and unbind
-	if (h_tex != -1) {
-		GLSL::disableVertexAttribArray(h_tex);
-	}
-	if (h_nor != -1) {
-		GLSL::disableVertexAttribArray(h_nor);
-	}
-	GLSL::disableVertexAttribArray(h_pos);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    //std::cout << "size " << posBuf.size() << std::endl;
+
+    int bufNum = posBuf.size();
+    // Send the position array to the GPU
+    for(int i = 0; i < bufNum; i++) {
+
+
+        glBindVertexArray(vaoID[i]);
+
+        // Bind position buffer
+        h_pos = prog->getAttribute("vertPos");
+        GLSL::enableVertexAttribArray(h_pos);
+        glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
+        glVertexAttribPointer(h_pos, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+        //std::cout << "pos " << posBufID[i] << std::endl;
+
+        // Bind normal buffer
+        h_nor = prog->getAttribute("vertNor");
+        if (h_nor != -1 && norBufID[i] != 0) {
+            GLSL::enableVertexAttribArray(h_nor);
+            glBindBuffer(GL_ARRAY_BUFFER, norBufID[i]);
+            glVertexAttribPointer(h_nor, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+        }
+
+
+        if (texBufID[i] != 0) {
+            // Bind texcoords buffer
+            h_tex = prog->getAttribute("vertTex");
+            if (h_tex != -1 && texBufID[i] != 0) {
+                GLSL::enableVertexAttribArray(h_tex);
+                glBindBuffer(GL_ARRAY_BUFFER, texBufID[i]);
+                glVertexAttribPointer(h_tex, 2, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+            }
+        }
+
+        // Bind element buffer
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
+        //std::cout << "ele " << eleBufID[i] << std::endl;
+        //std::cout << "ele size " << eleBuf[i].size() << std::endl;
+
+        // Draw
+        glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
+
+    }
+    // Disable and unbind
+    if (h_tex != -1) {
+        GLSL::disableVertexAttribArray(h_tex);
+    }
+    if (h_nor != -1) {
+        GLSL::disableVertexAttribArray(h_nor);
+    }
+
+    GLSL::disableVertexAttribArray(h_pos);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 }
 
 
@@ -289,18 +337,20 @@ void Shape::findAndSetMinAndMax() {
 	minX = minY = minZ = FLT_MAX;
 	maxX = maxY = maxZ = FLT_MIN;
 
+    int bufNum = posBuf.size();
 	// Go through all vertices to determine min and max of each dimension
-	for (size_t v = 0; v < posBuf.size() / 3; v++) {
-		if (posBuf[3 * v + 0] < minX) minX = posBuf[3 * v + 0];
-		if (posBuf[3 * v + 0] > maxX) maxX = posBuf[3 * v + 0];
+    for(int i = 0; i < bufNum; i++) {
+        for (size_t v = 0; v < posBuf[i].size() / 3; v++) {
+            if (posBuf[i][3 * v + 0] < minX) minX = posBuf[i][3 * v + 0];
+            if (posBuf[i][3 * v + 0] > maxX) maxX = posBuf[i][3 * v + 0];
 
-		if (posBuf[3 * v + 1] < minY) minY = posBuf[3 * v + 1];
-		if (posBuf[3 * v + 1] > maxY) maxY = posBuf[3 * v + 1];
+            if (posBuf[i][3 * v + 1] < minY) minY = posBuf[i][3 * v + 1];
+            if (posBuf[i][3 * v + 1] > maxY) maxY = posBuf[i][3 * v + 1];
 
-		if (posBuf[3 * v + 2] < minZ) minZ = posBuf[3 * v + 2];
-		if (posBuf[3 * v + 2] > maxZ) maxZ = posBuf[3 * v + 2];
-	}
-
+            if (posBuf[i][3 * v + 2] < minZ) minZ = posBuf[i][3 * v + 2];
+            if (posBuf[i][3 * v + 2] > maxZ) maxZ = posBuf[i][3 * v + 2];
+        }
+    }
 	min = glm::vec3(minX, minY, minZ);
 	max = glm::vec3(maxX, maxY, maxZ);
 }

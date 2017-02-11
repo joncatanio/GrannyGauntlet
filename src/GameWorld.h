@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <queue>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,10 +33,10 @@ public:
 	~GameWorld();
 
 	// Adds a GameObject to the World's internal list of non-static GameObjects (could move)
-	void addDynamicGameObject(GameObject* obj);
+	void addDynamicGameObject(std::shared_ptr<GameObject> obj);
 	
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
-	void addStaticGameObject(GameObject* obj);
+	void addStaticGameObject(std::shared_ptr<GameObject> obj);
 	
 	// Adds a new light to the current world
 	void addLight(const Light& newLight);
@@ -61,9 +62,12 @@ public:
 	// Calls the draw function on all GameObjects in the world
 	void drawGameObjects();
 
+   // Draws a small view port to see view frustum culling
+   void drawVFCViewport();
+
 	// Checks to see if the passed Game Object collides with any other object in the world.
 	// Returns the type of object hit or not hit
-	GameObject* checkCollision(GameObject* objToCheck);
+	std::shared_ptr<GameObject> checkCollision(std::shared_ptr<GameObject> objToCheck);
 
 	// Returns the number of render iterations performed so far
 	unsigned long getRenderCount();
@@ -77,10 +81,16 @@ public:
 
 private:
 	// Collection of GameObjects in the world
-	std::vector<GameObject*> dynamicGameObjects_;
+	std::vector<std::shared_ptr<GameObject>> dynamicGameObjects_;
 
 	// Collection of static geometry in the world - these should never move
-	std::vector<GameObject*> staticGameObjects_;
+	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
+
+	// Queue of dynamic objects added to the world but that have yet to be added to the vector
+	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToAdd_;
+
+	// Queue of static objects added to the world but that have yet to be added to the vector
+	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToAdd_;
 
 	// List of the lights currently in the world
 	std::vector<Light> lights;
@@ -96,6 +106,9 @@ private:
 
 	// Adds a bunny model to the game world under the rules of 476 Lab 1
 	void addBunnyToGameWorld();
+
+	// Updates the GameObject lists from the incoming object queues
+	void updateInternalGameObjectLists();
 
 };
 

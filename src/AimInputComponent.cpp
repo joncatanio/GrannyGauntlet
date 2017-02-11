@@ -28,9 +28,25 @@ void AimInputComponent::pollInput() {
 void AimInputComponent::pollGamepad() {
    int count;
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
-   float xComponent = -axes[3], yComponent = -axes[2];
+   float xComponent, yComponent, rightTrigger;
+
+   /* GLFW Gamepad input is annoying. */
+   #ifdef __linux__
+   xComponent = -axes[5];
+   yComponent = -axes[2];
    // A trigger at rest has a value of -1.0, fully engaged is 1.0.
-   float rightTrigger = axes[5];
+   rightTrigger = axes[4];
+   #elif _WIN32
+   xComponent = -axes[3];
+   yComponent = -axes[2];
+   // A trigger at rest has a value of -1.0, fully engaged is 1.0.
+   rightTrigger = axes[5];
+   #else // MAC_OSX
+   xComponent = -axes[3];
+   yComponent = -axes[2];
+   // A trigger at rest has a value of -1.0, fully engaged is 1.0.
+   rightTrigger = axes[5];
+   #endif
 
    if (-0.1f < xComponent && xComponent < 0.1f) {
       toggleXRotation = false;

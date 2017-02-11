@@ -9,48 +9,53 @@ GameObject::GameObject(GameObjectType objType,
 	InputComponent* input,
 	PhysicsComponent* physics,
 	RenderComponent* render,
-	ActionComponent* action)
+	ActionComponent* action,
+	bool deliverable)
 	: direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
 	type(objType),
 	toggleMovement(false),
 	orientAngle_(0),
+	yRotationAngle_(0),
 	render_(render),
 	input_(input),
 	physics_(physics),
-	action_(action) {
+	action_(action),
+	cookieDeliverable(deliverable) {
 
 	// Set initial position and scale values
 	setPosition(startPosition);
 	setScale(initialScale);
+}
 
+GameObject::~GameObject() {
+
+}
+
+void GameObject::initComponents() {
 	if (input_ != NULL) {
-	  input_->setGameObjectHolder(this);
+	  input_->setGameObjectHolder(shared_from_this());
 	}
 
-   glm::vec3 minBoundBoxPt(0.0f, 0.0f, 0.0f);
-   glm::vec3 maxBoundBoxPt(0.0f, 0.0f, 0.0f);
+	glm::vec3 minBoundBoxPt(0.0f, 0.0f, 0.0f);
+	glm::vec3 maxBoundBoxPt(0.0f, 0.0f, 0.0f);
 
 	if (render_ != NULL) {
-		render_->setGameObjectHolder(this);
+		render_->setGameObjectHolder(shared_from_this());
 		minBoundBoxPt = render_->getShape()->getMin();
 		maxBoundBoxPt = render_->getShape()->getMax();
 	}
 
 	if (physics_ != NULL) {
-		physics_->setGameObjectHolder(this);
+		physics_->setGameObjectHolder(shared_from_this());
 		physics_->initBoundingBox(minBoundBoxPt, maxBoundBoxPt);
 		physics_->initObjectPhysics();
 	}
 
-    if(action_ != NULL) {
-        action_->setGameObjectHolder(this);
-        action_->initActionComponent();
-    }
-}
-
-GameObject::~GameObject() {
-
+	if (action_ != NULL) {
+	    action_->setGameObjectHolder(shared_from_this());
+	    action_->initActionComponent();
+	}
 }
 
 glm::vec3& GameObject::getPosition() {
@@ -129,7 +134,7 @@ RenderComponent* GameObject::getRenderComponent() {
     return render_;
 }
 
-bool GameObject::checkIntersection(GameObject* otherObj) {	
+bool GameObject::checkIntersection(std::shared_ptr<GameObject> otherObj) {	
 	PhysicsComponent* otherObjPhysics = otherObj->physics_;
 	if (physics_ != NULL && otherObjPhysics != NULL) {
 		return physics_->getBoundingBox().checkIntersection(otherObjPhysics->getBoundingBox());
@@ -139,5 +144,8 @@ bool GameObject::checkIntersection(GameObject* otherObj) {
 }
 
 BoundingBox* GameObject::getBoundingBox() {
-	return &physics_->getBoundingBox();
+   if (physics_) {
+      return &physics_->getBoundingBox();
+   }
+   return NULL;
 }

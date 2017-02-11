@@ -3,6 +3,7 @@
 
 #include "Camera.h"
 #include "GameWorld.h"
+#include "ViewFrustum.h"
 
 // Singleton class that handles any global game state not easily categorized into other areas
 class GameManager {
@@ -20,10 +21,16 @@ public:
 	void setCamera(Camera* newCamera);
 
    // Gets the reference to the current Player
-   GameObject& getPlayer();
+   std::shared_ptr<GameObject> getPlayer();
 
    // Sets a new reference to the current Player
-   void setPlayer(GameObject* newPlayer);
+   void setPlayer(std::shared_ptr<GameObject> newPlayer);
+
+   // Gets the reference to the current View Frustum
+   ViewFrustum& getViewFrustum();
+
+   // Sets a new reference to the view frustum
+   void setViewFrustum(ViewFrustum* newViewFrustum);
 
 	// Gets the reference to the current GameWorld
 	GameWorld& getGameWorld();
@@ -52,9 +59,11 @@ private:
 
 	Camera* currentCamera_;
 
-   GameObject* currentPlayer_;
+   std::shared_ptr<GameObject> currentPlayer_;
 
 	GameWorld* currentWorld_;
+
+   ViewFrustum* currentViewFrustum_;
 
 	float score_ = 0.0;
 

@@ -22,11 +22,13 @@ public:
 	// Scale for the A and S key movements
 	const float ADScale = 10.0f;
 
-	Camera(GameObject* player);
+	Camera(std::shared_ptr<GameObject> player);
 
 	~Camera();
 
 	glm::vec3& getEye();
+
+   glm::vec3& getNoSpringEye();
 
 	// Returns a reference to the current look-at vector for the camera
 	glm::vec3& getLookAt();
@@ -51,10 +53,11 @@ public:
 
 private:
    // The player the camera is following
-   GameObject* player;
+   std::shared_ptr<GameObject> player;
 
 	// Vector's the define the camera
 	glm::vec3 Eye = glm::vec3(0, 2, 0);
+   glm::vec3 NoSpringEye;
 	glm::vec3 LA;
 	glm::vec3 Up = glm::vec3(0, 1, 0);
 

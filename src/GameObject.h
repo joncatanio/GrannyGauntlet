@@ -18,7 +18,7 @@
 
 enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 
-class GameObject {
+class GameObject : public std::enable_shared_from_this<GameObject> {
 public:
 
 	// Direct object properties
@@ -30,6 +30,9 @@ public:
     // Properties for player moveable objects
     bool toggleMovement;
 
+	// Can a Cookie be delivered to this object
+	bool cookieDeliverable;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,
@@ -40,9 +43,12 @@ public:
 		InputComponent* input,
 		PhysicsComponent* physics,
 		RenderComponent* render,
-		ActionComponent* action);
+		ActionComponent* action,
+		bool deliverable = false);
 
     ~GameObject();
+
+    void initComponents();
 
     glm::vec3& getPosition();
 
@@ -79,7 +85,7 @@ public:
 	void changeShader(const std::string& newShaderName);
 
 	// Checks if the object intersects with the passed object
-	bool checkIntersection(GameObject* otherObj);
+	bool checkIntersection(std::shared_ptr<GameObject> otherObj);
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
@@ -110,6 +116,7 @@ private:
 
     // Action Component to control actions performed by objects
     ActionComponent* action_;
+
 };
 
 #endif

@@ -7,7 +7,6 @@ build/
 
 # Compiled object files
 *.o
-*.obj
 
 # Incremental state files
 *.d
@@ -75,7 +74,6 @@ artifacts/
 *_i.h
 *.ilk
 *.meta
-*.obj
 *.pch
 *.pdb
 *.pgc

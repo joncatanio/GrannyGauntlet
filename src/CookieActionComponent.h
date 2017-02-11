@@ -28,9 +28,9 @@ public:
     void checkAndPerformAction(double deltaTime, double totalTime);
 
 private:
-    GameObject* gameObj;
-    GameObject* gameObj1;
-    GameObject* gameObj2;
+    std::shared_ptr<GameObject> gameObj;
+    std::shared_ptr<GameObject> gameObj1;
+    std::shared_ptr<GameObject> gameObj2;
     AimInputComponent* aimInputComponent;
     std::shared_ptr<Shape> cookieShape;
     float xRot = 0.0;

@@ -61,7 +61,7 @@ public:
 	void unbindShader();
 
 	// Renders the given object
-	void renderObject(GameObject* objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
+	void renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 private:

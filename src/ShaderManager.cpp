@@ -133,7 +133,7 @@ void ShaderManager::unbindShader() {
 	glUseProgram(NO_SHADER);
 }
 
-void ShaderManager::renderObject(GameObject* objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
+void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
 		GameManager& gameManager = GameManager::instance();

@@ -13,12 +13,20 @@ void GameManager::setCamera(Camera* newCamera) {
 	currentCamera_ = newCamera;
 }
 
-GameObject& GameManager::getPlayer() {
-   return *currentPlayer_;
+std::shared_ptr<GameObject> GameManager::getPlayer() {
+   return currentPlayer_;
 }
 
-void GameManager::setPlayer(GameObject* newPlayer) {
+void GameManager::setPlayer(std::shared_ptr<GameObject> newPlayer) {
    currentPlayer_ = newPlayer;
+}
+
+ViewFrustum& GameManager::getViewFrustum() {
+   return *currentViewFrustum_;
+}
+
+void GameManager::setViewFrustum(ViewFrustum* newViewFrustum) {
+   currentViewFrustum_ = newViewFrustum;
 }
 
 GameWorld& GameManager::getGameWorld() {

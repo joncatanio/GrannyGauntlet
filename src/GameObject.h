@@ -18,7 +18,7 @@
 
 enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
 
-class GameObject {
+class GameObject : public std::enable_shared_from_this<GameObject> {
 public:
 
 	// Direct object properties
@@ -47,6 +47,8 @@ public:
 		bool deliverable = false);
 
     ~GameObject();
+
+    void initComponents();
 
     glm::vec3& getPosition();
 
@@ -83,7 +85,7 @@ public:
 	void changeShader(const std::string& newShaderName);
 
 	// Checks if the object intersects with the passed object
-	bool checkIntersection(GameObject* otherObj);
+	bool checkIntersection(std::shared_ptr<GameObject> otherObj);
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT

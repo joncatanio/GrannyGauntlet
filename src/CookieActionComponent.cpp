@@ -29,40 +29,41 @@ CookieActionComponent::CookieActionComponent() {
     BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, "Phong", brass);
     BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, "Phong", brass);
 
-    gameObj = new GameObject(
+    gameObj = std::make_shared<GameObject>(
             GameObjectType::DYNAMIC_OBJECT,
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
             glm::vec3(0.1),
-            NULL,
-            NULL,
+            nullptr,
+            nullptr,
             bunnyRenderComp,
-            NULL);
+            nullptr);
+    gameObj->initComponents();
 
-    gameObj1 = new GameObject(
+    gameObj1 = std::make_shared<GameObject>(
             GameObjectType::DYNAMIC_OBJECT,
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
             glm::vec3(0.1),
-            NULL,
-            NULL,
+            nullptr,
+            nullptr,
             bunnyRenderComp1,
-            NULL);
+            nullptr);
+    gameObj1->initComponents();
 
-    gameObj2 = new GameObject(
+    gameObj2 = std::make_shared<GameObject>(
             GameObjectType::DYNAMIC_OBJECT,
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
             glm::vec3(0.1),
-            NULL,
-            NULL,
+            nullptr,
+            nullptr,
             bunnyRenderComp2,
-            NULL);
-
-
+            nullptr);
+    gameObj2->initComponents();
 }
 
 CookieActionComponent::~CookieActionComponent() {}
@@ -114,16 +115,17 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
             BunnyRenderComponent *renderComp = new BunnyRenderComponent(cookieShape,
                "Phong", obsidian);
 
-            GameObject *cookieObj = new GameObject(
+            std::shared_ptr<GameObject> cookieObj = std::make_shared<GameObject>(
                     GameObjectType::DYNAMIC_OBJECT,
                     holder_->getPosition(),
                     throwDirection,
                     (holder_->velocity + startVelocity) * timeDown,
                     initialScale,
-                    NULL,
+                    nullptr,
                     cookiePhysicsComp,
                     renderComp,
-                    NULL);
+                    nullptr);
+            cookieObj->initComponents();
 
             gameManager.getGameWorld().addDynamicGameObject(cookieObj);
 

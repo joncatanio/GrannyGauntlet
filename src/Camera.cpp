@@ -5,7 +5,7 @@
 // Ninety degrees in radians
 constexpr float ninetyRad = 90.0f * M_PI / 180.0f;
 
-Camera::Camera(GameObject* player)
+Camera::Camera(std::shared_ptr<GameObject> player)
    : springConstant(25.0f),
    cameraDistance(5.0f),
    cameraVelocity(glm::vec3(0.0f, 0.0f, 0.0f)) {
@@ -19,6 +19,10 @@ Camera::~Camera() {}
 
 glm::vec3& Camera::getEye() {
 	return Eye;
+}
+
+glm::vec3& Camera::getNoSpringEye() {
+   return NoSpringEye;
 }
 
 /* Eye is not added to LookAt because gaze will ultimately be LA - Eye + Eye
@@ -108,6 +112,7 @@ void Camera::update(float deltaTime) {
 	glm::normalize(gazeVec);
 
 	glm::vec3 w = -gazeVec;
+   NoSpringEye = player->getPosition() + w;
 
    /* Make spring calculations */
    // Ideal resting camera position

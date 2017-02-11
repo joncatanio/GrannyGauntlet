@@ -80,6 +80,9 @@ public:
 	void registerBunnyHit();
 
 private:
+   // Load level from JSON object
+   void loadLevel();
+
 	// Collection of GameObjects in the world
 	std::vector<std::shared_ptr<GameObject>> dynamicGameObjects_;
 

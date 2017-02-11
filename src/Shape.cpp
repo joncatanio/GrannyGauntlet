@@ -340,7 +340,7 @@ void Shape::findAndSetMinAndMax() {
     int bufNum = posBuf.size();
 	// Go through all vertices to determine min and max of each dimension
     for(int i = 0; i < bufNum; i++) {
-        for (size_t v = 0; v < posBuf.size() / 3; v++) {
+        for (size_t v = 0; v < posBuf[i].size() / 3; v++) {
             if (posBuf[i][3 * v + 0] < minX) minX = posBuf[i][3 * v + 0];
             if (posBuf[i][3 * v + 0] > maxX) maxX = posBuf[i][3 * v + 0];
 

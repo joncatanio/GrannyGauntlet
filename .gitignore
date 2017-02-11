@@ -7,7 +7,6 @@ build/
 
 # Compiled object files
 *.o
-*.obj
 
 # Incremental state files
 *.d

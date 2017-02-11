@@ -139,7 +139,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house1PhysicsComp,
 			house1RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house1->initComponents();
 		world.addStaticGameObject(house1);
 
@@ -155,7 +156,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house2PhysicsComp,
 			house2RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house2->initComponents();
 		world.addStaticGameObject(house2);
 
@@ -171,7 +173,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house3PhysicsComp,
 			house3RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house3->initComponents();
 		world.addStaticGameObject(house3);
 
@@ -187,7 +190,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house4PhysicsComp,
 			house4RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house4->initComponents();
 		world.addStaticGameObject(house4);
 
@@ -203,7 +207,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house5PhysicsComp,
 			house5RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house5->initComponents();
 		world.addStaticGameObject(house5);
 
@@ -219,7 +224,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house6PhysicsComp,
 			house6RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house6->initComponents();
 		world.addStaticGameObject(house6);
 
@@ -235,7 +241,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house7PhysicsComp,
 			house7RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house7->initComponents();
 		world.addStaticGameObject(house7);
 
@@ -251,7 +258,8 @@ static void setupStaticWorld(GameWorld& world) {
 			nullptr,
 			house8PhysicsComp,
 			house8RenderComp,
-	        nullptr);
+	    nullptr,
+      true);
 		house8->initComponents();
 		world.addStaticGameObject(house8);
 

@@ -9,7 +9,8 @@ GameObject::GameObject(GameObjectType objType,
 	InputComponent* input,
 	PhysicsComponent* physics,
 	RenderComponent* render,
-	ActionComponent* action)
+	ActionComponent* action,
+	bool deliverable)
 	: direction(glm::normalize(startDirection)),
 	velocity(startVelocity),
 	type(objType),
@@ -19,7 +20,8 @@ GameObject::GameObject(GameObjectType objType,
 	render_(render),
 	input_(input),
 	physics_(physics),
-	action_(action) {
+	action_(action),
+	cookieDeliverable(deliverable) {
 
 	// Set initial position and scale values
 	setPosition(startPosition);

@@ -35,7 +35,7 @@ void Shape::loadMesh(const string &meshName) {
 	if(!rc) {
 		cerr << errStr << endl;
 	} else {
-        for(int i = 0; i < shapes.size(); i++) {
+        for(unsigned int i = 0; i < shapes.size(); i++) {
             //posBuf[i] = shapes[i].mesh.positions;
             posBuf.push_back(shapes[i].mesh.positions);
             //texBuf.push_back(shapes[i].mesh.texcoords);
@@ -45,11 +45,13 @@ void Shape::loadMesh(const string &meshName) {
             eleBuf.push_back(shapes[i].mesh.indices);
             //norBuf[i] = shapes[i].mesh.normals;
             norBuf.push_back(shapes[i].mesh.normals);
+
+            if (norBuf[i].size() == 0) {
+                calculateNormals(i);
+            }
         }
 		// If no normals are given, calculate them ourselves
-		if (norBuf.size() == 0) {
-			//calculateNormals();
-		}
+
 
 		findAndSetMinAndMax();
 	}
@@ -61,8 +63,8 @@ void Shape::loadMesh(const string &meshName) {
  * Taken and modified from provided "lighting slides" pdf on PolyLearn along
  * with tips given on the PolyLearn forms by Prof. Wood
  */
- /*
-void Shape::calculateNormals() {
+
+void Shape::calculateNormals(int i) {
 	float v1[3], v2[3], nor[3];
 	static const int x = 0;
 	static const int y = 1;
@@ -70,74 +72,76 @@ void Shape::calculateNormals() {
 	float length;
 
 	// Set all vertex normals to zero so we can add the adjacent face normals to each
-	norBuf.clear();
-	norBuf.resize(posBuf.size());
+    norBuf[i].clear();
+    norBuf[i].resize(posBuf[i].size());
 
-	for (size_t v = 0; v < norBuf.size(); ++v) {
-		norBuf[0] = 0.0;
-	}
+    for (size_t v = 0; v < norBuf[i].size(); ++v) {
+        norBuf[i][v] = 0.0;
+    }
 
-	// Calculate the normal for each face; add to adjacent vertices
-	for (size_t v = 0; v < eleBuf.size() / 3; ++v) {
-		int idx1 = eleBuf[3*v+0];
-		int	idx2 = eleBuf[3*v+1];
-		int	idx3 = eleBuf[3*v+2];
+    // Calculate the normal for each face; add to adjacent vertices
+    for (size_t v = 0; v < eleBuf[i].size() / 3; ++v) {
+        int idx1 = eleBuf[i][3 * v + 0];
+        int idx2 = eleBuf[i][3 * v + 1];
+        int idx3 = eleBuf[i][3 * v + 2];
 
-		// Calculate two vectors from the three points
-		v1[x] = posBuf[3*idx1+x] - posBuf[3*idx2+x];
-		v1[y] = posBuf[3*idx1+y] - posBuf[3*idx2+y];
-		v1[z] = posBuf[3*idx1+z] - posBuf[3*idx2+z];
+        // Calculate two vectors from the three points
+        v1[x] = posBuf[i][3 * idx1 + x] - posBuf[i][3 * idx2 + x];
+        v1[y] = posBuf[i][3 * idx1 + y] - posBuf[i][3 * idx2 + y];
+        v1[z] = posBuf[i][3 * idx1 + z] - posBuf[i][3 * idx2 + z];
 
-		v2[x] = posBuf[3*idx2+x] - posBuf[3*idx3+x];
-		v2[y] = posBuf[3*idx2+y] - posBuf[3*idx3+y];
-		v2[z] = posBuf[3*idx2+z] - posBuf[3*idx3+z];
+        v2[x] = posBuf[i][3 * idx2 + x] - posBuf[i][3 * idx3 + x];
+        v2[y] = posBuf[i][3 * idx2 + y] - posBuf[i][3 * idx3 + y];
+        v2[z] = posBuf[i][3 * idx2 + z] - posBuf[i][3 * idx3 + z];
 
-		// Take the cross product of the two vectors to get
-		// the normal vector which will be stored in out
-		nor[x] = v1[y]*v2[z] - v1[z]*v2[y];
-		nor[y] = v1[z]*v2[x] - v1[x]*v2[z];
-		nor[z] = v1[x]*v2[y] - v1[y]*v2[x];
+        // Take the cross product of the two vectors to get
+        // the normal vector which will be stored in out
+        nor[x] = v1[y] * v2[z] - v1[z] * v2[y];
+        nor[y] = v1[z] * v2[x] - v1[x] * v2[z];
+        nor[z] = v1[x] * v2[y] - v1[y] * v2[x];
 
-		// Normalize the vector
-		length = sqrt(nor[x] * nor[x] + nor[y] * nor[y] + nor[z] * nor[z]);
-		
-		nor[x] /= length;
-		nor[y] /= length;
-		nor[z] /= length;
+        // Normalize the vector
+        length = sqrt(nor[x] * nor[x] + nor[y] * nor[y] + nor[z] * nor[z]);
 
-		// Set the normal into the shape's normal buffer
-		norBuf[3*idx1+x] += nor[x];
-		norBuf[3*idx1+y] += nor[y];
-		norBuf[3*idx1+z] += nor[z];
-		
-		norBuf[3*idx2+x] += nor[x];
-		norBuf[3*idx2+y] += nor[y];
-		norBuf[3*idx2+z] += nor[z];
+        nor[x] /= length;
+        nor[y] /= length;
+        nor[z] /= length;
 
-		norBuf[3*idx3+x] += nor[x];
-		norBuf[3*idx3+y] += nor[y];
-		norBuf[3*idx3+z] += nor[z];
-	}
+        // Set the normal into the shape's normal buffer
+        norBuf[i][3 * idx1 + x] += nor[x];
+        norBuf[i][3 * idx1 + y] += nor[y];
+        norBuf[i][3 * idx1 + z] += nor[z];
 
-	// Normalize each vector's normal, effectively giving us a weighted average based on
-	// the area of each face adjacent to each vertex
-	for (size_t v = 0; v < norBuf.size() / 3; ++v) {
-		nor[x] = norBuf[(v*3)+x];
-		nor[y] = norBuf[(v*3)+y];
-		nor[z] = norBuf[(v*3)+z];
+        norBuf[i][3 * idx2 + x] += nor[x];
+        norBuf[i][3 * idx2 + y] += nor[y];
+        norBuf[i][3 * idx2 + z] += nor[z];
 
-		length = sqrt(nor[x] * nor[x] + nor[y] * nor[y] + nor[z] * nor[z]);
+        norBuf[i][3 * idx3 + x] += nor[x];
+        norBuf[i][3 * idx3 + y] += nor[y];
+        norBuf[i][3 * idx3 + z] += nor[z];
+    }
 
-		nor[x] /= length;
-		nor[y] /= length;
-		nor[z] /= length;
+    // Normalize each vector's normal, effectively giving us a weighted average based on
+    // the area of each face adjacent to each vertex
+    for (size_t v = 0; v < norBuf[i].size() / 3; ++v) {
+        nor[x] = norBuf[i][(v * 3) + x];
+        nor[y] = norBuf[i][(v * 3) + y];
+        nor[z] = norBuf[i][(v * 3) + z];
 
-		norBuf[(v*3)+x] = nor[x];
-		norBuf[(v*3)+y] = nor[y];
-		norBuf[(v*3)+z] = nor[z];
-	}
+        length = sqrt(nor[x] * nor[x] + nor[y] * nor[y] + nor[z] * nor[z]);
+
+        nor[x] /= length;
+        nor[y] /= length;
+        nor[z] /= length;
+
+        norBuf[i][(v * 3) + x] = nor[x];
+        norBuf[i][(v * 3) + y] = nor[y];
+        norBuf[i][(v * 3) + z] = nor[z];
+    }
+
+
 }
-*/
+
 void Shape::resize() {
 	float scaleX, scaleY, scaleZ;
 	float shiftX, shiftY, shiftZ;
@@ -220,7 +224,7 @@ void Shape::init() {
 
         // Send the normal array to the GPU
         if (norBuf[i].empty()) {
-            norBufID[i] = 0;
+            norBufID.push_back(0);
         } else {
             unsigned norBufIDRef;
             glGenBuffers(1, &norBufIDRef);

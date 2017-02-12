@@ -1,6 +1,5 @@
 #include <glm/gtx/rotate_vector.hpp>
-
-#include <glm/gtx/rotate_vector.hpp>
+#include <fstream>
 
 #include "CookieActionComponent.h"
 #include "GameManager.h"
@@ -8,9 +7,9 @@
 #include "ViewFrustum.h"
 #include "ShaderManager.h"
 #include "WindowManager.h"
-#include "json.hpp"
+//#include "json.hpp"
 
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 GameWorld::GameWorld()
 	: updateCount(0),
@@ -23,13 +22,17 @@ GameWorld::GameWorld()
 	// TODO(rgarmsen2295): Make this look nicer
 	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 });
    
-   loadLevel();
+   //loadLevel();
 }
 
 GameWorld::~GameWorld() {}
 
 void GameWorld::loadLevel() {
-
+ /*  std::ifstream level_file("file.json");
+   json level;
+   level_file >> level;
+*/
+   
 }
 
 void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {

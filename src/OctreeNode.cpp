@@ -67,6 +67,7 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
    for (OctreeNode child : children_) {
       if (child.contains(objToCheck)) {
          hitObj = child.checkIntersection(objToCheck);
+         break;
       }
    }
 
@@ -74,6 +75,7 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
       for (std::shared_ptr<GameObject> objInTree : objsEnclosed) {
          if (objToCheck->checkIntersection(objInTree)) {
             hitObj = objInTree;
+            break;
          }
       }
    }

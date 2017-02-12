@@ -198,6 +198,7 @@ std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject
 		return objHit;
 	}
 
+	// return nullptr
 	return std::make_shared<GameObject>(
             GameObjectType::NO_OBJECT,
             glm::vec3(0.0),

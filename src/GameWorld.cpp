@@ -85,8 +85,6 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-	init();
-
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 		obj->update(deltaTime);
         obj->performAction(deltaTime, totalTime);

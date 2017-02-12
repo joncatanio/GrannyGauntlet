@@ -24,11 +24,11 @@ GameWorld::GameWorld()
 GameWorld::~GameWorld() {}
 
 void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
-	this->dynamicGameObjectsToAdd_.push(obj);
+	dynamicGameObjectsToAdd_.push(obj);
 }
 
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
-	this->staticGameObjectsToAdd_.push(obj);
+	staticGameObjectsToAdd_.push(obj);
 }
 
 void GameWorld::addLight(const Light& newLight) {
@@ -36,28 +36,39 @@ void GameWorld::addLight(const Light& newLight) {
 }
 
 int GameWorld::getNumDynamicGameObjects() {
-	return this->dynamicGameObjects_.size();
+	return dynamicGameObjects_.size();
 }
 
 int GameWorld::getNumStaticGameObjects() {
-	return this->staticGameObjects_.size();
+	return staticGameObjects_.size();
 }
 
 const std::vector<Light>& GameWorld::getLights() {
 	return lights;
 }
 
-void GameWorld::clearGameObjects() {
-	this->dynamicGameObjects_.clear();
+void GameWorld::clearDynamicGameObjects() {
+	dynamicGameObjects_.clear();
+	while (!dynamicGameObjectsToAdd_.empty()) {
+		dynamicGameObjectsToAdd_.pop();
+	}
 }
 
-void GameWorld::resetWorld() {
-	this->clearGameObjects();
-	this->numBunniesHit = 0;
+void GameWorld::clearStaticGameObjects() {
+	staticGameObjects_.clear();
+	while (!staticGameObjectsToAdd_.empty()) {
+		staticGameObjectsToAdd_.pop();
+	}
+	staticGameObjectsTree_.clearTree();
 }
 
 void GameWorld::init() {
 	updateInternalGameObjectLists();
+
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+		staticGameObjectsTree_.addObject(obj);
+	}
+
 	staticGameObjectsTree_.buildTree();
 }
 
@@ -74,12 +85,14 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 	}
 #endif
 
-	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
+	init();
+
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 		obj->update(deltaTime);
         obj->performAction(deltaTime, totalTime);
 	}
 
-	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
 		obj->update(deltaTime);
 	}
 
@@ -112,14 +125,14 @@ void GameWorld::drawGameObjects() {
    viewFrustum.extractPlanes(P->topMatrix(), V->topMatrix());
 
 	// Draw non-static objects
-	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
-	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
@@ -154,14 +167,14 @@ void GameWorld::drawVFCViewport() {
       camera.getLookAt() - camera.getNoSpringEye());
 
 	// Draw non-static objects
-	for (std::shared_ptr<GameObject> obj : this->dynamicGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
 	}
 
 	// Draw static objects
-	for (std::shared_ptr<GameObject> obj : this->staticGameObjects_) {
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
       if (!viewFrustum.cull(obj)) {
 		   obj->draw(P, M, V);
       }
@@ -171,7 +184,6 @@ void GameWorld::drawVFCViewport() {
 std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {
 	GameManager& gameManager = GameManager::instance();
    std::shared_ptr<GameObject> player = gameManager.getPlayer();
-
 
 	// Check the player against the object
 	if (player != objToCheck && objToCheck->checkIntersection(player)) {
@@ -184,13 +196,6 @@ std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject
 			return obj;
 		}
 	}
-
-	// Check against static objects
-	/*for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
-		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
-			return obj;
-		}
-	}*/
 
 	// Check against static objects
 	std::shared_ptr<GameObject> objHit = staticGameObjectsTree_.checkIntersection(objToCheck);
@@ -261,7 +266,7 @@ void GameWorld::addBunnyToGameWorld() {
         nullptr);
 	bunnyObj->initComponents();
 
-	this->addDynamicGameObject(bunnyObj);
+	addDynamicGameObject(bunnyObj);
 }
 
 void GameWorld::updateInternalGameObjectLists() {
@@ -272,7 +277,6 @@ void GameWorld::updateInternalGameObjectLists() {
 
 	while (!staticGameObjectsToAdd_.empty()) {
 		staticGameObjects_.push_back(staticGameObjectsToAdd_.front());
-		staticGameObjectsTree_.addObject(staticGameObjectsToAdd_.front());
 		staticGameObjectsToAdd_.pop();
 	}
 }

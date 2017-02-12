@@ -14,14 +14,15 @@ OctreeNode::~OctreeNode() {
 }
 
 void OctreeNode::addObject(std::shared_ptr<GameObject> obj) {
-   objsNotInTree.push_front(obj);
+   objsNotInTree_.push_front(obj);
 }
 
 void OctreeNode::createEnclosingRegionForRoot() {
    glm::vec3 min(FLT_MAX, FLT_MAX, FLT_MAX);
    glm::vec3 max(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 
-   for (std::shared_ptr<GameObject> obj : objsNotInTree) {
+   // Find the smallest min and max from every object that will be in the tree
+   for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
       if (obj->getBoundingBox() != NULL) {
          glm::vec3& objMin = obj->getBoundingBox()->min_;
          glm::vec3& objMax = obj->getBoundingBox()->max_;
@@ -42,6 +43,12 @@ void OctreeNode::createEnclosingRegionForRoot() {
 bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
    BoundingBox* objBoundBox = obj->getBoundingBox();
 
+   // Object has no bounding box
+   if (objBoundBox == NULL) {
+      return false;
+   }
+
+   // Make sure each point of the object's bounding box is within the node's enclosing region
    for (int i = 0; i < 8; ++i) {
       if (enclosingRegion_.min_.x >= objBoundBox->boxPoints[i].x 
        && enclosingRegion_.min_.y >= objBoundBox->boxPoints[i].y
@@ -57,15 +64,25 @@ bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
 }
 
 void OctreeNode::buildTree() {
+   clearTree();
    createEnclosingRegionForRoot();
    buildTreeNode();
+}
+
+void OctreeNode::clearTree() {
+   for (OctreeNode& child : children_) {
+      child.clearTree();
+   }
+
+   children_.clear();
+   objsEnclosed_.clear();
 }
 
 std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameObject> objToCheck) {
    std::shared_ptr<GameObject> hitObj = nullptr;
 
    // Check for a child that contains the object and recursively call it's |checkIntersection| method
-   for (OctreeNode child : children_) {
+   for (OctreeNode& child : children_) {
       if (child.contains(objToCheck)) {
          hitObj = child.checkIntersection(objToCheck);
          break;
@@ -74,7 +91,7 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
 
    // Nothing hit yet, so check all the objects belonging to this node
    if (hitObj == nullptr) {
-      for (std::shared_ptr<GameObject> objInTree : objsEnclosed) {
+      for (std::shared_ptr<GameObject> objInTree : objsEnclosed_) {
          if (objToCheck->checkIntersection(objInTree)) {
             hitObj = objInTree;
             break;
@@ -82,14 +99,13 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
       }
    }
 
+   if (hitObj != nullptr)
+   std::cout << "Test! " << hitObj->getBoundingBox()->min_.x << std::endl;
+
    return hitObj;
 }
    
 void OctreeNode::buildTreeNode() {
-
-   // Clear node to remove any objects from a previous build
-   objsEnclosed.clear();
-
    glm::vec3& regionMin = enclosingRegion_.min_;
    glm::vec3& regionMax = enclosingRegion_.max_;
 
@@ -99,18 +115,19 @@ void OctreeNode::buildTreeNode() {
    glm::vec3 centerOfRegion(regionMin + halfRegionDim);
 
    // If region is a minimum  size, stop dividing and put everything left in here
-   if (regionDim.x <= 1.0f && regionDim.y <= 1.0f && regionDim.z < 1.0f) {
-      for (std::shared_ptr<GameObject> obj : objsNotInTree) {
-         objsEnclosed.push_back(obj);
+   if (std::abs(regionDim.x) <= 1.0f && std::abs(regionDim.y) <= 1.0f && std::abs(regionDim.z) < 1.0f) {
+      for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
+         objsEnclosed_.push_back(obj);
       }
-      objsNotInTree.clear();
+      objsNotInTree_.clear();
       
       return;
    }
-
+   
    glm::vec3 childMin;
    glm::vec3 childMax;
 
+   // Build each octant child of the current node
    childMin = enclosingRegion_.min_;
    childMax = centerOfRegion;
    children_.emplace_back(this, childMin, childMax);
@@ -147,13 +164,13 @@ void OctreeNode::buildTreeNode() {
    std::queue<std::shared_ptr<GameObject>> objsRemoved;
 
    // Find all objects that fit perfectly in the child node
-   for (std::shared_ptr<GameObject> obj : objsNotInTree) {
-      for (OctreeNode child : children_) {
+   for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
+      for (OctreeNode& child : children_) {
          if (child.contains(obj)) {
 
             // If the child node perfectly contains the object, add it to it's list
             // and set it for removal from the parent list
-            child.objsNotInTree.push_front(obj);
+            child.objsNotInTree_.push_front(obj);
             objsRemoved.push(obj);
             break;
          }
@@ -164,21 +181,21 @@ void OctreeNode::buildTreeNode() {
    while (!objsRemoved.empty()) {
       std::shared_ptr<GameObject> objToRemove = objsRemoved.front();
       objsRemoved.pop();
-      objsNotInTree.remove(objToRemove);
+      objsNotInTree_.remove(objToRemove);
    }
 
    // Move all objects that don't fit perfectly into a child node into the list for this node
    // as this is the smallest enclosing space it fits perfectly into
-   for (std::shared_ptr<GameObject> obj : objsNotInTree) {
-      objsEnclosed.push_back(obj);
+   for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
+      objsEnclosed_.push_back(obj);
    }
 
    // All objects are now either in the tree or in a child's list
-   objsNotInTree.clear();
+   objsNotInTree_.clear();
 
    // Check children for remaining objects to add to the tree
-   for (OctreeNode child : children_) {
-      if (child.objsNotInTree.size() > 0) {
+   for (OctreeNode& child : children_) {
+      if (child.objsNotInTree_.size() > 0) {
 
          // Child has objects to further sort so we keep going
          child.buildTreeNode();

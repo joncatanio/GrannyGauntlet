@@ -51,12 +51,12 @@ public:
 	// Returns a reference to the list of lights currently in the world
 	const std::vector<Light>& getLights();
 
-	// Clears the world of all GameObjects
-	void clearGameObjects();
+	// Clears the world of all dynamic GameObjects
+	void clearDynamicGameObjects();
 
-	// Resets the world to it's default state (clears game objects)
-	void resetWorld();
-
+	// Clears the world of all static GameObjects
+	void clearStaticGameObjects();
+	
 	// Initializes the game world (e.g. loads the map)
 	void init();
 
@@ -96,7 +96,8 @@ private:
 	// Queue of static objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToAdd_;
 
-	//
+	// Octree of static objects that are in the world - these objects should never move.
+	// If they do, the tree must be rebuilt
 	OctreeNode staticGameObjectsTree_;
 
 	// List of the lights currently in the world

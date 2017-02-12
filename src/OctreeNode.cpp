@@ -99,9 +99,6 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
       }
    }
 
-   if (hitObj != nullptr)
-   std::cout << "Test! " << hitObj->getBoundingBox()->min_.x << std::endl;
-
    return hitObj;
 }
    

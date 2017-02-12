@@ -59,4 +59,5 @@ void Program::addDefaultAttributesAndUniforms() {
 	// Adds vertex position and normal uniforms
 	addAttribute("vertPos");
 	addAttribute("vertNor");
+	addAttribute("vertTex");
 }

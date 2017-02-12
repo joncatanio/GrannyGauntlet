@@ -15,13 +15,13 @@ GameObject::GameObject(GameObjectType objType,
 	velocity(startVelocity),
 	type(objType),
 	toggleMovement(false),
+      cookieDeliverable(deliverable),
 	orientAngle_(0),
 	yRotationAngle_(0),
 	render_(render),
 	input_(input),
 	physics_(physics),
-	action_(action),
-	cookieDeliverable(deliverable) {
+	action_(action) {
 
 	// Set initial position and scale values
 	setPosition(startPosition);

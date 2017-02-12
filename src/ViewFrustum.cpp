@@ -84,7 +84,7 @@ bool ViewFrustum::cull(std::shared_ptr<GameObject> obj) {
    vec4 plane;
    int px, py, pz;
    float dotProduct;
-   for (int i = 0; i < planes.size(); ++i) {
+   for (unsigned int i = 0; i < planes.size(); ++i) {
       plane = planes[i];
 
       px = static_cast<int>(plane.x > 0.0f);

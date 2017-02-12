@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
    ShapeManager& shapeManager = ShapeManager::instance();
    MaterialManager& materialManager = MaterialManager::instance();
 
-   // Instantiate the current game world and load it.
+   // Instantiate the current game world and load the level.
    GameWorld world;
    LevelLoader& levelLoader = LevelLoader::instance();
    if (levelLoader.loadLevel(world)) {

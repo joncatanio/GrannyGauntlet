@@ -59,6 +59,11 @@ int LevelLoader::loadLevel(GameWorld &world) {
       return res;
    }
 
+   if ((res = parseDynamicObjects(world, level["dynamic-objects"]))) {
+      std::cerr << "Error parsing dynamic objects." << std::endl;
+      return res;
+   }
+
    return 0;
 }
 

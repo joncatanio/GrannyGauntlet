@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
     std::shared_ptr<GameObject> player;
 
     LevelLoader& levelLoader = LevelLoader::instance();
-    if ((player = levelLoader.loadLevel(world)) == nullptr) {
+    if (levelLoader.loadLevel(world, player)) {
         std::cerr << "Error loading level." << std::endl;
         return EXIT_FAILURE;
     }

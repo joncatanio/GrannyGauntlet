@@ -29,51 +29,51 @@ LevelLoader::~LevelLoader() {}
 
 /* Open for reading only for now, if we want to save gamestate we can at
    some point. Possible saveLevel() member function? */
-std::shared_ptr<GameObject> LevelLoader::loadLevel(GameWorld &world) {
-   std::shared_ptr<GameObject> player;
+int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player) {
    std::ifstream level_file("../levels/grandmas-awakening.json",
       std::ifstream::in);
+   int res = 0;
 
    if (!level_file) {
       std::cerr << "Error reading JSON level file." << std::endl;
-      return nullptr;
+      return res;
    }
    json level;
    level_file >> level;
 
    std::cout << "level_name: " << level["level-name"] << std::endl;
 
-   if (parseShaders(level["level-shaders"])) {
+   if ((res = parseShaders(level["level-shaders"]))) {
       std::cerr << "Error parsing isomorphic shaders." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   if (parseShapes(level["level-shapes"])) {
+   if ((res = parseShapes(level["level-shapes"]))) {
       std::cerr << "Error parsing shapes." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   if (parseMaterials(level["level-materials"])) {
+   if ((res = parseMaterials(level["level-materials"]))) {
       std::cerr << "Error parsing materials." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   if ((player = parseCharacters(world, level["characters"])) == nullptr) {
+   if ((res = parseCharacters(world, player, level["characters"]))) {
       std::cerr << "Error parsing characters." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   if (parseStaticObjects(world, level["static-objects"])) {
+   if ((res = parseStaticObjects(world, level["static-objects"]))) {
       std::cerr << "Error parsing static objects." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   if (parseDynamicObjects(world, level["dynamic-objects"])) {
+   if ((res = parseDynamicObjects(world, level["dynamic-objects"]))) {
       std::cerr << "Error parsing dynamic objects." << std::endl;
-      return nullptr;
+      return res;
    }
 
-   return player;
+   return res;
 }
 
 int LevelLoader::parseShaders(json shaders) {
@@ -132,14 +132,13 @@ int LevelLoader::parseMaterials(json materials) {
 
 /* Later make a map of available players so they can swap out to a new
    main character whenever they want. */
-std::shared_ptr<GameObject> LevelLoader::parseCharacters(GameWorld &world,
-   json chars) {
-   std::shared_ptr<GameObject> player;
+int LevelLoader::parseCharacters(GameWorld &world,
+   std::shared_ptr<GameObject> &player, json chars) {
 
    for (json character : chars) {
       if (character["yAxis-rotation-deg"] == nullptr ||
           character["orient-angle-deg"] == nullptr) {
-         return nullptr;
+         return 1;
       }
 
       /* Set the orient angle to orient the object correctly from it's starting pos.
@@ -156,7 +155,7 @@ std::shared_ptr<GameObject> LevelLoader::parseCharacters(GameWorld &world,
       world.addDynamicGameObject(player);
    }
 
-   return player;
+   return 0;
 }
 
 int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {

@@ -14,16 +14,15 @@ public:
 
    ~LevelLoader();
 
-   /* Loads a level and populates reference of GameWorld, returns a player
-    * on success. */
-   std::shared_ptr<GameObject> loadLevel(GameWorld &world);
+   // Loads a level and populates reference of GameWorld, returns 0 on success
+   int loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player);
 private:
    LevelLoader();
 
    int parseShaders(nlohmann::json shaders);
    int parseShapes(nlohmann::json shapes);
    int parseMaterials(nlohmann::json materials);
-   std::shared_ptr<GameObject> parseCharacters(GameWorld &world,
+   int parseCharacters(GameWorld &world, std::shared_ptr<GameObject> &player,
       nlohmann::json chars);
    int parseStaticObjects(GameWorld &world, nlohmann::json staticObjs);
    int parseDynamicObjects(GameWorld &world, nlohmann::json dynamicObjs);

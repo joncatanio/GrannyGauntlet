@@ -147,7 +147,7 @@ std::shared_ptr<GameObject> LevelLoader::parseCharacters(GameWorld &world,
       float yRotRad = static_cast<float>(character["yAxis-rotation-deg"]) * M_PI / 180.0f;
       float orientRad = static_cast<float>(character["orient-angle-deg"]) * M_PI / 180.0f;
 
-      player = createGameObject(character);
+      player = createGameObject(character, GameObjectType::PLAYER);
 
       player->initComponents();
       player->setYAxisRotation(yRotRad);
@@ -162,7 +162,8 @@ std::shared_ptr<GameObject> LevelLoader::parseCharacters(GameWorld &world,
 int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
    if (staticObjs != nullptr) {
       for (json gameObj : staticObjs) {
-         std::shared_ptr<GameObject> staticGameObj = createGameObject(gameObj); 
+         std::shared_ptr<GameObject> staticGameObj =
+            createGameObject(gameObj, GameObjectType::STATIC_OBJECT); 
 
          staticGameObj->initComponents();
          world.addStaticGameObject(staticGameObj);
@@ -175,7 +176,8 @@ int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
 int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
    if (dynamicObjs != nullptr) {
       for (json gameObj : dynamicObjs) {
-         std::shared_ptr<GameObject> dynamicGameObj = createGameObject(gameObj); 
+         std::shared_ptr<GameObject> dynamicGameObj =
+            createGameObject(gameObj, GameObjectType::DYNAMIC_OBJECT); 
 
          dynamicGameObj->initComponents();
          world.addDynamicGameObject(dynamicGameObj);
@@ -185,14 +187,15 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
    return 0;
 }
 
-std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj) {
+std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
+   GameObjectType objType) {
    InputComponent* inputComponent = getInputComponent(obj);
    PhysicsComponent* physicsComponent = getPhysicsComponent(obj);
    RenderComponent* renderComponent = getRenderComponent(obj);
    ActionComponent* actionComponent = getActionComponent(obj);
    
    std::shared_ptr<GameObject> gameObj = std::make_shared<GameObject>(
-      GameObjectType::STATIC_OBJECT,
+      objType,
       glm::vec3(obj["pos"]["x"], obj["pos"]["y"], obj["pos"]["z"]),
       glm::vec3(obj["dir"]["x"], obj["dir"]["y"], obj["dir"]["z"]),
       static_cast<float>(obj["vel"]),

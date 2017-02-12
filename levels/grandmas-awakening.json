@@ -133,6 +133,45 @@
          "shininess": 10.0
       }
    ],
+   "characters": [
+      {
+         "object-name": "granny",
+         "pos": {
+            "x": 45.0,
+            "y": 1.0,
+            "z": -70.0
+         },
+         "dir": {
+            "x": -1.0,
+            "y": 0.0,
+            "z": 0.0
+         },
+         "vel": 12.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "input-component": {
+            "name": "PlayerInputComponent"
+         },
+         "physics-component": {
+            "name": "PlayerPhysicsComponent"
+         },
+         "render-component": {
+            "name": "PlayerRenderComponent",
+            "shape": "Lowpolycar",
+            "shader": "Phong",
+            "material": "Pearl"
+         },
+         "action-component": {
+            "name": "CookieActionComponent"
+         },
+         "yAxis-rotation-deg": -45.0,
+         "orient-angle-deg": -45.0,
+         "deliverable": false
+      }
+   ],
    "static-objects": [
       {
          "object-name": "ground plane",

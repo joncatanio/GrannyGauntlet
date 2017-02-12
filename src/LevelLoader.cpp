@@ -2,6 +2,10 @@
 // Individual component headers
 #include "WallRenderComponent.h"
 #include "WallPhysicsComponent.h"
+#include "PlayerInputComponent.h"
+#include "PlayerPhysicsComponent.h"
+#include "PlayerRenderComponent.h"
+#include "CookieActionComponent.h"
 // Manager headers
 #include "ResourceManager.h"
 #include "ShaderManager.h"
@@ -25,46 +29,51 @@ LevelLoader::~LevelLoader() {}
 
 /* Open for reading only for now, if we want to save gamestate we can at
    some point. Possible saveLevel() member function? */
-int LevelLoader::loadLevel(GameWorld &world) {
-   int res;
+std::shared_ptr<GameObject> LevelLoader::loadLevel(GameWorld &world) {
+   std::shared_ptr<GameObject> player;
    std::ifstream level_file("../levels/grandmas-awakening.json",
       std::ifstream::in);
 
    if (!level_file) {
       std::cerr << "Error reading JSON level file." << std::endl;
-      return 1;
+      return nullptr;
    }
    json level;
    level_file >> level;
 
    std::cout << "level_name: " << level["level-name"] << std::endl;
 
-   if ((res = parseShaders(level["level-shaders"]))) {
+   if (parseShaders(level["level-shaders"])) {
       std::cerr << "Error parsing isomorphic shaders." << std::endl;
-      return res;
+      return nullptr;
    }
 
-   if ((res = parseShapes(level["level-shapes"]))) {
+   if (parseShapes(level["level-shapes"])) {
       std::cerr << "Error parsing shapes." << std::endl;
-      return res;
+      return nullptr;
    }
 
-   if ((res = parseMaterials(level["level-materials"]))) {
+   if (parseMaterials(level["level-materials"])) {
       std::cerr << "Error parsing materials." << std::endl;
-      return res;
+      return nullptr;
    }
 
-   if ((res = parseStaticObjects(world, level["static-objects"]))) {
+   if ((player = parseCharacters(world, level["characters"])) == nullptr) {
+      std::cerr << "Error parsing characters." << std::endl;
+      return nullptr;
+   }
+
+   if (parseStaticObjects(world, level["static-objects"])) {
       std::cerr << "Error parsing static objects." << std::endl;
-      return res;
+      return nullptr;
    }
 
-   if ((res = parseDynamicObjects(world, level["dynamic-objects"]))) {
+   if (parseDynamicObjects(world, level["dynamic-objects"])) {
       std::cerr << "Error parsing dynamic objects." << std::endl;
-      return res;
+      return nullptr;
    }
 
-   return 0;
+   return player;
 }
 
 int LevelLoader::parseShaders(json shaders) {
@@ -121,6 +130,35 @@ int LevelLoader::parseMaterials(json materials) {
    return 0;
 }
 
+/* Later make a map of available players so they can swap out to a new
+   main character whenever they want. */
+std::shared_ptr<GameObject> LevelLoader::parseCharacters(GameWorld &world,
+   json chars) {
+   std::shared_ptr<GameObject> player;
+
+   for (json character : chars) {
+      if (character["yAxis-rotation-deg"] == nullptr ||
+          character["orient-angle-deg"] == nullptr) {
+         return nullptr;
+      }
+
+      /* Set the orient angle to orient the object correctly from it's starting pos.
+       * This is specific to each obj file. Positive values are cw, negative ccw */
+      float yRotRad = static_cast<float>(character["yAxis-rotation-deg"]) * M_PI / 180.0f;
+      float orientRad = static_cast<float>(character["orient-angle-deg"]) * M_PI / 180.0f;
+
+      player = createGameObject(character);
+
+      player->initComponents();
+      player->setYAxisRotation(yRotRad);
+      player->setOrientAngle(orientRad);
+      
+      world.addDynamicGameObject(player);
+   }
+
+   return player;
+}
+
 int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
    if (staticObjs != nullptr) {
       for (json gameObj : staticObjs) {
@@ -174,6 +212,12 @@ InputComponent* LevelLoader::getInputComponent(json obj) {
       return nullptr;
    }
 
+   std::string componentName = obj["input-component"]["name"];
+
+   if (componentName == "PlayerInputComponent") {
+      return new PlayerInputComponent();
+   }
+
    return nullptr;
 }
 
@@ -193,6 +237,8 @@ PhysicsComponent* LevelLoader::getPhysicsComponent(json obj) {
 
    if (componentName == "WallPhysicsComponent") {
       return new WallPhysicsComponent();
+   } else if (componentName == "PlayerPhysicsComponent") {
+      return new PlayerPhysicsComponent();
    }
 
    return nullptr;
@@ -224,6 +270,9 @@ RenderComponent* LevelLoader::getRenderComponent(json obj) {
    if (componentName == "WallRenderComponent") {
       return new WallRenderComponent(shapeManager.getShape(shapeName),
          shaderName, materialManager.getMaterial(materialName));
+   } else if (componentName == "PlayerRenderComponent") {
+      return new PlayerRenderComponent(shapeManager.getShape(shapeName),
+         shaderName, materialManager.getMaterial(materialName));
    } else if (componentName == "FireHydrantRenderComponent") {
       return nullptr;
    }
@@ -234,6 +283,12 @@ RenderComponent* LevelLoader::getRenderComponent(json obj) {
 ActionComponent* LevelLoader::getActionComponent(json obj) {
    if (obj["action-component"] == nullptr) {
       return nullptr;
+   }
+
+   std::string componentName = obj["action-component"]["name"];
+
+   if (componentName == "CookieActionComponent") {
+      return new CookieActionComponent();
    }
 
    return nullptr;

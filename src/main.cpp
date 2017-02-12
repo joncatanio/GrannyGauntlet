@@ -71,27 +71,19 @@ int main(int argc, char **argv) {
 	// Initialize scene data
 	initMisc();
 
-	// Initialize the ResourceManager and get its instance
-	ResourceManager& resourceManager = ResourceManager::instance();
-	resourceManager.setResourceDirectory(resourceDirectory);
-   ShapeManager& shapeManager = ShapeManager::instance();
-   MaterialManager& materialManager = MaterialManager::instance();
+	 // Initialize the ResourceManager and get its instance
+	 ResourceManager& resourceManager = ResourceManager::instance();
+	 resourceManager.setResourceDirectory(resourceDirectory);
 
-   // Instantiate the current game world and load the level.
-   GameWorld world;
-   LevelLoader& levelLoader = LevelLoader::instance();
-   if (levelLoader.loadLevel(world)) {
-      std::cerr << "Error loading level." << std::endl;
-      return EXIT_FAILURE;
-   }
+    // Instantiate the current game world and player then load the level.
+    GameWorld world;
+    std::shared_ptr<GameObject> player;
 
-   PlayerInputComponent* playerInputComp = new PlayerInputComponent();
-   PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
-    CookieActionComponent* cookieAction = new CookieActionComponent();
-   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(
-      shapeManager.getShape("Lowpolycar"),
-      "Phong", materialManager.getMaterial("Pearl"));
-
+    LevelLoader& levelLoader = LevelLoader::instance();
+    if ((player = levelLoader.loadLevel(world)) == nullptr) {
+        std::cerr << "Error loading level." << std::endl;
+        return EXIT_FAILURE;
+    }
 
     // Initialize the GameManager and get its instance
     GameManager& gameManager = GameManager::instance();
@@ -99,28 +91,9 @@ int main(int argc, char **argv) {
     // Set the manager to the current game world
     gameManager.setGameWorld(&world);
 
-   std::shared_ptr<GameObject> player = std::make_shared<GameObject>(
-      GameObjectType::PLAYER,
-      glm::vec3(45.0f, 1.0f, -70.0f),
-      glm::vec3(-1.0f, 0.0f, 0.0f),
-      12.0f,
-      glm::vec3(1.0f, 1.0f, 1.0f),
-      playerInputComp,
-      playerPhysicsComp,
-      playerRenderComp,
-	  cookieAction
-   );
-   player->initComponents();
-
-   /* Set the orient angle to orient the object correctly from it's starting pos.
-    * This is specific to each obj file. Positive values are cw, negative ccw */ 
-   player->setYAxisRotation(-M_PI / 4);
-   player->setOrientAngle(-M_PI / 4);
-
-	// The current game camera
-	Camera camera(player);
-
-   world.addDynamicGameObject(player);
+	 // The current game camera
+	 Camera camera(player);
+    world.addDynamicGameObject(player);
 
 	// Set the manager to the current camera
     gameManager.setCamera(&camera);
@@ -130,8 +103,6 @@ int main(int argc, char **argv) {
 
     // Set the current view frustum
     gameManager.setViewFrustum(new ViewFrustum());
-
-    //setupStaticWorld(world);
 
     gameManager.setTime(30.0);
 

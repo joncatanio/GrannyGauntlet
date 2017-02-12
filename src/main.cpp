@@ -91,7 +91,6 @@ int main(int argc, char **argv) {
 
 	 // The current game camera
 	 Camera camera(player);
-    world.addDynamicGameObject(player);
 
 	// Set the manager to the current camera
     gameManager.setCamera(&camera);

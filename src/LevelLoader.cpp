@@ -151,7 +151,8 @@ int LevelLoader::parseCharacters(GameWorld &world,
       player->initComponents();
       player->setYAxisRotation(yRotRad);
       player->setOrientAngle(orientRad);
-      
+
+      // TODO (noj) when we have multiple chars only add the main char
       world.addDynamicGameObject(player);
    }
 

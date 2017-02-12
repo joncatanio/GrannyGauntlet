@@ -64,6 +64,7 @@ void OctreeNode::buildTree() {
 std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameObject> objToCheck) {
    std::shared_ptr<GameObject> hitObj = nullptr;
 
+   // Check for a child that contains the object and recursively call it's |checkIntersection| method
    for (OctreeNode child : children_) {
       if (child.contains(objToCheck)) {
          hitObj = child.checkIntersection(objToCheck);
@@ -71,6 +72,7 @@ std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameOb
       }
    }
 
+   // Nothing hit yet, so check all the objects belonging to this node
    if (hitObj == nullptr) {
       for (std::shared_ptr<GameObject> objInTree : objsEnclosed) {
          if (objToCheck->checkIntersection(objInTree)) {

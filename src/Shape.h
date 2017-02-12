@@ -19,7 +19,7 @@ public:
 	Shape();
 	virtual ~Shape();
 	void loadMesh(const std::string &meshName);
-	void calculateNormals();
+	void calculateNormals(int i);
 	void init();
 	void resize();
 	void draw(const std::shared_ptr<Program> prog) const;

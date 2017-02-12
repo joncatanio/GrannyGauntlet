@@ -120,7 +120,7 @@ float CookiePhysicsComponent::distanceTraveled() {
             glm::vec3(cookieState.hitPositions[0].x, 0.0, cookieState.hitPositions[0].z) );
 
     // go through all further hits
-    for(int i = 1; i < cookieState.hitPositions.size(); i++) {
+    for(unsigned int i = 1; i < cookieState.hitPositions.size(); i++) {
         distance += glm::distance(
                 glm::vec3(cookieState.hitPositions[i-1].x, 0.0, cookieState.hitPositions[i-1].z),
                 glm::vec3(cookieState.hitPositions[i].x, 0.0, cookieState.hitPositions[i].z) );

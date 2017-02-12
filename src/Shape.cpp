@@ -339,7 +339,7 @@ void Shape::findAndSetMinAndMax() {
 	float maxX, maxY, maxZ;
 
 	minX = minY = minZ = FLT_MAX;
-	maxX = maxY = maxZ = FLT_MIN;
+	maxX = maxY = maxZ = -FLT_MAX;
 
     int bufNum = posBuf.size();
 	// Go through all vertices to determine min and max of each dimension

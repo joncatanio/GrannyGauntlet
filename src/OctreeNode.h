@@ -1,6 +1,15 @@
 #ifndef OCTREE_H
 #define OCTREE_H
 
+#include <array>
+#include <list>
+#include <memory>
+#include <queue>
+
+#include "glm/glm.hpp"
+
+#include "GameObject.h"
+
 /* 
  * Spatial data structure used to store static objects in the world
  *
@@ -9,18 +18,25 @@
 class OctreeNode {
 public:
 
-   OctreeNode(const BoundingBox& enclosingRegion);
+   //
+   OctreeNode();
 
-   OctreeNode(const glm::vec3& min, const glm::vec3& max);
+   //
+   OctreeNode(OctreeNode* parent, glm::vec3& min, glm::vec3& max);
 
-   OctreeNode(std::vector<std::shared_ptr<GameObject>>& objs);
-
+   //
    ~OctreeNode();
+
+   //
+   void addObject(std::shared_ptr<GameObject> obj);
+
+   //
+   void buildTree();
 
 private:
 
    // The children whose parent is this node
-   std::array<OctreeNode, 8> children_;
+   std::vector<OctreeNode> children_;
 
    // The representation of the region of space contained within the octree
    BoundingBox enclosingRegion_;
@@ -29,10 +45,19 @@ private:
    std::vector<std::shared_ptr<GameObject>> objsEnclosed;
 
    // Any objects that have yet to be added to the Octree (should only have objects within the parent node)
-   std::vector<std::shared_ptr<GameObject>> objsNotInTree;
+   std::list<std::shared_ptr<GameObject>> objsNotInTree;
 
    // The parent of this node
-   std::shared_ptr<OctreeNode> parent_;
+   OctreeNode* parent_;
+
+
+   void buildTreeNode();
+
+   //
+   void createEnclosingRegionForRoot();
+
+   //
+   bool contains(const std::shared_ptr<GameObject> obj);
 
 };
 

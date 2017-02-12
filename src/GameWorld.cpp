@@ -29,6 +29,7 @@ void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	this->staticGameObjectsToAdd_.push(obj);
+	staticGameObjectsTree_.addObject(obj);
 }
 
 void GameWorld::addLight(const Light& newLight) {
@@ -54,6 +55,10 @@ void GameWorld::clearGameObjects() {
 void GameWorld::resetWorld() {
 	this->clearGameObjects();
 	this->numBunniesHit = 0;
+}
+
+void GameWorld::init() {
+	staticGameObjectsTree_.buildTree();
 }
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {

@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
+#include "MaterialManager.h"
 
 BunnyPhysicsComponent::BunnyPhysicsComponent() {
 
@@ -68,7 +69,7 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 		if (holder_->velocity != 0.0f) {
 			// Only update bunny on hit once
 			holder_->velocity = 0.0f;
-			holder_->changeMaterial(jade);
+			holder_->changeMaterial(MaterialManager::instance().getMaterial("Jade"));
 			world.registerBunnyHit();
 		}
 	} else if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {

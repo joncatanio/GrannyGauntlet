@@ -11,6 +11,8 @@
 #include "ViewFrustum.h"
 #include "ResourceManager.h"
 #include "ShaderManager.h"
+#include "ShapeManager.h"
+#include "MaterialManager.h"
 #include "WindowManager.h"
 
 #include "WallPhysicsComponent.h"
@@ -20,19 +22,6 @@
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
 std::string RESOURCE_DIR = "../resources/";
-
-// Material pointers
-// TODO(rgarmsen2295): Move into shader manager class
-std::shared_ptr<Material> obsidian;
-std::shared_ptr<Material> green;
-std::shared_ptr<Material> jade;
-std::shared_ptr<Material> pearl;
-std::shared_ptr<Material> brass;
-
-// Shape pointers
-// TODO(rgarmsen2295): Move into shader manager class
-std::shared_ptr<Shape> shapeCube;
-std::shared_ptr<Shape> shapeGirl;
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {
@@ -85,6 +74,8 @@ int main(int argc, char **argv) {
 	// Initialize the ResourceManager and get its instance
 	ResourceManager& resourceManager = ResourceManager::instance();
 	resourceManager.setResourceDirectory(resourceDirectory);
+   ShapeManager& shapeManager = ShapeManager::instance();
+   MaterialManager& materialManager = MaterialManager::instance();
 
    // Instantiate the current game world and load it.
    GameWorld world;
@@ -97,8 +88,9 @@ int main(int argc, char **argv) {
    PlayerInputComponent* playerInputComp = new PlayerInputComponent();
    PlayerPhysicsComponent* playerPhysicsComp = new PlayerPhysicsComponent();
     CookieActionComponent* cookieAction = new CookieActionComponent();
-   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(shapeGirl,
-      "Phong", pearl);
+   PlayerRenderComponent* playerRenderComp = new PlayerRenderComponent(
+      shapeManager.getShape("Lowpolycar"),
+      "Phong", materialManager.getMaterial("Pearl"));
 
 
     // Initialize the GameManager and get its instance

@@ -1,11 +1,12 @@
 #include <glm/gtx/rotate_vector.hpp>
-#include <fstream>
 
 #include "CookieActionComponent.h"
 #include "GameManager.h"
 #include "GameWorld.h"
 #include "ViewFrustum.h"
 #include "ShaderManager.h"
+#include "ShapeManager.h"
+#include "MaterialManager.h"
 #include "WindowManager.h"
 
 GameWorld::GameWorld()
@@ -215,6 +216,8 @@ void GameWorld::registerBunnyHit() {
 // TODO(rgarmsen2295): Abstract into "bunny world" specific sub-class
 void GameWorld::addBunnyToGameWorld() {
 	ShaderManager& shaderManager = ShaderManager::instance();
+   ShapeManager& shapeManager = ShapeManager::instance();
+   MaterialManager& materialManager = MaterialManager::instance();
 	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	static std::shared_ptr<Shape> bunnyShape = std::make_shared<Shape>();
@@ -244,7 +247,8 @@ void GameWorld::addBunnyToGameWorld() {
 	glm::vec3 initialScale(1.0f, 1.0f, 1.0f);
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
-	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(bunnyShape, "Phong", brass);
+	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
+      shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Brass"));
 
 	std::shared_ptr<GameObject> bunnyObj = std::make_shared<GameObject>(
 		GameObjectType::DYNAMIC_OBJECT, 

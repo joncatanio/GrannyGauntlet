@@ -30,6 +30,10 @@
       {
          "name": "Lowpolycar",
          "filename": "lowpolycar.obj"
+      },
+      {
+         "name": "Bunny",
+         "filename": "bunny.obj"
       }
    ],
    "level-materials": [

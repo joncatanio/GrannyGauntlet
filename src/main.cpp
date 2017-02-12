@@ -75,8 +75,12 @@ int main(int argc, char **argv) {
 	 ResourceManager& resourceManager = ResourceManager::instance();
 	 resourceManager.setResourceDirectory(resourceDirectory);
 
+    // Initialize the GameManager and get its instance
+    GameManager& gameManager = GameManager::instance();
+
     // Instantiate the current game world and player then load the level.
     GameWorld world;
+    gameManager.setGameWorld(&world);
     std::shared_ptr<GameObject> player;
 
     LevelLoader& levelLoader = LevelLoader::instance();
@@ -84,12 +88,6 @@ int main(int argc, char **argv) {
         std::cerr << "Error loading level." << std::endl;
         return EXIT_FAILURE;
     }
-
-    // Initialize the GameManager and get its instance
-    GameManager& gameManager = GameManager::instance();
-
-    // Set the manager to the current game world
-    gameManager.setGameWorld(&world);
 
 	 // The current game camera
 	 Camera camera(player);

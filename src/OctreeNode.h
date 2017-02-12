@@ -33,6 +33,9 @@ public:
    //
    void buildTree();
 
+   //
+   std::shared_ptr<GameObject> checkIntersection(std::shared_ptr<GameObject> objToCheck);
+
 private:
 
    // The children whose parent is this node
@@ -50,7 +53,7 @@ private:
    // The parent of this node
    OctreeNode* parent_;
 
-
+   //
    void buildTreeNode();
 
    //

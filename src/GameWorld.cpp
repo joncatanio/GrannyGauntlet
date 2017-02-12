@@ -29,7 +29,6 @@ void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	this->staticGameObjectsToAdd_.push(obj);
-	staticGameObjectsTree_.addObject(obj);
 }
 
 void GameWorld::addLight(const Light& newLight) {
@@ -58,6 +57,7 @@ void GameWorld::resetWorld() {
 }
 
 void GameWorld::init() {
+	updateInternalGameObjectLists();
 	staticGameObjectsTree_.buildTree();
 }
 
@@ -186,10 +186,16 @@ std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject
 	}
 
 	// Check against static objects
-	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+	/*for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
 		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
 			return obj;
 		}
+	}*/
+
+	// Check against static objects
+	std::shared_ptr<GameObject> objHit = staticGameObjectsTree_.checkIntersection(objToCheck);
+	if (objHit != nullptr) {
+		return objHit;
 	}
 
 	return std::make_shared<GameObject>(
@@ -275,6 +281,7 @@ void GameWorld::updateInternalGameObjectLists() {
 
 	while (!staticGameObjectsToAdd_.empty()) {
 		staticGameObjects_.push_back(staticGameObjectsToAdd_.front());
+		staticGameObjectsTree_.addObject(staticGameObjectsToAdd_.front());
 		staticGameObjectsToAdd_.pop();
 	}
 }

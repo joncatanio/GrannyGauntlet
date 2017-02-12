@@ -438,7 +438,7 @@ int main(int argc, char **argv) {
     setupStaticWorld(world);
 
     // Add all static objects before this!!!
-    //world.init();
+    world.init();
 
     gameManager.setTime(30.0);
 

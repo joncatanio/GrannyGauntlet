@@ -22,16 +22,18 @@ void OctreeNode::createEnclosingRegionForRoot() {
    glm::vec3 max(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 
    for (std::shared_ptr<GameObject> obj : objsNotInTree) {
-      glm::vec3& objMin = obj->getBoundingBox()->min_;
-      glm::vec3& objMax = obj->getBoundingBox()->max_;
+      if (obj->getBoundingBox() != NULL) {
+         glm::vec3& objMin = obj->getBoundingBox()->min_;
+         glm::vec3& objMax = obj->getBoundingBox()->max_;
 
-      min.x = objMin.x < min.x ? objMin.x : min.x;
-      min.y = objMin.y < min.y ? objMin.y : min.y;
-      min.z = objMin.z < min.z ? objMin.z : min.z;
+         min.x = objMin.x < min.x ? objMin.x : min.x;
+         min.y = objMin.y < min.y ? objMin.y : min.y;
+         min.z = objMin.z < min.z ? objMin.z : min.z;
 
-      max.x = objMax.x < max.x ? objMax.x : max.x;
-      max.y = objMax.y < max.y ? objMax.y : max.y;
-      max.z = objMax.z < max.z ? objMax.z : max.z;
+         max.x = objMax.x < max.x ? objMax.x : max.x;
+         max.y = objMax.y < max.y ? objMax.y : max.y;
+         max.z = objMax.z < max.z ? objMax.z : max.z;
+      }
    }
 
    enclosingRegion_ = BoundingBox(min, max);
@@ -57,6 +59,26 @@ bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
 void OctreeNode::buildTree() {
    createEnclosingRegionForRoot();
    buildTreeNode();
+}
+
+std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameObject> objToCheck) {
+   std::shared_ptr<GameObject> hitObj = nullptr;
+
+   for (OctreeNode child : children_) {
+      if (child.contains(objToCheck)) {
+         hitObj = child.checkIntersection(objToCheck);
+      }
+   }
+
+   if (hitObj == nullptr) {
+      for (std::shared_ptr<GameObject> objInTree : objsEnclosed) {
+         if (objToCheck->checkIntersection(objInTree)) {
+            hitObj = objInTree;
+         }
+      }
+   }
+
+   return hitObj;
 }
    
 void OctreeNode::buildTreeNode() {

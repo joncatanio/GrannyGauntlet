@@ -41,50 +41,49 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
     // If we hit anything, stop "forward"
     std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
-    GameObjectType objTypeHit = objHit->type;
+    if (objHit != nullptr) {
+        GameObjectType objTypeHit = objHit->type;
 
-    if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
+        if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
 
-        BoundingBox* objBB = objHit->getBoundingBox();
-        BoundingBox* cookieBB = holder_->getBoundingBox();
+            BoundingBox* objBB = objHit->getBoundingBox();
+            BoundingBox* cookieBB = holder_->getBoundingBox();
 
-        glm::vec3 n;
+            glm::vec3 n;
 
-        //check on which side of the bounding box of the object the cookie hit and create normal for reflection
-        if((objBB->min_.x - epsilon <= cookieBB->max_.x && objBB->min_.x + epsilon >= cookieBB->max_.x) ||
-                (objBB->max_.x - epsilon <= cookieBB->min_.x && objBB->max_.x + epsilon >= cookieBB->min_.x)) {
-            n = glm::vec3(1.0, 0.0, 0.0);
+            //check on which side of the bounding box of the object the cookie hit and create normal for reflection
+            if((objBB->min_.x - epsilon <= cookieBB->max_.x && objBB->min_.x + epsilon >= cookieBB->max_.x) ||
+                    (objBB->max_.x - epsilon <= cookieBB->min_.x && objBB->max_.x + epsilon >= cookieBB->min_.x)) {
+                n = glm::vec3(1.0, 0.0, 0.0);
+            }
+            if((objBB->min_.y - epsilon <= cookieBB->max_.y && objBB->min_.y + epsilon >= cookieBB->max_.y) ||
+                    (objBB->max_.y - epsilon <= cookieBB->min_.y && objBB->max_.y + epsilon >= cookieBB->min_.y)){
+                n = glm::vec3(0.0, 1.0, 0.0);
+            }
+            if((objBB->min_.z - epsilon <= cookieBB->max_.z && objBB->min_.z + epsilon >= cookieBB->max_.z) ||
+                    (objBB->max_.z - epsilon <= cookieBB->min_.z && objBB->max_.z + epsilon >= cookieBB->min_.z)){
+                n = glm::vec3(0.0, 0.0, 1.0);
+            }
+
+            holder_->direction = glm::reflect(holder_->direction, n);
+
+            newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
+            newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
+            holder_->setPosition(newPosition);
+            updateBoundingBox();
+
+            cookieState.hits++;
+            cookieState.hitPositions.push_back(holder_->getPosition());
+            if( objHit->cookieDeliverable) {
+                objHit->changeShader("Green");
+                float score = calculateScore();
+                GameManager& gameManager = GameManager::instance();
+                gameManager.reportScore(score);
+                gameManager.increaseTime(score/100.0);
+                objHit->cookieDeliverable = false;
+            }
         }
-        if((objBB->min_.y - epsilon <= cookieBB->max_.y && objBB->min_.y + epsilon >= cookieBB->max_.y) ||
-                (objBB->max_.y - epsilon <= cookieBB->min_.y && objBB->max_.y + epsilon >= cookieBB->min_.y)){
-            n = glm::vec3(0.0, 1.0, 0.0);
-        }
-        if((objBB->min_.z - epsilon <= cookieBB->max_.z && objBB->min_.z + epsilon >= cookieBB->max_.z) ||
-                (objBB->max_.z - epsilon <= cookieBB->min_.z && objBB->max_.z + epsilon >= cookieBB->min_.z)){
-            n = glm::vec3(0.0, 0.0, 1.0);
-        }
-
-        holder_->direction = glm::reflect(holder_->direction, n);
-
-        newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
-        newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
-        holder_->setPosition(newPosition);
-        updateBoundingBox();
-
-        cookieState.hits++;
-        cookieState.hitPositions.push_back(holder_->getPosition());
-        if( objHit->cookieDeliverable) {
-            objHit->changeShader("Green");
-            float score = calculateScore();
-            GameManager& gameManager = GameManager::instance();
-            gameManager.reportScore(score);
-            gameManager.increaseTime(score/100.0);
-            objHit->cookieDeliverable = false;
-        }
-
     }
-
-
 }
 
 float CookiePhysicsComponent::calculateScore() {

@@ -16,7 +16,7 @@
 #include "RenderComponent.h"
 #include "ActionComponent.h"
 
-enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, NO_OBJECT };
+enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT };
 
 class GameObject : public std::enable_shared_from_this<GameObject> {
 public:

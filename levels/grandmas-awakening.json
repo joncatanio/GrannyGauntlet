@@ -890,7 +890,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Green",
+            "shader": "Red",
             "material": "Obsidian"
          },
          "deliverable": false

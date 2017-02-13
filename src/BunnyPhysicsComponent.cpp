@@ -19,11 +19,11 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 	setupInitialRotation();
 	updateBoundingBox();
 
-	GameObjectType objTypeHit = world.checkCollision(holder_)->type;
+	std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
 
 	// Don't randomly place a bunny on another bunny
 	// Bunnies with no direction (static at 0, 0, 0) are currently OK - rare and adds an interesting twist
-	while (objTypeHit != GameObjectType::NO_OBJECT) {
+	while (objHit != nullptr) {
 
 		// Get a random start location between (-10, 0, -10) and (10, 0, 10)
 		float randomStartX = (std::rand() % 20) - 10.0f;
@@ -39,7 +39,7 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 		setupInitialRotation();
 		updateBoundingBox();
 
-		objTypeHit = world.checkCollision(holder_)->type;
+		objHit = world.checkCollision(holder_);
 	}
 }
 
@@ -63,25 +63,28 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	updateBoundingBox();
 
 	// If we hit someone or we're at the edge of the acceptable "world", then reverse direction
-	GameObjectType objTypeHit = world.checkCollision(holder_)->type;
-	
-	if (objTypeHit == GameObjectType::PLAYER) {
-		if (holder_->velocity != 0.0f) {
-			// Only update bunny on hit once
-			holder_->velocity = 0.0f;
-			holder_->changeMaterial(MaterialManager::instance().getMaterial("Jade"));
-			world.registerBunnyHit();
-		}
-	} else if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-		if (holder_->velocity != 0.0f) {
-			// Only update bunny on hit if moving
-			holder_->direction = -holder_->direction;
-			holder_->setYAxisRotation(M_PI + holder_->getYAxisRotation());
+	std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
+	if (objHit != nullptr) {
+		GameObjectType objTypeHit = objHit->type;
 
-			// Update position of GameObject
-			newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
-			holder_->setPosition(newPosition);
-			updateBoundingBox();
+		if (objTypeHit == GameObjectType::PLAYER) {
+			if (holder_->velocity != 0.0f) {
+				// Only update bunny on hit once
+				holder_->velocity = 0.0f;
+			   holder_->changeMaterial(MaterialManager::instance().getMaterial("Jade"));
+				world.registerBunnyHit();
+			}
+		} else if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
+			if (holder_->velocity != 0.0f) {
+				// Only update bunny on hit if moving
+				holder_->direction = -holder_->direction;
+				holder_->setYAxisRotation(M_PI + holder_->getYAxisRotation());
+
+				// Update position of GameObject
+				newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
+				holder_->setPosition(newPosition);
+				updateBoundingBox();
+			}
 		}
 	}
 }

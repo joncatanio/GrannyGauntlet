@@ -22,14 +22,17 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
 
    // Check player collision against static objects
    GameWorld& world = GameManager::instance().getGameWorld();
-   GameObjectType objTypeHit = world.checkCollision(holder_)->type;
+   std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
+   if (objHit != nullptr) {
+      GameObjectType objTypeHit = objHit->type;
 
-   if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-      if (holder_->velocity != 0.0f) {
-         glm::vec3 newPosition = holder_->getPosition() - (holder_->velocity * 
-            glm::normalize(holder_->direction) * deltaTime);
-         holder_->setPosition(newPosition);
-         updateBoundingBox();
+      if (objTypeHit == GameObjectType::STATIC_OBJECT) {
+         if (holder_->velocity != 0.0f) {
+            glm::vec3 newPosition = holder_->getPosition() - (holder_->velocity * 
+               glm::normalize(holder_->direction) * deltaTime);
+            holder_->setPosition(newPosition);
+            updateBoundingBox();
+         }
       }
    }
 }

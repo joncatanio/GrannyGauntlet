@@ -10,11 +10,7 @@
 using namespace std;
 
 Shape::Shape() :
-	//eleBufID(new vector<vector<unsigned int> > (vector<unsigned int>()) ),
-	//posBufID(0),
-	//norBufID(0),
-	//texBufID(0),
-	//vaoID(0),
+	vaoID(0),
 	min(glm::vec3(0,0,0)),
 	max(glm::vec3(0, 0, 0))
 {
@@ -36,22 +32,15 @@ void Shape::loadMesh(const string &meshName) {
 		cerr << errStr << endl;
 	} else {
         for(unsigned int i = 0; i < shapes.size(); i++) {
-            //posBuf[i] = shapes[i].mesh.positions;
             posBuf.push_back(shapes[i].mesh.positions);
-            //texBuf.push_back(shapes[i].mesh.texcoords);
-            texBuf.push_back(vector<float>());
-            //texBuf = shapes[0].mesh.texcoords;
-            //eleBuf[i] = shapes[i].mesh.indices;
+            texBuf.push_back(shapes[i].mesh.texcoords);
             eleBuf.push_back(shapes[i].mesh.indices);
-            //norBuf[i] = shapes[i].mesh.normals;
             norBuf.push_back(shapes[i].mesh.normals);
 
             if (norBuf[i].size() == 0) {
                 calculateNormals(i);
             }
         }
-		// If no normals are given, calculate them ourselves
-
 
 		findAndSetMinAndMax();
 	}
@@ -202,18 +191,14 @@ void Shape::resize() {
 }
 
 void Shape::init() {
-	// Initialize the vertex array object
-
 
     int bufNum = posBuf.size();
 
 
     for(int i = 0; i < bufNum; i++) {
 
-        unsigned vaoIDRef;
-        glGenVertexArrays(1, &vaoIDRef);
-        vaoID.push_back(vaoIDRef);
-        glBindVertexArray(vaoID[i]);
+        glGenVertexArrays(1, &vaoID);
+        glBindVertexArray(vaoID);
 
         // Send the position array to the GPU
         unsigned posBufIDRef;
@@ -251,6 +236,7 @@ void Shape::init() {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, eleBuf[i].size() * sizeof(unsigned int), &(eleBuf[i][0]), GL_STATIC_DRAW);
 
+        // Unbind the arrays
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
@@ -258,30 +244,23 @@ void Shape::init() {
 
     }
 
-	// Unbind the arrays
-
 }
 
 void Shape::draw(const shared_ptr<Program> prog) const {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 
-
-    //std::cout << "size " << posBuf.size() << std::endl;
+    glBindVertexArray(vaoID);
 
     int bufNum = posBuf.size();
     // Send the position array to the GPU
     for(int i = 0; i < bufNum; i++) {
-
-
-        glBindVertexArray(vaoID[i]);
 
         // Bind position buffer
         h_pos = prog->getAttribute("vertPos");
         GLSL::enableVertexAttribArray(h_pos);
         glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
         glVertexAttribPointer(h_pos, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
-        //std::cout << "pos " << posBufID[i] << std::endl;
 
         // Bind normal buffer
         h_nor = prog->getAttribute("vertNor");
@@ -290,7 +269,6 @@ void Shape::draw(const shared_ptr<Program> prog) const {
             glBindBuffer(GL_ARRAY_BUFFER, norBufID[i]);
             glVertexAttribPointer(h_nor, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
         }
-
 
         if (texBufID[i] != 0) {
             // Bind texcoords buffer
@@ -304,8 +282,6 @@ void Shape::draw(const shared_ptr<Program> prog) const {
 
         // Bind element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
-        //std::cout << "ele " << eleBufID[i] << std::endl;
-        //std::cout << "ele size " << eleBuf[i].size() << std::endl;
 
         // Draw
         glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
@@ -339,7 +315,7 @@ void Shape::findAndSetMinAndMax() {
 	float maxX, maxY, maxZ;
 
 	minX = minY = minZ = FLT_MAX;
-	maxX = maxY = maxZ = FLT_MIN;
+	maxX = maxY = maxZ = -FLT_MAX;
 
     int bufNum = posBuf.size();
 	// Go through all vertices to determine min and max of each dimension

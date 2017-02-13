@@ -101,6 +101,9 @@ int main(int argc, char **argv) {
     // Set the current view frustum
     gameManager.setViewFrustum(new ViewFrustum());
 
+    // Add all static objects before this!!!
+    world.init();
+
     gameManager.setTime(30.0);
 
     // Loop until the user closes the window

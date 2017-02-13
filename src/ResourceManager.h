@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include "Shape.h"
 
 #include "GLSL.h"
 
@@ -20,6 +21,9 @@ public:
 
 	// Reads shader source from a file and returns a pointer to the in-memory string
 	std::shared_ptr<std::string> loadShader(const std::string& shaderFileName);
+
+   // Loads, resizes, and initializes shape then returns it.
+   std::shared_ptr<Shape> loadShape(const std::string filename);
 
 private:
 

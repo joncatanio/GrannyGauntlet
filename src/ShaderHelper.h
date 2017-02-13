@@ -49,13 +49,6 @@ typedef struct {
 
 // TODO(rgarmsen2295): EXTERMINATE ALL GLOBALS
 
-// Materials
-extern std::shared_ptr<Material> obsidian;
-extern std::shared_ptr<Material> green;
-extern std::shared_ptr<Material> jade;
-extern std::shared_ptr<Material> pearl;
-extern std::shared_ptr<Material> brass;
-
 extern Light curLight;
 
 extern std::string RESOURCE_DIR;

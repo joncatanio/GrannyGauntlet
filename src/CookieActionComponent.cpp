@@ -1,6 +1,8 @@
 #include "CookieActionComponent.h"
 #include "GameManager.h"
 #include "ShaderManager.h"
+#include "ShapeManager.h"
+#include "MaterialManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 /*
@@ -10,24 +12,16 @@
 CookieActionComponent::CookieActionComponent() {
 
     aimInputComponent = new AimInputComponent();
-    cookieShape = std::make_shared<Shape>();
-    cookieShape->loadMesh(RESOURCE_DIR + "sphere.obj");
-    cookieShape->resize();
-    cookieShape->init();
 
-    static std::shared_ptr<Shape> shape = std::make_shared<Shape>();
-    static bool hasLoaded = false;
+    ShapeManager& shapeManager = ShapeManager::instance();
+    MaterialManager& materialManager = MaterialManager::instance();
 
-    if (!hasLoaded) {
-        shape->loadMesh(RESOURCE_DIR + "sphere.obj");
-        shape->resize();
-        shape->init();
-        hasLoaded = true;
-    }
-
-    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(shape, "Phong", brass);
-    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(shape, "Phong", brass);
-    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(shape, "Phong", brass);
+    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
+      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(
+      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(
+      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
 
     gameObj = std::make_shared<GameObject>(
             GameObjectType::DYNAMIC_OBJECT,
@@ -79,6 +73,8 @@ void CookieActionComponent::initActionComponent() {
 void CookieActionComponent::checkAndPerformAction(double deltaTime, double totalTime) {
 
     GameManager& gameManager = GameManager::instance();
+    ShapeManager& shapeManager = ShapeManager::instance();
+    MaterialManager& materialManager = MaterialManager::instance();
     glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
 
     aimInputComponent->pollInput();
@@ -112,8 +108,8 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
         if (totalTime >= previousCookieTime + 0.5) {
 
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
-            BunnyRenderComponent *renderComp = new BunnyRenderComponent(cookieShape,
-               "Phong", obsidian);
+            BunnyRenderComponent *renderComp = new BunnyRenderComponent(
+               shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Obsidian"));
 
             std::shared_ptr<GameObject> cookieObj = std::make_shared<GameObject>(
                     GameObjectType::DYNAMIC_OBJECT,

@@ -1,0 +1,902 @@
+{
+   "level-name": "Granny's Awakening",
+   "level-shaders": [
+      {
+         "name": "Phong",
+         "file-prefix": "phong"
+      },
+      {
+         "name": "Blue",
+         "file-prefix": "dummyBlue"
+      },
+      {
+         "name": "Green",
+         "file-prefix": "dummyGreen"
+      },
+      {
+         "name": "Red",
+         "file-prefix": "dummyRed"
+      }
+   ],
+   "level-shapes": [
+      {
+         "name": "Cube",
+         "filename": "cube.obj"
+      },
+      {
+         "name": "Sphere",
+         "filename": "sphere.obj"
+      },
+      {
+         "name": "Lowpolycar",
+         "filename": "lowpolycar.obj"
+      },
+      {
+         "name": "Bunny",
+         "filename": "bunny.obj"
+      }
+   ],
+   "level-materials": [
+      {
+         "name": "Obsidian",
+         "ambient": {
+            "r": 0.05375,
+            "g": 0.05,
+            "b": 0.06625
+         },
+         "diffuse": {
+            "r": 0.18275,
+            "g": 0.17,
+            "b": 0.22525
+         },
+         "specular": {
+            "r": 0.332741,
+            "g": 0.328634, 
+            "b": 0.346435
+         },
+         "shininess": 38.4
+      },
+      {
+         "name": "Green",
+         "ambient": {
+            "r": 0.4,
+            "g": 0.7,
+            "b": 0.4
+         },
+         "diffuse": {
+            "r": 0.4,
+            "g": 1.0,
+            "b": 0.1
+         },
+         "specular": {
+            "r": 0.0225,
+            "g": 0.0255, 
+            "b": 0.0255
+         },
+         "shininess": 12.8
+      },
+      {
+         "name": "Jade",
+         "ambient": {
+            "r": 0.135,
+            "g": 0.2225,
+            "b": 0.1575
+         },
+         "diffuse": {
+            "r": 0.54,
+            "g": 0.89,
+            "b": 0.63
+         },
+         "specular": {
+            "r": 0.316228,
+            "g": 0.316228,
+            "b": 0.316228
+         },
+         "shininess": 10.0
+      },
+      {
+         "name": "Pearl",
+         "ambient": {
+            "r": 0.25,
+            "g": 0.20725,
+            "b": 0.20725
+         },
+         "diffuse": {
+            "r": 1.0,
+            "g": 0.829,
+            "b": 0.296648
+         },
+         "specular": {
+            "r": 0.296648,
+            "g": 0.296648,
+            "b": 0.296648
+         },
+         "shininess": 0.088
+      },
+      {
+         "name": "Brass",
+         "ambient": {
+            "r": 0.329412,
+            "g": 0.223529,
+            "b": 0.027451
+         },
+         "diffuse": {
+            "r": 0.780392,
+            "g": 0.568627,
+            "b": 0.113725
+         },
+         "specular": {
+            "r": 0.992157,
+            "g": 0.941176,
+            "b": 0.807843
+         },
+         "shininess": 10.0
+      }
+   ],
+   "characters": [
+      {
+         "object-name": "granny",
+         "pos": {
+            "x": 45.0,
+            "y": 1.0,
+            "z": -70.0
+         },
+         "dir": {
+            "x": -1.0,
+            "y": 0.0,
+            "z": 0.0
+         },
+         "vel": 12.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "input-component": {
+            "name": "PlayerInputComponent"
+         },
+         "physics-component": {
+            "name": "PlayerPhysicsComponent"
+         },
+         "render-component": {
+            "name": "PlayerRenderComponent",
+            "shape": "Lowpolycar",
+            "shader": "Phong",
+            "material": "Pearl"
+         },
+         "action-component": {
+            "name": "CookieActionComponent"
+         },
+         "yAxis-rotation-deg": -45.0,
+         "orient-angle-deg": -45.0,
+         "deliverable": false
+      }
+   ],
+   "static-objects": [
+      {
+         "object-name": "ground plane",
+         "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1000.0,
+            "y": 0.01,
+            "z": 1000.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Green"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -25.0,
+            "y": 5.1,
+            "z": -20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -30.0,
+            "y": 5.1,
+            "z": 20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -40.0,
+            "y": 5.1,
+            "z": -20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -10.0,
+            "y": 5.1,
+            "z": 20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -60.0,
+            "y": 5.1,
+            "z": -5.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -60.0,
+            "y": 5.1,
+            "z": 15.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -60.0,
+            "y": 5.1,
+            "z": 35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": -30.0,
+            "y": 5.1,
+            "z": 45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": -40.0,
+            "y": 0.5,
+            "z": 45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 35
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": -50.0,
+            "y": 0.5,
+            "z": 35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 45
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": 5.0,
+            "y": 0.5,
+            "z": 10.75
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 45.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 25.0,
+            "y": 5.1,
+            "z": 20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 30.0,
+            "y": 5.1,
+            "z": -20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 40.0,
+            "y": 5.1,
+            "z": 20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 10.0,
+            "y": 5.1,
+            "z": -20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 60.0,
+            "y": 5.1,
+            "z": 5.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 60.0,
+            "y": 5.1,
+            "z": -15.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 60.0,
+            "y": 5.1,
+            "z": -35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "pos": {
+            "x": 30.0,
+            "y": 5.1,
+            "z": -45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Blue",
+            "material": "Obsidian"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": 40.0,
+            "y": 0.5,
+            "z": -45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 35
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": 50.0,
+            "y": 0.5,
+            "z": -35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 45
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "pos": {
+            "x": -5.0,
+            "y": 0.5,
+            "z": -10.75
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 45.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "start hedge",
+         "pos": {
+            "x": 45.0,
+            "y": 0.5,
+            "z": -79.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Green",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "finish hedge",
+         "pos": {
+            "x": -45.0,
+            "y": 0.5,
+            "z": 79.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Red",
+            "material": "Obsidian"
+         },
+         "deliverable": false
+      }
+   ],
+   "dynamic-objects": [
+
+   ]
+}

@@ -18,7 +18,7 @@ GameWorld::GameWorld()
 	std::srand(std::time(NULL));
 
 	// TODO(rgarmsen2295): Make this look nicer
-	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 });
+	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, glm::vec3(0.0f, 0.0f, 0.0f), LightType::POINT });
 }
 
 GameWorld::~GameWorld() {}
@@ -224,19 +224,6 @@ void GameWorld::addBunnyToGameWorld() {
    ShapeManager& shapeManager = ShapeManager::instance();
    MaterialManager& materialManager = MaterialManager::instance();
 	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
-
-	static std::shared_ptr<Shape> bunnyShape = std::make_shared<Shape>();
-	static bool hasBunnyLoaded = false;
-
-	// TODO(rgarmsen2295): Refactor into some sort of manager class to simply and remove complexity from GameWorld
-	// Only perform bunny shape init stuff once
-	if (!hasBunnyLoaded) {
-		bunnyShape->loadMesh(RESOURCE_DIR + "bunny.obj");
-		bunnyShape->resize();
-		bunnyShape->init();
-
-		hasBunnyLoaded = true;
-	}
 
 	// Get a random start location between (-10, 0, -10) and (10, 0, 10)
 	float randomStartX = (std::rand() % 20) - 10.0f;

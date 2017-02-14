@@ -8,8 +8,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+#include <memory>
+
 #include "BoundingBox.h"
-#include "ShaderHelper.h"
+#include "GameObject.h"
 
 class GameObject;
 

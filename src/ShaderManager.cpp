@@ -144,9 +144,6 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		Light curLight;
 		if (lights.size() > 0) {
 			curLight = lights[0];
-		} 
-		else {
-			curLight = { -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1 };
 		}
 
 		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);

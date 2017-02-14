@@ -4,7 +4,6 @@
  * Application code for "Granny Gauntlet"
  */
 
-#include "ShaderHelper.h"
 #include "LevelLoader.h"
 #include "GameWorld.h"
 #include "GameManager.h"
@@ -21,7 +20,6 @@
 
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
-std::string RESOURCE_DIR = "../resources/";
 
 // TODO(rgarmsen2295): Move into GLSL Graphics API Manager class
 static void initMisc() {
@@ -34,32 +32,7 @@ static void initMisc() {
     glEnable(GL_DEPTH_TEST);
 }
 
-int parseArgs(int argc, char **argv) {
-#ifdef linux
-    // Assume default resource directory if none is given
-    if (argc >= 2) {
-        RESOURCE_DIR = argv[1] + string("/");
-    }
-#elif _WIN32
-    // Don't even try to guess default directory with Windows
-    if (argc < 2) {
-        std::cerr << "Error: No specified resource directory in arguments" << std::endl;
-        std::cerr << "Expected: ./a.out [RESOURCE_DIR]" << std::endl;
-        return -1;
-    }
-
-    RESOURCE_DIR = argv[1] + std::string("/");
-#endif
-
-    return 0;
-}
-
 int main(int argc, char **argv) {
-
-	// Parse commandline arguments and check for errors
-	if (parseArgs(argc, argv) == -1) {
-		return EXIT_FAILURE;
-	}
 
 	// Initialize boilerplate glfw, etc. code and check for failure
     WindowManager& windowManager = WindowManager::instance();    

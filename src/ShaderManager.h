@@ -11,14 +11,29 @@
 #include <string>
 #include <unordered_map>
 
-#include "ShaderHelper.h"
-
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
 #include "GLSL.h"
 #include "Program.h"
 #include "ResourceManager.h"
+
+enum class LightType { POINT, DIRECTIONAL, AREA };
+
+/**
+ * Data structure that represents a prescence of light
+ *
+ * X, Y, Z 		- Represents the position of the light
+ * R, G, B 		- Represents the color of the light
+ * Orientation  - Represents the orientation of the light
+ * Type 		- The type of light represented
+ */
+typedef struct Light {
+	GLfloat x, y, z;
+	GLfloat r, g, b;
+	glm::vec3 orientation;
+	LightType type;
+} Light;
 
 // Manages shaders used by the geometry of the world
 class ShaderManager {

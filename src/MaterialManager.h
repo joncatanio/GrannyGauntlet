@@ -1,9 +1,19 @@
 #ifndef MATERIAL_MANAGER_H
 #define MATERIAL_MANAGER_H
 
-#include "ShaderHelper.h"
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
+#include <memory>
 #include <unordered_map>
+
+typedef struct {
+	GLfloat rAmb, gAmb, bAmb;
+	GLfloat rDif, gDif, bDif;
+	GLfloat rSpc, gSpc, bSpc;
+	GLfloat shininess;
+} Material;
 
 class MaterialManager {
 public:

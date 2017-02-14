@@ -6,7 +6,7 @@
 
 #include "Shape.h"
 #include "MatrixStack.h"
-#include "ShaderHelper.h"
+#include "MaterialManager.h"
 
 #include "Component.h"
 

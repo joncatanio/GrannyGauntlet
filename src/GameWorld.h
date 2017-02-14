@@ -9,7 +9,6 @@
 #include <stdlib.h>
 
 #include "GameObject.h"
-#include "ShaderHelper.h"
 
 #include "BunnyPhysicsComponent.h"
 #include "BunnyRenderComponent.h"
@@ -18,6 +17,9 @@
 #include "PlayerInputComponent.h"
 #include "PlayerPhysicsComponent.h"
 #include "PlayerRenderComponent.h"
+
+// Forward-declare the Light struct in ShaderManager.h
+struct Light;
 
 /* 
  * The holder class for anything that could be considered "in" or pertaining

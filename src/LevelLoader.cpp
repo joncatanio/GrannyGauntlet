@@ -301,14 +301,14 @@ ActionComponent* LevelLoader::getActionComponent(json obj) {
 GameObjectType LevelLoader::stringToType(std::string type) {
     if(type == "PLAYER") {
         return GameObjectType::PLAYER;
-    }
-    if(type == "STATIC_OBJECT") {
+    } else if(type == "STATIC_OBJECT") {
         return GameObjectType::STATIC_OBJECT;
-    }
-    if(type == "DYNAMIC_OBJECT") {
+    } else if(type == "DYNAMIC_OBJECT") {
         return GameObjectType::DYNAMIC_OBJECT;
-    }
-    if(type == "FINISH_OBJECT") {
+    } else if(type == "FINISH_OBJECT") {
         return GameObjectType::FINISH_OBJECT;
+    } else {
+        //default to static object
+        return GameObjectType::STATIC_OBJECT;
     }
 }

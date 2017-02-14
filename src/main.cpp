@@ -131,6 +131,12 @@ int main(int argc, char **argv) {
 
             gameManager.decreaseTime(deltaTime);
 
+            if(gameManager.gameOver_) {
+                gameManager.showScore();
+                return EXIT_SUCCESS;
+            }
+
+
             elapsedTime -= deltaTime;
             totalTime += deltaTime;
             secondClock += deltaTime;

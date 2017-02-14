@@ -16,7 +16,7 @@
 #include "RenderComponent.h"
 #include "ActionComponent.h"
 
-enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT };
+enum class GameObjectType { PLAYER, STATIC_OBJECT, DYNAMIC_OBJECT, FINISH_OBJECT };
 
 class GameObject : public std::enable_shared_from_this<GameObject> {
 public:
@@ -86,6 +86,8 @@ public:
 
 	// Checks if the object intersects with the passed object
 	bool checkIntersection(std::shared_ptr<GameObject> otherObj);
+
+    static GameObjectType stringToType(std::string type);
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT

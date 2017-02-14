@@ -149,3 +149,18 @@ BoundingBox* GameObject::getBoundingBox() {
    }
    return NULL;
 }
+
+GameObjectType GameObject::stringToType(std::string type) {
+	if(type == "PLAYER") {
+		return GameObjectType::PLAYER;
+	} else if(type == "STATIC_OBJECT") {
+		return GameObjectType::STATIC_OBJECT;
+	} else if(type == "DYNAMIC_OBJECT") {
+		return GameObjectType::DYNAMIC_OBJECT;
+	} else if(type == "FINISH_OBJECT") {
+		return GameObjectType::FINISH_OBJECT;
+	} else {
+		//default to static object
+		return GameObjectType::STATIC_OBJECT;
+	}
+}

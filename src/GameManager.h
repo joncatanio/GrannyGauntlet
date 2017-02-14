@@ -11,6 +11,9 @@ public:
 
 	~GameManager() {}
 
+	// Indicates if the game if over
+	bool gameOver_ = false;
+
 	// Returns the single instance of the GameManager
 	static GameManager& instance();
 
@@ -43,6 +46,9 @@ public:
 
 	//Reports the state of a cookie to count the score
 	void reportScore(float score);
+
+	//Shows the score
+	void showScore();
 
     //Sets the initial timelimit
     void setTime(float time);

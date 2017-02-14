@@ -23,6 +23,8 @@ CookieActionComponent::CookieActionComponent() {
     BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
 
+
+
     gameObj = std::make_shared<GameObject>(
             GameObjectType::DYNAMIC_OBJECT,
             glm::vec3(0.0),

@@ -195,7 +195,7 @@ std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
    ActionComponent* actionComponent = getActionComponent(obj);
    
    std::shared_ptr<GameObject> gameObj = std::make_shared<GameObject>(
-      objType,
+      GameObject::stringToType(obj["object-type"]),
       glm::vec3(obj["pos"]["x"], obj["pos"]["y"], obj["pos"]["z"]),
       glm::vec3(obj["dir"]["x"], obj["dir"]["y"], obj["dir"]["z"]),
       static_cast<float>(obj["vel"]),
@@ -296,3 +296,4 @@ ActionComponent* LevelLoader::getActionComponent(json obj) {
 
    return nullptr;
 }
+

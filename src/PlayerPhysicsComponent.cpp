@@ -34,5 +34,8 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
             updateBoundingBox();
          }
       }
+      if (objTypeHit == GameObjectType::FINISH_OBJECT) {
+         GameManager::instance().gameOver_ = true;
+      }
    }
 }

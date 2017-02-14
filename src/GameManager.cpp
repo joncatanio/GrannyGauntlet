@@ -54,8 +54,23 @@ void GameManager::setTime(float time) {
 
 void GameManager::decreaseTime(float deltaTime) {
     time_ -= deltaTime;
+	if(time_ <= 0.0) {
+		gameOver_ = true;
+	}
 }
 
 void GameManager::increaseTime(float deltaTime) {
     time_ += deltaTime;
 }
+
+void GameManager::showScore() {
+    if(gameOver_) {
+        if(time_ <= 0.0) {
+            std::cout << "YOU LOST!" << std::endl;
+        } else {
+            std::cout << "YOU WON!" << std::endl;
+        }
+    }
+	std::cout << "SCORE " << score_ << std::endl;
+}
+

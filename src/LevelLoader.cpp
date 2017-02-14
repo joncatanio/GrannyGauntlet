@@ -195,7 +195,7 @@ std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
    ActionComponent* actionComponent = getActionComponent(obj);
    
    std::shared_ptr<GameObject> gameObj = std::make_shared<GameObject>(
-      objType,
+      stringToType(obj["object-type"]),
       glm::vec3(obj["pos"]["x"], obj["pos"]["y"], obj["pos"]["z"]),
       glm::vec3(obj["dir"]["x"], obj["dir"]["y"], obj["dir"]["z"]),
       static_cast<float>(obj["vel"]),
@@ -295,4 +295,20 @@ ActionComponent* LevelLoader::getActionComponent(json obj) {
    }
 
    return nullptr;
+}
+
+//TODO(nurgan) find a better method for parsing to enum
+GameObjectType LevelLoader::stringToType(std::string type) {
+    if(type == "PLAYER") {
+        return GameObjectType::PLAYER;
+    }
+    if(type == "STATIC_OBJECT") {
+        return GameObjectType::STATIC_OBJECT;
+    }
+    if(type == "DYNAMIC_OBJECT") {
+        return GameObjectType::DYNAMIC_OBJECT;
+    }
+    if(type == "FINISH_OBJECT") {
+        return GameObjectType::FINISH_OBJECT;
+    }
 }

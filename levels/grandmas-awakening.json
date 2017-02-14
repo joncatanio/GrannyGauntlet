@@ -136,6 +136,7 @@
    "characters": [
       {
          "object-name": "granny",
+         "object-type": "PLAYER",
          "pos": {
             "x": 45.0,
             "y": 1.0,
@@ -175,6 +176,7 @@
    "static-objects": [
       {
          "object-name": "ground plane",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 0.0,
             "y": 0.0,
@@ -201,6 +203,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -25.0,
             "y": 5.1,
@@ -230,6 +233,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -30.0,
             "y": 5.1,
@@ -259,6 +263,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
             "y": 5.1,
@@ -288,6 +293,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -10.0,
             "y": 5.1,
@@ -317,6 +323,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -60.0,
             "y": 5.1,
@@ -346,6 +353,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -60.0,
             "y": 5.1,
@@ -375,6 +383,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -60.0,
             "y": 5.1,
@@ -404,6 +413,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -30.0,
             "y": 5.1,
@@ -433,6 +443,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
             "y": 0.5,
@@ -462,6 +473,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -50.0,
             "y": 0.5,
@@ -491,6 +503,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 5.0,
             "y": 0.5,
@@ -520,6 +533,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 25.0,
             "y": 5.1,
@@ -549,6 +563,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 30.0,
             "y": 5.1,
@@ -578,6 +593,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 40.0,
             "y": 5.1,
@@ -607,6 +623,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 10.0,
             "y": 5.1,
@@ -636,6 +653,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
             "y": 5.1,
@@ -665,6 +683,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
             "y": 5.1,
@@ -694,6 +713,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
             "y": 5.1,
@@ -723,6 +743,7 @@
       },
       {
          "object-name": "house",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 30.0,
             "y": 5.1,
@@ -752,6 +773,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 40.0,
             "y": 0.5,
@@ -781,6 +803,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 50.0,
             "y": 0.5,
@@ -810,6 +833,7 @@
       },
       {
          "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -5.0,
             "y": 0.5,
@@ -839,6 +863,7 @@
       },
       {
          "object-name": "start hedge",
+         "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 45.0,
             "y": 0.5,
@@ -868,6 +893,7 @@
       },
       {
          "object-name": "finish hedge",
+         "object-type": "FINISH_OBJECT",
          "pos": {
             "x": -45.0,
             "y": 0.5,

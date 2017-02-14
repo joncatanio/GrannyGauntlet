@@ -125,11 +125,14 @@ const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shad
 	boundShaderName = shaderProgramName;
 	glUseProgram(shaderToBind->getPid());
 
+    shaderToBind->bindTextures();
+
 	return shaderToBind;
 }
 
 void ShaderManager::unbindShader() {
-	boundShaderName = "";
+	shaderPrograms.at(boundShaderName)->unbindTextures();
+    boundShaderName = "";
 	glUseProgram(NO_SHADER);
 }
 

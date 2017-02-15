@@ -278,8 +278,14 @@ RenderComponent* LevelLoader::getRenderComponent(json obj) {
         return new PlayerRenderComponent(shapeManager.getShape(shapeName),
                                          shaderName, materialManager.getMaterial(materialName));
     } else if (componentName == "SkyboxRenderComponent") {
+       if (obj["render-component"]["skybox-path"] == nullptr ||
+           obj["render-component"]["file-extension"] == nullptr) {
+          return nullptr;
+       }
         return new SkyboxRenderComponent(shapeManager.getShape(shapeName),
-                                         shaderName, materialManager.getMaterial(materialName));
+                                         shaderName, materialManager.getMaterial(materialName),
+                                         obj["render-component"]["skybox-path"],
+                                         obj["render-component"]["file-extension"]);
     } else if (componentName == "FireHydrantRenderComponent") {
       return nullptr;
    }

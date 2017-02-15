@@ -2,9 +2,9 @@
 #include "GameObject.h"
 #include "ShaderManager.h"
 
-SkyboxRenderComponent::SkyboxRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material)
+SkyboxRenderComponent::SkyboxRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material, std::string path, std::string fileExtension)
         : RenderComponent(shape, shaderName, material) {
-    cubemap = new Cubemap();
+    cubemap = new Cubemap(path, fileExtension);
     cubemap->loadCubemap();
 }
 

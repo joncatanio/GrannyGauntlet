@@ -6,7 +6,7 @@
 
 class SkyboxRenderComponent : public RenderComponent {
 public:
-    SkyboxRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material);
+    SkyboxRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material, std::string path, std::string fileExtension);
 
     ~SkyboxRenderComponent();
 

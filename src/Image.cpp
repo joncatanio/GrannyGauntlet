@@ -5,7 +5,7 @@
 #include "stb_image.h"
 
 Image::Image(std::string path) {
-    imageData = stbi_load( path.c_str() , &width, &height, &components, STBI_rgb_alpha );
+    imageData = stbi_load( path.c_str() , &width, &height, &components, STBI_rgb);
 }
 
 Image::~Image() {

@@ -229,6 +229,8 @@
          },
          "render-component": {
             "name": "SkyboxRenderComponent",
+            "skybox-path": "skybox/bluesky/",
+            "file-extension": "png",
             "shape": "Cube",
             "shader": "Cubemap",
             "material": "Obsidian"

@@ -7,15 +7,15 @@
       },
       {
          "name": "Blue",
-         "file-prefix": "dummyBlue"
+         "file-prefix": "phong"
       },
       {
          "name": "Green",
-         "file-prefix": "dummyGreen"
+         "file-prefix": "phong"
       },
       {
          "name": "Red",
-         "file-prefix": "dummyRed"
+         "file-prefix": "phong"
       },
       {
          "name": "Cubemap",

@@ -14,11 +14,8 @@ GameWorld::GameWorld()
 	renderCount(0),
 	numBunniesHit(0) {
 
-	// Seed the PRNG with the current time for any random elements in the world
-	std::srand(std::time(NULL));
-
 	// TODO(rgarmsen2295): Make this look nicer
-	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, glm::vec3(0.0f, 0.0f, 0.0f), LightType::POINT });
+	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 0.0f, 1.0f) });
 }
 
 GameWorld::~GameWorld() {}
@@ -31,8 +28,16 @@ void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	staticGameObjectsToAdd_.push(obj);
 }
 
-void GameWorld::addLight(const Light& newLight) {
-	lights.push_back(newLight);
+void GameWorld::addPointLight(const Light& newLight) {
+	pointLights.push_back(newLight);
+}
+
+void GameWorld::addDirectionalLight(const Light& newLight) {
+	directionalLights.push_back(newLight);
+}
+
+void GameWorld::addAreaLight(const Light& newLight) {
+	areaLights.push_back(newLight);
 }
 
 int GameWorld::getNumDynamicGameObjects() {
@@ -43,8 +48,16 @@ int GameWorld::getNumStaticGameObjects() {
 	return staticGameObjects_.size();
 }
 
-const std::vector<Light>& GameWorld::getLights() {
-	return lights;
+const std::vector<Light>& GameWorld::getPointLights() {
+	return pointLights;
+}
+
+const std::vector<Light>& GameWorld::getDirectionalLights() {
+	return directionalLights;
+}
+
+const std::vector<Light>& GameWorld::getAreaLights() {
+	return areaLights;
 }
 
 void GameWorld::clearDynamicGameObjects() {

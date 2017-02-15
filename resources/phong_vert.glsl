@@ -12,10 +12,13 @@ out vec3 fragNor;
 out vec3 worldPos;
 
 void main() {
+
+	// Calculate the position of the vertex in view space
 	worldPos = (V * M * vertPos).xyz;
 
-	vec3 vertNormal = normalize(vertNor);
-	fragNor = normalize((tiMV * vec4(vertNormal, 0.0)).xyz);
+	// Calculate the normal of the vertex in world space
+	fragNor = normalize(tiMV * vec4(normalize(vertNor), 0.0).xyz);
 
+	// Set the position of the vertex in perspective space
 	gl_Position = P * V * M * vertPos;
 }

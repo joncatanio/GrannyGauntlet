@@ -9,6 +9,7 @@
 #include <memory>
 #include <unordered_map>
 
+// TODO(rgarmsen2295): Change to glm::vec3 for rgb variables
 typedef struct {
 	GLfloat rAmb, gAmb, bAmb;
 	GLfloat rDif, gDif, bDif;

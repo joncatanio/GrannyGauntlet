@@ -139,25 +139,40 @@ void ShaderManager::unbindShader() {
 void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
-		GameManager& gameManager = GameManager::instance();
-		GameWorld& gameWorld = gameManager.getGameWorld();
-		const std::vector<Light>& lights = gameWorld.getLights();
-
-		// TODO(rgarmsen2295): Add support for multiple lights
-		Light curLight;
-		if (lights.size() > 0) {
-			curLight = lights[0];
-		}
-
 		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
 
 		// Bind perspective and view tranforms
 		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
 		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
 
-		// Bind light properties
-		glUniform3f(shaderProgram->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
-		glUniform3f(shaderProgram->getUniform("lightClr"), curLight.r, curLight.g, curLight.b);
+		// Set up lights
+		GameManager& gameManager = GameManager::instance();
+		GameWorld& gameWorld = gameManager.getGameWorld();
+
+		// Point lights
+		/*const std::vector<Light>& lights = gameWorld.getPointLights();
+
+		// TODO(rgarmsen2295): Add support for multiple point lights
+		Light curLight;
+		if (lights.size() > 0) {
+			curLight = lights[0];
+			// Bind point lights
+			glUniform3f(shaderProgram->getUniform("lightPos"), curLight.position.x, curLight.position.y, curLight.position.z);
+			glUniform3f(shaderProgram->getUniform("lightClr"), curLight.color.x, curLight.color.y, curLight.color.z);
+		}*/
+
+		// Directional lights
+		// TODO(rgarmsen2295): Implement more cleanly using "uniform buffer objects"
+		const std::vector<Light>& directionalLights = gameWorld.getDirectionalLights();
+		int numDirectionLights = directionalLights.size();
+		
+		glUniform1i(shaderProgram->getUniform("numDirectionLights"), numDirectionLights);
+		for (int i = 0; i < numDirectionLights; ++i) {
+			const Light& light = directionalLights.at(i);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].position"), light.position.x, light.position.y, light.position.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].color"), light.color.x, light.color.y, light.color.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].orientation"), light.orientation.x, light.orientation.y, light.orientation.z);
+		}
 
 		// Bind material properties
 		glUniform3f(shaderProgram->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);

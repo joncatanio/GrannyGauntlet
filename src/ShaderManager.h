@@ -18,21 +18,21 @@
 #include "Program.h"
 #include "ResourceManager.h"
 
+#define MAX_DIRECTIONAL_LIGHTS 10
+
 enum class LightType { POINT, DIRECTIONAL, AREA };
 
 /**
  * Data structure that represents a prescence of light
  *
- * X, Y, Z 		- Represents the position of the light
- * R, G, B 		- Represents the color of the light
- * Orientation  - Represents the orientation of the light
- * Type 		- The type of light represented
+ * position 	- Represents the position of the light
+ * color 		- Represents the color of the light
+ * orientation  - Represents the orientation of the light
  */
 typedef struct Light {
-	GLfloat x, y, z;
-	GLfloat r, g, b;
+	glm::vec3 position;
+	glm::vec3 color;
 	glm::vec3 orientation;
-	LightType type;
 } Light;
 
 // Manages shaders used by the geometry of the world

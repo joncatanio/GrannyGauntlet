@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <cassert>
+#include <string>
 
 #include "GLSL.h"
+#include "ShaderManager.h"
 
 Program::Program(const std::string shaderProgramName, const std::string vertexShaderName, const std::string fragmentShaderName, const GLuint pid)
 	: name(shaderProgramName),
@@ -74,8 +76,16 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("tiMV");
 
 	// Adds light uniforms
-	addUniform("lightPos");
-	addUniform("lightClr");
+	//addUniform("lightPos");
+	//addUniform("lightClr");
+
+	// Add directional light uniforms
+	addUniform("numDirectionLights");
+	for (int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i) {
+		addUniform("directionLights[" + std::to_string(i) + "].position");
+		addUniform("directionLights[" + std::to_string(i) + "].color");
+		addUniform("directionLights[" + std::to_string(i) + "].orientation");
+	}
 
 	//TODO(nurgan) remove from default attributs
 	addUniform("cubemap");

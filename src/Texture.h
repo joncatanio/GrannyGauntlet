@@ -1,12 +1,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-//#define GLEW_STATIC
-#include <GL/glew.h>
 
+#define GLEW_STATIC
+#include <GL/glew.h>
 #include <string>
+
+
 
 
 class Texture

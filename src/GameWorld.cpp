@@ -15,7 +15,7 @@ GameWorld::GameWorld()
 	numBunniesHit(0) {
 
 	// TODO(rgarmsen2295): Make this look nicer
-	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 0.0f, 1.0f) });
+	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) });
 }
 
 GameWorld::~GameWorld() {}

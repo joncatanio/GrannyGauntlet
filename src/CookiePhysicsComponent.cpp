@@ -49,23 +49,8 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             BoundingBox* objBB = objHit->getBoundingBox();
             BoundingBox* cookieBB = holder_->getBoundingBox();
 
-            glm::vec3 n;
-
-            //check on which side of the bounding box of the object the cookie hit and create normal for reflection
-            if((objBB->min_.x - epsilon <= cookieBB->max_.x && objBB->min_.x + epsilon >= cookieBB->max_.x) ||
-                    (objBB->max_.x - epsilon <= cookieBB->min_.x && objBB->max_.x + epsilon >= cookieBB->min_.x)) {
-                n = glm::vec3(1.0, 0.0, 0.0);
-            }
-            if((objBB->min_.y - epsilon <= cookieBB->max_.y && objBB->min_.y + epsilon >= cookieBB->max_.y) ||
-                    (objBB->max_.y - epsilon <= cookieBB->min_.y && objBB->max_.y + epsilon >= cookieBB->min_.y)){
-                n = glm::vec3(0.0, 1.0, 0.0);
-            }
-            if((objBB->min_.z - epsilon <= cookieBB->max_.z && objBB->min_.z + epsilon >= cookieBB->max_.z) ||
-                    (objBB->max_.z - epsilon <= cookieBB->min_.z && objBB->max_.z + epsilon >= cookieBB->min_.z)){
-                n = glm::vec3(0.0, 0.0, 1.0);
-            }
-
-            holder_->direction = glm::reflect(holder_->direction, n);
+            glm::vec3 normal = objBB->calcReflNormal(*cookieBB);
+            holder_->direction = glm::reflect(holder_->direction, normal);
 
             newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
             newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);

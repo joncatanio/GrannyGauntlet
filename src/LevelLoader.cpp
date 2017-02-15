@@ -6,6 +6,7 @@
 #include "PlayerPhysicsComponent.h"
 #include "PlayerRenderComponent.h"
 #include "CookieActionComponent.h"
+#include "SkyboxRenderComponent.h"
 // Manager headers
 #include "ResourceManager.h"
 #include "ShaderManager.h"
@@ -248,35 +249,38 @@ PhysicsComponent* LevelLoader::getPhysicsComponent(json obj) {
 }
 
 RenderComponent* LevelLoader::getRenderComponent(json obj) {
-   ShapeManager& shapeManager = ShapeManager::instance();
-   MaterialManager& materialManager = MaterialManager::instance();
+    ShapeManager &shapeManager = ShapeManager::instance();
+    MaterialManager &materialManager = MaterialManager::instance();
 
-   // No render component included
-   if (obj["render-component"] == nullptr) {
-      return nullptr;
-   }
+    // No render component included
+    if (obj["render-component"] == nullptr) {
+        return nullptr;
+    }
 
-   // Invalid render component syntax
-   if (obj["render-component"]["name"] == nullptr ||
-       obj["render-component"]["shape"] == nullptr ||
-       obj["render-component"]["shader"] == nullptr ||
-       obj["render-component"]["material"] == nullptr) {
-      std::cerr << "Warning - Invalid render component syntax" << std::endl;
-      return nullptr;
-   }
+    // Invalid render component syntax
+    if (obj["render-component"]["name"] == nullptr ||
+        obj["render-component"]["shape"] == nullptr ||
+        obj["render-component"]["shader"] == nullptr ||
+        obj["render-component"]["material"] == nullptr) {
+        std::cerr << "Warning - Invalid render component syntax" << std::endl;
+        return nullptr;
+    }
 
-   std::string componentName = obj["render-component"]["name"];
-   std::string shapeName = obj["render-component"]["shape"];
-   std::string shaderName = obj["render-component"]["shader"];
-   std::string materialName = obj["render-component"]["material"];
+    std::string componentName = obj["render-component"]["name"];
+    std::string shapeName = obj["render-component"]["shape"];
+    std::string shaderName = obj["render-component"]["shader"];
+    std::string materialName = obj["render-component"]["material"];
 
-   if (componentName == "WallRenderComponent") {
-      return new WallRenderComponent(shapeManager.getShape(shapeName),
-         shaderName, materialManager.getMaterial(materialName));
-   } else if (componentName == "PlayerRenderComponent") {
-      return new PlayerRenderComponent(shapeManager.getShape(shapeName),
-         shaderName, materialManager.getMaterial(materialName));
-   } else if (componentName == "FireHydrantRenderComponent") {
+    if (componentName == "WallRenderComponent") {
+        return new WallRenderComponent(shapeManager.getShape(shapeName),
+                                       shaderName, materialManager.getMaterial(materialName));
+    } else if (componentName == "PlayerRenderComponent") {
+        return new PlayerRenderComponent(shapeManager.getShape(shapeName),
+                                         shaderName, materialManager.getMaterial(materialName));
+    } else if (componentName == "SkyboxRenderComponent") {
+        return new SkyboxRenderComponent(shapeManager.getShape(shapeName),
+                                         shaderName, materialManager.getMaterial(materialName));
+    } else if (componentName == "FireHydrantRenderComponent") {
       return nullptr;
    }
 

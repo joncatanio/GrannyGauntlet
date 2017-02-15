@@ -74,6 +74,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("lightPos");
 	addUniform("lightClr");
 
+	//TODO(nurgan) remove from default attributs
+	addUniform("cubemap");
+
 	// Adds material uniforms
 	addUniform("MatAmb");
 	addUniform("MatDif");

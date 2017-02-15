@@ -1,10 +1,6 @@
 #include "Texture.h"
 #include "GLSL.h"
 
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 Texture::Texture() {}
 
 Texture::~Texture() {}
@@ -13,18 +9,18 @@ void Texture::loadTexture(std::string path, std::string newName) {
 
     name = newName;
 
-    unsigned char* textureData = stbi_load( path.c_str() , &width, &height, &components, STBI_rgb_alpha );
+    image = new Image(path);
 
     glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &tid);
     glBindTexture(GL_TEXTURE_2D, tid);
 
-    if(components == 3) {
+    if(image->components == 3) {
         // RGB texture
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLubyte*) textureData);
-    } else if (components == 4) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLubyte*) image->getImageData());
+    } else if (image->components == 4) {
         // RBGA texture
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLubyte*) textureData);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLubyte*) image->getImageData());
     }
 
     // generate MipMap and set minification ang magnification filter
@@ -35,9 +31,6 @@ void Texture::loadTexture(std::string path, std::string newName) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
     glBindTexture(GL_TEXTURE_2D, 0);
-
-    // texture data not needed anymore
-    stbi_image_free(textureData);
 
 }
 

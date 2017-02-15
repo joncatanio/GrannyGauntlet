@@ -1,6 +1,9 @@
 #include "Texture.h"
 #include "GLSL.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 Texture::Texture() {}
 
 Texture::~Texture() {}
@@ -42,7 +45,7 @@ void Texture::bind(int newUnit)
     unit = newUnit;
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, tid);
-    glUniform1i(0, unit);
+    //glUniform1i(0, unit);
 }
 
 void Texture::unbind() {

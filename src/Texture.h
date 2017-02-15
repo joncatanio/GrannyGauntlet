@@ -2,13 +2,17 @@
 #define TEXTURE_H
 
 
+
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <string>
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 144ca15d42d66cc466fa1fff2b2d088a1a5124ae
 class Texture
 {
 public:

@@ -9,6 +9,7 @@ typedef struct {
     double launchTime;
     glm::vec3 launchPosition;
     std::vector<glm::vec3> hitPositions;
+    float scored;
 } CookieState;
 
 class CookiePhysicsComponent : public PhysicsComponent {

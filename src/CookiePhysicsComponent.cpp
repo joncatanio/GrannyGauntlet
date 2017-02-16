@@ -1,6 +1,7 @@
 #include "CookiePhysicsComponent.h"
 
 #include "GameManager.h"
+#include "MaterialManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
 
@@ -48,6 +49,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
             BoundingBox* objBB = objHit->getBoundingBox();
             BoundingBox* cookieBB = holder_->getBoundingBox();
+            MaterialManager materialManager = MaterialManager::instance();
 
             glm::vec3 normal = objBB->calcReflNormal(*cookieBB);
             holder_->direction = glm::reflect(holder_->direction, normal);
@@ -60,7 +62,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             cookieState.hits++;
             cookieState.hitPositions.push_back(holder_->getPosition());
             if( objHit->cookieDeliverable) {
-                objHit->changeShader("Green");
+                objHit->changeMaterial(materialManager.getMaterial("Red Rubber"));
                 float score = calculateScore();
                 GameManager& gameManager = GameManager::instance();
                 gameManager.reportScore(score);

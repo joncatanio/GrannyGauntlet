@@ -70,6 +70,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("V");
 	addUniform("P");
 
+	// Add transpose inverse MV, so no per vertex calculation
+	addUniform("tiMV");
+
 	// Adds light uniforms
 	addUniform("lightPos");
 	addUniform("lightClr");

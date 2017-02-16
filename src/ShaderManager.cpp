@@ -139,25 +139,31 @@ void ShaderManager::unbindShader() {
 void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
-		GameManager& gameManager = GameManager::instance();
-		GameWorld& gameWorld = gameManager.getGameWorld();
-		const std::vector<Light>& lights = gameWorld.getLights();
-
-		// TODO(rgarmsen2295): Add support for multiple lights
-		Light curLight;
-		if (lights.size() > 0) {
-			curLight = lights[0];
-		}
-
 		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
 
 		// Bind perspective and view tranforms
 		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
 		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
 
-		// Bind light properties
-		glUniform3f(shaderProgram->getUniform("lightPos"), curLight.x, curLight.y, curLight.z);
-		glUniform3f(shaderProgram->getUniform("lightClr"), curLight.r, curLight.g, curLight.b);
+		// Set up lights
+		GameManager& gameManager = GameManager::instance();
+		GameWorld& gameWorld = gameManager.getGameWorld();
+
+		// Point lights
+		// TODO(rgarmsen2295): Add point lights back
+
+		// Directional lights
+		// TODO(rgarmsen2295): Implement more cleanly using "uniform buffer objects"
+		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
+		int numDirectionLights = directionalLights.size();
+		
+		glUniform1i(shaderProgram->getUniform("numDirectionLights"), numDirectionLights);
+		for (int i = 0; i < numDirectionLights; ++i) {
+			const std::shared_ptr<Light> light = directionalLights.at(i);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].position"), light->position.x, light->position.y, light->position.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].color"), light->color.x, light->color.y, light->color.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].orientation"), light->orientation.x, light->orientation.y, light->orientation.z);
+		}
 
 		// Bind material properties
 		glUniform3f(shaderProgram->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);
@@ -175,8 +181,8 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-		glm::mat4 tiMV = glm::transpose(glm::inverse(V->topMatrix() * M->topMatrix()));
-		glUniformMatrix4fv(shaderProgram->getUniform("tiMV"), 1, GL_FALSE, glm::value_ptr(tiMV));
+		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
 
 		// Draw bunny
 		// TODO(rgarmsen): Make shape not need the shader program
@@ -185,6 +191,17 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		M->popMatrix();
 
 		unbindShader();
+	}
+}
+
+LightType ShaderManager::stringToLightType(std::string type) {
+	if (type == "POINT") {
+		return LightType::POINT;
+	} else if(type == "AREA") {
+		return LightType::AREA;
+	} else {
+		//default to directional light
+		return LightType::DIRECTIONAL;
 	}
 }
 

@@ -6,16 +6,21 @@ layout(location = 1) in vec3 vertNor;
 uniform mat4 P;
 uniform mat4 M;
 uniform mat4 V;
-uniform mat4 tiMV;
+uniform mat4 tiM;
 
-out vec3 fragNor;
-out vec3 worldPos;
+// Push the position in camera space and normal in world space
+// to the fragment shader
+out vec3 positionInCamSpace;
+out vec3 normalInWorldSpace;
 
 void main() {
-	worldPos = (V * M * vertPos).xyz;
 
-	vec3 vertNormal = normalize(vertNor);
-	fragNor = normalize((tiMV * vec4(vertNormal, 0.0)).xyz);
-
+	// Set the position of the vertex in homogeneous space
 	gl_Position = P * V * M * vertPos;
+
+	// Calculate the position of the vertex in camera/view space
+	positionInCamSpace = (V * M * vertPos).xyz;
+
+	// Calculate the normal of the vertex in world space
+	normalInWorldSpace = normalize((tiM * vec4(normalize(vertNor), 0.0)).xyz);
 }

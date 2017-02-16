@@ -30,6 +30,9 @@ static void initMisc() {
 
     // Enable z-buffer test
     glEnable(GL_DEPTH_TEST);
+
+    // Seed the PRNG with the current time for any random elements in the world
+    std::srand(std::time(NULL));
 }
 
 int main(int argc, char **argv) {

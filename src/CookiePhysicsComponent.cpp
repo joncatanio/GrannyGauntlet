@@ -18,7 +18,7 @@ void CookiePhysicsComponent::initObjectPhysics() {
     gravity = 10.0;
     yVelocity = 0.0;
     epsilon = 0.5;
-    cookieState = {0, glfwGetTime(), holder_->getPosition(), std::vector<glm::vec3>()};
+    cookieState = {0, glfwGetTime(), holder_->getPosition(), std::vector<glm::vec3>(), 0.0};
 }
 
 void CookiePhysicsComponent::updatePhysics(float deltaTime) {
@@ -66,7 +66,13 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
                 float score = calculateScore();
                 GameManager& gameManager = GameManager::instance();
                 gameManager.reportScore(score);
-                gameManager.increaseTime(score/100.0);
+
+                float timeBump = ((score - cookieState.scored)/500.0) + 1.0;
+                cookieState.scored += score;
+
+                std::cout << "HIT." << " Score on hit: " << score << "time bump: " << timeBump << std::endl;
+
+                gameManager.increaseTime(timeBump);
                 objHit->cookieDeliverable = false;
             }
         }

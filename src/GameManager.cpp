@@ -69,6 +69,8 @@ void GameManager::showScore() {
             std::cout << "YOU LOST!" << std::endl;
         } else {
             std::cout << "YOU WON!" << std::endl;
+            std::cout << "Time left: " << time_ << std::endl;
+            reportScore(time_ * 100);
         }
     }
 	std::cout << "SCORE " << score_ << std::endl;

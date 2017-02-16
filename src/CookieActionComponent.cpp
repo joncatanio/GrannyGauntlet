@@ -22,6 +22,10 @@ CookieActionComponent::CookieActionComponent() {
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
     BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+    BunnyRenderComponent* bunnyRenderComp3 = new BunnyRenderComponent(
+      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+    BunnyRenderComponent* bunnyRenderComp4 = new BunnyRenderComponent(
+      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
 
 
 
@@ -60,6 +64,30 @@ CookieActionComponent::CookieActionComponent() {
             bunnyRenderComp2,
             nullptr);
     gameObj2->initComponents();
+
+    gameObj3 = std::make_shared<GameObject>(
+            GameObjectType::DYNAMIC_OBJECT,
+            glm::vec3(0.0),
+            glm::vec3(0.0),
+            0.0,
+            glm::vec3(0.1),
+            nullptr,
+            nullptr,
+            bunnyRenderComp3,
+            nullptr);
+    gameObj3->initComponents();
+
+    gameObj4 = std::make_shared<GameObject>(
+            GameObjectType::DYNAMIC_OBJECT,
+            glm::vec3(0.0),
+            glm::vec3(0.0),
+            0.0,
+            glm::vec3(0.1),
+            nullptr,
+            nullptr,
+            bunnyRenderComp4,
+            nullptr);
+    gameObj4->initComponents();
 }
 
 CookieActionComponent::~CookieActionComponent() {}
@@ -69,6 +97,8 @@ void CookieActionComponent::initActionComponent() {
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj1);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj2);
+    GameManager::instance().getGameWorld().addDynamicGameObject(gameObj3);
+    GameManager::instance().getGameWorld().addDynamicGameObject(gameObj4);
 
 }
 
@@ -140,4 +170,9 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 0.5f;
     gameObj2->setPosition(aimTarget2);
 
+    glm::vec3 aimTarget3 = holder_->getPosition() + throwDirection * 2.0f;
+    gameObj3->setPosition(aimTarget3);
+
+    glm::vec3 aimTarget4 = holder_->getPosition() + throwDirection * 2.5f;
+    gameObj4->setPosition(aimTarget4);
 }

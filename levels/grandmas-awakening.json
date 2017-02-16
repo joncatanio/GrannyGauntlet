@@ -7,19 +7,15 @@
       },
       {
          "name": "Blue",
-         "file-prefix": "phong"
+         "file-prefix": "dummyBlue"
       },
       {
          "name": "Green",
-         "file-prefix": "phong"
+         "file-prefix": "dummyGreen"
       },
       {
          "name": "Red",
-         "file-prefix": "phong"
-      },
-      {
-         "name": "Cubemap",
-         "file-prefix": "cubemap"
+         "file-prefix": "dummyRed"
       }
    ],
    "level-shapes": [
@@ -38,10 +34,6 @@
       {
          "name": "Bunny",
          "filename": "bunny.obj"
-      },
-      {
-         "name": "FireHydrant",
-         "filename": "FireHydrantLow.obj"
       }
    ],
    "level-materials": [
@@ -65,7 +57,7 @@
          "shininess": 38.4
       },
       {
-         "name": "GrassGreen",
+         "name": "Green",
          "ambient": {
             "r": 0.4,
             "g": 0.7,
@@ -205,41 +197,9 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Phong",
-            "material": "GrassGreen"
+            "material": "Green"
          },
          "deliverable": false
-      },
-      {
-         "object-name": "skybox",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 100.0,
-            "y": 100.0,
-            "z": 100.0
-         },
-         "physics-component": {
-            "name": ""
-         },
-         "render-component": {
-            "name": "SkyboxRenderComponent",
-            "skybox-path": "skybox/bluesky/",
-            "file-extension": "png",
-            "shape": "Cube",
-            "shader": "Cubemap",
-            "material": "Obsidian"
-         },
-         "deliverable": true
       },
       {
          "object-name": "house",
@@ -963,125 +923,6 @@
       }
    ],
    "dynamic-objects": [
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -2.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -4.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 2.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      }
+
    ]
 }

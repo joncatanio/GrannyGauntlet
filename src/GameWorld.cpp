@@ -14,10 +14,7 @@ GameWorld::GameWorld()
 	renderCount(0),
 	numBunniesHit(0) {
 
-	//sun_ = std::make_shared({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, -1.0f, -1.0f) });
-
-	// TODO(rgarmsen2295): Make this look nicer
-	//addDirectionalLight(sun_);
+	// TODO(rgarmsen2295): Move these to JSON files
 	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.3f, -0.8f, -1.0f) });
 	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(-0.3f, -0.8f, 1.0f) });
 }

@@ -190,8 +190,8 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-		glm::mat4 tiMV = glm::transpose(glm::inverse(V->topMatrix() * M->topMatrix()));
-		glUniformMatrix4fv(shaderProgram->getUniform("tiMV"), 1, GL_FALSE, glm::value_ptr(tiMV));
+		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
 
 		// Draw bunny
 		// TODO(rgarmsen): Make shape not need the shader program

@@ -72,9 +72,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("V");
 	addUniform("P");
 
-	// Add transpose inverse MV, so no per vertex calculation
-	addUniform("tiMV");
-	
+	// Add transpose inverse M, so no per vertex calculation
+	addUniform("tiM");
+
 	// Add directional light uniforms
 	addUniform("numDirectionLights");
 	for (int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i) {

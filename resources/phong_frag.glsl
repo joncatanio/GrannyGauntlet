@@ -34,12 +34,8 @@ uniform float MatShiny;
 uniform mat4 M;
 uniform mat4 V;
 
-uniform bool useTexture;
-uniform sampler2D texture;
-
 in vec3 positionInCamSpace;
 in vec3 normalInWorldSpace;
-in vec2 texCoord;
 
 out vec4 color;
 

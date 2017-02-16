@@ -2,7 +2,6 @@
 
 layout(location = 0) in vec4 vertPos;
 layout(location = 1) in vec3 vertNor;
-layout(location = 2) in vec2 vertTex;
 
 uniform mat4 P;
 uniform mat4 M;
@@ -13,7 +12,6 @@ uniform mat4 tiM;
 // to the fragment shader
 out vec3 positionInCamSpace;
 out vec3 normalInWorldSpace;
-out vec2 texCoord;
 
 void main() {
 
@@ -25,6 +23,4 @@ void main() {
 
 	// Calculate the normal of the vertex in world space
 	normalInWorldSpace = normalize((tiM * vec4(normalize(vertNor), 0.0)).xyz);
-
-	texCoord = vertTex;
 }

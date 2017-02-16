@@ -90,9 +90,9 @@ void main() {
 	vec3 view = normalize(-positionInCamSpace);
 
 	// Calculate total specular/diffuse color contributions from all light types
-	//vec3 pointLightColor = pointLightColor();
+	// TODO(rgarmsen2295): vec3 pointLightColor = pointLightColor();
 	vec3 directionalLightColor = dirLightColor(fragNormalInWorldSpace, view);
-	//vec3 areaLightColor = areaLightColor();
+	// TODO(rgarmsen2295): vec3 areaLightColor = areaLightColor();
 
 	// Calculate ambient color
 	vec3 ambient = MatAmb;

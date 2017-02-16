@@ -18,7 +18,7 @@ GameWorld::GameWorld()
 	*primarySun = { 
 		glm::vec3(10.0f, 10.0f, 0.0f), 
 		glm::vec3(0.5f, 0.5f, 0.5f), 
-		glm::vec3(0.3f, -0.8f, -1.0f), 
+		glm::vec3(0.4f, -0.8f, -1.0f), 
 		LightType::DIRECTIONAL 
 	};
 
@@ -26,7 +26,7 @@ GameWorld::GameWorld()
 	*reflectedSun = { 
 		glm::vec3(10.0f, 10.0f, 0.0f), 
 		glm::vec3(0.5f, 0.5f, 0.5f), 
-		glm::vec3(-0.3f, -0.8f, 1.0f), 
+		glm::vec3(-0.4f, -0.8f, 1.0f), 
 		LightType::DIRECTIONAL 
 	};
 

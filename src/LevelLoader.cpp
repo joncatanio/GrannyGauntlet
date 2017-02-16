@@ -6,7 +6,9 @@
 #include "PlayerPhysicsComponent.h"
 #include "PlayerRenderComponent.h"
 #include "CookieActionComponent.h"
+#include "FireHydrantPhysicsComponent.h"
 #include "SkyboxRenderComponent.h"
+
 // Manager headers
 #include "ResourceManager.h"
 #include "ShaderManager.h"
@@ -243,6 +245,8 @@ PhysicsComponent* LevelLoader::getPhysicsComponent(json obj) {
       return new WallPhysicsComponent();
    } else if (componentName == "PlayerPhysicsComponent") {
       return new PlayerPhysicsComponent();
+   } else if (componentName == "FireHydrantPhysicsComponent") {
+      return new FireHydrantPhysicsComponent();
    }
 
    return nullptr;

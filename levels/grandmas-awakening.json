@@ -42,6 +42,14 @@
       {
          "name": "FireHydrant",
          "filename": "FireHydrantLow.obj"
+      },
+      {
+         "name": "BubbleTree",
+         "filename": "bubbletree.obj"
+      },
+      {
+         "name": "FirTree",
+         "filename": "firtree.obj"
       }
    ],
    "level-materials": [
@@ -65,23 +73,118 @@
          "shininess": 38.4
       },
       {
-         "name": "Green",
+         "name": "Ruby",
          "ambient": {
-            "r": 0.4,
-            "g": 0.7,
-            "b": 0.4
+            "r": 0.1745,
+            "g": 0.01175,
+            "b": 0.01175
+         },
+         "diffuse": {
+            "r": 0.61424,
+            "g": 0.04136,
+            "b": 0.04136
+         },
+         "specular": {
+            "r": 0.727811,
+            "g": 0.626959,
+            "b": 0.626959
+         },
+         "shininess": 76.8
+      },
+      {
+         "name": "Silver",
+         "ambient": {
+            "r": 0.19225,
+            "g": 0.19225,
+            "b": 0.19225
+         },
+         "diffuse": {
+            "r": 0.50754,
+            "g": 0.50754,
+            "b": 0.50754
+         },
+         "specular": {
+            "r": 0.508273,
+            "g": 0.508273,
+            "b": 0.508273
+         },
+         "shininess": 51.2
+      },
+      {
+         "name": "Blue Plastic",
+         "ambient": {
+            "r": 0.02,
+            "g": 0.04,
+            "b": 0.2
+         },
+         "diffuse": {
+            "r": 0.0,
+            "g": 0.16,
+            "b": 0.9
+         },
+         "specular": {
+            "r": 0.14,
+            "g": 0.2,
+            "b": 0.8
+         },
+         "shininess": 120.0
+      },
+      {
+         "name": "Cyan Rubber",
+         "ambient": {
+            "r": 0.0,
+            "g": 0.05,
+            "b": 0.05
          },
          "diffuse": {
             "r": 0.4,
-            "g": 1.0,
-            "b": 0.1
+            "g": 0.5,
+            "b": 0.5
          },
          "specular": {
-            "r": 0.0225,
-            "g": 0.0255, 
-            "b": 0.0255
+            "r": 0.04,
+            "g": 0.7,
+            "b": 0.7
          },
-         "shininess": 12.8
+         "shininess": 10.0
+      },
+      {
+         "name": "Red Rubber",
+         "ambient": {
+            "r": 0.05,
+            "g": 0.0,
+            "b": 0.0
+         },
+         "diffuse": {
+            "r": 0.5,
+            "g": 0.4,
+            "b": 0.4
+         },
+         "specular": {
+            "r": 0.7,
+            "g": 0.04,
+            "b": 0.04
+         },
+         "shininess": 10.0
+      },
+      {
+         "name": "Emerald",
+         "ambient": {
+            "r": 0.0215,
+            "g": 0.1745,
+            "b": 0.0215
+         },
+         "diffuse": {
+            "r": 0.07568,
+            "g": 0.61424,
+            "b": 0.07568
+         },
+         "specular": {
+            "r": 0.633,
+            "g": 0.727811, 
+            "b": 0.633
+         },
+         "shininess": 76.8
       },
       {
          "name": "Jade",
@@ -205,7 +308,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Phong",
-            "material": "Green"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -237,7 +340,7 @@
             "file-extension": "png",
             "shape": "Cube",
             "shader": "Cubemap",
-            "material": "Obsidian"
+            "material": "Emerald"
          },
          "deliverable": true
       },
@@ -266,8 +369,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -296,8 +399,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -326,8 +429,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -356,8 +459,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -386,8 +489,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -416,8 +519,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -446,8 +549,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -476,100 +579,10 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
-      },
-      {
-         "object-name": "hedge",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -40.0,
-            "y": 0.5,
-            "z": 45.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 0.75,
-            "y": 1.0,
-            "z": 35
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "hedge",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -50.0,
-            "y": 0.5,
-            "z": 35.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 0.75,
-            "y": 1.0,
-            "z": 45
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "hedge",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 5.0,
-            "y": 0.5,
-            "z": 10.75
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 45.0,
-            "y": 1.0,
-            "z": 0.75
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
-         },
-         "deliverable": false
       },
       {
          "object-name": "house",
@@ -596,8 +609,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -626,8 +639,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -656,8 +669,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -686,8 +699,68 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -50.0,
+            "y": 2.5,
+            "z": 87.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -25.0,
+            "y": 5.25,
+            "z": 72.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.25,
+            "y": 5.25,
+            "z": 5.25
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -716,8 +789,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -746,8 +819,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -776,8 +849,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -806,8 +879,158 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Blue",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -65.0,
+            "y": 4.0,
+            "z": -60.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -60.0,
+            "y": 4.0,
+            "z": -80.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -40.0,
+            "y": 3.0,
+            "z": -90.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 45.0,
+            "y": 3.0,
+            "z": -90.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -20.0,
+            "y": 6.0,
+            "z": -87.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Cyan Rubber"
          },
          "deliverable": true
       },
@@ -817,7 +1040,7 @@
          "pos": {
             "x": 40.0,
             "y": 0.5,
-            "z": -45.0
+            "z": -35.0
          },
          "dir": {
             "x": 0.0,
@@ -828,7 +1051,7 @@
          "scale": {
             "x": 0.75,
             "y": 1.0,
-            "z": 35
+            "z": 25
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
@@ -836,8 +1059,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Emerald"
          },
          "deliverable": false
       },
@@ -866,8 +1089,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Emerald"
          },
          "deliverable": false
       },
@@ -896,8 +1119,338 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -40.0,
+            "y": 0.5,
+            "z": 45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 35
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -50.0,
+            "y": 0.5,
+            "z": 35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 45
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 5.0,
+            "y": 0.5,
+            "z": 10.75
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 45.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -50.0,
+            "y": 0.5,
+            "z": -57.125
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 22.125
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -20.0,
+            "y": 0.5,
+            "z": -35.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 30.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -19.25,
+            "y": 0.5,
+            "z": -60.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 15.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -19.25,
+            "y": 0.5,
+            "z": -44.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 15.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -33.50,
+            "y": 0.5,
+            "z": -52.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 8.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -5.0,
+            "y": 0.5,
+            "z": -52.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 8.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 10.0,
+            "y": 0.5,
+            "z": -48.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.75,
+            "y": 1.0,
+            "z": 12.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "hedge",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 25.75,
+            "y": 0.5,
+            "z": -60.00
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 15.0,
+            "y": 1.0,
+            "z": 0.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Cube",
+            "shader": "Phong",
+            "material": "Emerald"
          },
          "deliverable": false
       },
@@ -905,7 +1458,7 @@
          "object-name": "start hedge",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 45.0,
+            "x": 0.0,
             "y": 0.5,
             "z": -79.25
          },
@@ -916,7 +1469,7 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
+            "x": 50.0,
             "y": 1.0,
             "z": 0.75
          },
@@ -926,8 +1479,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Green",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Emerald"
          },
          "deliverable": false
       },
@@ -956,8 +1509,578 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Red",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -10.0,
+            "y": 5.0,
+            "z": -52.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 35.0,
+            "y": 5.0,
+            "z": -85.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -17.0,
+            "y": 2.5,
+            "z": -50.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -10.0,
+            "y": 7.5,
+            "z": -20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 7.5,
+            "y": 7.5,
+            "z": 7.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -53.0,
+            "y": 4.5,
+            "z": 77.5
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.5,
+            "y": 4.5,
+            "z": 4.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -35.0,
+            "y": 2.5,
+            "z": 73.5
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "bubble tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -32.0,
+            "y": 3.5,
+            "z": -47.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.5,
+            "y": 3.5,
+            "z": 3.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BubbleTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -30.0,
+            "y": 5.5,
+            "z": -52.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.5,
+            "y": 5.5,
+            "z": 5.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 15.0,
+            "y": 6.75,
+            "z": -87.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.75,
+            "y": 6.75,
+            "z": 6.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 11.0,
+            "y": 2.75,
+            "z": -88.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.75,
+            "y": 2.75,
+            "z": 2.75
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 4.0,
+            "y": 2.5,
+            "z": -89.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -37.0,
+            "y": 2.5,
+            "z": 70.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -44.0,
+            "y": 1.5,
+            "z": 95.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 25.0,
+            "y": 3.5,
+            "z": -90.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.5,
+            "y": 3.5,
+            "z": 3.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 52.5,
+            "y": 5.5,
+            "z": 17.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.5,
+            "y": 5.5,
+            "z": 5.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -20.0,
+            "y": 8.5,
+            "z": -56.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 8.5,
+            "y": 8.5,
+            "z": 8.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -23.0,
+            "y": 1.5,
+            "z": -52.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 20.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fir tree",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -19.0,
+            "y": 1.5,
+            "z": -48.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+         },
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree",
+            "shader": "Phong",
+            "material": "Emerald"
          },
          "deliverable": false
       }
@@ -988,68 +2111,8 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -2.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -4.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Ruby"
          },
          "deliverable": false
       },
@@ -1078,8 +2141,308 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Red",
-            "material": "Obsidian"
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 4.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 6.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 8.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": -2.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": -4.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": -6.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": -45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -37.0,
+            "y": 1.0,
+            "z": -60.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 30.0,
+            "y": 1.0,
+            "z": -65.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "fire hydrant",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -43.0,
+            "y": 1.0,
+            "z": 23.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "physics-component": {
+            "name": "FireHydrantPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Phong",
+            "material": "Ruby"
          },
          "deliverable": false
       }

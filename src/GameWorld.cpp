@@ -112,7 +112,8 @@ void GameWorld::drawGameObjects() {
 
 	// Apply perspective projection
 	P->pushMatrix();
-	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 200.0f);
+	//TODO(nurgan) check for better way of not clipping skybox instead of increasing far plane
+	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 300.0f);
 
 	// Set up view Matrix
 	V->pushMatrix();

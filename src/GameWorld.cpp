@@ -12,28 +12,7 @@
 GameWorld::GameWorld()
 	: updateCount(0),
 	renderCount(0),
-	numBunniesHit(0) {
-
-	std::shared_ptr<Light> primarySun = std::make_shared<Light>();
-	*primarySun = { 
-		glm::vec3(10.0f, 10.0f, 0.0f), 
-		glm::vec3(0.5f, 0.5f, 0.5f), 
-		glm::vec3(0.4f, -0.8f, -1.0f), 
-		LightType::DIRECTIONAL 
-	};
-
-	std::shared_ptr<Light> reflectedSun = std::make_shared<Light>();
-	*reflectedSun = { 
-		glm::vec3(10.0f, 10.0f, 0.0f), 
-		glm::vec3(0.5f, 0.5f, 0.5f), 
-		glm::vec3(-0.4f, -0.8f, 1.0f), 
-		LightType::DIRECTIONAL 
-	};
-
-	// TODO(rgarmsen2295): Move these to JSON files
-	addLight(primarySun);
-	addLight(reflectedSun);
-}
+	numBunniesHit(0) {}
 
 GameWorld::~GameWorld() {}
 

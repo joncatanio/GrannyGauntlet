@@ -6,18 +6,6 @@
          "file-prefix": "phong"
       },
       {
-         "name": "Blue",
-         "file-prefix": "dummyBlue"
-      },
-      {
-         "name": "Green",
-         "file-prefix": "dummyGreen"
-      },
-      {
-         "name": "Red",
-         "file-prefix": "dummyRed"
-      },
-      {
          "name": "Cubemap",
          "file-prefix": "cubemap"
       }
@@ -130,6 +118,25 @@
          "shininess": 120.0
       },
       {
+         "name": "Green Plastic",
+         "ambient": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0
+         },
+         "diffuse": {
+            "r": 0.1,
+            "g": 0.35,
+            "b": 0.1
+         },
+         "specular": {
+            "r": 0.45,
+            "g": 0.55,
+            "b": 0.45
+         },
+         "shininess": 32.0
+      },
+      {
          "name": "Cyan Rubber",
          "ambient": {
             "r": 0.0,
@@ -163,6 +170,25 @@
          "specular": {
             "r": 0.7,
             "g": 0.04,
+            "b": 0.04
+         },
+         "shininess": 10.0
+      },
+      {
+         "name": "Green Rubber",
+         "ambient": {
+            "r": 0.0,
+            "g": 0.05,
+            "b": 0.0
+         },
+         "diffuse": {
+            "r": 0.4,
+            "g": 0.5,
+            "b": 0.4
+         },
+         "specular": {
+            "r": 0.04,
+            "g": 0.7,
             "b": 0.04
          },
          "shininess": 10.0
@@ -242,6 +268,25 @@
             "b": 0.807843
          },
          "shininess": 10.0
+      },
+      {
+         "name": "Bronze",
+         "ambient": {
+            "r": 0.2125,
+            "g": 0.1275,
+            "b": 0.054
+         },
+         "diffuse": {
+            "r": 0.714,
+            "g": 0.4284,
+            "b": 0.18144
+         },
+         "specular": {
+            "r": 0.393548,
+            "g": 0.271906,
+            "b": 0.166721
+         },
+         "shininess": 25.6
       }
    ],
    "characters": [
@@ -2445,6 +2490,65 @@
             "material": "Ruby"
          },
          "deliverable": false
+      }
+   ],
+   "lights" : [
+      {
+         "light-name": "primary sun",
+         "light-type": "DIRECTIONAL",
+         "pos": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 0.0
+         },
+         "color": {
+            "r": 0.6,
+            "g": 0.6,
+            "b": 0.6
+         },
+         "orientation": {
+            "x": -0.5,
+            "y": -0.5,
+            "z": -0.5
+         }
+      },
+      {
+         "light-name": "reflected sun 1",
+         "light-type": "DIRECTIONAL",
+         "pos": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 0.0
+         },
+         "color": {
+            "r": 0.2,
+            "g": 0.2,
+            "b": 0.2
+         },
+         "orientation": {
+            "x": -0.5,
+            "y": -0.5,
+            "z": 0.5
+         }
+      },
+      {
+         "light-name": "reflected sun 2",
+         "light-type": "DIRECTIONAL",
+         "pos": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 0.0
+         },
+         "color": {
+            "r": 0.2,
+            "g": 0.2,
+            "b": 0.2
+         },
+         "orientation": {
+            "x": 0.5,
+            "y": -0.5,
+            "z": 0.5
+         }
       }
    ]
 }

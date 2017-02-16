@@ -153,8 +153,11 @@ int textFileWrite(const char *fn, char *s)
 GLint getAttribLocation(const GLuint program, const char varname[], bool verbose)
 {
 	GLint r = glGetAttribLocation(program, varname);
-	if (r < 0 && verbose)
-		std::cerr << "WARN: "<< varname << " cannot be bound (it either doesn't exist or has been optimized away). safe_glAttrib calls will silently ignore it.\n" << std::endl;
+	if (r < 0 && verbose) {
+#ifdef DEBUG
+		//std::cerr << "WARN: "<< varname << " cannot be bound (it either doesn't exist or has been optimized away). safe_glAttrib calls will silently ignore it.\n" << std::endl;
+#endif
+	}
 	return r;
 }
 
@@ -163,7 +166,9 @@ GLint getUniformLocation(const GLuint program, const char varname[], bool verbos
 {
 	GLint r = glGetUniformLocation(program, varname);
 	if(r < 0 && verbose) {
-		std::cerr << "WARN: "<< varname << " cannot be bound (it either doesn't exist or has been optimized away). safe_glUniform calls will silently ignore it.\n" << std::endl;
+#ifdef DEBUG
+		//std::cerr << "WARN: "<< varname << " cannot be bound (it either doesn't exist or has been optimized away). safe_glUniform calls will silently ignore it.\n" << std::endl;
+#endif
 	}
 	return r;
 }

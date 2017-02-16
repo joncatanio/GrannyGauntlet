@@ -200,7 +200,7 @@ int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
       for (json lightObj : lightObjs) {
          std::shared_ptr<Light> light = std::make_shared<Light>();
          *light = {
-            glm::vec3(lightObj["position"]["x"], lightObj["position"]["y"], lightObj["position"]["z"]),
+            glm::vec3(lightObj["pos"]["x"], lightObj["pos"]["y"], lightObj["pos"]["z"]),
             glm::vec3(lightObj["color"]["r"], lightObj["color"]["g"], lightObj["color"]["b"]),
             glm::vec3(lightObj["orientation"]["x"], lightObj["orientation"]["y"], lightObj["orientation"]["z"]),
             ShaderManager::stringToLightType(lightObj["light-type"])

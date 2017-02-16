@@ -76,6 +76,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
       return res;
    }
 
+   if ((res = parseLights(world, level["lights"]))) {
+      std::cerr << "Error parsing lights." << std::endl;
+      return res;
+   }
+
    return res;
 }
 
@@ -184,6 +189,24 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
 
          dynamicGameObj->initComponents();
          world.addDynamicGameObject(dynamicGameObj);
+      }
+   }
+
+   return 0;
+}
+
+int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
+   if (lightObjs != nullptr) {
+      for (json lightObj : lightObjs) {
+         std::shared_ptr<Light> light = std::make_shared<Light>();
+         *light = {
+            glm::vec3(lightObj["position"]["x"], lightObj["position"]["y"], lightObj["position"]["z"]),
+            glm::vec3(lightObj["color"]["r"], lightObj["color"]["g"], lightObj["color"]["b"]),
+            glm::vec3(lightObj["orientation"]["x"], lightObj["orientation"]["y"], lightObj["orientation"]["z"]),
+            ShaderManager::stringToLightType(lightObj["light-type"])
+         };
+
+         world.addLight(light);
       }
    }
 

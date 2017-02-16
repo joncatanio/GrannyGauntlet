@@ -14,11 +14,25 @@ GameWorld::GameWorld()
 	renderCount(0),
 	numBunniesHit(0) {
 
-	// Seed the PRNG with the current time for any random elements in the world
-	std::srand(std::time(NULL));
+	std::shared_ptr<Light> primarySun = std::make_shared<Light>();
+	*primarySun = { 
+		glm::vec3(10.0f, 10.0f, 0.0f), 
+		glm::vec3(0.5f, 0.5f, 0.5f), 
+		glm::vec3(0.4f, -0.8f, -1.0f), 
+		LightType::DIRECTIONAL 
+	};
 
-	// TODO(rgarmsen2295): Make this look nicer
-	addLight({ -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 1.0f, glm::vec3(0.0f, 0.0f, 0.0f), LightType::POINT });
+	std::shared_ptr<Light> reflectedSun = std::make_shared<Light>();
+	*reflectedSun = { 
+		glm::vec3(10.0f, 10.0f, 0.0f), 
+		glm::vec3(0.5f, 0.5f, 0.5f), 
+		glm::vec3(-0.4f, -0.8f, 1.0f), 
+		LightType::DIRECTIONAL 
+	};
+
+	// TODO(rgarmsen2295): Move these to JSON files
+	addLight(primarySun);
+	addLight(reflectedSun);
 }
 
 GameWorld::~GameWorld() {}
@@ -31,8 +45,31 @@ void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	staticGameObjectsToAdd_.push(obj);
 }
 
-void GameWorld::addLight(const Light& newLight) {
-	lights.push_back(newLight);
+void GameWorld::addLight(const std::shared_ptr<Light> light) {
+	switch(light->type) {
+		case LightType::POINT:
+			addPointLight(light);
+			break;
+		case LightType::AREA:
+			addAreaLight(light);
+			break;
+		case LightType::DIRECTIONAL:
+		default:
+			addDirectionalLight(light);
+			break;
+	}
+}
+
+void GameWorld::addPointLight(const std::shared_ptr<Light> newLight) {
+	pointLights.push_back(newLight);
+}
+
+void GameWorld::addDirectionalLight(const std::shared_ptr<Light> newLight) {
+	directionalLights.push_back(newLight);
+}
+
+void GameWorld::addAreaLight(const std::shared_ptr<Light> newLight) {
+	areaLights.push_back(newLight);
 }
 
 int GameWorld::getNumDynamicGameObjects() {
@@ -43,8 +80,16 @@ int GameWorld::getNumStaticGameObjects() {
 	return staticGameObjects_.size();
 }
 
-const std::vector<Light>& GameWorld::getLights() {
-	return lights;
+const std::vector<std::shared_ptr<Light>>& GameWorld::getPointLights() {
+	return pointLights;
+}
+
+const std::vector<std::shared_ptr<Light>>& GameWorld::getDirectionalLights() {
+	return directionalLights;
+}
+
+const std::vector<std::shared_ptr<Light>>& GameWorld::getAreaLights() {
+	return areaLights;
 }
 
 void GameWorld::clearDynamicGameObjects() {

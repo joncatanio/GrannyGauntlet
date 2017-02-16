@@ -40,9 +40,18 @@ public:
 	
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
 	void addStaticGameObject(std::shared_ptr<GameObject> obj);
+
+	// Adds a new light of any type to the game world
+	void addLight(const std::shared_ptr<Light> newLight);
+
+	// Adds a new point light to the current world
+	void addPointLight(const std::shared_ptr<Light> newLight);
 	
-	// Adds a new light to the current world
-	void addLight(const Light& newLight);
+	// Adds a new directional light to the current world
+	void addDirectionalLight(const std::shared_ptr<Light> newLight);
+
+	// Adds a new area light to the current world
+	void addAreaLight(const std::shared_ptr<Light> newLight);
 
 	// Gets the current total number of non-static GameObjects in the world
 	int getNumDynamicGameObjects();
@@ -50,8 +59,14 @@ public:
 	// Gets the current total number of static objects in the world
 	int getNumStaticGameObjects();
 
-	// Returns a reference to the list of lights currently in the world
-	const std::vector<Light>& getLights();
+	// Returns a reference to the list of point lights currently in the world
+	const std::vector<std::shared_ptr<Light>>& getPointLights();
+
+	// Returns a reference to the list of directional lights currently in the world
+	const std::vector<std::shared_ptr<Light>>& getDirectionalLights();
+
+	// Returns a reference to the list of area lights currently in the world
+	const std::vector<std::shared_ptr<Light>>& getAreaLights();
 
 	// Clears the world of all dynamic GameObjects
 	void clearDynamicGameObjects();
@@ -103,7 +118,13 @@ private:
 	OctreeNode staticGameObjectsTree_;
 
 	// List of the lights currently in the world
-	std::vector<Light> lights;
+	std::vector<std::shared_ptr<Light>> pointLights;
+
+	// List of the directional lights currently in the world
+	std::vector<std::shared_ptr<Light>> directionalLights;
+
+	// List of the area lights currently in the world
+	std::vector<std::shared_ptr<Light>> areaLights;
 
 	// Number of update iterations
 	unsigned long updateCount;

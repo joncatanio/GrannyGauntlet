@@ -18,19 +18,21 @@
 #include "Program.h"
 #include "ResourceManager.h"
 
+#define MAX_DIRECTIONAL_LIGHTS 10
+
 enum class LightType { POINT, DIRECTIONAL, AREA };
 
 /**
  * Data structure that represents a prescence of light
  *
- * X, Y, Z 		- Represents the position of the light
- * R, G, B 		- Represents the color of the light
- * Orientation  - Represents the orientation of the light
+ * position 	- Represents the position of the light
+ * color 		- Represents the color of the light
+ * orientation  - Represents the orientation of the light
  * Type 		- The type of light represented
  */
 typedef struct Light {
-	GLfloat x, y, z;
-	GLfloat r, g, b;
+	glm::vec3 position;
+	glm::vec3 color;
 	glm::vec3 orientation;
 	LightType type;
 } Light;
@@ -78,6 +80,9 @@ public:
 	// Renders the given object
 	void renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
+
+	// Returns an actual LightType enum value of the given string
+	static LightType stringToLightType(std::string type);
 
 private:
 

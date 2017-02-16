@@ -150,16 +150,7 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		GameWorld& gameWorld = gameManager.getGameWorld();
 
 		// Point lights
-		/*const std::vector<Light>& lights = gameWorld.getPointLights();
-
-		// TODO(rgarmsen2295): Add support for multiple point lights
-		Light curLight;
-		if (lights.size() > 0) {
-			curLight = lights[0];
-			// Bind point lights
-			glUniform3f(shaderProgram->getUniform("lightPos"), curLight.position.x, curLight.position.y, curLight.position.z);
-			glUniform3f(shaderProgram->getUniform("lightClr"), curLight.color.x, curLight.color.y, curLight.color.z);
-		}*/
+		// TODO(rgarmsen2295): Add point lights back
 
 		// Directional lights
 		// TODO(rgarmsen2295): Implement more cleanly using "uniform buffer objects"

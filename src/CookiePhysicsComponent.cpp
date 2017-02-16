@@ -70,7 +70,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
                 float timeBump = ((score - cookieState.scored)/500.0) + 1.0;
                 cookieState.scored += score;
 
-                std::cout << "HIT." << " Score on hit: " << score << "time bump: " << timeBump << std::endl;
+                std::cout << "HIT." << " Score on hit: " << score << " Time bump: " << timeBump << std::endl;
 
                 gameManager.increaseTime(timeBump);
                 objHit->cookieDeliverable = false;

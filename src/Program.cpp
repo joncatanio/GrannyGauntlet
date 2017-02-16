@@ -92,6 +92,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("MatSpc");
 	addUniform("MatShiny");
 
+	// Adds texture uniforms
+	addUniform("useTexture");
+
 	// Adds vertex position and normal uniforms
 	addAttribute("vertPos");
 	addAttribute("vertNor");

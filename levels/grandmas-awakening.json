@@ -118,6 +118,25 @@
          "shininess": 120.0
       },
       {
+         "name": "Green Plastic",
+         "ambient": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0
+         },
+         "diffuse": {
+            "r": 0.1,
+            "g": 0.35,
+            "b": 0.1
+         },
+         "specular": {
+            "r": 0.45,
+            "g": 0.55,
+            "b": 0.45
+         },
+         "shininess": 32.0
+      },
+      {
          "name": "Cyan Rubber",
          "ambient": {
             "r": 0.0,
@@ -151,6 +170,25 @@
          "specular": {
             "r": 0.7,
             "g": 0.04,
+            "b": 0.04
+         },
+         "shininess": 10.0
+      },
+      {
+         "name": "Green Rubber",
+         "ambient": {
+            "r": 0.0,
+            "g": 0.05,
+            "b": 0.0
+         },
+         "diffuse": {
+            "r": 0.4,
+            "g": 0.5,
+            "b": 0.4
+         },
+         "specular": {
+            "r": 0.04,
+            "g": 0.7,
             "b": 0.04
          },
          "shininess": 10.0

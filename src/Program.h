@@ -7,6 +7,8 @@
 #include <unordered_map>
 #include <string>
 
+#include "Texture.h"
+
 // Represents a shader program used to shade objects in OpenGL
 class Program {
 public:
@@ -24,6 +26,9 @@ public:
 	// Adds a new uniform associated with the shader program
 	void addUniform(const std::string &name);
 
+	// Adds a new uniform associated with the shader program
+	void addTexture(Texture* texture);
+
 	// Returns the ID of this shader program
 	GLuint getPid();
 
@@ -34,6 +39,16 @@ public:
 	// Returns the location of the attribute with the given name.
 	// Throws an |out_of_range| exception if no uniform with the given name is found
 	GLint getUniform(const std::string &name) const;
+
+    // Returns the texture specified by the given name
+    Texture* getTexture(const std::string &name) const;
+
+    // binds the textures that belong to this shader program
+    void bindTextures();
+
+    // unbinds all textures
+    void unbindTextures();
+
 	
 protected:
 	
@@ -53,6 +68,9 @@ private:
 
 	// A hash map of uniform names associated with the program and their OpenGL location
 	std::unordered_map<std::string, GLint> uniforms;
+
+	// A hash map of texture names associated with the program and their OpenGL location
+	std::unordered_map<std::string, Texture*> textures;
 
 	// Adds default attributes and uniforms common to most useful shaders
 	void addDefaultAttributesAndUniforms();

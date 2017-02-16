@@ -101,8 +101,6 @@ void main() {
 	// Calculate ambient color
 	vec3 ambient = MatAmb;
 
-	//vec4 texColor = texture(texture, texCoord);
-
 	// Calculate the total color
 	color = vec4(directionalLightColor + ambient, 1.0);
 }

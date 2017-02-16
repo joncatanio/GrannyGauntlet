@@ -76,6 +76,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
       return res;
    }
 
+   if ((res = parseLights(world, level["lights"]))) {
+      std::cerr << "Error parsing lights." << std::endl;
+      return res;
+   }
+
    return res;
 }
 
@@ -193,7 +198,13 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
 int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
    if (lightObjs != nullptr) {
       for (json lightObj : lightObjs) {
-         std::shared_ptr<Light> light = createLight(lightObj); 
+         std::shared_ptr<Light> light = std::make_shared<Light>();
+         *light = {
+            glm::vec3(lightObj["position"]["x"], lightObj["position"]["y"], lightObj["position"]["z"]),
+            glm::vec3(lightObj["color"]["r"], lightObj["color"]["g"], lightObj["color"]["b"]),
+            glm::vec3(lightObj["orientation"]["x"], lightObj["orientation"]["y"], lightObj["orientation"]["z"]),
+            ShaderManager::stringToLightType(lightObj["light-type"])
+         };
 
          world.addLight(light);
       }
@@ -223,13 +234,6 @@ std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
    );
 
    return gameObj;
-}
-
-std::shared_ptr<Light> LevelLoader::createLight(json lightObj) {
-   std::shared_ptr<Light> light = std::make_shared<Light>();
-
-
-   return light;
 }
 
 InputComponent* LevelLoader::getInputComponent(json obj) {

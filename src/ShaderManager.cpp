@@ -203,6 +203,17 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 	}
 }
 
+LightType ShaderManager::stringToLightType(std::string type) {
+	if (type == "POINT") {
+		return LightType::POINT;
+	} else if(type == "AREA") {
+		return LightType::AREA;
+	} else {
+		//default to directional light
+		return LightType::DIRECTIONAL;
+	}
+}
+
 ShaderManager::ShaderManager() {
 	boundShaderName = "";
 }

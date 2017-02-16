@@ -81,6 +81,9 @@ public:
 	void renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
+	// Returns an actual LightType enum value of the given string
+	static LightType stringToLightType(std::string type);
+
 private:
 
 	// Special program ID that represents a no/null program shader

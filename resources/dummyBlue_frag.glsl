@@ -50,7 +50,7 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		float specularValue = 0.0;
 		if (lightNormalDot > 0.0) {
 			float specWeight = max(dot(reflect, view), 0.0);
-			specularValue = pow(specWeight, MatShiny);
+			specularValue = pow(specWeight, 12.8);
 		}
 
 		vec3 diffuse = vec3(0.3, 0.3, 1.0) * max(lightNormalDot, 0.0) * lightColor;

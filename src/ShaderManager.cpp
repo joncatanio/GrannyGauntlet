@@ -163,15 +163,15 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
 		// Directional lights
 		// TODO(rgarmsen2295): Implement more cleanly using "uniform buffer objects"
-		const std::vector<Light>& directionalLights = gameWorld.getDirectionalLights();
+		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
 		int numDirectionLights = directionalLights.size();
 		
 		glUniform1i(shaderProgram->getUniform("numDirectionLights"), numDirectionLights);
 		for (int i = 0; i < numDirectionLights; ++i) {
-			const Light& light = directionalLights.at(i);
-			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].position"), light.position.x, light.position.y, light.position.z);
-			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].color"), light.color.x, light.color.y, light.color.z);
-			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].orientation"), light.orientation.x, light.orientation.y, light.orientation.z);
+			const std::shared_ptr<Light> light = directionalLights.at(i);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].position"), light->position.x, light->position.y, light->position.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].color"), light->color.x, light->color.y, light->color.z);
+			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].orientation"), light->orientation.x, light->orientation.y, light->orientation.z);
 		}
 
 		// Bind material properties

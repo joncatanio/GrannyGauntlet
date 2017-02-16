@@ -45,13 +45,13 @@ public:
 	void addLight(const std::shared_ptr<Light> newLight);
 
 	// Adds a new point light to the current world
-	void addPointLight(const Light& newLight);
+	void addPointLight(const std::shared_ptr<Light> newLight);
 	
 	// Adds a new directional light to the current world
-	void addDirectionalLight(const Light& newLight);
+	void addDirectionalLight(const std::shared_ptr<Light> newLight);
 
 	// Adds a new area light to the current world
-	void addAreaLight(const Light& newLight);
+	void addAreaLight(const std::shared_ptr<Light> newLight);
 
 	// Gets the current total number of non-static GameObjects in the world
 	int getNumDynamicGameObjects();
@@ -60,13 +60,13 @@ public:
 	int getNumStaticGameObjects();
 
 	// Returns a reference to the list of point lights currently in the world
-	const std::vector<Light>& getPointLights();
+	const std::vector<std::shared_ptr<Light>>& getPointLights();
 
 	// Returns a reference to the list of directional lights currently in the world
-	const std::vector<Light>& getDirectionalLights();
+	const std::vector<std::shared_ptr<Light>>& getDirectionalLights();
 
 	// Returns a reference to the list of area lights currently in the world
-	const std::vector<Light>& getAreaLights();
+	const std::vector<std::shared_ptr<Light>>& getAreaLights();
 
 	// Clears the world of all dynamic GameObjects
 	void clearDynamicGameObjects();
@@ -118,13 +118,13 @@ private:
 	OctreeNode staticGameObjectsTree_;
 
 	// List of the lights currently in the world
-	std::vector<Light> pointLights;
+	std::vector<std::shared_ptr<Light>> pointLights;
 
 	// List of the directional lights currently in the world
-	std::vector<Light> directionalLights;
+	std::vector<std::shared_ptr<Light>> directionalLights;
 
 	// List of the area lights currently in the world
-	std::vector<Light> areaLights;
+	std::vector<std::shared_ptr<Light>> areaLights;
 
 	// Number of update iterations
 	unsigned long updateCount;

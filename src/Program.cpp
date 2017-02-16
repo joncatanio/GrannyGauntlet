@@ -74,11 +74,7 @@ void Program::addDefaultAttributesAndUniforms() {
 
 	// Add transpose inverse MV, so no per vertex calculation
 	addUniform("tiMV");
-
-	// Adds light uniforms
-	//addUniform("lightPos");
-	//addUniform("lightClr");
-
+	
 	// Add directional light uniforms
 	addUniform("numDirectionLights");
 	for (int i = 0; i < MAX_DIRECTIONAL_LIGHTS; ++i) {

@@ -190,6 +190,18 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
    return 0;
 }
 
+int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
+   if (lightObjs != nullptr) {
+      for (json lightObj : lightObjs) {
+         std::shared_ptr<Light> light = createLight(lightObj); 
+
+         world.addLight(light);
+      }
+   }
+
+   return 0;
+}
+
 std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
    GameObjectType objType) {
    InputComponent* inputComponent = getInputComponent(obj);
@@ -211,6 +223,13 @@ std::shared_ptr<GameObject> LevelLoader::createGameObject(json obj,
    );
 
    return gameObj;
+}
+
+std::shared_ptr<Light> LevelLoader::createLight(json lightObj) {
+   std::shared_ptr<Light> light = std::make_shared<Light>();
+
+
+   return light;
 }
 
 InputComponent* LevelLoader::getInputComponent(json obj) {

@@ -14,8 +14,10 @@ GameWorld::GameWorld()
 	renderCount(0),
 	numBunniesHit(0) {
 
+	//sun_ = std::make_shared({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, -1.0f, -1.0f) });
+
 	// TODO(rgarmsen2295): Make this look nicer
-	addDirectionalLight({ glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) });
+	//addDirectionalLight(sun_);
 }
 
 GameWorld::~GameWorld() {}
@@ -26,6 +28,18 @@ void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	staticGameObjectsToAdd_.push(obj);
+}
+
+void GameWorld::addLight(std::shared_ptr<Light> light) {
+	switch(light->type) {
+		case LightType::POINT:
+			break;
+		case LightType::AREA:
+			break;
+		case LightType::DIRECTIONAL:
+		default:
+			break;
+	}
 }
 
 void GameWorld::addPointLight(const Light& newLight) {

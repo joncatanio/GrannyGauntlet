@@ -41,6 +41,9 @@ public:
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
 	void addStaticGameObject(std::shared_ptr<GameObject> obj);
 
+	// Adds a new light of any type to the game world
+	void addLight(const std::shared_ptr<Light> newLight);
+
 	// Adds a new point light to the current world
 	void addPointLight(const Light& newLight);
 	

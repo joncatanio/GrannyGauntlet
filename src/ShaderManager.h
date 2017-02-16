@@ -28,11 +28,13 @@ enum class LightType { POINT, DIRECTIONAL, AREA };
  * position 	- Represents the position of the light
  * color 		- Represents the color of the light
  * orientation  - Represents the orientation of the light
+ * Type 		- The type of light represented
  */
 typedef struct Light {
 	glm::vec3 position;
 	glm::vec3 color;
 	glm::vec3 orientation;
+	LightType type;
 } Light;
 
 // Manages shaders used by the geometry of the world

@@ -26,8 +26,10 @@ private:
       nlohmann::json chars);
    int parseStaticObjects(GameWorld &world, nlohmann::json staticObjs);
    int parseDynamicObjects(GameWorld &world, nlohmann::json dynamicObjs);
+   int parseLights(GameWorld &world, nlohmann::json lightObjs);
    std::shared_ptr<GameObject> createGameObject(nlohmann::json obj,
       GameObjectType objType);
+   std::shared_ptr<Light> createLight(nlohmann::json lightObj);
 
    InputComponent* getInputComponent(nlohmann::json obj);
    PhysicsComponent* getPhysicsComponent(nlohmann::json obj);

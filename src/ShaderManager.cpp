@@ -171,9 +171,6 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		glUniform3f(shaderProgram->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
 		glUniform1f(shaderProgram->getUniform("MatShiny"), material->shininess);
 
-		// Bind texture properties
-		//glUniform1b(shaderProgram->getUniform("useTexture"),)
-
 		// Set up and bind model transform
 		M->pushMatrix();
 		M->loadIdentity();

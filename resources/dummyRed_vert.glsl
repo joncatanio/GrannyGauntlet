@@ -6,6 +6,7 @@ layout(location = 1) in vec3 vertNor;
 uniform mat4 P;
 uniform mat4 M;
 uniform mat4 V;
+uniform mat4 tiMV;
 
 out vec3 fragNor;
 out vec3 worldPos;
@@ -14,7 +15,7 @@ void main() {
 	worldPos = (V * M * vertPos).xyz;
 
 	vec3 vertNormal = normalize(vertNor);
-	fragNor = normalize((transpose(inverse(V * M)) * vec4(vertNormal, 0.0)).xyz);
+	fragNor = normalize((tiMV * vec4(vertNormal, 0.0)).xyz);
 
 	gl_Position = P * V * M * vertPos;
 }

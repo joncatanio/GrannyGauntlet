@@ -23,27 +23,31 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
 
       // Check player collision against static objects
       GameWorld& world = GameManager::instance().getGameWorld();
-      std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
-      if (objHit != nullptr) {
-         GameObjectType objTypeHit = objHit->type;
+      std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
 
-         if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-            BoundingBox* objHitBB = objHit->getBoundingBox();
-            glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
+      if (!objsHit.empty()) {
+         std::shared_ptr<GameObject> objHit = objsHit[0];
+         if (objHit != nullptr) {
+            GameObjectType objTypeHit = objHit->type;
 
-            if (normalOfObjHit.x != 0.0f) {
-               newPosition.x = oldPosition.x;
+            if (objTypeHit == GameObjectType::STATIC_OBJECT) {
+               BoundingBox* objHitBB = objHit->getBoundingBox();
+               glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
+
+               if (normalOfObjHit.x != 0.0f) {
+                  newPosition.x = oldPosition.x;
+               }
+
+               if (normalOfObjHit.z != 0.0f) {
+                  newPosition.z = oldPosition.z;
+               }
+
+               holder_->setPosition(newPosition);
+               updateBoundingBox();
             }
-
-            if (normalOfObjHit.z != 0.0f) {
-               newPosition.z = oldPosition.z;
+            if (objTypeHit == GameObjectType::FINISH_OBJECT) {
+               GameManager::instance().gameOver_ = true;
             }
-
-            holder_->setPosition(newPosition);
-            updateBoundingBox();
-         }
-         if (objTypeHit == GameObjectType::FINISH_OBJECT) {
-            GameManager::instance().gameOver_ = true;
          }
       }
    }

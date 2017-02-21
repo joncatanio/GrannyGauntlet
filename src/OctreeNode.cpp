@@ -78,28 +78,31 @@ void OctreeNode::clearTree() {
    objsEnclosed_.clear();
 }
 
-std::shared_ptr<GameObject> OctreeNode::checkIntersection(std::shared_ptr<GameObject> objToCheck) {
-   std::shared_ptr<GameObject> hitObj = nullptr;
+std::vector<std::shared_ptr<GameObject>> OctreeNode::checkIntersection(std::shared_ptr<GameObject> objToCheck) {
+   std::vector<std::shared_ptr<GameObject>> hitObjs;
 
    // Check for a child that contains the object and recursively call it's |checkIntersection| method
    for (OctreeNode& child : children_) {
       if (child.contains(objToCheck)) {
-         hitObj = child.checkIntersection(objToCheck);
+         //hitObj = child.checkIntersection(objToCheck);
+         std::vector<std::shared_ptr<GameObject>> childHitObjs = child.checkIntersection(objToCheck);
+         hitObjs.insert(hitObjs.end(), 
+          std::make_move_iterator(childHitObjs.begin()),
+          std::make_move_iterator(childHitObjs.end()));
          break;
       }
    }
 
    // Nothing hit yet, so check all the objects belonging to this node
-   if (hitObj == nullptr) {
+   //if (hitObjs.empty()) {
       for (std::shared_ptr<GameObject> objInTree : objsEnclosed_) {
          if (objToCheck->checkIntersection(objInTree)) {
-            hitObj = objInTree;
-            break;
+            hitObjs.push_back(objInTree);
          }
       }
-   }
+   //}
 
-   return hitObj;
+   return hitObjs;
 }
    
 void OctreeNode::buildTreeNode() {

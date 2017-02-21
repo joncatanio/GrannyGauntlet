@@ -4,6 +4,7 @@
 #include <array>
 #include <list>
 #include <memory>
+#include <vector>
 #include <queue>
 
 #include "glm/glm.hpp"
@@ -36,7 +37,7 @@ public:
    void clearTree();
 
    // Returns an object that intersects with the past object. Returns |nullptr| if no such object exists
-   std::shared_ptr<GameObject> checkIntersection(std::shared_ptr<GameObject> objToCheck);
+   std::vector<std::shared_ptr<GameObject>> checkIntersection(std::shared_ptr<GameObject> objToCheck);
 
 private:
 

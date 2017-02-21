@@ -25,31 +25,42 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       GameWorld& world = GameManager::instance().getGameWorld();
       std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
 
-      if (!objsHit.empty()) {
+      /*if (!objsHit.empty()) {
          std::shared_ptr<GameObject> objHit = objsHit[0];
-         if (objHit != nullptr) {
-            GameObjectType objTypeHit = objHit->type;
+         if (objHit != nullptr) {*/
+      for (auto objHit : objsHit) {
+         GameObjectType objTypeHit = objHit->type;
 
-            if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-               BoundingBox* objHitBB = objHit->getBoundingBox();
-               glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
+         if (objTypeHit == GameObjectType::STATIC_OBJECT) {
+            BoundingBox* objHitBB = objHit->getBoundingBox();
+            glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
 
-               if (normalOfObjHit.x != 0.0f) {
-                  newPosition.x = oldPosition.x;
-               }
-
-               if (normalOfObjHit.z != 0.0f) {
-                  newPosition.z = oldPosition.z;
-               }
-
-               holder_->setPosition(newPosition);
-               updateBoundingBox();
+            if (normalOfObjHit.x != 0.0f) {
+         std::cout << "HERE X!" << std::endl;
+               newPosition.x = oldPosition.x;
             }
-            if (objTypeHit == GameObjectType::FINISH_OBJECT) {
-               GameManager::instance().gameOver_ = true;
+
+            if (normalOfObjHit.y != 0.0f) {
+         std::cout << "HERE Y!" << std::endl;
+               newPosition.y = oldPosition.y;
+            }
+
+            if (normalOfObjHit.z != 0.0f) {
+         std::cout << "HERE Z!" << std::endl;
+               newPosition.z = oldPosition.z;
             }
          }
+         if (objTypeHit == GameObjectType::FINISH_OBJECT) {
+            GameManager::instance().gameOver_ = true;
+         }
       }
+
+      if (!objsHit.empty()) {
+         holder_->setPosition(newPosition);
+         updateBoundingBox();
+         //}
+      }
+      //}
    }
 
 

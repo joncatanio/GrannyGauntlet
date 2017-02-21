@@ -47,7 +47,9 @@ glm::vec3 BoundingBox::calcReflNormal(BoundingBox& other) {
    }
    if((this->min_.y - epsilon <= other.max_.y && this->min_.y + epsilon >= other.max_.y) ||
            (this->max_.y - epsilon <= other.min_.y && this->max_.y + epsilon >= other.min_.y)){
-       normal = glm::vec3(0.0, 1.0, 0.0);
+   	
+   		// TODO(rgarmsen2295): Hack, should be y as normal, figure out why collisions are matching x instead of y only
+       normal = glm::vec3(1.0, 0.0, 0.0);
    }
    if((this->min_.z - epsilon <= other.max_.z && this->min_.z + epsilon >= other.max_.z) ||
            (this->max_.z - epsilon <= other.min_.z && this->max_.z + epsilon >= other.min_.z)){

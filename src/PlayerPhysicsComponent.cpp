@@ -25,9 +25,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       GameWorld& world = GameManager::instance().getGameWorld();
       std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
 
-      /*if (!objsHit.empty()) {
-         std::shared_ptr<GameObject> objHit = objsHit[0];
-         if (objHit != nullptr) {*/
       for (auto objHit : objsHit) {
          GameObjectType objTypeHit = objHit->type;
 
@@ -36,17 +33,14 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
             glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
 
             if (normalOfObjHit.x != 0.0f) {
-         std::cout << "HERE X!" << std::endl;
                newPosition.x = oldPosition.x;
             }
 
             if (normalOfObjHit.y != 0.0f) {
-         std::cout << "HERE Y!" << std::endl;
                newPosition.y = oldPosition.y;
             }
 
             if (normalOfObjHit.z != 0.0f) {
-         std::cout << "HERE Z!" << std::endl;
                newPosition.z = oldPosition.z;
             }
          }
@@ -58,42 +52,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       if (!objsHit.empty()) {
          holder_->setPosition(newPosition);
          updateBoundingBox();
-         //}
       }
-      //}
    }
-
-
-
-
-
-
-
-
-
-   /*if (holder_->toggleMovement) {
-      glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *
-         glm::normalize(holder_->direction) * deltaTime);
-      holder_->setPosition(newPosition);
-      updateBoundingBox();
-   }
-
-   // Check player collision against static objects
-   GameWorld& world = GameManager::instance().getGameWorld();
-   std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
-   if (objHit != nullptr) {
-      GameObjectType objTypeHit = objHit->type;
-
-      if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-         if (holder_->velocity != 0.0f) {
-            glm::vec3 newPosition = holder_->getPosition() - (holder_->velocity * 
-               glm::normalize(holder_->direction) * deltaTime);
-            holder_->setPosition(newPosition);
-            updateBoundingBox();
-         }
-      }
-      if (objTypeHit == GameObjectType::FINISH_OBJECT) {
-         GameManager::instance().gameOver_ = true;
-      }
-   }*/
 }

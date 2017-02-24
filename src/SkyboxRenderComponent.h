@@ -12,6 +12,8 @@ public:
 
     void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
+    void renderShadow(std::shared_ptr<MatrixStack> M);
+
 private:
     Cubemap* cubemap;
 

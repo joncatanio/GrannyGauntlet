@@ -97,8 +97,9 @@ void CookieActionComponent::initActionComponent() {
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj1);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj2);
-    GameManager::instance().getGameWorld().addDynamicGameObject(gameObj3);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj4);
+    GameManager::instance().getGameWorld().addDynamicGameObject(gameObj3);
+
 
 }
 

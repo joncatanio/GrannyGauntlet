@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "GameWorld.h"
 #include "ViewFrustum.h"
+#include "ShadowMap.h"
 
 // Singleton class that handles any global game state not easily categorized into other areas
 class GameManager {
@@ -59,6 +60,15 @@ public:
     //Increases the remaining time
     void increaseTime(float deltaTime);
 
+	// set a Shadow Map Object
+	void setShadowMap(ShadowMap* shadowMap);
+
+	// Returns the Shadow Map object
+	ShadowMap* getShadowMap();
+
+    static constexpr float playerFarPlane = 100.0;
+    static constexpr float playerNearPlane = 0.01;
+
 private:
 
 	GameManager() {}
@@ -71,9 +81,13 @@ private:
 
    ViewFrustum* currentViewFrustum_;
 
+	ShadowMap* shadowMap_;
+
 	float score_ = 0.0;
 
     float time_;
+
+
 };
 
 #endif

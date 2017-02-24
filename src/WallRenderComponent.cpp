@@ -15,3 +15,8 @@ void WallRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<M
 	ShaderManager& shaderManager = ShaderManager::instance();
 	shaderManager.renderObject(holder_, shaderName_, shape_, material_, P, V, M);
 }
+
+void WallRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
+	ShaderManager& shaderManager = ShaderManager::instance();
+	shaderManager.renderShadowPass(holder_, shape_, M);
+}

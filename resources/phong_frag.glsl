@@ -1,4 +1,5 @@
 #version 330 core
+uniform sampler2D shadowMapTex;
 
 #define MAX_POINT_LIGHTS 10
 #define MAX_DIRECTION_LIGHTS 10
@@ -36,6 +37,8 @@ uniform mat4 V;
 
 in vec3 positionInCamSpace;
 in vec3 normalInWorldSpace;
+in vec3 positionInLightSpace;
+
 
 out vec4 color;
 
@@ -97,6 +100,24 @@ void main() {
 	// Calculate ambient color
 	vec3 ambient = MatAmb;
 
+	//sm
+	float shadeFactor = 1.0;
+
+	vec3 shifted = (positionInLightSpace + 1.0) / 2.0;
+
+	if(shifted.x > 1.0 || shifted.x < 0.0 || shifted.y > 1.0 || shifted.y < 0.0 ) {
+	    shadeFactor = 0.3;
+	} else {
+        float curDepth = shifted.z;
+        float smValue = texture(shadowMapTex, shifted.xy).r;
+
+        if((smValue + 0.001) < curDepth) {
+               shadeFactor = 0.5;
+        }
+    }
+
+
 	// Calculate the total color
-	color = vec4(directionalLightColor + ambient, 1.0);
+	color = shadeFactor * vec4(directionalLightColor + ambient, 1.0);
+	//color = vec4(vec3(smValue), 1.0);
 }

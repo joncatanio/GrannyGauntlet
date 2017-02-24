@@ -124,10 +124,14 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 
 void GameWorld::drawGameObjects() {
 	GameManager& gameManager = GameManager::instance();
+
+    gameManager.getShadowMap()->bindForDraw();
+
 	Camera& camera = gameManager.getCamera();
    ViewFrustum& viewFrustum = gameManager.getViewFrustum();
 
 	WindowManager& windowManager = WindowManager::instance();
+
 	
 	// Create the matrix stacks
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
@@ -137,9 +141,11 @@ void GameWorld::drawGameObjects() {
 	// Apply perspective projection
 	P->pushMatrix();
 	//TODO(nurgan) check for better way of not clipping skybox instead of increasing far plane
-	P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 300.0f);
+	//P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 300.0f);
+    P->perspective(45.0f, windowManager.getAspectRatio(), GameManager::playerNearPlane, GameManager::playerFarPlane);
 
-	// Set up view Matrix
+
+    // Set up view Matrix
 	V->pushMatrix();
 	V->loadIdentity();
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
@@ -165,6 +171,23 @@ void GameWorld::drawGameObjects() {
    #ifdef DEBUG
    drawVFCViewport();
    #endif
+}
+
+void GameWorld::renderShadowMap() {
+
+    GameManager::instance().getShadowMap()->bindForShadowPass();
+
+    std::shared_ptr<MatrixStack> M = std::make_shared<MatrixStack>();
+
+    // Draw non-static objects
+    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
+            obj->renderToShadowMap(M);
+    }
+
+    // Draw static objects
+    for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+            obj->renderToShadowMap(M);
+    }
 }
 
 // For debugging view frustum culling. This is mostly magic.

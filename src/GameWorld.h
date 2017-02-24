@@ -83,6 +83,9 @@ public:
 	// Calls the draw function on all GameObjects in the world
 	void drawGameObjects();
 
+	// Renders all GameObjects to the shadow map
+	void renderShadowMap();
+
    // Draws a small view port to see view frustum culling
    void drawVFCViewport();
 

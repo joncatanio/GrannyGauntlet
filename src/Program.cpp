@@ -72,6 +72,10 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("V");
 	addUniform("P");
 
+	// Add light View and Projection
+	addUniform("lightV");
+	addUniform("lightP");
+
 	// Add transpose inverse M, so no per vertex calculation
 	addUniform("tiM");
 
@@ -85,6 +89,8 @@ void Program::addDefaultAttributesAndUniforms() {
 
 	//TODO(nurgan) remove from default attributs
 	addUniform("cubemap");
+
+	addUniform("shadowMapTex");
 
 	// Adds material uniforms
 	addUniform("MatAmb");

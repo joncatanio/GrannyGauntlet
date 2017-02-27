@@ -177,6 +177,7 @@ static void mouseCallback(GLFWwindow* window, int button, int action, int mods) 
 }
 
 static void cursorPositionCallback(GLFWwindow* window, double posX, double posY) {
+#ifdef ENABLE_MOUSE
 	WindowManager& windowManager = WindowManager::instance();
     GameManager& gameManager = GameManager::instance();
     Camera& camera = gameManager.getCamera();
@@ -195,6 +196,7 @@ static void cursorPositionCallback(GLFWwindow* window, double posX, double posY)
 
     camera.changeAlpha(deltaAlpha);
     camera.changeBeta(deltaBeta);
+#endif
 }
 
 static void resizeCallback(GLFWwindow* window, int width, int height) {

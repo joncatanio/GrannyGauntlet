@@ -3,6 +3,8 @@
 
 #include <ctime>
 #include <iostream>
+#include <iterator>
+#include <vector>
 #include <queue>
 
 #include <stdio.h>
@@ -87,8 +89,8 @@ public:
    void drawVFCViewport();
 
 	// Checks to see if the passed Game Object collides with any other object in the world.
-	// Returns the type of object hit or not hit
-	std::shared_ptr<GameObject> checkCollision(std::shared_ptr<GameObject> objToCheck);
+	// Returns an array of all objects collided with
+	std::vector<std::shared_ptr<GameObject>> checkCollision(std::shared_ptr<GameObject> objToCheck);
 
 	// Returns the number of render iterations performed so far
 	unsigned long getRenderCount();

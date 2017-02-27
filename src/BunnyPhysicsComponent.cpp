@@ -19,11 +19,12 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 	setupInitialRotation();
 	updateBoundingBox();
 
-	std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
+	std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
 
 	// Don't randomly place a bunny on another bunny
 	// Bunnies with no direction (static at 0, 0, 0) are currently OK - rare and adds an interesting twist
-	while (objHit != nullptr) {
+	while (!objsHit.empty()) {
+		std::shared_ptr<GameObject> objHit = objsHit[0];
 
 		// Get a random start location between (-10, 0, -10) and (10, 0, 10)
 		float randomStartX = (std::rand() % 20) - 10.0f;
@@ -39,7 +40,7 @@ void BunnyPhysicsComponent::initObjectPhysics() {
 		setupInitialRotation();
 		updateBoundingBox();
 
-		objHit = world.checkCollision(holder_);
+		objsHit = world.checkCollision(holder_);
 	}
 }
 
@@ -63,8 +64,9 @@ void BunnyPhysicsComponent::updatePhysics(float deltaTime) {
 	updateBoundingBox();
 
 	// If we hit someone or we're at the edge of the acceptable "world", then reverse direction
-	std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
-	if (objHit != nullptr) {
+	std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
+	if (!objsHit.empty()) {
+		std::shared_ptr<GameObject> objHit = objsHit[0];
 		GameObjectType objTypeHit = objHit->type;
 
 		if (objTypeHit == GameObjectType::PLAYER) {

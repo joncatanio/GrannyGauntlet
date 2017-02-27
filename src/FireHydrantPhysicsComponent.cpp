@@ -15,7 +15,6 @@ void FireHydrantPhysicsComponent::initObjectPhysics() {
 
 void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
    GameWorld& world = GameManager::instance().getGameWorld();
-   std::shared_ptr<GameObject> objHit = world.checkCollision(holder_);
 
    glm::vec3 oldPosition = holder_->getPosition();
    glm::vec3 newPosition = holder_->getPosition() + (holder_->velocity *
@@ -32,7 +31,9 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->velocity = 0.0f;
    }
 
-   if (objHit != nullptr) {
+   std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
+   if (!objsHit.empty()) {
+      std::shared_ptr<GameObject> objHit = objsHit[0];
       GameObjectType objTypeHit = objHit->type;
       
       if (objTypeHit == GameObjectType::PLAYER) {

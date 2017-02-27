@@ -204,29 +204,33 @@ void GameWorld::drawVFCViewport() {
 	}
 }
 
-std::shared_ptr<GameObject> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {
+std::vector<std::shared_ptr<GameObject>> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {
 	GameManager& gameManager = GameManager::instance();
+	std::vector<std::shared_ptr<GameObject>> collidedObjs;
+
    std::shared_ptr<GameObject> player = gameManager.getPlayer();
 
 	// Check the player against the object
 	if (player != objToCheck && objToCheck->checkIntersection(player)) {
-		return player;
+		collidedObjs.push_back(player);
 	}
 
 	// Check against dynamic objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 		if (obj != objToCheck && objToCheck->checkIntersection(obj)) {
-			return obj;
+			collidedObjs.push_back(obj);
 		}
 	}
 
 	// Check against static objects
-	std::shared_ptr<GameObject> objHit = staticGameObjectsTree_.checkIntersection(objToCheck);
-	if (objHit != nullptr) {
-		return objHit;
+	std::vector<std::shared_ptr<GameObject>> staticObjsCollided = staticGameObjectsTree_.checkIntersection(objToCheck);
+	if (!staticObjsCollided.empty()) {
+		collidedObjs.insert(collidedObjs.end(), 
+		 std::make_move_iterator(staticObjsCollided.begin()),
+		 std::make_move_iterator(staticObjsCollided.end()));
 	}
 
-	return nullptr;
+	return collidedObjs;
 }
 
 unsigned long GameWorld::getRenderCount() {

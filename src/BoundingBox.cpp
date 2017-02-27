@@ -37,26 +37,24 @@ bool BoundingBox::checkIntersection(BoundingBox& other) {
 }
 
 glm::vec3 BoundingBox::calcReflNormal(BoundingBox& other) {
-   glm::vec3 normal;
+   glm::vec3 normal = glm::vec3(0.0, 0.0, 0.0);
    float epsilon = 1.5;
 
    //check on which side of the bounding box of the object the cookie hit and create normal for reflection
    if((this->min_.x - epsilon <= other.max_.x && this->min_.x + epsilon >= other.max_.x) ||
            (this->max_.x - epsilon <= other.min_.x && this->max_.x + epsilon >= other.min_.x)) {
-       normal = glm::vec3(1.0, 0.0, 0.0);
+       normal.x = 1.0;
    }
    if((this->min_.y - epsilon <= other.max_.y && this->min_.y + epsilon >= other.max_.y) ||
            (this->max_.y - epsilon <= other.min_.y && this->max_.y + epsilon >= other.min_.y)){
-
-       // TODO(rgarmsen2295): Hack, should be y as normal, figure out why collisions are matching x instead of y only
-       normal = glm::vec3(1.0, 0.0, 0.0);
+       normal.y = 1.0;
    }
    if((this->min_.z - epsilon <= other.max_.z && this->min_.z + epsilon >= other.max_.z) ||
            (this->max_.z - epsilon <= other.min_.z && this->max_.z + epsilon >= other.min_.z)){
-       normal = glm::vec3(0.0, 0.0, 1.0);
+       normal.z = 1.0;
    }
 
-   return normal;
+   return glm::normalize(normal);
 }
 
 void BoundingBox::update(glm::mat4& transform) {

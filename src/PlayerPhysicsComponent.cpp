@@ -13,7 +13,6 @@ void PlayerPhysicsComponent::initObjectPhysics() {
 }
 
 void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
-
    if (holder_->toggleMovement && holder_->velocity != 0.0f) {
       glm::vec3 oldPosition = holder_->getPosition();
       glm::vec3 newPosition = oldPosition + (holder_->velocity *

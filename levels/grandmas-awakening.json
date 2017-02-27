@@ -1623,36 +1623,6 @@
          "object-name": "bubble tree",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -17.0,
-            "y": 2.5,
-            "z": -50.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 2.5,
-            "y": 2.5,
-            "z": 2.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "BubbleTree",
-            "shader": "Phong",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "bubble tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
             "x": -10.0,
             "y": 7.5,
             "z": -20.0
@@ -2015,7 +1985,7 @@
          "pos": {
             "x": -20.0,
             "y": 8.5,
-            "z": -56.0
+            "z": -50.0
          },
          "dir": {
             "x": 0.0,

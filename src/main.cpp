@@ -18,6 +18,11 @@
 #include "WallRenderComponent.h"
 #include "CookieActionComponent.h"
 
+#ifdef _WIN32
+#include <gl\gl.h>
+#pragma comment(lib, "opengl32.lib")
+#endif
+
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
 

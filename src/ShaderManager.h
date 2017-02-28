@@ -106,6 +106,20 @@ private:
 	// A hash map of the currently linked shader programs. The key is the shader program name and the value is a pointer to the Program
 	std::unordered_map<std::string, std::shared_ptr<Program>> shaderPrograms;
 
+	// Calculate the View Matrix for the given light (for Shadow Mapping)
+	glm::mat4 calculateLightView(std::shared_ptr<Light> light);
+
+	// Calculate the Projection Matrix for the given light (for Shadow Mapping)
+	glm::mat4 calculateLightProjection(std::shared_ptr<Light> light);
+
+    // calculate the "middle" of the shoadow map in world sapce
+    glm::vec3 calculateShadowMapMid();
+
+    // calculate the light position as used for shadow mapping
+    glm::vec3 calculateShadowMapLightPos(std::shared_ptr<Light> light);
+
+	float getViewFrustumMaxDiagonal();
+
 	ShaderManager();
 
 };

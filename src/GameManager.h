@@ -66,7 +66,7 @@ public:
 	// Returns the Shadow Map object
 	ShadowMap* getShadowMap();
 
-    static constexpr float playerFarPlane = 100.0;
+    static constexpr float playerFarPlane = 300.0;
     static constexpr float playerNearPlane = 0.01;
 
 private:

@@ -105,6 +105,32 @@ void main() {
 
 	vec3 shifted = (positionInLightSpace + 1.0) / 2.0;
 
+	float smTexOffset = 1.0/16384.0;
+	float samples = 0.0;
+	float shadedFrags = 0.0;
+
+	for (float i = -3.0; i<=3.0; i++) {
+		for (float j = -3.0; j<=3.0; j++) {
+		        vec3 shiftedOffsetted = vec3(shifted.x + i * smTexOffset, shifted.y + j * smTexOffset, shifted.z);
+    	    	if(shiftedOffsetted.x > 1.0 || shiftedOffsetted.x < 0.0 || shiftedOffsetted.y > 1.0 || shiftedOffsetted.y < 0.0 ) {
+            	    //shadeFactor = 0.3;
+            	} else {
+                    float curDepth = shifted.z;
+                    float smValue = texture(shadowMapTex, shiftedOffsetted.xy).r;
+
+                    samples++;
+                    if((smValue + 0.001) < curDepth) {
+                           //shadeFactor = 0.5;
+                           shadedFrags++;
+                    }
+                }
+    	}
+	}
+
+	float PCFfac = shadedFrags / samples;
+	shadeFactor = PCFfac * 0.5 + (1.0 -PCFfac) * 1.0;
+
+    /*
 	if(shifted.x > 1.0 || shifted.x < 0.0 || shifted.y > 1.0 || shifted.y < 0.0 ) {
 	    shadeFactor = 0.3;
 	} else {
@@ -115,7 +141,7 @@ void main() {
                shadeFactor = 0.5;
         }
     }
-
+    */
 
 	// Calculate the total color
 	color = shadeFactor * vec4(directionalLightColor + ambient, 1.0);

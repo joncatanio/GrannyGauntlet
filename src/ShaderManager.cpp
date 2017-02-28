@@ -292,6 +292,7 @@ glm::mat4 ShaderManager::calculateLightView(std::shared_ptr<Light> light) {
     //glm::mat4 lightV = glm::lookAt(smLightPos, smLightPos + light->orientation, glm::vec3(0.0, 1.0, 0.0));
     glm::mat4 lightV = glm::lookAt(smLightPos, smMiddle, glm::vec3(0.0, 1.0, 0.0));
 
+    /*
     std::cout << "SM light pos " << smLightPos.x << " "  << smLightPos.y << " " << smLightPos.z << std::endl;
     std::cout << "light orientation " << light->orientation.x << " "<< light->orientation.y << " "<< light->orientation.z << std::endl;
     std::cout << "SM mid "  << smMiddle.x << " "  << smMiddle.y << " " << smMiddle.z << std::endl;
@@ -299,6 +300,7 @@ glm::mat4 ShaderManager::calculateLightView(std::shared_ptr<Light> light) {
     std::cout << "cam POS "  << camera.getEye().x << " "  << camera.getEye().y << " " << camera.getEye().z << std::endl;
     std::cout << "cam LA "  << camera.getLookAt().x << " "  << camera.getLookAt().y << " " << camera.getLookAt().z << std::endl;
     std::cout << "hd " << halfDiagonal << std::endl;
+    */
 
     // print camera position and lookAt to check why orientation is bs
 

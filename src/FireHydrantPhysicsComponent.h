@@ -19,7 +19,7 @@ private:
    float gravity;
    float yVelocity;
 
-   /* Animation datat */
+   /* Animation data */
    bool animated;
    glm::vec3 animRotAxis;
    const float animSpeed = 5.0;

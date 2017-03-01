@@ -3,7 +3,6 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <list>
 
 class MatrixTransform {
 public:
@@ -25,7 +24,7 @@ public:
 
    /* Adds a rotation matrix to the rotate_ list, this list is used as a stack
       but needs to be iterated through in updateTransform() */
-   void pushRotation(float angle, const glm::vec3& axis);
+   void addRotation(float angle, const glm::vec3& axis);
 
    void popRotation();
 private:
@@ -34,7 +33,7 @@ private:
 
 	glm::mat4 translate_;
 	glm::mat4 scale_;
-	std::list<glm::mat4> rotate_;
+	glm::mat4 rotate_;
 
 	void updateTransform();
 };

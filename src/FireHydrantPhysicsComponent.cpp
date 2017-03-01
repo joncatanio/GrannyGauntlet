@@ -29,6 +29,12 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
    } else {
       yVelocity = 0.0f;
       holder_->velocity = 0.0f;
+
+      // Set the position above ground plane.
+      // TODO (noj) we'll want to set the position relative to the object it lands on.
+      glm::vec3 newPos = holder_->getPosition();
+      newPos.y = 1.0f;
+      holder_->setPosition(newPos);
    }
 
    std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
@@ -48,7 +54,6 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          // Initialize animation parameters.
          animated = true;
          animRotAxis = rotAxis;
-         animDuration = 0.0f;
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();
@@ -73,14 +78,6 @@ void FireHydrantPhysicsComponent::updateAnimation(float deltaTime) {
    if (holder_->velocity == 0.0f) {
       animated = false;
    } else {
-      if (animDuration != 0.0f) {
-         // Pop off the previous rotation.
-         holder_->popRotation();
-      }
-
-      animDuration += deltaTime * animSpeed;
-      /* TODO (noj) this isn't really safe if other things push on animations
-         make like a map who's key is the rotation axis. */
-      holder_->pushRotation(animDuration, animRotAxis);
+      holder_->addRotation(deltaTime * animSpeed, animRotAxis);
    }
 }

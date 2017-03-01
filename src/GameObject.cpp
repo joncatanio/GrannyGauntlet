@@ -95,8 +95,8 @@ void GameObject::setYAxisRotation(float angle) {
 	transform.setRotate(angle, yAxis);
 }
 
-void GameObject::pushRotation(float angle, const glm::vec3& axis) {
-   transform.pushRotation(angle, axis);
+void GameObject::addRotation(float angle, const glm::vec3& axis) {
+   transform.addRotation(angle, axis);
 }
 
 void GameObject::popRotation() {

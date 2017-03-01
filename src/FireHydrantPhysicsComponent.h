@@ -22,7 +22,6 @@ private:
    /* Animation datat */
    bool animated;
    glm::vec3 animRotAxis;
-   float animDuration;
    const float animSpeed = 5.0;
 };
 

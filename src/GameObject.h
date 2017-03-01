@@ -67,7 +67,7 @@ public:
 
     void setYAxisRotation(float angle);
 
-    void pushRotation(float angle, const glm::vec3& axis);
+    void addRotation(float angle, const glm::vec3& axis);
 
     void popRotation();
 

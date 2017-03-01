@@ -1,4 +1,5 @@
 #include "ShaderManager.h"
+#include "ShapeManager.h"
 
 ShaderManager& ShaderManager::instance() {
 	static ShaderManager *instance = new ShaderManager();
@@ -189,6 +190,29 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		shape->draw(shaderProgram);
 
 		M->popMatrix();
+
+
+#ifdef DEBUG_BB
+      ShapeManager& shapeManager = ShapeManager::instance();
+      std::shared_ptr<Shape> shapeToDraw = shapeManager.getShape("Sphere");
+      if (objToRender->getBoundingBox()) {
+         for (int i = 0; i < 8; i++) {
+            M->pushMatrix();
+            M->loadIdentity();
+            glm::vec3 rotation = glm::vec3(objToRender->getBoundingBox()->boxPoints[i].x,
+                      objToRender->getBoundingBox()->boxPoints[i].y,
+                      objToRender->getBoundingBox()->boxPoints[i].z
+            );
+
+            M->translate(rotation);
+		      M->scale(0.25);
+            glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+
+            shapeToDraw->draw(shaderProgram);
+            M->popMatrix();
+         }
+      }
+#endif
 
 		unbindShader();
 	}

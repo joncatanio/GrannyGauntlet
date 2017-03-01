@@ -25,8 +25,6 @@ public:
    /* Adds a rotation matrix to the rotate_ list, this list is used as a stack
       but needs to be iterated through in updateTransform() */
    void addRotation(float angle, const glm::vec3& axis);
-
-   void popRotation();
 private:
 
 	glm::mat4 transform_;

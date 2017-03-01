@@ -47,10 +47,6 @@ void MatrixTransform::addRotation(float angle, const glm::vec3& axis) {
    updateTransform();
 }
 
-void MatrixTransform::popRotation() {
-   updateTransform();
-}
-
 void MatrixTransform::updateTransform() {
    transform_ = translate_ * rotate_ * scale_;
 }

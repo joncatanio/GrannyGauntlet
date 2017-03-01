@@ -69,8 +69,6 @@ public:
 
     void addRotation(float angle, const glm::vec3& axis);
 
-    void popRotation();
-
     void calculateAndSetInitialRotation();
 
     void changeMaterial(std::shared_ptr<Material> newMaterial);

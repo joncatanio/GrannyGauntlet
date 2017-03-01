@@ -99,10 +99,6 @@ void GameObject::addRotation(float angle, const glm::vec3& axis) {
    transform.addRotation(angle, axis);
 }
 
-void GameObject::popRotation() {
-   transform.popRotation();
-}
-
 void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {
 	if (newMaterial != render_->getMaterial()) {
 		render_->setMaterial(newMaterial);

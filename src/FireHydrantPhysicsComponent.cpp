@@ -61,6 +61,7 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          glm::vec3 normal = objBB->calcReflNormal(*thisBB);
          holder_->direction = glm::reflect(holder_->direction, normal);
+         animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
 
          newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
          newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);

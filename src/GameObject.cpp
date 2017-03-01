@@ -95,6 +95,13 @@ void GameObject::setYAxisRotation(float angle) {
 	transform.setRotate(angle, yAxis);
 }
 
+void GameObject::pushRotation(float angle, const glm::vec3& axis) {
+   transform.pushRotation(angle, axis);
+}
+
+void GameObject::popRotation() {
+   transform.popRotation();
+}
 
 void GameObject::changeMaterial(std::shared_ptr<Material> newMaterial) {
 	if (newMaterial != render_->getMaterial()) {

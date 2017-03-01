@@ -44,6 +44,11 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          holder_->direction = reactDir;
          holder_->velocity = objHit->velocity * 2.0;
+
+         // Initialize animation parameters.
+         animated = true;
+         animRotAxis = rotAxis;
+         animDuration = 0.0f;
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();
@@ -57,5 +62,25 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          holder_->setPosition(newPosition);
          updateBoundingBox();
       }
+   }
+
+   if (animated) {
+      updateAnimation(deltaTime);
+   }
+}
+
+void FireHydrantPhysicsComponent::updateAnimation(float deltaTime) {
+   if (holder_->velocity == 0.0f) {
+      animated = false;
+   } else {
+      if (animDuration != 0.0f) {
+         // Pop off the previous rotation.
+         holder_->popRotation();
+      }
+
+      animDuration += deltaTime * animSpeed;
+      /* TODO (noj) this isn't really safe if other things push on animations
+         make like a map who's key is the rotation axis. */
+      holder_->pushRotation(animDuration, animRotAxis);
    }
 }

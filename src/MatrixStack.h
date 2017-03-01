@@ -41,6 +41,8 @@ public:
    void scale(float size);
    // Right multiplies the top matrix by a rotation matrix (angle in deg)
    void rotate(float angle, const glm::vec3 &axis);
+   // Same as rotate but takes the matrix already
+   void rotateMat4(glm::mat4 &rotMat);
 
    // Gets the top matrix
    const glm::mat4 &topMatrix();

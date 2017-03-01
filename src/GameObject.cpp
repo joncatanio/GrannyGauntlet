@@ -67,6 +67,9 @@ glm::vec3& GameObject::getScale() {
 }
 
 void GameObject::setOrientAngle(float orientAngle) {
+   static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
+
+   transform.setRotate(yRotationAngle_ + orientAngle, yAxis);
    orientAngle_ = orientAngle;
 }
 
@@ -92,7 +95,7 @@ void GameObject::setYAxisRotation(float angle) {
 	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
 
 	yRotationAngle_ = angle;
-	transform.setRotate(angle, yAxis);
+	transform.setRotate(angle + orientAngle_, yAxis);
 }
 
 void GameObject::addRotation(float angle, const glm::vec3& axis) {

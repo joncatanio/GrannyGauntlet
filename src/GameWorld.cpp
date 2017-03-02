@@ -137,13 +137,16 @@ void GameWorld::drawGameObjects() {
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
 	std::shared_ptr<MatrixStack> M = std::make_shared<MatrixStack>();
 	std::shared_ptr<MatrixStack> V = std::make_shared<MatrixStack>();
+    //create another projection, identical but with closer far plane for VFC
+    std::shared_ptr<MatrixStack> cullP = std::make_shared<MatrixStack>();
 
 	// Apply perspective projection
 	P->pushMatrix();
+    cullP->pushMatrix();
 	//TODO(nurgan) check for better way of not clipping skybox instead of increasing far plane
 	//P->perspective(45.0f, windowManager.getAspectRatio(), 0.01f, 300.0f);
-    P->perspective(45.0f, windowManager.getAspectRatio(), GameManager::playerNearPlane, GameManager::playerFarPlane);
-
+    P->perspective(45.0f, windowManager.getAspectRatio(), GameManager::nearPlane, GameManager::camFarPlane);
+    cullP->perspective(45.0f, windowManager.getAspectRatio(), GameManager::nearPlane, GameManager::cullFarPlane);
 
     // Set up view Matrix
 	V->pushMatrix();
@@ -151,7 +154,7 @@ void GameWorld::drawGameObjects() {
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
    // Calculate view frustum planes
-   viewFrustum.extractPlanes(P->topMatrix(), V->topMatrix());
+   viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
 	// Draw non-static objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {

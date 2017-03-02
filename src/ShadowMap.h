@@ -25,15 +25,14 @@ public:
 
     GLuint getShadowMap();
 
-
+    //static constexpr GLuint SM_WIDTH = 4096, SM_WIDTH = 4096;
+    static constexpr GLuint SM_WIDTH = 8192, SM_HEIGHT = 8192;
+    //static constexpr GLuint SM_WIDTH = 16384, SM_WIDTH = 16384;
 
 private:
     GLuint shadowMapFBO;
 
     GLuint shadowMap;
 
-    //const GLuint S_WIDTH = 2048, S_HEIGHT = 2048;
-    //const GLuint S_WIDTH = 4096, S_HEIGHT = 4096;
-    const GLuint S_WIDTH = 16384, S_HEIGHT = 16384;
 };
 #endif

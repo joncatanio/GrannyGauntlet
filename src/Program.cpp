@@ -76,6 +76,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("lightV");
 	addUniform("lightP");
 
+	// Add shadow map size
+	addUniform("shadowMapSize");
+
 	// Add transpose inverse M, so no per vertex calculation
 	addUniform("tiM");
 

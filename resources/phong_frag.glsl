@@ -35,6 +35,37 @@ uniform float MatShiny;
 uniform mat4 M;
 uniform mat4 V;
 
+uniform vec2 shadowMapSize;
+
+uniform float PCFkernelRadius = 4.0;
+
+//Poisson Disc for PCF filtering
+uniform vec2 poission[25] = { vec2(-0.978698, -0.0884121),
+                                  vec2(-0.841121, 0.521165),
+                                  vec2(-0.717460, -0.50322),
+                                  vec2(-0.702933, 0.903134),
+                                  vec2(-0.663198, 0.15482),
+                                  vec2(-0.495102, -0.232887),
+                                  vec2(-0.364238, -0.961791),
+                                  vec2(-0.345866, -0.564379),
+                                  vec2(-0.325663, 0.64037),
+                                  vec2(-0.182714, 0.321329),
+                                  vec2(-0.142613, -0.0227363),
+                                  vec2(-0.0564287, -0.36729),
+                                  vec2(-0.0185858, 0.918882),
+                                  vec2(0.0381787, -0.728996),
+                                  vec2(0.16599, 0.093112),
+                                  vec2(0.253639, 0.719535),
+                                  vec2(0.369549, -0.655019),
+                                  vec2(0.423627, 0.429975),
+                                  vec2(0.530747, -0.364971),
+                                  vec2(0.566027, -0.940489),
+                                  vec2(0.639332, 0.0284127),
+                                  vec2(0.652089, 0.669668),
+                                  vec2(0.773797, 0.345012),
+                                  vec2(0.968871, 0.840449),
+                                  vec2(0.991882, -0.657338) };
+
 in vec3 positionInCamSpace;
 in vec3 normalInWorldSpace;
 in vec3 positionInLightSpace;
@@ -83,6 +114,51 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 	return dirLightColor;
 }
 
+// Credit for rand function goes to:
+// http://byteblacksmith.com/improvements-to-the-canonical-one-liner-glsl-rand-for-opengl-es-2-0/
+highp float rand(vec2 co)
+{
+    highp float a = 12.9898;
+    highp float b = 78.233;
+    highp float c = 43758.5453;
+    highp float dt= dot(co.xy ,vec2(a,b));
+    highp float sn= mod(dt,3.14);
+    return fract(sin(sn) * c);
+}
+
+float shadowFactor() {
+
+    // transform to texture spacde
+	vec3 shifted = (positionInLightSpace + 1.0) / 2.0;
+	// PCF samples and shaded fragment count
+	float samples = 9.0;
+	float shadedFrags = 0.0;
+
+    for (int i = 0; i < samples; i++) {
+        // generate random index for possion disc
+        int index = int(25.0*rand(gl_FragCoord.xy))%25;
+        // get poisson disc value and scale it
+        vec2 offset = vec2(poission[i].x * (PCFkernelRadius / shadowMapSize.x), poission[i].y * (PCFkernelRadius / shadowMapSize.y));
+        // apply poisson offset
+    	vec3 shiftedOffsetted = vec3(shifted.x + offset.x, shifted.y + offset.y, shifted.z);
+
+        // fragment still in shadow map?
+    	if(shiftedOffsetted.x <= 1.0 && shiftedOffsetted.x >= 0.0 && shiftedOffsetted.y <= 1.0 && shiftedOffsetted.y >= 0.0) {
+    	    // get current and sampled shadow map depth
+            float curDepth = shifted.z;
+            float smValue = texture(shadowMapTex, shiftedOffsetted.xy).r;
+            // if sampled depth is smaller, fragment is shaded
+            if((smValue + 0.001) < curDepth) {
+                shadedFrags++;
+            }
+        }
+    }
+
+    // calculate shadow factor
+	float PCFfactor = shadedFrags / samples;
+	return PCFfactor * 0.5 + (1.0 -PCFfactor) * 1.0;
+}
+
 void main() {
 
 	// Normalize the normal of the fragment in world space
@@ -100,50 +176,9 @@ void main() {
 	// Calculate ambient color
 	vec3 ambient = MatAmb;
 
-	//sm
-	float shadeFactor = 1.0;
-
-	vec3 shifted = (positionInLightSpace + 1.0) / 2.0;
-
-	float smTexOffset = 1.0/16384.0;
-	float samples = 0.0;
-	float shadedFrags = 0.0;
-
-	for (float i = -3.0; i<=3.0; i++) {
-		for (float j = -3.0; j<=3.0; j++) {
-		        vec3 shiftedOffsetted = vec3(shifted.x + i * smTexOffset, shifted.y + j * smTexOffset, shifted.z);
-    	    	if(shiftedOffsetted.x > 1.0 || shiftedOffsetted.x < 0.0 || shiftedOffsetted.y > 1.0 || shiftedOffsetted.y < 0.0 ) {
-            	    //shadeFactor = 0.3;
-            	} else {
-                    float curDepth = shifted.z;
-                    float smValue = texture(shadowMapTex, shiftedOffsetted.xy).r;
-
-                    samples++;
-                    if((smValue + 0.001) < curDepth) {
-                           //shadeFactor = 0.5;
-                           shadedFrags++;
-                    }
-                }
-    	}
-	}
-
-	float PCFfac = shadedFrags / samples;
-	shadeFactor = PCFfac * 0.5 + (1.0 -PCFfac) * 1.0;
-
-    /*
-	if(shifted.x > 1.0 || shifted.x < 0.0 || shifted.y > 1.0 || shifted.y < 0.0 ) {
-	    shadeFactor = 0.3;
-	} else {
-        float curDepth = shifted.z;
-        float smValue = texture(shadowMapTex, shifted.xy).r;
-
-        if((smValue + 0.001) < curDepth) {
-               shadeFactor = 0.5;
-        }
-    }
-    */
+	// Shadow Mapping, calculate shadow Factor
+    float shadowFactor = shadowFactor();
 
 	// Calculate the total color
-	color = shadeFactor * vec4(directionalLightColor + ambient, 1.0);
-	//color = vec4(vec3(smValue), 1.0);
+	color = shadowFactor * vec4(directionalLightColor + ambient, 1.0);
 }

@@ -173,14 +173,13 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		glUniform1f(shaderProgram->getUniform("MatShiny"), material->shininess);
 
 
-
+        // Calculate and bind light transorms and shadow Map
         glm::mat4 lightP = calculateLightProjection(directionalLights.at(0));
-
-        //TODO(nurgan) check +/- if SM not working
         glm::mat4 lightV = calculateLightView(directionalLights.at(0));
 
         glUniformMatrix4fv(shaderProgram->getUniform("lightP"), 1, GL_FALSE, glm::value_ptr(lightP));
         glUniformMatrix4fv(shaderProgram->getUniform("lightV"), 1, GL_FALSE, glm::value_ptr(lightV));
+        glUniform2f(shaderProgram->getUniform("shadowMapSize"), ShadowMap::SM_WIDTH, ShadowMap::SM_HEIGHT);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, gameManager.getShadowMap()->getShadowMap());
@@ -220,27 +219,13 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		GameManager& gameManager = GameManager::instance();
 		GameWorld& gameWorld = gameManager.getGameWorld();
 
-		// Point lights
-		// TODO(rgarmsen2295): Add point lights back
-
-		// Directional lights
-		// TODO(rgarmsen2295): Implement more cleanly using "uniform buffer objects"
 		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
 		int numDirectionLights = directionalLights.size();
 
-
-
-
-		//TODO(nurgan) check +/- if SM not working
         std::shared_ptr<Light> light = directionalLights.at(0);
 
-        //TODO(nurgan) create light P and V!
-        //TODO(nurgan) calculate good values for the ortho projection
         glm::mat4 lightP = calculateLightProjection(light);
-
-
         glm::mat4 lightV = calculateLightView(light);
-
 
 		glUniformMatrix4fv(shaderProgram->getUniform("lightP"), 1, GL_FALSE, glm::value_ptr(lightP));
 		glUniformMatrix4fv(shaderProgram->getUniform("lightV"), 1, GL_FALSE, glm::value_ptr(lightV));
@@ -255,76 +240,34 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-		// Draw bunny
-		// TODO(rgarmsen): Make shape not need the shader program
 		shape->draw(shaderProgram);
-        //TODO(nurgan) check if draw is OK, or if I need a shadow mapping draw
 
 		M->popMatrix();
 
 		unbindShader();
 
-        //glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 	}
 }
 
 glm::mat4 ShaderManager::calculateLightView(std::shared_ptr<Light> light) {
-    //TODO(nurgan) check +/- if SM not working
-    //glm::mat4 lightV = glm::lookAt(light->position + glm::vec3(0.0, 25.0, 0.0), light->position + glm::vec3(0.0, 25.0, 0.0) + light->orientation, glm::vec3(0.0, 1.0, 0.0));
-    //glm::vec3 smLightPos = light->position + glm::vec3(0.0, halfDiagonal - light->position.y, 0.0);
-
-    float halfDiagonal = getViewFrustumMaxDiagonal() / 2.0f;
 
     Camera camera = GameManager::instance().getCamera();
-    //glm::vec3 camOrientation = glm::normalize(camera.getLookAt() - camera.getEye());
-    //glm::vec3 camOrientation = camera.getLookAt();
-    //glm::vec3 lightOrientation = glm::normalize(-light->orientation);
-    //float heightFac = halfDiagonal / lightOrientation.y;
-
-	//glm::vec3 camOrientationNoY = glm::normalize(glm::vec3(camera.getLookAt().x, 0.0f, camera.getLookAt().z));
-	//glm::vec3 camOrientationNoY = glm::normalize(glm::vec3(-std::abs(camOrientation.x), 0.0f, -std::abs(camOrientation.z)));
-
-	//glm::vec3 smMiddle = camera.getEye() + camOrientationNoY * halfDiagonal;
     glm::vec3 smMiddle = calculateShadowMapMid();
-    //glm::vec3 smLightPos = smMiddle + lightOrientation * heightFac;
     glm::vec3 smLightPos = calculateShadowMapLightPos(light);
-    //glm::mat4 lightV = glm::lookAt(smLightPos, smLightPos + light->orientation, glm::vec3(0.0, 1.0, 0.0));
     glm::mat4 lightV = glm::lookAt(smLightPos, smMiddle, glm::vec3(0.0, 1.0, 0.0));
-
-    /*
-    std::cout << "SM light pos " << smLightPos.x << " "  << smLightPos.y << " " << smLightPos.z << std::endl;
-    std::cout << "light orientation " << light->orientation.x << " "<< light->orientation.y << " "<< light->orientation.z << std::endl;
-    std::cout << "SM mid "  << smMiddle.x << " "  << smMiddle.y << " " << smMiddle.z << std::endl;
-    std::cout << "cam orientation "  << camera.getLookAt().x << " "  << camera.getLookAt().y << " " << camera.getLookAt().z << std::endl;
-    std::cout << "cam POS "  << camera.getEye().x << " "  << camera.getEye().y << " " << camera.getEye().z << std::endl;
-    std::cout << "cam LA "  << camera.getLookAt().x << " "  << camera.getLookAt().y << " " << camera.getLookAt().z << std::endl;
-    std::cout << "hd " << halfDiagonal << std::endl;
-    */
-
-    // print camera position and lookAt to check why orientation is bs
-
-    //glm::vec3 lpos = glm::vec3(0.0, 30.0, 0.0);
-    //glm::vec3 lor = glm::normalize(glm::vec3(1.0, 1.0, 0.0));
-    //glm::vec3 lup = glm::vec3(0.0, 0.0, 1.0);
-    //glm::mat4 lightV = glm::lookAt(lpos, lpos - lor, lup);
 
     return lightV;
 }
 
 glm::mat4 ShaderManager::calculateLightProjection(std::shared_ptr<Light> light) {
-    //glm::mat4 lightP = glm::ortho(-50.0, 50.0, -50.0, 50.0, 0.1, 150.0);
+
     float viewFrustumMaxDiagonal = getViewFrustumMaxDiagonal();
     float halfDiagonal = viewFrustumMaxDiagonal / 2.0;
 
     glm::vec3 lightSmMid = calculateShadowMapLightPos(light) - calculateShadowMapMid();
-
     float dist = glm::length(lightSmMid);
 
-    //glm::mat4 lightP = glm::ortho(-halfDiagonal, halfDiagonal, -halfDiagonal, halfDiagonal, 0.1f, viewFrustumMaxDiagonal*2.0f);
     glm::mat4 lightP = glm::ortho(-halfDiagonal, halfDiagonal, -halfDiagonal, halfDiagonal, 0.1f, dist*2.0f);
-
-    //TODO(nurgan): GET THE FUCKING FAR PLANE FOR THE LIGHT WORKING AND WHOOP WHOOP WE GOOOD
 
     return lightP;
 }
@@ -332,10 +275,7 @@ glm::mat4 ShaderManager::calculateLightProjection(std::shared_ptr<Light> light) 
 glm::vec3 ShaderManager::calculateShadowMapMid() {
 
     Camera camera = GameManager::instance().getCamera();
-
     glm::vec3 camOrientationNoY = glm::normalize(glm::vec3(camera.getLookAt().x, 0.0f, camera.getLookAt().z));
-    //glm::vec3 camOrientationNoY = glm::normalize(glm::vec3(-std::abs(camOrientation.x), 0.0f, -std::abs(camOrientation.z)));
-
     glm::vec3 smMiddle = camera.getEye() + camOrientationNoY * (getViewFrustumMaxDiagonal() / 2.0f);
 
     return smMiddle;
@@ -345,15 +285,14 @@ glm::vec3 ShaderManager::calculateShadowMapLightPos(std::shared_ptr<Light> light
 
     glm::vec3 lightOrientation = glm::normalize(-light->orientation);
     float heightFac = (getViewFrustumMaxDiagonal() / 2.0f) / lightOrientation.y;
-
     glm::vec3 smLightPos = calculateShadowMapMid() + lightOrientation * heightFac;
 
     return smLightPos;
 }
 
 float ShaderManager::getViewFrustumMaxDiagonal() {
-    float farNearDist = GameManager::playerFarPlane - GameManager::playerNearPlane;
-    return std::sqrt(2 * (farNearDist * farNearDist));
+    float farNearDist = GameManager::cullFarPlane - GameManager::nearPlane;
+    return farNearDist;
 }
 
 LightType ShaderManager::stringToLightType(std::string type) {

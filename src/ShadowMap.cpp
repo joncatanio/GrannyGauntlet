@@ -8,7 +8,7 @@ ShadowMap::ShadowMap() {
     //generate the texture
     glGenTextures(1, &shadowMap);
     glBindTexture(GL_TEXTURE_2D, shadowMap);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, S_WIDTH, S_HEIGHT,
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SM_WIDTH, SM_HEIGHT,
                  0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -29,20 +29,13 @@ ShadowMap::~ShadowMap() {
 }
 
 void ShadowMap::bindForShadowPass() {
-    glViewport(0, 0, S_WIDTH, S_HEIGHT);
+    glViewport(0, 0, SM_WIDTH, SM_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFBO);
     glClear(GL_DEPTH_BUFFER_BIT);
-    glCullFace(GL_FRONT);
-
 }
 
 void ShadowMap::bindForDraw() {
-
-
-    //end sm
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    //start
 
     WindowManager& windowManager = WindowManager::instance();
 

@@ -67,17 +67,7 @@ glm::vec3& GameObject::getScale() {
 }
 
 void GameObject::setOrientAngle(float orientAngle) {
-   static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
-
-   BoundingBox* bb_obj = physics_->getBoundingBox();
-
-   if (bb_obj != NULL) {
-
-      transform.setRotate(yRotationAngle_ + orientAngle, yAxis);
-   }	
-
-   transform.setRotate(yRotationAngle_ + orientAngle, yAxis);
-   orientAngle_ = orientAngle;
+	orientAngle_ = orientAngle;
 }
 
 float GameObject::getOrientAngle() {

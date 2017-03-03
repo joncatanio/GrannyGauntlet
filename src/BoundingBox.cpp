@@ -11,19 +11,20 @@ BoundingBox::BoundingBox()
 	}
 }
 
-BoundingBox::BoundingBox(glm::vec3& min, glm::vec3& max) 
-	: objMin_(min),
-	objMax_(max),
-	min_(min),
-	max_(max) {
-	objBoxPoints[0] = boxPoints[0] = glm::vec3(min_);
-	objBoxPoints[1] = boxPoints[1] = glm::vec3(max_);
-	objBoxPoints[2] = boxPoints[2] = glm::vec3(max_.x, max.y, min.z);
-	objBoxPoints[3] = boxPoints[3] = glm::vec3(min_.x, max.y, min.z);
-	objBoxPoints[4] = boxPoints[4] = glm::vec3(min_.x, min.y, max.z);
-	objBoxPoints[5] = boxPoints[5] = glm::vec3(max_.x, min.y, max.z);
-	objBoxPoints[6] = boxPoints[6] = glm::vec3(max_.x, min.y, min.z);
-	objBoxPoints[7] = boxPoints[7] = glm::vec3(min_.x, max.y, max.z);
+BoundingBox::BoundingBox(glm::vec3& min, glm::vec3& max) {
+	objMin_ = min;
+	objMax_ = max;
+	min_ = min;
+	max_ = max;
+
+	objBoxPoints[0] = boxPoints[0] = min_;
+	objBoxPoints[1] = boxPoints[1] = max_;
+	objBoxPoints[2] = boxPoints[2] = glm::vec3(max_.x, max_.y, min_.z);
+	objBoxPoints[3] = boxPoints[3] = glm::vec3(min_.x, max_.y, min_.z);
+	objBoxPoints[4] = boxPoints[4] = glm::vec3(min_.x, min_.y, max_.z);
+	objBoxPoints[5] = boxPoints[5] = glm::vec3(max_.x, min_.y, max_.z);
+	objBoxPoints[6] = boxPoints[6] = glm::vec3(max_.x, min_.y, min_.z);
+	objBoxPoints[7] = boxPoints[7] = glm::vec3(min_.x, max_.y, max_.z);
 }
 
 /* 
@@ -66,8 +67,8 @@ void BoundingBox::update(glm::mat4& transform) {
 
 	// TODO(rgarmsen2295): Optimize this
 	for (int i = 0; i < 8; ++i) {
-		glm::vec4 tempPoint((transform * glm::vec4(objBoxPoints[i].x, objBoxPoints[i].y, objBoxPoints[i].z, 1.0f)));
-		boxPoints[i] = glm::vec3(tempPoint.x, tempPoint.y, tempPoint.z);
+		glm::vec3 tempPoint((transform * glm::vec4(objBoxPoints[i], 1.0f)));
+		boxPoints[i] = tempPoint;
 
 		if (boxPoints[i].x < minX) minX = boxPoints[i].x;
 		if (boxPoints[i].x > maxX) maxX = boxPoints[i].x;
@@ -82,3 +83,4 @@ void BoundingBox::update(glm::mat4& transform) {
 	min_ = glm::vec3(minX, minY, minZ);
 	max_ = glm::vec3(maxX, maxY, maxZ);
 }
+ 

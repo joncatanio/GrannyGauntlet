@@ -19,11 +19,8 @@ public:
 
 	void setScale(glm::vec3& scaleV);
 
-   /* Empties the rotation list and pushes an initial rotation. */
 	void setRotate(float angle, const glm::vec3& axis);
 
-   /* Adds a rotation matrix to the rotate_ list, this list is used as a stack
-      but needs to be iterated through in updateTransform() */
    void addRotation(float angle, const glm::vec3& axis);
 private:
 

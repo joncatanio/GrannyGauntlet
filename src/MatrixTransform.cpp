@@ -8,7 +8,7 @@ MatrixTransform::MatrixTransform() :
    transform_(glm::mat4(1.0)),
    translate_(glm::mat4(1.0)),
    scale_(glm::mat4(1.0)),
-   rotate_(glm::mat4(1.)) {
+   rotate_(glm::mat4(1.0)) {
 }
 
 MatrixTransform::~MatrixTransform() {

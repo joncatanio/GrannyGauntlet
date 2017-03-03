@@ -38,7 +38,7 @@ bool BoundingBox::checkIntersection(BoundingBox& other) {
 
 glm::vec3 BoundingBox::calcReflNormal(BoundingBox& other) {
    glm::vec3 normal = glm::vec3(0.0, 0.0, 0.0);
-   float epsilon = 1.5;
+   float epsilon = 0.12f;
 
    //check on which side of the bounding box of the object the cookie hit and create normal for reflection
    if((this->min_.x - epsilon <= other.max_.x && this->min_.x + epsilon >= other.max_.x) ||

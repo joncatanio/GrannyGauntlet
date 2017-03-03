@@ -310,7 +310,7 @@ glm::vec3& Shape::getMax() {
 	return this->max;
 }
 
-void Shape::findAndSetMinAndMax() {
+void Shape::findAndSetMinAndMax(glm::mat4 orientTransform) {
 	float minX, minY, minZ;
 	float maxX, maxY, maxZ;
 
@@ -321,14 +321,17 @@ void Shape::findAndSetMinAndMax() {
 	// Go through all vertices to determine min and max of each dimension
     for(int i = 0; i < bufNum; i++) {
         for (size_t v = 0; v < posBuf[i].size() / 3; v++) {
-            if (posBuf[i][3 * v + 0] < minX) minX = posBuf[i][3 * v + 0];
-            if (posBuf[i][3 * v + 0] > maxX) maxX = posBuf[i][3 * v + 0];
+            glm::vec3 curVertex(posBuf[i][3 * v + 0], posBuf[i][3 * v + 1], posBuf[i][3 * v + 2]);
+            curVertex = orientTransform * glm::vec4(curVertex, 1.0f);
 
-            if (posBuf[i][3 * v + 1] < minY) minY = posBuf[i][3 * v + 1];
-            if (posBuf[i][3 * v + 1] > maxY) maxY = posBuf[i][3 * v + 1];
+            if (curVertex.x < minX) minX = curVertex.x;
+            if (curVertex.x > maxX) maxX = curVertex.x;
 
-            if (posBuf[i][3 * v + 2] < minZ) minZ = posBuf[i][3 * v + 2];
-            if (posBuf[i][3 * v + 2] > maxZ) maxZ = posBuf[i][3 * v + 2];
+            if (curVertex.y < minY) minY = curVertex.y;
+            if (curVertex.y > maxY) maxY = curVertex.y;
+
+            if (curVertex.z < minZ) minZ = curVertex.z;
+            if (curVertex.z > maxZ) maxZ = curVertex.z;
         }
     }
 	min = glm::vec3(minX, minY, minZ);

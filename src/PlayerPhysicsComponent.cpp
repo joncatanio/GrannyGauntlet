@@ -52,5 +52,7 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
          holder_->setPosition(newPosition);
          updateBoundingBox();
       }
+   } else {
+      updateBoundingBox();
    }
 }

@@ -16,3 +16,8 @@ void PlayerRenderComponent::draw(std::shared_ptr<MatrixStack> P,
 
 	shaderManager.renderObject(holder_, shaderName_, shape_, material_, P, V, M);
 }
+
+void PlayerRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
+    ShaderManager& shaderManager = ShaderManager::instance();
+    shaderManager.renderShadowPass(holder_, shape_, M);
+}

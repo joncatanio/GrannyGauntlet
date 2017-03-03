@@ -81,8 +81,13 @@ public:
 	void renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
+	// Render the given object to the shadowmap
+	void renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
+						  std::shared_ptr<MatrixStack> M);
 	// Returns an actual LightType enum value of the given string
 	static LightType stringToLightType(std::string type);
+
+    static constexpr const char* shadowPassShaderName = "shadowPass";
 
 private:
 
@@ -100,6 +105,20 @@ private:
 
 	// A hash map of the currently linked shader programs. The key is the shader program name and the value is a pointer to the Program
 	std::unordered_map<std::string, std::shared_ptr<Program>> shaderPrograms;
+
+	// Calculate the View Matrix for the given light (for Shadow Mapping)
+	glm::mat4 calculateLightView(std::shared_ptr<Light> light);
+
+	// Calculate the Projection Matrix for the given light (for Shadow Mapping)
+	glm::mat4 calculateLightProjection(std::shared_ptr<Light> light);
+
+    // calculate the "middle" of the shoadow map in world sapce
+    glm::vec3 calculateShadowMapMid();
+
+    // calculate the light position as used for shadow mapping
+    glm::vec3 calculateShadowMapLightPos(std::shared_ptr<Light> light);
+
+	float getViewFrustumMaxDiagonal();
 
 	ShaderManager();
 

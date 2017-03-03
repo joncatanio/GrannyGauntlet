@@ -81,6 +81,9 @@ public:
     // Performs any render/draw updates necessary for the object
     void draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
+	// Renders the Object to the shadow map
+	void renderToShadowMap(std::shared_ptr<MatrixStack> M);
+
     // Perform the any actions that are bound to the object, if any and if applicable at that moment
     void performAction(double deltaTime, double totalTime);
 

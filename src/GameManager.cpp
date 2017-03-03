@@ -63,6 +63,14 @@ void GameManager::increaseTime(float deltaTime) {
     time_ += deltaTime;
 }
 
+void GameManager::setShadowMap(ShadowMap *shadowMap) {
+    shadowMap_ = shadowMap;
+}
+
+ShadowMap* GameManager::getShadowMap() {
+    return shadowMap_;
+}
+
 void GameManager::showScore() {
     if(gameOver_) {
         if(time_ <= 0.0) {

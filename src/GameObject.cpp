@@ -121,6 +121,12 @@ void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStac
 	}
 }
 
+void GameObject::renderToShadowMap(std::shared_ptr <MatrixStack> M) {
+	if (render_ != NULL) {
+		render_->renderShadow(M);
+	}
+}
+
 void GameObject::performAction(double deltaTime, double totalTime) {
     if (action_ != NULL) {
         action_->checkAndPerformAction(deltaTime, totalTime);

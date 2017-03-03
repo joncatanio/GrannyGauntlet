@@ -18,3 +18,7 @@ void SkyboxRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr
     shaderManager.renderObject(holder_, shaderName_, shape_, material_, P, V, M);
     cubemap->unbind();
 }
+
+void SkyboxRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
+    // don't do anything, there is no shadow on the skybox
+}

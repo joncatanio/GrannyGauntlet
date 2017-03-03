@@ -96,6 +96,11 @@ int LevelLoader::parseShaders(json shaders) {
             return 1;
          }
       }
+      // load shadow pass shader
+      if (shaderManager.createIsomorphicShader(resourceManager, ShaderManager::shadowPassShaderName,
+                                               ShaderManager::shadowPassShaderName) == 0) {
+         return 1;
+      }
    }
 
    return 0;

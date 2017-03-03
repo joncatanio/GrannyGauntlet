@@ -13,6 +13,7 @@
 #include "ShapeManager.h"
 #include "MaterialManager.h"
 #include "WindowManager.h"
+#include "ShadowMap.h"
 
 #include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
@@ -82,6 +83,10 @@ int main(int argc, char **argv) {
     // Set the current view frustum
     gameManager.setViewFrustum(new ViewFrustum());
 
+    // Set the Shadow Map Object
+    ShadowMap* shadowMap = new ShadowMap();
+    gameManager.setShadowMap(shadowMap);
+
     // Add all static objects before this!!!
     world.init();
 
@@ -125,6 +130,9 @@ int main(int argc, char **argv) {
 
         // Update the window in-case of resizing, etc.
         windowManager.update();
+
+        // Render all objects to shadow map
+        world.renderShadowMap();
 
         // Draw all objects in the world
         world.drawGameObjects();

@@ -3,6 +3,7 @@
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
+#include "AimRenderComponent.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 /*
@@ -16,15 +17,15 @@ CookieActionComponent::CookieActionComponent() {
     ShapeManager& shapeManager = ShapeManager::instance();
     MaterialManager& materialManager = MaterialManager::instance();
 
-    BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
+    AimRenderComponent* aimRenderComponent = new AimRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
-    BunnyRenderComponent* bunnyRenderComp1 = new BunnyRenderComponent(
+    AimRenderComponent* aimRenderComponent1 = new AimRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
-    BunnyRenderComponent* bunnyRenderComp2 = new BunnyRenderComponent(
+    AimRenderComponent* aimRenderComponent2 = new AimRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
-    BunnyRenderComponent* bunnyRenderComp3 = new BunnyRenderComponent(
+    AimRenderComponent* aimRenderComponent3 = new AimRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
-    BunnyRenderComponent* bunnyRenderComp4 = new BunnyRenderComponent(
+    AimRenderComponent* aimRenderComponent4 = new AimRenderComponent(
       shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
 
 
@@ -37,7 +38,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.1),
             nullptr,
             nullptr,
-            bunnyRenderComp,
+            aimRenderComponent,
             nullptr);
     gameObj->initComponents();
 
@@ -49,7 +50,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.1),
             nullptr,
             nullptr,
-            bunnyRenderComp1,
+            aimRenderComponent1,
             nullptr);
     gameObj1->initComponents();
 
@@ -61,7 +62,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.1),
             nullptr,
             nullptr,
-            bunnyRenderComp2,
+            aimRenderComponent2,
             nullptr);
     gameObj2->initComponents();
 
@@ -73,7 +74,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.1),
             nullptr,
             nullptr,
-            bunnyRenderComp3,
+            aimRenderComponent3,
             nullptr);
     gameObj3->initComponents();
 
@@ -85,7 +86,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.1),
             nullptr,
             nullptr,
-            bunnyRenderComp4,
+            aimRenderComponent4,
             nullptr);
     gameObj4->initComponents();
 }
@@ -99,6 +100,7 @@ void CookieActionComponent::initActionComponent() {
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj2);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj3);
     GameManager::instance().getGameWorld().addDynamicGameObject(gameObj4);
+
 
 }
 

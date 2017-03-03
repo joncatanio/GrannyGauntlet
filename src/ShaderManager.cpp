@@ -3,7 +3,12 @@
 
 ShaderManager& ShaderManager::instance() {
 	static ShaderManager *instance = new ShaderManager();
+
 	return *instance;
+}
+
+void ShaderManager::setDefaultShader(const std::string& shaderProgramName) {
+	shaderPrograms[DefaultShader] = shaderPrograms.at(shaderProgramName);
 }
 
 const std::string& ShaderManager::getBoundShaderName() {
@@ -328,4 +333,8 @@ LightType ShaderManager::stringToLightType(std::string type) {
 
 ShaderManager::ShaderManager() {
 	boundShaderName = "";
+
+	// Put the default shader pair into the map of pairs (it will be set to the default once a default shader is loaded)
+	std::pair<std::string, std::shared_ptr<Program>> newShaderProgram(DefaultShader, nullptr);
+	shaderPrograms.insert(newShaderProgram);
 }

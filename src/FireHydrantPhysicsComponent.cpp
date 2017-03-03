@@ -29,6 +29,12 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
    } else {
       yVelocity = 0.0f;
       holder_->velocity = 0.0f;
+
+      // Set the position above ground plane.
+      // TODO (noj) we'll want to set the position relative to the object it lands on.
+      glm::vec3 newPos = holder_->getPosition();
+      newPos.y = 1.0f;
+      holder_->setPosition(newPos);
    }
 
    std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
@@ -44,6 +50,10 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          holder_->direction = reactDir;
          holder_->velocity = objHit->velocity * 2.0;
+
+         // Initialize animation parameters.
+         animated = true;
+         animRotAxis = rotAxis;
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();
@@ -51,11 +61,24 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          glm::vec3 normal = objBB->calcReflNormal(*thisBB);
          holder_->direction = glm::reflect(holder_->direction, normal);
+         animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
 
          newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
          newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
          holder_->setPosition(newPosition);
          updateBoundingBox();
       }
+   }
+
+   if (animated) {
+      updateAnimation(deltaTime);
+   }
+}
+
+void FireHydrantPhysicsComponent::updateAnimation(float deltaTime) {
+   if (holder_->velocity == 0.0f) {
+      animated = false;
+   } else {
+      holder_->addRotation(deltaTime * animSpeed, animRotAxis);
    }
 }

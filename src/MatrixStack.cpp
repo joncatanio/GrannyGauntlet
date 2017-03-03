@@ -59,6 +59,11 @@ void MatrixStack::rotate(float angle, const glm::vec3 &axis)
 	top *= r;
 }
 
+void MatrixStack::rotateMat4(glm::mat4 &rotMat) {
+   glm::mat4 &top = mstack->top();
+   top *= rotMat;
+}
+
 void MatrixStack::multMatrix(const glm::mat4 &matrix)
 {
    glm::mat4 &top = mstack->top();

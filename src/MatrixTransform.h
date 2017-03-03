@@ -1,43 +1,27 @@
 #ifndef MATRIX_TRANSFORM_H
 #define MATRIX_TRANSFORM_H
 
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-// TODO(rgarmsen2295): Separate into .cpp file or make inline
 class MatrixTransform {
 public:
 
-	MatrixTransform() 
-		: transform_(glm::mat4(1.0)),
-		translate_(glm::mat4(1.0)),
-		scale_(glm::mat4(1.0)),
-		rotate_(glm::mat4(1.0)) {}
+	MatrixTransform(); 
 
-	~MatrixTransform() {}
+	~MatrixTransform();
 
-	glm::mat4& getTransform() { return transform_; }
+	glm::mat4& getTransform();
 
-	void setTranslation(glm::vec3& offset) {
-		translate_ = glm::translate(glm::mat4(1.0), offset);
+   glm::mat4 getRotate();
 
-		updateTransform();
-	}
+	void setTranslation(glm::vec3& offset);
 
-	void setScale(glm::vec3& scaleV) {
-		scale_ = glm::scale(glm::mat4(1.0), scaleV);
+	void setScale(glm::vec3& scaleV);
 
-		updateTransform();
-	}
+	void setRotate(float angle, const glm::vec3& axis);
 
-	// TODO(rgarmsen2295): Add seperate functions and member variables to allow for x, y, AND z rotation at the same time
-	void setRotate(float angle, const glm::vec3& axis)
-	{
-		rotate_ = glm::rotate(glm::mat4(1.0), angle, axis);
-
-		updateTransform();
-	}
-
+   void addRotation(float angle, const glm::vec3& axis);
 private:
 
 	glm::mat4 transform_;
@@ -46,10 +30,7 @@ private:
 	glm::mat4 scale_;
 	glm::mat4 rotate_;
 
-	// TODO(rgarmsen): Add options on how to do the transform update (e.g. different orders)
-	void updateTransform() {
-		transform_ = translate_ * rotate_ * scale_;
-	}
+	void updateTransform();
 };
 
 #endif

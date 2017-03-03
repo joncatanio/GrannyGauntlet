@@ -9,8 +9,6 @@ void PhysicsComponent::initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoun
 
 void PhysicsComponent::updateBoundingBox() {
 	MatrixTransform transform = holder_->transform;
-	//boundBox_.update(transform.getTransform());
-	
 	boundBox_.update(transform.getBoundingBoxTransform());
 }
 

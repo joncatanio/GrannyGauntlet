@@ -11,12 +11,11 @@ BoundingBox::BoundingBox()
 	}
 }
 
-BoundingBox::BoundingBox(glm::vec3& min, glm::vec3& max) {
-	objMin_ = min;
-	objMax_ = max;
-	min_ = min;
-	max_ = max;
-
+BoundingBox::BoundingBox(glm::vec3& min, glm::vec3& max)
+	: objMin_(min),
+	objMax_(max),
+	min_(min),
+	max_(max) {
 	objBoxPoints[0] = boxPoints[0] = min_;
 	objBoxPoints[1] = boxPoints[1] = max_;
 	objBoxPoints[2] = boxPoints[2] = glm::vec3(max_.x, max_.y, min_.z);
@@ -83,4 +82,3 @@ void BoundingBox::update(glm::mat4& transform) {
 	min_ = glm::vec3(minX, minY, minZ);
 	max_ = glm::vec3(maxX, maxY, maxZ);
 }
- 

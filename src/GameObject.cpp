@@ -67,7 +67,7 @@ glm::vec3& GameObject::getScale() {
 }
 
 void GameObject::setOrientAngle(float orientAngle) {
-	orientAngle_ = orientAngle;
+   orientAngle_ = orientAngle;
 }
 
 float GameObject::getOrientAngle() {

@@ -32,6 +32,37 @@ void WindowManager::pollEvents() {
 void WindowManager::update() {
 	updateFramebuffer();
 	aspect_ = getAspectRatio();
+
+    checkForUserChanges();
+}
+
+void WindowManager::checkForUserChanges() {
+    ShaderManager& shaderManager = ShaderManager::instance();
+
+    // Check for shader setting changes
+    if (isKeyPressed(GLFW_KEY_P)) {
+        // Use the "Phong" shader as the current default
+        shaderManager.setDefaultShader(shaderManager.PhongShader);
+
+        std::cout << "Switched to " << shaderManager.PhongShader << " shader!" << std::endl;
+    } else if (isKeyPressed(GLFW_KEY_C)) {
+        // Use the "CookTorrance" shader as the current default
+        shaderManager.setDefaultShader(shaderManager.CookTorranceShader);
+
+        std::cout << "Switched to " << shaderManager.CookTorranceShader << " shader!" << std::endl;
+    } else if (isKeyPressed(GLFW_KEY_T)) {
+        // TODO(rgarmsen2295): Add the Toon shader
+
+        // Use the "Toon" shader as the current default
+        //shaderManager.setDefaultShader(shaderManager.ToonShader);
+
+        std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
+    }
+
+    if (isKeyPressed(GLFW_KEY_ESCAPE)) {
+        // Should close the GLFW window
+        glfwSetWindowShouldClose(window_, GL_TRUE);
+    }
 }
 
 void WindowManager::swapBuffers() {
@@ -166,10 +197,7 @@ int WindowManager::initializeGLFW() {
 }
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        // Should close the GLFW window
-        glfwSetWindowShouldClose(window, GL_TRUE);
-    }
+    // Nothing here for now
 }
 
 static void mouseCallback(GLFWwindow* window, int button, int action, int mods) {

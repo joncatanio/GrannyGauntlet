@@ -118,6 +118,10 @@ int LevelLoader::parseShapes(json shapes) {
             return 1;
          }
       }
+
+      if (shapeManager.createShape(resourceManager, "Arrow", "arrow.obj")) {
+          return 1;
+      }
    }
 
    return 0;

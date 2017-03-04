@@ -15,6 +15,8 @@ public:
 
    void updateAnimation(float deltaTime);
 
+    void startDeliveryAnimation() {};
+
 private:
    float gravity;
    float yVelocity;

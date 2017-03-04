@@ -64,6 +64,9 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             cookieState.hitPositions.push_back(holder_->getPosition());
             if( objHit->cookieDeliverable) {
                 objHit->changeMaterial(materialManager.getMaterial("Red Rubber"));
+
+                objHit->triggerDeliveryAnimation();
+
                 float score = calculateScore();
                 GameManager& gameManager = GameManager::instance();
                 gameManager.reportScore(score);

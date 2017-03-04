@@ -1,5 +1,10 @@
 #include "GameObject.h"
 #include "GameManager.h"
+#include "AimRenderComponent.h"
+#include "MarkerPhysicsComponent.h"
+#include "ShaderManager.h"
+#include "ShapeManager.h"
+#include "MaterialManager.h"
 
 GameObject::GameObject(GameObjectType objType,
 	glm::vec3 startPosition,
@@ -56,6 +61,34 @@ void GameObject::initComponents() {
 	    action_->setGameObjectHolder(shared_from_this());
 	    action_->initActionComponent();
 	}
+
+    if(cookieDeliverable) {
+        createMarkerObject();
+    }
+}
+
+void GameObject::createMarkerObject() {
+    ShapeManager& shapeManager = ShapeManager::instance();
+    MaterialManager& materialManager = MaterialManager::instance();
+    AimRenderComponent* arrowRenderComponent = new AimRenderComponent(
+            shapeManager.getShape("Arrow"), "Phong", materialManager.getMaterial("Bright Green"));
+    MarkerPhysicsComponent* markerPhysicsComponent = new MarkerPhysicsComponent();
+
+
+    glm::vec3 arrowPos = position_ + glm::vec3(0.0f, scale_.y * 2.0f, 0.0f);
+
+    arrow_ = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+                                          arrowPos,
+                                          glm::vec3(0.0f, 1.0f, 0.0f),
+                                          0.0f,
+                                          scale_ / 2.0f,
+                                          nullptr,
+                                          markerPhysicsComponent,
+                                          arrowRenderComponent,
+                                          nullptr
+    );
+
+    arrow_->initComponents();
 }
 
 glm::vec3& GameObject::getPosition() {
@@ -113,11 +146,19 @@ void GameObject::update(double deltaTime) {
 	if (physics_ != NULL) {
 		physics_->updatePhysics(deltaTime);
 	}
+
+    if (cookieDeliverable) {
+        arrow_->update(deltaTime);
+    }
 }
 
 void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 	if (render_ != NULL) {
 		render_->draw(P, M, V);
+        if(cookieDeliverable) {
+            std::shared_ptr<MatrixStack> M2 = std::make_shared<MatrixStack>();
+            arrow_->draw(P, M2, V);
+        }
 	}
 }
 
@@ -157,6 +198,10 @@ BoundingBox* GameObject::getBoundingBox() {
       return &physics_->getBoundingBox();
    }
    return NULL;
+}
+
+void GameObject::triggerDeliveryAnimation() {
+	physics_->startDeliveryAnimation();
 }
 
 GameObjectType GameObject::stringToType(std::string type) {

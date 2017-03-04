@@ -13,6 +13,8 @@ public:
 
    void updatePhysics(float deltaTime);
 
+    void startDeliveryAnimation() {};
+
 private:
 };
 

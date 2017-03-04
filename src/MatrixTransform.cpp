@@ -5,6 +5,7 @@
 #include <iostream>
 
 MatrixTransform::MatrixTransform() :
+
    transform_(glm::mat4(1.0)),
    translate_(glm::mat4(1.0)),
    scale_(glm::mat4(1.0)),
@@ -13,6 +14,10 @@ MatrixTransform::MatrixTransform() :
 
 MatrixTransform::~MatrixTransform() {
 
+}
+
+glm::mat4& MatrixTransform::getBoundingBoxTransform() { 
+   return boundingBoxTransform_; 
 }
 
 glm::mat4& MatrixTransform::getTransform() {
@@ -48,5 +53,6 @@ void MatrixTransform::addRotation(float angle, const glm::vec3& axis) {
 }
 
 void MatrixTransform::updateTransform() {
+   boundingBoxTransform_ = translate_ * scale_;
    transform_ = translate_ * rotate_ * scale_;
 }

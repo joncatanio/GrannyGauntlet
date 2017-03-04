@@ -25,6 +25,7 @@ public:
 	void draw(const std::shared_ptr<Program> prog) const;
 	glm::vec3& getMin();
 	glm::vec3& getMax();
+	void findAndSetMinAndMax(glm::mat4 orientTransform = glm::mat4(1.0f));
 	
 private:
 	std::vector<std::vector<unsigned>> eleBuf = std::vector<std::vector<unsigned>>();
@@ -39,8 +40,6 @@ private:
 
 	glm::vec3 min;
 	glm::vec3 max;
-
-	void findAndSetMinAndMax();
 };
 
 #endif

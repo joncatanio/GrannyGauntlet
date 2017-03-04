@@ -11,6 +11,8 @@ public:
 
 	~MatrixTransform();
 
+	glm::mat4& getBoundingBoxTransform();
+
 	glm::mat4& getTransform();
 
    glm::mat4 getRotate();
@@ -24,6 +26,7 @@ public:
    void addRotation(float angle, const glm::vec3& axis);
 private:
 
+	glm::mat4 boundingBoxTransform_;
 	glm::mat4 transform_;
 
 	glm::mat4 translate_;

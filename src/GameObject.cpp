@@ -100,6 +100,17 @@ glm::vec3& GameObject::getScale() {
 }
 
 void GameObject::setOrientAngle(float orientAngle) {
+	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
+
+   BoundingBox* objectBB = getBoundingBox();
+
+   if (objectBB != NULL) {
+      MatrixTransform orientTransform;
+      orientTransform.setRotate(orientAngle, yAxis);
+      render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
+      physics_->initBoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
+   }
+
    orientAngle_ = orientAngle;
 }
 
@@ -123,6 +134,15 @@ void GameObject::setScale(glm::vec3& newScale) {
 
 void GameObject::setYAxisRotation(float angle) {
 	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
+
+	BoundingBox* objectBB = getBoundingBox();
+
+   if (objectBB != NULL) {
+      MatrixTransform orientTransform;
+      orientTransform.setRotate(angle, yAxis);
+      render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
+      physics_->initBoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
+   }
 
 	yRotationAngle_ = angle;
 	transform.setRotate(angle, yAxis);

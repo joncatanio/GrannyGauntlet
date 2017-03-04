@@ -97,7 +97,7 @@ int LevelLoader::parseShaders(json shaders) {
              shaderName, shader["file-prefix"]) == 0) {
             return 1;
          }
-         if (shader["default"] == true) {
+         if (shader["default"]) {
              shaderManager.setDefaultShader(shaderName);
          }
       }

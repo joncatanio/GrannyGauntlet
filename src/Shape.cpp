@@ -177,10 +177,10 @@ void Shape::calculateNormals(int i) {
 void Shape::resize() {
 	float scaleX, scaleY, scaleZ;
 	float shiftX, shiftY, shiftZ;
-	float epsilon = 0.001;
 
 	// From min and max compute necessary scale and shift for each dimension
 	float maxExtent, xExtent, yExtent, zExtent;
+    maxExtent = 0.0f;
 	xExtent = max.x - min.x;
 	yExtent = max.y - min.y;
 	zExtent = max.z - min.z;

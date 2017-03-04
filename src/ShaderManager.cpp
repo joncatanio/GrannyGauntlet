@@ -244,7 +244,6 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		GameWorld& gameWorld = gameManager.getGameWorld();
 
 		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
-		int numDirectionLights = directionalLights.size();
 
         std::shared_ptr<Light> light = directionalLights.at(0);
 

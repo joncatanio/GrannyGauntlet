@@ -28,6 +28,9 @@ public:
 	// Updates the object's physics by the given timestep |deltaTime|
 	virtual void updatePhysics(float deltaTime) = 0;
 
+	// starts the delivery animation
+	virtual void startDeliveryAnimation() = 0;
+
 private:
 
 	// The bounding box associated with the object

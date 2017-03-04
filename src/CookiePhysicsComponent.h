@@ -23,6 +23,8 @@ public:
 
     void updatePhysics(float deltaTime);
 
+    void startDeliveryAnimation() {};
+
 private:
     float gravity;
     float yVelocity;

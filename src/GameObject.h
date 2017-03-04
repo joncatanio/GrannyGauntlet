@@ -93,6 +93,9 @@ public:
 	// Checks if the object intersects with the passed object
 	bool checkIntersection(std::shared_ptr<GameObject> otherObj);
 
+	// Starts the delivery animation of the Game Object, if any
+	void triggerDeliveryAnimation();
+
     static GameObjectType stringToType(std::string type);
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
@@ -113,6 +116,9 @@ private:
     // The current y-axis rotation of the object relative to it's original orientation
     float yRotationAngle_;
 
+    // Creates the Game Object for the "Quest Maker" arrow
+    void createMarkerObject();
+
     // Stuff necessary to draw object
     RenderComponent* render_;
 
@@ -124,6 +130,9 @@ private:
 
     // Action Component to control actions performed by objects
     ActionComponent* action_;
+
+    // Arrow "Quest Marker" for deliverable palces
+    std::shared_ptr<GameObject> arrow_;
 
 };
 

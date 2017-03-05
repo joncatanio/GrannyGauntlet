@@ -78,13 +78,14 @@ out vec4 color;
 
 // Calculates the fresnel factor - "defines what fraction of incoming light is reflected and what fraction is transmitted"
 float calcFresnel(vec3 halfVec, vec3 view) {
-	float halfViewDot = dot(halfVec, view);
+	float halfViewDot = max(dot(halfVec, view), 0.0);
 
 	// TODO(rgarmsen2295): Figure out if this should be object dependent
 	float normalIncidence = 0.8;
 
 	// Calculate the fresnel factor
-	float fresnel = normalIncidence + ((1.0 - normalIncidence) * pow((1.0 - halfViewDot), 5.0);
+	float fresnel = (1.0 - normalIncidence) * pow(1.0 - halfViewDot, 5.0);
+	fresnel += normalIncidence;
 
 	return fresnel;
 }
@@ -92,11 +93,11 @@ float calcFresnel(vec3 halfVec, vec3 view) {
 // Calculates the roughness/microfacet distribution of the surface using the Beckmanns distribution function
 float calcRoughness(vec3 halfVec, vec3 fragNormal) {
 	float matRoughness = 1.0 / MatShiny;
-	float halfNormalDot = dot(halfVec, fragNormal);
+	float halfNormalDot = max(dot(halfVec, fragNormal), 0.0);
 	float halfNormalDotSqrd = pow(halfNormalDot, 2.0);
 	float roughnessSqrd = pow(matRoughness, 2.0);
 
-	float roughness = exp((halfNormalDotSqrd - 1.0) / (MatShiny * halfNormalDotSqrd));
+	float roughness = exp((halfNormalDotSqrd - 1.0) / (roughnessSqrd * halfNormalDotSqrd));
 	roughness /= M_PI * roughnessSqrd * pow(halfNormalDot, 4.0);
 
 	return roughness;
@@ -104,16 +105,16 @@ float calcRoughness(vec3 halfVec, vec3 fragNormal) {
 
 // Calculates the amount of light blocked by microfacets before reaching the surface
 float calcGeometricAttenuation(vec3 halfVec, vec3 view, vec3 fragNormal, vec3 lightDir) {
-	float halfNormalDot = dot(halfVec, fragNormal);
-	float halfViewDot = dot(halfVec, view);
-	float halfLightDot = dot(halfVec, lightDir);
-	float viewNormalDot = dot(view, fragNormal);
-	float lightNormalDot = dot(lightDir, fragNormal);
+	float halfNormalDot = max(dot(halfVec, fragNormal), 0.0);
+	float halfViewDot = max(dot(halfVec, view), 0.0);
+	float halfLightDot = max(dot(halfVec, lightDir), 0.0);
+	float viewNormalDot = max(dot(view, fragNormal), 0.0);
+	float lightNormalDot = max(dot(lightDir, fragNormal), 0.0);
 
 	float amountOfReflectedLightBlocked = 2.0 * halfNormalDot * viewNormalDot / halfViewDot;
 	float amountOfLightBlockedBeforeMicrofacet = 2.0 * halfNormalDot * lightNormalDot / halfLightDot;
 
-	float geometricAttenuation = min(1.0, amountOfReflectedLightBlocked, amountOfLightBlockedBeforeMicrofacet);
+	float geometricAttenuation = min(1.0, min(amountOfReflectedLightBlocked, amountOfLightBlockedBeforeMicrofacet));
 
 	return geometricAttenuation;
 }
@@ -150,7 +151,9 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		}
 
 		// Mix diffuse value with the specular component
-		float totalValue = lightNormalDir * (MatDif + ((1.0 - MatDif) * specularValue));
+		// TODO(rgarmsen2295): Should probably be object dependent
+		float diffuseReflection = 0.2;
+		float totalValue = lightNormalDot * (diffuseReflection + ((1.0 - diffuseReflection) * specularValue));
 
 		// Add light color to total directional color
 		dirLightColor += totalValue * lightColor;

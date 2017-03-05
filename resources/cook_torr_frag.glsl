@@ -132,6 +132,10 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		// How close are the object normal and the light's direction? (aka Lambertian)
 		float lightNormalDot = max(dot(lightDir, fragNormal), 0.0);
 
+		// Calculate diffuse component from light
+		float diffuseValue = max(lightNormalDot, 0.0);
+		vec3 diffuse = diffuseValue * MatDif * lightColor;
+
 		// How close are the object normal and the view direction?
 		float viewNormalDot = max(dot(view, fragNormal), 0.0);
 
@@ -153,10 +157,10 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		// Mix diffuse value with the specular component
 		// TODO(rgarmsen2295): Should probably be object dependent
 		float diffuseReflection = 0.2;
-		float totalValue = lightNormalDot * (diffuseReflection + ((1.0 - diffuseReflection) * specularValue));
+		specularValue = lightNormalDot * (diffuseReflection + ((1.0 - diffuseReflection) * specularValue));
 
 		// Add light color to total directional color
-		dirLightColor += totalValue * lightColor;
+		dirLightColor += diffuseValue * MatDif * lightColor + specularValue * MatSpc * lightColor;
 	}
 
 	return dirLightColor;

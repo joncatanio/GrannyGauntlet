@@ -2143,7 +2143,7 @@
             "name": "FireHydrantPhysicsComponent"
          },
          "render-component": {
-            "name": "WallRenderComponent",
+            "name": "FireHydrantRenderComponent",
             "shape": "FireHydrant",
             "shader": "Phong",
             "material": "Ruby"

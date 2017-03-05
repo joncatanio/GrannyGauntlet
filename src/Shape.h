@@ -10,8 +10,10 @@
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "MatrixStack.h"
 
 class Program;
+class GameObject;
 
 class Shape
 {
@@ -23,6 +25,9 @@ public:
 	void init();
 	void resize();
 	void draw(const std::shared_ptr<Program> prog) const;
+   std::shared_ptr<std::vector<glm::vec3>> calcFragmentDir(glm::vec3 direction);
+   void fracture(const std::shared_ptr<Program> prog,
+      std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj) const;
 	glm::vec3& getMin();
 	glm::vec3& getMax();
 	void findAndSetMinAndMax(glm::mat4 orientTransform = glm::mat4(1.0f));
@@ -37,6 +42,9 @@ private:
 	std::vector<unsigned> norBufID = std::vector<unsigned>();
 	std::vector<unsigned> texBufID = std::vector<unsigned>();
 	unsigned vaoID;
+
+   // For fracturing objects
+   float randFloat(float a, float b);
 
 	glm::vec3 min;
 	glm::vec3 max;

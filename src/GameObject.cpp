@@ -21,6 +21,7 @@ GameObject::GameObject(GameObjectType objType,
 	type(objType),
 	toggleMovement(false),
       cookieDeliverable(deliverable),
+   fracture(false),
 	orientAngle_(0),
 	yRotationAngle_(0),
 	render_(render),
@@ -237,4 +238,12 @@ GameObjectType GameObject::stringToType(std::string type) {
 		//default to static object
 		return GameObjectType::STATIC_OBJECT;
 	}
+}
+
+void GameObject::setFragmentDirs(std::shared_ptr<std::vector<glm::vec3>> fragDirs) {
+   fragDirs_ = fragDirs;
+}
+
+std::shared_ptr<std::vector<glm::vec3>> GameObject::getFragmentDirs() {
+   return fragDirs_;
 }

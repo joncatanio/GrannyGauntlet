@@ -43,6 +43,10 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
       GameObjectType objTypeHit = objHit->type;
       
       if (objTypeHit == GameObjectType::PLAYER) {
+         // Initialize fracture variables
+         holder_->fracture = true;
+         holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(objHit->direction));
+
          glm::vec3 reactDir = objHit->direction;
          glm::vec3 rotAxis = glm::cross(objHit->direction, glm::vec3(0, 1, 0));
          // Give the direction of the hydrant a vertical component.

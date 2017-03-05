@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
     // Add all static objects before this!!!
     world.init();
 
-    gameManager.setTime(15.0);
+    gameManager.setTime(150000.0);
 
     // Loop until the user closes the window
     int numFramesInSecond = 0;

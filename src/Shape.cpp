@@ -3,6 +3,9 @@
 
 #include "GLSL.h"
 #include "Program.h"
+#include "GameObject.h"
+
+#include <glm/gtx/rotate_vector.hpp>
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
@@ -299,6 +302,102 @@ void Shape::draw(const shared_ptr<Program> prog) const {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+}
+
+float Shape::randFloat(float a, float b) {
+   float randNum = ((float)rand()) / (float)RAND_MAX;
+   float diff = b - a;
+   float off = randNum * diff;
+
+   return a + off;
+}
+
+std::shared_ptr<std::vector<glm::vec3>> Shape::calcFragmentDir(glm::vec3 direction) {
+   std::shared_ptr<std::vector<glm::vec3>> eleDir = std::make_shared<std::vector<glm::vec3>>();
+
+   // Calculate the axis to randomize the direction of the objects about.
+   glm::vec3 horAxis = glm::vec3(0.0, 1.0, 0.0);
+   glm::vec3 vertAxis = glm::cross(direction, horAxis);
+
+   int bufNum = posBuf.size();
+   for (int i = 0; i < bufNum; i++) {
+      // Calculate a random direction to translate the point on.
+      glm::vec3 dirHor = glm::rotate(direction, randFloat(-M_PI / 4.0f, M_PI / 4.0f), horAxis);
+      glm::vec3 dirVert = glm::rotate(direction, randFloat(-M_PI / 6.0f, M_PI / 6.0f), vertAxis);
+      glm::vec3 dir = glm::normalize((dirHor + dirVert) * 0.5f);
+
+      eleDir->push_back(dir);
+   }
+
+   return eleDir;
+}
+
+void Shape::fracture(const std::shared_ptr<Program> prog,
+   std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj) const {
+	int h_pos, h_nor, h_tex;
+	h_pos = h_nor = h_tex = -1;
+
+   glBindVertexArray(vaoID);
+
+   int bufNum = posBuf.size();
+   // Send the position array to the GPU
+   for (int i = 0; i < bufNum; i++) {
+      M->pushMatrix();
+      M->loadIdentity();
+
+      /* Load in a new model transform per shape within the larger Shape obj.
+       * For fracturing we are just going to translate the shape. */ 
+      M->translate(obj->getPosition() + ((obj->getFragmentDirs())->at(i) * 5.0f));
+      M->scale(obj->getScale());
+      glm::mat4 rotation = obj->transform.getRotate();
+      M->rotateMat4(rotation);
+      glUniformMatrix4fv(prog->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+      glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
+      glUniformMatrix4fv(prog->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
+
+       // Bind position buffer
+      h_pos = prog->getAttribute("vertPos");
+      GLSL::enableVertexAttribArray(h_pos);
+      glBindBuffer(GL_ARRAY_BUFFER, posBufID[i]);
+      glVertexAttribPointer(h_pos, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+
+      // Bind normal buffer
+      h_nor = prog->getAttribute("vertNor");
+      if (h_nor != -1 && norBufID[i] != 0) {
+         GLSL::enableVertexAttribArray(h_nor);
+         glBindBuffer(GL_ARRAY_BUFFER, norBufID[i]);
+         glVertexAttribPointer(h_nor, 3, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+      }
+
+      if (texBufID[i] != 0) {
+         // Bind texcoords buffer
+         h_tex = prog->getAttribute("vertTex");
+         if (h_tex != -1 && texBufID[i] != 0) {
+            GLSL::enableVertexAttribArray(h_tex);
+            glBindBuffer(GL_ARRAY_BUFFER, texBufID[i]);
+            glVertexAttribPointer(h_tex, 2, GL_FLOAT, GL_FALSE, 0, (const void *) 0);
+         }
+      }
+
+      // Bind element buffer
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
+
+      // Draw
+      glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
+
+      M->popMatrix();
+   }
+   // Disable and unbind
+   if (h_tex != -1) {
+      GLSL::disableVertexAttribArray(h_tex);
+   }
+   if (h_nor != -1) {
+      GLSL::disableVertexAttribArray(h_nor);
+   }
+
+   GLSL::disableVertexAttribArray(h_pos);
+   glBindBuffer(GL_ARRAY_BUFFER, 0);
+   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 

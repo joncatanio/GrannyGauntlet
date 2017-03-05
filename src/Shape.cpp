@@ -316,14 +316,14 @@ std::shared_ptr<std::vector<glm::vec3>> Shape::calcFragmentDir(glm::vec3 directi
    std::shared_ptr<std::vector<glm::vec3>> eleDir = std::make_shared<std::vector<glm::vec3>>();
 
    // Calculate the axis to randomize the direction of the objects about.
-   glm::vec3 horAxis = glm::vec3(0.0, 1.0, 0.0);
-   glm::vec3 vertAxis = glm::cross(direction, horAxis);
+   glm::vec3 vertRotAxis = glm::vec3(0.0, 1.0, 0.0);
+   glm::vec3 horRotAxis = glm::cross(direction, vertRotAxis);
 
    int bufNum = posBuf.size();
    for (int i = 0; i < bufNum; i++) {
       // Calculate a random direction to translate the point on.
-      glm::vec3 dirHor = glm::rotate(direction, randFloat(-M_PI / 4.0f, M_PI / 4.0f), horAxis);
-      glm::vec3 dirVert = glm::rotate(direction, randFloat(-M_PI / 6.0f, M_PI / 6.0f), vertAxis);
+      glm::vec3 dirHor = glm::rotate(direction, randFloat(-M_PI / 4.0f, M_PI / 4.0f), vertRotAxis);
+      glm::vec3 dirVert = glm::rotate(direction, randFloat(-M_PI / 12.0f, M_PI / 6.0f), horRotAxis);
       glm::vec3 dir = glm::normalize((dirHor + dirVert) * 0.5f);
 
       eleDir->push_back(dir);
@@ -347,7 +347,7 @@ void Shape::fracture(const std::shared_ptr<Program> prog,
 
       /* Load in a new model transform per shape within the larger Shape obj.
        * For fracturing we are just going to translate the shape. */ 
-      M->translate(obj->getPosition() + ((obj->getFragmentDirs())->at(i) * 5.0f));
+      M->translate(obj->getFragmentPos()->at(i));
       M->scale(obj->getScale());
       glm::mat4 rotation = obj->transform.getRotate();
       M->rotateMat4(rotation);

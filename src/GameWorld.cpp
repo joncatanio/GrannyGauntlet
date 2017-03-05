@@ -20,8 +20,16 @@ void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 	dynamicGameObjectsToAdd_.push(obj);
 }
 
+void GameWorld::rmDynamicGameObject(std::shared_ptr<GameObject> obj) {
+   dynamicGameObjectsToRemove_.push(obj);
+}
+
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	staticGameObjectsToAdd_.push(obj);
+}
+
+void GameWorld::rmStaticGameObject(std::shared_ptr<GameObject> obj) {
+   staticGameObjectsToRemove_.push(obj);
 }
 
 void GameWorld::addLight(const std::shared_ptr<Light> light) {
@@ -322,4 +330,20 @@ void GameWorld::updateInternalGameObjectLists() {
 		staticGameObjects_.push_back(staticGameObjectsToAdd_.front());
 		staticGameObjectsToAdd_.pop();
 	}
+
+   while (!dynamicGameObjectsToRemove_.empty()) {
+      std::shared_ptr<GameObject> obj = dynamicGameObjectsToRemove_.front();
+      dynamicGameObjects_.erase(std::remove(dynamicGameObjects_.begin(),
+         dynamicGameObjects_.end(), obj), dynamicGameObjects_.end());
+
+      dynamicGameObjectsToRemove_.pop();
+   }
+
+   while (!staticGameObjectsToRemove_.empty()) {
+      std::shared_ptr<GameObject> obj = staticGameObjectsToRemove_.front();
+      staticGameObjects_.erase(std::remove(staticGameObjects_.begin(),
+         staticGameObjects_.end(), obj), staticGameObjects_.end());
+
+      staticGameObjectsToRemove_.pop();
+   }
 }

@@ -1,4 +1,5 @@
 #include <glm/gtx/rotate_vector.hpp>
+#include <algorithm>
 
 #include "CookieActionComponent.h"
 #include "GameManager.h"

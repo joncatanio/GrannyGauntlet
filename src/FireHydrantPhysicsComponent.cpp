@@ -37,6 +37,11 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->setPosition(newPos);
    }
 
+   // All fracturing updating happens here
+   if (holder_->fracture) {
+      holder_->updateFragmentDirs(deltaTime);
+   }
+
    std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
    if (!objsHit.empty()) {
       std::shared_ptr<GameObject> objHit = objsHit[0];

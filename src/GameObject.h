@@ -104,7 +104,11 @@ public:
    // Sets the fragment direction vector usually from Shape.cpp
    void setFragmentDirs(std::shared_ptr<std::vector<glm::vec3>> fragDirs);
 
+   // Gets the fragment direction vector for the fractured object
    std::shared_ptr<std::vector<glm::vec3>> getFragmentDirs();
+
+   // Updates the fragment directions which have velocity encoded.
+   void updateFragmentDirs(float deltaTime);
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT

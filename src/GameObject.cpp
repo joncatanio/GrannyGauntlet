@@ -247,3 +247,13 @@ void GameObject::setFragmentDirs(std::shared_ptr<std::vector<glm::vec3>> fragDir
 std::shared_ptr<std::vector<glm::vec3>> GameObject::getFragmentDirs() {
    return fragDirs_;
 }
+
+/* TODO (noj) it would be nice to simply get deltaTime to the fracture call
+ * in shape, but that might be a bigger refactor. */
+void GameObject::updateFragmentDirs(float deltaTime) {
+   int numFrags = fragDirs_->size();
+
+   for (int i = 0; i < numFrags; i++) {
+      fragDirs_->at(i) = fragDirs_->at(i) * deltaTime * 2.0f;
+   }
+}

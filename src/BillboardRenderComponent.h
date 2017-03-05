@@ -22,7 +22,6 @@ private:
 	unsigned vaoID;
 	unsigned posBufIDRef;
 	unsigned texBufIDRef;
-
 };
 
 #endif

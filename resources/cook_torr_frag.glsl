@@ -81,7 +81,7 @@ float calcFresnel(vec3 halfVec, vec3 view) {
 	float halfViewDot = max(dot(halfVec, view), 0.0);
 
 	// TODO(rgarmsen2295): Figure out if this should be object dependent
-	float normalIncidence = 0.8;
+	float normalIncidence = 0.4;
 
 	// Calculate the fresnel factor
 	float fresnel = (1.0 - normalIncidence) * pow(1.0 - halfViewDot, 5.0);
@@ -122,6 +122,7 @@ float calcGeometricAttenuation(vec3 halfVec, vec3 view, vec3 fragNormal, vec3 li
 // Calculates the total color (specular/diffuse) from directional lights using cook-torrance
 // Loops through up to |MAX_DIRECTIONAL_LIGHTS| with a soft cap set by |numDirectionLights|
 // Math and explanation of cook-torrance sourced from ruh.li/GraphicsCookTorrance.html
+// TODO(rgarmsen2295): Optimize this to remove duplicated calculations (currently reads a bit better though)
 vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 	vec3 dirLightColor = vec3(0.0);
 

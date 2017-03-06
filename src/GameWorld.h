@@ -1,6 +1,7 @@
 #ifndef GAME_WORLD_H
 #define GAME_WORLD_H
 
+#include <algorithm>
 #include <ctime>
 #include <iostream>
 #include <iterator>
@@ -39,6 +40,9 @@ public:
 
 	// Adds a GameObject to the World's internal list of non-static GameObjects (could move)
 	void addDynamicGameObject(std::shared_ptr<GameObject> obj);
+
+	// Removes a GameObject to the World's internal list of non-static GameObjects
+	void rmDynamicGameObject(std::shared_ptr<GameObject> obj);
 	
 	// Adds a GameObject to the World's internal list of static GameObjects (non-moving)
 	void addStaticGameObject(std::shared_ptr<GameObject> obj);
@@ -117,6 +121,9 @@ private:
 
 	// Queue of static objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToAdd_;
+
+	// Queue of dynamic objects removed to the world but that have yet to be removed to the vector
+	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToRemove_;
 
 	// Octree of static objects that are in the world - these objects should never move.
 	// If they do, the tree must be rebuilt

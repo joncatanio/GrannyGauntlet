@@ -20,6 +20,10 @@ void GameWorld::addDynamicGameObject(std::shared_ptr<GameObject> obj) {
 	dynamicGameObjectsToAdd_.push(obj);
 }
 
+void GameWorld::rmDynamicGameObject(std::shared_ptr<GameObject> obj) {
+	dynamicGameObjectsToRemove_.push(obj);
+}
+
 void GameWorld::addStaticGameObject(std::shared_ptr<GameObject> obj) {
 	staticGameObjectsToAdd_.push(obj);
 }
@@ -295,7 +299,7 @@ void GameWorld::addBunnyToGameWorld() {
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
-      shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Bunny"), "Billboard", materialManager.getMaterial("Brass"));
 
 	std::shared_ptr<GameObject> bunnyObj = std::make_shared<GameObject>(
 		GameObjectType::DYNAMIC_OBJECT, 
@@ -321,5 +325,13 @@ void GameWorld::updateInternalGameObjectLists() {
 	while (!staticGameObjectsToAdd_.empty()) {
 		staticGameObjects_.push_back(staticGameObjectsToAdd_.front());
 		staticGameObjectsToAdd_.pop();
+	}
+
+	while (!dynamicGameObjectsToRemove_.empty()) {
+		std::shared_ptr<GameObject> obj = dynamicGameObjectsToRemove_.front();
+		dynamicGameObjects_.erase(std::remove(dynamicGameObjects_.begin(),
+			dynamicGameObjects_.end(), obj), dynamicGameObjects_.end());
+		
+		dynamicGameObjectsToRemove_.pop();
 	}
 }

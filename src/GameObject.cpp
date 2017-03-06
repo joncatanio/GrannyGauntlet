@@ -203,14 +203,14 @@ void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
 	MaterialManager& materialManager = MaterialManager::instance();
 	ShapeManager& shapeManager = ShapeManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Bright Green"));
+		shapeManager.getShape("Bunny"), "Billboard", materialManager.getMaterial("Bright Green"));
 	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
 		positionOfHit,
 		glm::vec3(0.0f, 1.0f, 0.0f),
-		0.0f,
-		scale_ / 2.0f,
+		5.0f,
+		glm::vec3(1.0f),
 		nullptr,
 		billboardPhysicsComponent,
 		billboardRenderComponent,

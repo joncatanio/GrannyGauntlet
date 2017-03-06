@@ -9,6 +9,7 @@
 #include "GameManager.h"
 #include "ViewFrustum.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
@@ -18,9 +19,6 @@
 #include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
 #include "CookieActionComponent.h"
-
-#include "fmod.hpp"
-#include "fmod_errors.h"
 
 #ifdef _WIN32
 #include <gl\gl.h>
@@ -45,27 +43,6 @@ static void initMisc() {
 }
 
 int main(int argc, char **argv) {
-   /* vvvvvv ERASE THIS vvvvvvv */
-   FMOD_RESULT result;
-   FMOD::System *system = NULL;
-   FMOD::Sound *sound = NULL;
-   FMOD::Channel *channel = 0;
-
-   result = FMOD::System_Create(&system);
-   if (result != FMOD_OK) {
-      std::cout << "FMOD error: " << result << std::endl;; 
-      exit(-1);
-   }
-
-   system->init(512, FMOD_INIT_NORMAL, 0);
-   if (result != FMOD_OK) {
-      std::cout << "FMOD error: " << result << std::endl;; 
-      exit(-1);
-   }
-
-   system->createStream((resourceDirectory + "ASingleWord.wav").c_str(), FMOD_LOOP_NORMAL | FMOD_2D, 0, &sound);
-   /* ^^^^^^ ERASE THIS ^^^^^^^*/
-
 	// Initialize boilerplate glfw, etc. code and check for failure
     WindowManager& windowManager = WindowManager::instance();    
     if (windowManager.initialize() == -1) {
@@ -79,6 +56,9 @@ int main(int argc, char **argv) {
 	 // Initialize the ResourceManager and get its instance
 	 ResourceManager& resourceManager = ResourceManager::instance();
 	 resourceManager.setResourceDirectory(resourceDirectory);
+
+    // Initialize the AudioManager and get its instance
+    AudioManager& audioManager = AudioManager::instance();
 
     // Initialize the GameManager and get its instance
     GameManager& gameManager = GameManager::instance();
@@ -113,7 +93,7 @@ int main(int argc, char **argv) {
     // Add all static objects before this!!!
     world.init();
 
-    gameManager.setTime(15.0);
+    gameManager.setTime(150000.0);
 
     // Loop until the user closes the window
     int numFramesInSecond = 0;
@@ -123,7 +103,8 @@ int main(int argc, char **argv) {
     double startTime = glfwGetTime();
     double previousTime = startTime;
 
-    system->playSound(sound, 0, false, &channel);
+    audioManager.startSoundtrack();
+
     while (!windowManager.isClosed()) {
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - previousTime;
@@ -175,7 +156,9 @@ int main(int argc, char **argv) {
             secondClock = 0.0;
             numFramesInSecond = 0;
         }
-         system->update();
+
+        // All audio updating occurs here.
+        audioManager.update();
     }
 
     return EXIT_SUCCESS;

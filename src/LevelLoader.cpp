@@ -14,6 +14,7 @@
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
+#include "AudioManager.h"
 
 #include <fstream>
 #include <glm/gtc/type_ptr.hpp>
@@ -78,6 +79,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
 
    if ((res = parseLights(world, level["lights"]))) {
       std::cerr << "Error parsing lights." << std::endl;
+      return res;
+   }
+
+   if ((res = parseSoundtrack(level["soundtrack"]))) {
+      std::cerr << "Error parsing soundtrack." << std::endl;
       return res;
    }
 
@@ -216,6 +222,18 @@ int LevelLoader::parseLights(GameWorld &world, json lightObjs) {
          };
 
          world.addLight(light);
+      }
+   }
+
+   return 0;
+}
+
+int LevelLoader::parseSoundtrack(json soundtrackObjs) {
+   AudioManager& audioManager = AudioManager::instance();
+
+   if (soundtrackObjs != nullptr) {
+      for (json track : soundtrackObjs) {
+         audioManager.addTrack(track["filename"]);
       }
    }
 

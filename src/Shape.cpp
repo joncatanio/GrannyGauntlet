@@ -27,7 +27,13 @@ void Shape::loadMesh(const string &meshName) {
 	vector<tinyobj::shape_t> shapes;
 	vector<tinyobj::material_t> objMaterials;
 	string errStr;
-	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str());
+
+    string mtlBase = "../resources/";
+
+    //printf("%s\n", meshName.c_str());
+
+
+	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str(), mtlBase.c_str());
 	if(!rc) {
 		cerr << errStr << endl;
 	} else {
@@ -37,13 +43,74 @@ void Shape::loadMesh(const string &meshName) {
             eleBuf.push_back(shapes[i].mesh.indices);
             norBuf.push_back(shapes[i].mesh.normals);
 
+            //printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
+            //printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
+            /*
+            for(unsigned int j = 0; j < shapes[i].mesh.material_ids.size(); j++) {
+                printf("shape[%ld] material[%ld]. material_id: %ld\n", i, j, shapes[i].mesh.material_ids[j]);
+            }
+             */
             if (norBuf[i].size() == 0) {
                 calculateNormals(i);
             }
+
+            //TODO(nurgan) check if that assumption hold
+            // theoreteically each face can have its own material.
+            // as it always seems to be the case anyways, we assume one material is used for a whole SHAPE.
+            int shapeMaterialID = shapes[i].mesh.material_ids[0];
+
+            if(shapeMaterialID < 0 || shapeMaterialID > objMaterials.size() - 1) {
+                // no material
+                textureNames.push_back("");
+                //std::cout << "no mtl" << std::endl;
+            } else {
+                string shapeTextureName = objMaterials[shapeMaterialID].diffuse_texname;
+
+                textureNames.push_back(shapeTextureName);
+
+                //first check if there is a texture name
+                if(shapeTextureName != "") {
+
+                    //std::cout << "TEX" << std::endl;
+
+                    if (textures.count(shapeTextureName) == 0) {
+                        //std::cout << "TEX2" << std::endl;
+                        Texture *texture = new Texture();
+                        texture->loadTexture("../resources/" + shapeTextureName, shapeTextureName);
+                        textures[shapeTextureName] = texture;
+                    }
+                } else {
+                    //std::cout << "no tex" << std::endl;
+                }
+            }
+
+
+
+
         }
 
 		findAndSetMinAndMax();
 	}
+
+    /*
+    for (int i = 0; i < objMaterials.size(); i++) {
+        printf("material[%ld].name = %s\n", i, objMaterials[i].name.c_str());
+        printf("  material.Ka = (%f, %f ,%f)\n", objMaterials[i].ambient[0], objMaterials[i].ambient[1], objMaterials[i].ambient[2]);
+        printf("  material.Kd = (%f, %f ,%f)\n", objMaterials[i].diffuse[0], objMaterials[i].diffuse[1], objMaterials[i].diffuse[2]);
+        printf("  material.Ks = (%f, %f ,%f)\n", objMaterials[i].specular[0], objMaterials[i].specular[1], objMaterials[i].specular[2]);
+        printf("  material.Tr = (%f, %f ,%f)\n", objMaterials[i].transmittance[0], objMaterials[i].transmittance[1], objMaterials[i].transmittance[2]);
+        printf("  material.Ke = (%f, %f ,%f)\n", objMaterials[i].emission[0], objMaterials[i].emission[1], objMaterials[i].emission[2]);
+        printf("  material.Ns = %f\n", objMaterials[i].shininess);
+        printf("  material.Ni = %f\n", objMaterials[i].ior);
+        printf("  material.dissolve = %f\n", objMaterials[i].dissolve);
+        printf("  material.illum = %d\n", objMaterials[i].illum);
+        printf("  material.map_Ka = %s\n", objMaterials[i].ambient_texname.c_str());
+        printf("  material.map_Kd = %s\n", objMaterials[i].diffuse_texname.c_str());
+        printf("  material.map_Ks = %s\n", objMaterials[i].specular_texname.c_str());
+        printf("  material.map_Ns = %s\n", objMaterials[i].specular_highlight_texname.c_str());
+        printf("\n");
+    }
+     */
 }
 
 /**
@@ -244,9 +311,10 @@ void Shape::init() {
 
     }
 
+
 }
 
-void Shape::draw(const shared_ptr<Program> prog) const {
+void Shape::draw(const shared_ptr<Program> prog) {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 
@@ -283,8 +351,22 @@ void Shape::draw(const shared_ptr<Program> prog) const {
         // Bind element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
 
+        // check if texture for shape
+        if(textureNames[i] != "") {
+            std::cout << "actually binding the texture" << std::endl;
+            textures[textureNames[i]]->bind(0, prog);
+            glUniform1i(prog->getUniform("textureActive"), 1);
+        } else {
+            glUniform1i(prog->getUniform("textureActive"), 0);
+        }
+
         // Draw
         glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
+
+
+        if(textureNames[i] != "") {
+            textures[textureNames[i]]->unbind();
+        }
 
     }
     // Disable and unbind
@@ -298,6 +380,9 @@ void Shape::draw(const shared_ptr<Program> prog) const {
     GLSL::disableVertexAttribArray(h_pos);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+
 
 }
 

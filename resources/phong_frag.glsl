@@ -1,5 +1,6 @@
 #version 330 core
 uniform sampler2D shadowMapTex;
+uniform sampler2D textureMap;
 
 #define MAX_POINT_LIGHTS 10
 #define MAX_DIRECTION_LIGHTS 10
@@ -35,8 +36,9 @@ uniform float MatShiny;
 uniform mat4 M;
 uniform mat4 V;
 
-uniform vec2 shadowMapSize;
+uniform int textureActive;
 
+uniform vec2 shadowMapSize;
 uniform float PCFkernelRadius = 4.0;
 
 //Poisson Disc for PCF filtering
@@ -71,6 +73,7 @@ const vec2 poission[25] = vec2[25](
 in vec3 positionInCamSpace;
 in vec3 normalInWorldSpace;
 in vec3 positionInLightSpace;
+in vec2 texCoord;
 
 
 out vec4 color;
@@ -108,8 +111,17 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 		}
 		vec3 specular = specularValue * MatSpc * lightColor;
 
+        // lookup texture
+        vec3 texColor = texture(textureMap, texCoord).xyz;
+
 		// Add light color to total directional color
-		dirLightColor += diffuse + specular;
+		//dirLightColor += diffuse + specular;
+		if(textureActive == 1) {
+		    dirLightColor += texColor + specular;
+        } else {
+		    dirLightColor += diffuse + specular;
+		}
+
 	}
 
 
@@ -181,6 +193,10 @@ void main() {
 	// Shadow Mapping, calculate shadow Factor
     float shadowFactor = shadowFactor();
 
+
+
 	// Calculate the total color
 	color = shadowFactor * vec4(directionalLightColor + ambient, 1.0);
+	//color = shadowFactor * vec4(texColor, 1.0);
+	//color = vec4(texCoord, 0.0, 1.0);
 }

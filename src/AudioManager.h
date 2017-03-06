@@ -18,9 +18,6 @@ public:
    // Main update call for all sounds in the current audio system.
    void update();
 
-   // Get the FMOD system in order to create/play sounds.
-   FMOD::System* getSystem();
-
    // Adds a song to the internal game soundtrack.
    void addTrack(std::string filename);
 

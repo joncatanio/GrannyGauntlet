@@ -78,8 +78,6 @@ void AudioManager::update() {
    }
 }
 
-FMOD::System* AudioManager::getSystem() { return system_; }
-
 void AudioManager::addTrack(std::string filename) {
    FMOD_RESULT result;
    FMOD::Sound *sound = NULL;

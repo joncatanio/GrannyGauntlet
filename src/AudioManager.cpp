@@ -111,3 +111,15 @@ void AudioManager::pauseSoundtrack() {
       }
    }
 }
+
+void AudioManager::playEffect(std::string filename) {
+   FMOD_RESULT result;
+   FMOD::Sound *sound = NULL;
+
+   result = system_->createSound((audioPath_ + filename).c_str(),
+      FMOD_LOOP_OFF | FMOD_2D, 0, &sound);
+   FMODErrorCheck(result);
+
+   result = system_->playSound(sound, 0, false, 0);
+   FMODErrorCheck(result);
+}

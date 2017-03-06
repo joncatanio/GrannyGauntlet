@@ -28,6 +28,9 @@ public:
 
    // Pauses the soundtrack.
    void pauseSoundtrack();
+
+   // Plays a small effect. This loads the sound into memory so keep it small.
+   void playEffect(std::string filename);
 private:
    AudioManager();
 
@@ -38,6 +41,7 @@ private:
       }
    };
 
+   // TODO (noj) possibly move this to resource manager or someshit.
    const std::string audioPath_ = "../resources/audio/";
 
    /* The main system for FMOD to utilize for managing sounds. There must be

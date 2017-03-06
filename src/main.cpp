@@ -19,6 +19,9 @@
 #include "WallRenderComponent.h"
 #include "CookieActionComponent.h"
 
+#include "fmod.hpp"
+#include "fmod_errors.h"
+
 #ifdef _WIN32
 #include <gl\gl.h>
 #pragma comment(lib, "opengl32.lib")
@@ -42,6 +45,26 @@ static void initMisc() {
 }
 
 int main(int argc, char **argv) {
+   /* vvvvvv ERASE THIS vvvvvvv */
+   FMOD_RESULT result;
+   FMOD::System *system = NULL;
+   FMOD::Sound *sound = NULL;
+   FMOD::Channel *channel = 0;
+
+   result = FMOD::System_Create(&system);
+   if (result != FMOD_OK) {
+      std::cout << "FMOD error: " << result << std::endl;; 
+      exit(-1);
+   }
+
+   system->init(512, FMOD_INIT_NORMAL, 0);
+   if (result != FMOD_OK) {
+      std::cout << "FMOD error: " << result << std::endl;; 
+      exit(-1);
+   }
+
+   system->createStream((resourceDirectory + "ASingleWord.wav").c_str(), FMOD_LOOP_NORMAL | FMOD_2D, 0, &sound);
+   /* ^^^^^^ ERASE THIS ^^^^^^^*/
 
 	// Initialize boilerplate glfw, etc. code and check for failure
     WindowManager& windowManager = WindowManager::instance();    
@@ -100,6 +123,7 @@ int main(int argc, char **argv) {
     double startTime = glfwGetTime();
     double previousTime = startTime;
 
+    system->playSound(sound, 0, false, &channel);
     while (!windowManager.isClosed()) {
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - previousTime;
@@ -151,6 +175,7 @@ int main(int argc, char **argv) {
             secondClock = 0.0;
             numFramesInSecond = 0;
         }
+         system->update();
     }
 
     return EXIT_SUCCESS;

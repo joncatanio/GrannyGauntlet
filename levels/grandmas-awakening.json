@@ -362,6 +362,12 @@
          "filename": "HairInTheDrain.mp3"
       }
    ],
+   "soundeffects": [
+      {
+         "name": "FireHydrant Clank",
+         "filename": "firehydrantclank.mp3"
+      }
+   ],
    "static-objects": [
       {
          "object-name": "ground plane",

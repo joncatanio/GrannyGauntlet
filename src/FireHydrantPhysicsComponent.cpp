@@ -58,7 +58,7 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          // Play sound effect.
          AudioManager& audioManager = AudioManager::instance();
-         audioManager.playEffect("firehydrantclank.mp3");
+         audioManager.playEffect("FireHydrant Clank");
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();

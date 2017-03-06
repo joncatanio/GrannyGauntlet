@@ -40,6 +40,16 @@ AudioManager::AudioManager() :
 AudioManager::~AudioManager() {
    system_->close();
    system_->release();
+
+   while (!soundtrack_.empty()) {
+      soundtrack_.front()->release();
+      soundtrack_.pop();
+   }
+
+   for (auto it = soundeffects_.begin(); it != soundeffects_.end(); ++it) {
+      it->second->release();
+   }
+   soundeffects_.clear();
 }
 
 void AudioManager::update() {
@@ -112,13 +122,21 @@ void AudioManager::pauseSoundtrack() {
    }
 }
 
-void AudioManager::playEffect(std::string filename) {
+void AudioManager::addEffect(std::string name, std::string filename) {
    FMOD_RESULT result;
    FMOD::Sound *sound = NULL;
 
    result = system_->createSound((audioPath_ + filename).c_str(),
       FMOD_LOOP_OFF | FMOD_2D, 0, &sound);
    FMODErrorCheck(result);
+
+   std::pair<std::string, FMOD::Sound*> effectToInsert(name, sound);
+   soundeffects_.insert(effectToInsert);
+}
+
+void AudioManager::playEffect(std::string effectName) {
+   FMOD_RESULT result;
+   FMOD::Sound* sound = soundeffects_.at(effectName);
 
    result = system_->playSound(sound, 0, false, 0);
    FMODErrorCheck(result);

@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <queue>
+#include <unordered_map>
 
 class AudioManager {
 public:
@@ -29,8 +30,11 @@ public:
    // Pauses the soundtrack.
    void pauseSoundtrack();
 
-   // Plays a small effect. This loads the sound into memory so keep it small.
-   void playEffect(std::string filename);
+   // Adds a sound effect. This loads the sound into memory so keep it small.
+   void addEffect(std::string name, std::string filename);
+
+   // Plays an effect from the `soundeffects_` map.
+   void playEffect(std::string effectName);
 private:
    AudioManager();
 
@@ -53,6 +57,9 @@ private:
 
    // The channel of the current soundtrack song.
    FMOD::Channel* stChannel_;
+
+   // A map of all sound effects, these are gathered from the JSON level.
+   std::unordered_map<std::string, FMOD::Sound*> soundeffects_;
 
    // Maximum number of audio channels.
    const int MAX_CHANNELS = 512;

@@ -14,8 +14,5 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 }
 
 void BillboardRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
-	//ShaderManager& shaderManager = ShaderManager::instance();
-	//shaderManager.renderShadowPass(holder_, shape_, M);
-
 	// No shadows on billboard effects currently
 }

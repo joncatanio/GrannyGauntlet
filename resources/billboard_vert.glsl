@@ -10,6 +10,7 @@ out vec3 vTexCoord;
 
 void main() {
 
+  // Calculate the object's location sans rotation and scale
   gl_Position = P * (V * M * vec4(0.0, 0.0, 0.0, 1.0) + vec4(vertPos.xy, 0.0, 1.0));
 
   vTexCoord = vertPos;  

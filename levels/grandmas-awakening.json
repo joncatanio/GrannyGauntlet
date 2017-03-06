@@ -20,6 +20,10 @@
         "name": "Cubemap",
         "file-prefix": "cubemap",
         "default": false
+    },
+    {
+      "name": "Billboard",
+      "file-prefix": "billboard"
     }
    ],
    "level-shapes": [

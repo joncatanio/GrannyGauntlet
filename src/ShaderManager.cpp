@@ -233,6 +233,43 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 	}
 }
 
+void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
+	const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
+	if (objToRender != NULL) {
+
+		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
+
+		// Bind perspective and view tranforms
+		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
+
+		GameManager& gameManager = GameManager::instance();
+		Camera& camera = gameManager.getCamera();
+
+		// Set up and bind model transform
+		M->pushMatrix();
+		M->loadIdentity();
+
+		M->translate(objToRender->getPosition());
+		M->scale(objToRender->getScale());
+
+		glm::mat4 rotation = objToRender->transform.getRotate();
+		M->rotateMat4(rotation);
+
+		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+
+		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
+		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
+
+		// Draw billboard
+		shape->draw(shaderProgram);
+
+		M->popMatrix();
+
+		unbindShader();
+	}
+}
+
 void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
 					  std::shared_ptr<MatrixStack> M){
 	if (objToRender != NULL) {

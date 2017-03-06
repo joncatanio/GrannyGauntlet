@@ -1,3 +1,5 @@
+#include "BillboardPhysicsComponent.h"
+#include "BillboardRenderComponent.h"
 #include "GameObject.h"
 #include "GameManager.h"
 #include "AimRenderComponent.h"
@@ -192,6 +194,31 @@ void GameObject::performAction(double deltaTime, double totalTime) {
     if (action_ != NULL) {
         action_->checkAndPerformAction(deltaTime, totalTime);
     }
+}
+
+void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
+	GameManager& gameManager = GameManager::instance();
+	GameWorld& world = gameManager.getGameWorld();
+
+	MaterialManager& materialManager = MaterialManager::instance();
+	ShapeManager& shapeManager = ShapeManager::instance();
+	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
+		shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Bright Green"));
+	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
+
+	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+		positionOfHit,
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f,
+		scale_ / 2.0f,
+		nullptr,
+		billboardPhysicsComponent,
+		billboardRenderComponent,
+		nullptr
+		);
+	billboardEffect->initComponents();
+
+	world.addDynamicGameObject(billboardEffect);
 }
 
 void GameObject::changeShader(const std::string& newShaderName) {

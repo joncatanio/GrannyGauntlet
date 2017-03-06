@@ -69,8 +69,6 @@ public:
 
     void addRotation(float angle, const glm::vec3& axis);
 
-    void calculateAndSetInitialRotation();
-
     void changeMaterial(std::shared_ptr<Material> newMaterial);
 
     RenderComponent* getRenderComponent();
@@ -86,6 +84,9 @@ public:
 
     // Perform the any actions that are bound to the object, if any and if applicable at that moment
     void performAction(double deltaTime, double totalTime);
+
+	// Spawns a billboard effect indicating that the object was "hit" by another object
+	void spawnHitBillboardEffect(glm::vec3& positionOfHit);
 
 	// Changes the active shader for the object
 	void changeShader(const std::string& newShaderName);

@@ -299,7 +299,7 @@ void GameWorld::addBunnyToGameWorld() {
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
-      shapeManager.getShape("Bunny"), "Billboard", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Brass"));
 
 	std::shared_ptr<GameObject> bunnyObj = std::make_shared<GameObject>(
 		GameObjectType::DYNAMIC_OBJECT, 

@@ -24,13 +24,13 @@ void BillboardPhysicsComponent::updatePhysics(float deltaTime) {
 		GameManager& gameManager = GameManager::instance();
 		GameWorld& world = gameManager.getGameWorld();
 
-		//world.rmDynamicGameObject(holder_);
+		world.rmDynamicGameObject(holder_);
 	}
 	else {
 		glm::vec3 oldPosition = holder_->getPosition();
 		glm::vec3 newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
 
-		//holder_->setPosition(newPosition);
+		holder_->setPosition(newPosition);
 		updateBoundingBox();
 	}
 }

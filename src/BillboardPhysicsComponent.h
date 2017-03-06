@@ -21,7 +21,6 @@ private:
 	const double maxLifeTime = 3.0;
 
 	double currentLifeTime = 0.0;
-
 };
 
 #endif

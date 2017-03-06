@@ -269,8 +269,13 @@ void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, con
 
 		M->popMatrix();
 
+<<<<<<< 0a47140a84c608cce6fc05aec81ceee2815427bf
 		//glBindTexture(GL_TEXTURE_2D, 0);
 		//unbindShader();
+=======
+		glBindTexture(GL_TEXTURE_2D, 0);
+		unbindShader();
+>>>>>>> Cleanup of billboard code
 	}
 }
 

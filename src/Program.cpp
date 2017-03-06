@@ -93,14 +93,6 @@ void Program::addDefaultAttributesAndUniforms() {
 	//TODO(nurgan) remove from default attributs
 	addUniform("cubemap");
 
-	Texture texture;
-	texture.setFilename("../resources/skybox/bluesky/negz.png");
-	texture.setUnit(0);
-	texture.setName("alphaTexture");
-	texture.init();
-
-	addTexture()
-
 	addUniform("shadowMapTex");
 
 	// Adds material uniforms

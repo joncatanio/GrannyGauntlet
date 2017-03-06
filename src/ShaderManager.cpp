@@ -238,30 +238,6 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
 	const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
-
-		//glActiveTexture(GL_TEXTURE0);
-		//GLuint tid_;
-		//glGenTextures(1, &tid_);
-		//glBindTexture(GL_TEXTURE_2D, tid_);
-
-		//std::string imgPath = "../resources/skybox/bluesky/negz.png";
-
-		//Image* image = new Image(imgPath);
-
-		//if (image->components == 3) {
-		//	// RGB texture
-
-		//	glTexImage2D(GL_TEXTURE_2D,
-		//		0, GL_RGB, image->width, image->height,
-		//		0, GL_RGB, GL_UNSIGNED_BYTE, (GLubyte*)image->getImageData());
-		//}
-		//else if (image->components == 4) {
-		//	// RBGA texture
-		//	glTexImage2D(GL_TEXTURE_2D,
-		//		0, GL_RGBA, image->width, image->height,
-		//		0, GL_RGBA, GL_UNSIGNED_BYTE, (GLubyte*)image->getImageData());
-		//}
-
 		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
 
 		// Bind perspective and view tranforms

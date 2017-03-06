@@ -21,6 +21,10 @@ private:
 	const double maxLifeTime = 3.0;
 
 	double currentLifeTime = 0.0;
+<<<<<<< 678a7567b1118afe499b003031fbbe261ca9cc44
+=======
+
+>>>>>>> Initial Billboard implementation with 3d objects
 };
 
 #endif

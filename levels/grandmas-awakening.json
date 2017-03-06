@@ -3,6 +3,7 @@
    "level-shaders": [
       {
          "name": "Phong",
+<<<<<<< 678a7567b1118afe499b003031fbbe261ca9cc44
          "file-prefix": "phong",
          "default": true
       },
@@ -25,6 +26,18 @@
       "name": "Billboard",
       "file-prefix": "billboard"
     }
+=======
+         "file-prefix": "phong"
+      },
+      {
+        "name": "Cubemap",
+        "file-prefix": "cubemap"
+      },
+      {
+        "name": "Billboard",
+        "file-prefix": "billboard"
+      }
+>>>>>>> Initial Billboard implementation with 3d objects
    ],
    "level-shapes": [
       {

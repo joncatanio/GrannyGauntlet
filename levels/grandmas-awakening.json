@@ -6,8 +6,12 @@
          "file-prefix": "phong"
       },
       {
-         "name": "Cubemap",
-         "file-prefix": "cubemap"
+        "name": "Cubemap",
+        "file-prefix": "cubemap"
+      },
+      {
+        "name": "Billboard",
+        "file-prefix": "billboard"
       }
    ],
    "level-shapes": [

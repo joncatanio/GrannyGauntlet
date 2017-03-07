@@ -8,7 +8,7 @@
 class BillboardRenderComponent : public RenderComponent {
 public:
 
-	BillboardRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material);
+	BillboardRenderComponent(std::shared_ptr<Shape> shape, const std::string& shaderName, std::shared_ptr<Material> material, std::shared_ptr<Texture> billboardTexture);
 
 	~BillboardRenderComponent();
 
@@ -17,6 +17,11 @@ public:
 	void renderShadow(std::shared_ptr<MatrixStack> M);
 
 private:
+
+	std::shared_ptr<Texture> billboardTexture_;
+	unsigned vaoID;
+	unsigned posBufIDRef;
+	unsigned texBufIDRef;
 
 };
 

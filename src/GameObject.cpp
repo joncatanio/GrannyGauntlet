@@ -198,13 +198,35 @@ void GameObject::performAction(double deltaTime, double totalTime) {
 }
 
 void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
+	static bool areTexturesLoaded = false;
+	static std::shared_ptr<Texture> billboardTexture;
+
+	if (!areTexturesLoaded) {
+		billboardTexture = std::make_shared<Texture>();
+		billboardTexture->loadTexture("../resources/billboard/pow-no-text", "billboardTex");
+
+		// TODO(rgarmsen): Load in billboard textures from json in a standard way
+		//ShaderManager& shaderManager = ShaderManager::instance();
+		//std::shared_ptr<Program> billboardShaderProg = shaderManager.getShaderProgram("Billboard");
+		//billboardShaderProg->addTexture(billboardTexture.get());
+
+		/*glBindTexture(GL_TEXTURE_2D, billboardTexture->tid);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, billboardTexture->image->width, billboardTexture->image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, billboardTexture->image->getImageData());*/
+	}
+
 	GameManager& gameManager = GameManager::instance();
 	GameWorld& world = gameManager.getGameWorld();
 
 	MaterialManager& materialManager = MaterialManager::instance();
 	ShapeManager& shapeManager = ShapeManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Bunny"), "Billboard", materialManager.getMaterial("Bright Green"));
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), billboardTexture);
 	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,

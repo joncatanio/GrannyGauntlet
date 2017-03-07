@@ -1,14 +1,18 @@
 #version 330 core
 
-in vec3 vTexCoord;
+in vec2 texCoord;
 
-uniform sampler2D billboardTex;
+uniform sampler2D textureMap;
 
 out vec4 color;
 
 void main() {
  
-	color = texture(billboardTex, vTexCoord.xy);
-	//color = vec4(1.0, 0.3, 0.3, 1.0);
-}
+	vec4 colorTemp = texture(textureMap, texCoord);
 
+	if (colorTemp.r >= 0.9 && colorTemp.g >= 0.9 && colorTemp.b >= 0.9) {
+		discard;
+	}
+
+	color = colorTemp;
+}

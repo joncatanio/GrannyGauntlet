@@ -255,17 +255,9 @@ void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, con
 
 		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
 		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
-
-		// Draw billboard
-		//shape->draw(shaderProgram);
-
-		//billboardTexture->bind(0);
 		
 
 		M->popMatrix();
-
-		//glBindTexture(GL_TEXTURE_2D, 0);
-		//unbindShader();
 	}
 }
 

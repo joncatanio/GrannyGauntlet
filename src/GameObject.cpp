@@ -202,21 +202,7 @@ void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
 
 	if (!areTexturesLoaded) {
 		billboardTexture = std::make_shared<Texture>();
-		billboardTexture->loadTexture("../resources/billboard/pow-no-text", "billboardTex");
-
-		// TODO(rgarmsen): Load in billboard textures from json in a standard way
-		//ShaderManager& shaderManager = ShaderManager::instance();
-		//std::shared_ptr<Program> billboardShaderProg = shaderManager.getShaderProgram("Billboard");
-		//billboardShaderProg->addTexture(billboardTexture.get());
-
-		/*glBindTexture(GL_TEXTURE_2D, billboardTexture->tid);
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, billboardTexture->image->width, billboardTexture->image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, billboardTexture->image->getImageData());*/
+		billboardTexture->loadTexture("../resources/billboard/pow-comic-book-style.jpg", "billboardTex");
 	}
 
 	GameManager& gameManager = GameManager::instance();

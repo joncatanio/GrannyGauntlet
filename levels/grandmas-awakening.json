@@ -33,6 +33,14 @@
          "filename": "cube.obj"
       },
       {
+         "name": "House04",
+         "filename": "House_04.obj"
+      },
+      {
+         "name": "House05",
+         "filename": "House_05.obj"
+      },
+      {
          "name": "Tex_Cube",
          "filename": "tex_cube.obj"
       },
@@ -792,7 +800,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 10.0,
-            "y": 5.1,
+            "y": 2.5,
             "z": -20.0
          },
          "dir": {
@@ -811,7 +819,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House05",
             "shader": "Default",
             "material": "Cyan Rubber"
          },
@@ -882,7 +890,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
-            "y": 5.1,
+            "y": 5.2,
             "z": 5.0
          },
          "dir": {
@@ -892,16 +900,16 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House04",
             "shader": "Default",
             "material": "Cyan Rubber"
          },

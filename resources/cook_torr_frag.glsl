@@ -1,5 +1,6 @@
 #version 330 core
 uniform sampler2D shadowMapTex;
+uniform sampler2D textureMap;
 
 #define M_PI 3.14159
 

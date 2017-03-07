@@ -385,6 +385,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
+            "shape": "Tex_Cube",
             "shader": "Default",
             "material": "Silver"
          },

@@ -7,24 +7,24 @@
          "default": true
       },
       {
-        "name": "CookTorrance",
-        "file-prefix": "cook_torr",
-        "default": false
+         "name": "CookTorrance",
+         "file-prefix": "cook_torr",
+         "default": false
       },
       {
-        "name": "Toon",
-        "file-prefix": "toon",
-        "default": false
+         "name": "Toon",
+         "file-prefix": "toon",
+         "default": false
       },
       {
-          "name": "Cubemap",
-          "file-prefix": "cubemap",
-          "default": false
+         "name": "Cubemap",
+         "file-prefix": "cubemap",
+         "default": false
       },
       {
-        "name": "Billboard",
-        "file-prefix": "billboard",
-        "default": false
+         "name": "Billboard",
+         "file-prefix": "billboard",
+         "default": false
       }
    ],
    "level-shapes": [

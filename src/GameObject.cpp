@@ -203,7 +203,7 @@ void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
 
 	if (!areTexturesLoaded) {
 		billboardTexture = std::make_shared<Texture>();
-		billboardTexture->loadTexture("../resources/billboard/pow-comic-book-style.jpg", "billboardTex");
+		billboardTexture->loadTexture("../resources/billboard/pow-text-stuff.jpg", "billboardTex");
 	}
 
 	GameManager& gameManager = GameManager::instance();

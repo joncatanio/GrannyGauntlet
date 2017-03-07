@@ -14,5 +14,6 @@ void main() {
 	gl_Position = P * (V * M * vec4(0.0, 0.0, 0.0, 1.0) + vec4(vertPos.xy, 0.0, 1.0));
 
 	// texture coordinates
-	texCoord = vertTex;
+	vec2 vertTemp = vec2(vertPos.x, -vertPos.y) * 0.5 + 0.5;
+	texCoord = vertTemp;
 }

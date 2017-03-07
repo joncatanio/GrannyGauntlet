@@ -10,21 +10,23 @@ BillboardRenderComponent::BillboardRenderComponent(std::shared_ptr<Shape> shape,
 	glGenBuffers(1, &posBufIDRef);
 
 	static GLfloat billboardVerts[] = {
-		-1, -1, 0.0,
-		-1, 1, 0.0,
-		1, -1, 0.0,
-		1, 1, 0.0
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		1.0f,  1.0f, 0.0f,
 	};
 	glBindBuffer(GL_ARRAY_BUFFER, posBufIDRef);
-	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), &(billboardVerts[0]), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float), &(billboardVerts[0]), GL_STATIC_DRAW);
 
 	glGenBuffers(1, &texBufIDRef);
 
 	static GLfloat billboardTex[] = {
 		0, 0,
 		0, 1,
-		1, 1,
-		1, 0
+		1, 0,
+		1, 1
 	};
 	glBindBuffer(GL_ARRAY_BUFFER, texBufIDRef);
 	glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), &(billboardTex[0]), GL_STATIC_DRAW);
@@ -59,7 +61,7 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 
 	shaderManager.renderBillboard(holder_, shaderName_, shape_, material_, billboardTexture_, P, V, M);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDrawArrays(GL_TRIANGLES, 1, 4);
+	glDrawArrays(GL_TRIANGLES, 3, 3);
 	billboardTexture_->unbind();
 
 	if (h_tex != -1) {

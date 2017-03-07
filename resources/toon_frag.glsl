@@ -1,5 +1,6 @@
 #version 330 core
 uniform sampler2D shadowMapTex;
+uniform sampler2D textureMap;
 
 #define MAX_POINT_LIGHTS 10
 #define MAX_DIRECTION_LIGHTS 10
@@ -34,6 +35,8 @@ uniform float MatShiny;
 
 uniform mat4 M;
 uniform mat4 V;
+
+uniform int textureActive;
 
 uniform vec2 shadowMapSize;
 
@@ -71,7 +74,7 @@ const vec2 poission[25] = vec2[25](
 in vec3 positionInCamSpace;
 in vec3 normalInWorldSpace;
 in vec3 positionInLightSpace;
-
+in vec2 texCoord;
 
 out vec4 color;
 
@@ -79,6 +82,9 @@ out vec4 color;
 // Loops through up to |MAX_DIRECTIONAL_LIGHTS| with a soft cap set by |numDirectionLights|
 vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 	vec3 dirLightColor = vec3(0.0);
+
+	// Calculate ambient color
+	vec3 ambient = MatAmb;
 
 	float normalViewDot = max(dot(fragNormal, view), 0.0);
 
@@ -104,13 +110,26 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 
 		vec3 halfVec = normalize(lightDir + view);
 
+		float shiny = MatShiny;
+        if (MatShiny == 0.0) {
+            shiny = 1.0;
+        }
+
 		float specularValue = max(dot(fragNormal, halfVec), 0.0);
-		specularValue = pow(specularValue, MatShiny);
+		specularValue = pow(specularValue, shiny);
 		specularValue = step(0.5, specularValue);
 
 		vec3 specular = specularValue * MatSpc * lightColor;
 
 		dirLightColor += diffuse + specular;
+	}
+
+	dirLightColor += ambient;
+
+	if (textureActive == 1) {
+		// lookup texture
+		vec3 texColor = texture(textureMap, texCoord).xyz;
+		dirLightColor *= texColor;
 	}
 
 	return dirLightColor;

@@ -391,6 +391,10 @@
       {
          "name": "FireHydrant Clank",
          "filename": "firehydrantclank.mp3"
+      },
+      {
+         "name": "Boing",
+         "filename": "boing.mp3"
       }
    ],
    "static-objects": [

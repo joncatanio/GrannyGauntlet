@@ -2,6 +2,7 @@
 
 #include "GameManager.h"
 #include "MaterialManager.h"
+#include "AudioManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
 
@@ -68,6 +69,10 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
                 objHit->changeMaterial(materialManager.getMaterial("Red Rubber"));
                 objHit->triggerDeliveryAnimation();
 				objHit->spawnHitBillboardEffect(holder_->getPosition());
+               // Play sound effect.
+               AudioManager& audioManager = AudioManager::instance();
+               audioManager.playEffect("Boing");
+   
 
 				// Score effects due to hit
                 float score = calculateScore();

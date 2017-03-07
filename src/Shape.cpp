@@ -30,9 +30,6 @@ void Shape::loadMesh(const string &meshName) {
 
     string mtlBase = "../resources/";
 
-    //printf("%s\n", meshName.c_str());
-
-
 	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str(), mtlBase.c_str());
 	if(!rc) {
 		cerr << errStr << endl;
@@ -43,13 +40,6 @@ void Shape::loadMesh(const string &meshName) {
             eleBuf.push_back(shapes[i].mesh.indices);
             norBuf.push_back(shapes[i].mesh.normals);
 
-            //printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
-            //printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
-            /*
-            for(unsigned int j = 0; j < shapes[i].mesh.material_ids.size(); j++) {
-                printf("shape[%ld] material[%ld]. material_id: %ld\n", i, j, shapes[i].mesh.material_ids[j]);
-            }
-             */
             if (norBuf[i].size() == 0) {
                 calculateNormals(i);
             }
@@ -61,9 +51,23 @@ void Shape::loadMesh(const string &meshName) {
 
             if(shapeMaterialID < 0 || shapeMaterialID > objMaterials.size() - 1) {
                 // no material
+                materialPresent.push_back(false);
                 textureNames.push_back("");
-                //std::cout << "no mtl" << std::endl;
+                materials.push_back(nullptr);
             } else {
+
+                materialPresent.push_back(true);
+
+                std::shared_ptr<Material> material = std::make_shared<Material>();
+                *material = {
+                        objMaterials[shapeMaterialID].ambient[0], objMaterials[shapeMaterialID].ambient[1], objMaterials[shapeMaterialID].ambient[2],
+                        objMaterials[shapeMaterialID].diffuse[0], objMaterials[shapeMaterialID].diffuse[1], objMaterials[shapeMaterialID].diffuse[2],
+                        objMaterials[shapeMaterialID].specular[0], objMaterials[shapeMaterialID].specular[1], objMaterials[shapeMaterialID].specular[2],
+                        objMaterials[i].shininess
+                };
+
+                materials.push_back(material);
+
                 string shapeTextureName = objMaterials[shapeMaterialID].diffuse_texname;
 
                 textureNames.push_back(shapeTextureName);
@@ -71,16 +75,11 @@ void Shape::loadMesh(const string &meshName) {
                 //first check if there is a texture name
                 if(shapeTextureName != "") {
 
-                    //std::cout << "TEX" << std::endl;
-
                     if (textures.count(shapeTextureName) == 0) {
-                        //std::cout << "TEX2" << std::endl;
                         Texture *texture = new Texture();
                         texture->loadTexture("../resources/" + shapeTextureName, shapeTextureName);
                         textures[shapeTextureName] = texture;
                     }
-                } else {
-                    //std::cout << "no tex" << std::endl;
                 }
             }
 
@@ -91,26 +90,6 @@ void Shape::loadMesh(const string &meshName) {
 
 		findAndSetMinAndMax();
 	}
-
-    /*
-    for (int i = 0; i < objMaterials.size(); i++) {
-        printf("material[%ld].name = %s\n", i, objMaterials[i].name.c_str());
-        printf("  material.Ka = (%f, %f ,%f)\n", objMaterials[i].ambient[0], objMaterials[i].ambient[1], objMaterials[i].ambient[2]);
-        printf("  material.Kd = (%f, %f ,%f)\n", objMaterials[i].diffuse[0], objMaterials[i].diffuse[1], objMaterials[i].diffuse[2]);
-        printf("  material.Ks = (%f, %f ,%f)\n", objMaterials[i].specular[0], objMaterials[i].specular[1], objMaterials[i].specular[2]);
-        printf("  material.Tr = (%f, %f ,%f)\n", objMaterials[i].transmittance[0], objMaterials[i].transmittance[1], objMaterials[i].transmittance[2]);
-        printf("  material.Ke = (%f, %f ,%f)\n", objMaterials[i].emission[0], objMaterials[i].emission[1], objMaterials[i].emission[2]);
-        printf("  material.Ns = %f\n", objMaterials[i].shininess);
-        printf("  material.Ni = %f\n", objMaterials[i].ior);
-        printf("  material.dissolve = %f\n", objMaterials[i].dissolve);
-        printf("  material.illum = %d\n", objMaterials[i].illum);
-        printf("  material.map_Ka = %s\n", objMaterials[i].ambient_texname.c_str());
-        printf("  material.map_Kd = %s\n", objMaterials[i].diffuse_texname.c_str());
-        printf("  material.map_Ks = %s\n", objMaterials[i].specular_texname.c_str());
-        printf("  material.map_Ns = %s\n", objMaterials[i].specular_highlight_texname.c_str());
-        printf("\n");
-    }
-     */
 }
 
 /**
@@ -314,7 +293,7 @@ void Shape::init() {
 
 }
 
-void Shape::draw(const shared_ptr<Program> prog) {
+void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defaultMtl) {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 
@@ -351,9 +330,14 @@ void Shape::draw(const shared_ptr<Program> prog) {
         // Bind element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
 
+        if(materialPresent[i]) {
+           bindMtl(prog, materials[i]);
+        } else {
+            bindMtl(prog, defaultMtl);
+        }
+
         // check if texture for shape
         if(textureNames[i] != "") {
-            std::cout << "actually binding the texture" << std::endl;
             textures[textureNames[i]]->bind(0, prog);
             glUniform1i(prog->getUniform("textureActive"), 1);
         } else {
@@ -386,6 +370,15 @@ void Shape::draw(const shared_ptr<Program> prog) {
 
 }
 
+void Shape::bindMtl(const std::shared_ptr<Program> prog, std::shared_ptr<Material> material) {
+    if(material != nullptr) {
+        glUniform3f(prog->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);
+        glUniform3f(prog->getUniform("MatDif"), material->rDif, material->gDif, material->bDif);
+        glUniform3f(prog->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
+        glUniform1f(prog->getUniform("MatShiny"), material->shininess);
+    }
+
+}
 
 glm::vec3& Shape::getMin() {
 	return this->min;

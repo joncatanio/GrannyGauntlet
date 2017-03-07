@@ -83,6 +83,10 @@ out vec4 color;
 vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 	vec3 dirLightColor = vec3(0.0);
 
+	// Calculate ambient color
+	vec3 ambient = MatAmb;
+
+
 	for (int i = 0; i < numDirectionLights; ++i) {
 		vec3 lightColor = directionLights[i].color;
 		vec3 lightDir = normalize(-directionLights[i].orientation);
@@ -92,7 +96,11 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 
 		// Calculate diffuse component from light
 		float diffuseValue = max(lightNormalDot, 0.0);
-		vec3 diffuse = diffuseValue * MatDif * lightColor;
+		//vec3 diffuse = diffuseValue * MatDif * lightColor;
+
+        vec3 diffuse = vec3(0.0);
+        diffuse = diffuseValue * MatDif * lightColor;
+
 
 		// Calculate specular component from light
 		vec3 reflect = reflect(-lightDir, fragNormal);
@@ -106,24 +114,27 @@ vec3 dirLightColor(vec3 fragNormal, vec3 view) {
 			// How close are we to looking straight at the reflection vector?
 			float specWeight = max(dot(reflect, view), 0.0);
 
+            float shiny = MatShiny;
+            if(MatShiny == 0.0) {
+                shiny = 1.0;
+            }
 			// Get shiny with it
-			specularValue = pow(specWeight, MatShiny);
+			specularValue = pow(specWeight, shiny);
 		}
 		vec3 specular = specularValue * MatSpc * lightColor;
 
-        // lookup texture
-        vec3 texColor = texture(textureMap, texCoord).xyz;
-
 		// Add light color to total directional color
-		//dirLightColor += diffuse + specular;
-		if(textureActive == 1) {
-		    dirLightColor += texColor + specular;
-        } else {
-		    dirLightColor += diffuse + specular;
-		}
+		dirLightColor += diffuse + specular;
 
 	}
 
+    dirLightColor += ambient;
+
+    if(textureActive == 1) {
+        // lookup texture
+        vec3 texColor = texture(textureMap, texCoord).xyz;
+        dirLightColor *= texColor;
+     }
 
 	return dirLightColor;
 }
@@ -187,8 +198,6 @@ void main() {
 	vec3 directionalLightColor = dirLightColor(fragNormalInWorldSpace, view);
 	// TODO(rgarmsen2295): vec3 areaLightColor = areaLightColor();
 
-	// Calculate ambient color
-	vec3 ambient = MatAmb;
 
 	// Shadow Mapping, calculate shadow Factor
     float shadowFactor = shadowFactor();
@@ -196,7 +205,5 @@ void main() {
 
 
 	// Calculate the total color
-	color = shadowFactor * vec4(directionalLightColor + ambient, 1.0);
-	//color = shadowFactor * vec4(texColor, 1.0);
-	//color = vec4(texCoord, 0.0, 1.0);
+	color = shadowFactor * vec4(directionalLightColor, 1.0);
 }

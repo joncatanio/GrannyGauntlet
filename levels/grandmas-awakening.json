@@ -16,6 +16,14 @@
          "filename": "cube.obj"
       },
       {
+         "name": "Tex_Cube",
+         "filename": "tex_cube.obj"
+      },
+      {
+         "name": "Sponza",
+         "filename": "sponza.obj"
+      },
+      {
          "name": "Sphere",
          "filename": "sphere.obj"
       },
@@ -29,7 +37,7 @@
       },
       {
          "name": "FireHydrant",
-         "filename": "sponza.obj"
+         "filename": "FireHydrantLow.obj"
       },
       {
          "name": "BubbleTree",
@@ -364,13 +372,13 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 1000.0,
-            "y": 0.01,
-            "z": 1000.0
+            "x": 100.0,
+            "y": 0.1,
+            "z": 100.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Tex_Cube",
             "shader": "Phong",
             "material": "Silver"
          },
@@ -413,7 +421,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -25.0,
-            "y": 5.1,
+            "y": 2.4,
             "z": -20.0
          },
          "dir": {
@@ -432,7 +440,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },

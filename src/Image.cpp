@@ -8,10 +8,6 @@
 
 Image::Image(std::string path) {
     imageData = stbi_load( path.c_str() , &width, &height, &components, STBI_rgb);
-
-    if(imageData == nullptr) {
-        std::cout << "failed to load " << path << std::endl;
-    }
 }
 
 Image::~Image() {

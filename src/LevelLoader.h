@@ -27,6 +27,8 @@ private:
    int parseStaticObjects(GameWorld &world, nlohmann::json staticObjs);
    int parseDynamicObjects(GameWorld &world, nlohmann::json dynamicObjs);
    int parseLights(GameWorld &world, nlohmann::json lightObjs);
+   int parseSoundtrack(nlohmann::json soundtrackObjs);
+   int parseSoundeffects(nlohmann::json soundeffectObjs);
    std::shared_ptr<GameObject> createGameObject(nlohmann::json obj,
       GameObjectType objType);
 

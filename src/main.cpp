@@ -9,6 +9,7 @@
 #include "GameManager.h"
 #include "ViewFrustum.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
@@ -42,7 +43,6 @@ static void initMisc() {
 }
 
 int main(int argc, char **argv) {
-
 	// Initialize boilerplate glfw, etc. code and check for failure
     WindowManager& windowManager = WindowManager::instance();    
     if (windowManager.initialize() == -1) {
@@ -56,6 +56,9 @@ int main(int argc, char **argv) {
 	 // Initialize the ResourceManager and get its instance
 	 ResourceManager& resourceManager = ResourceManager::instance();
 	 resourceManager.setResourceDirectory(resourceDirectory);
+
+    // Initialize the AudioManager and get its instance
+    AudioManager& audioManager = AudioManager::instance();
 
     // Initialize the GameManager and get its instance
     GameManager& gameManager = GameManager::instance();
@@ -99,6 +102,8 @@ int main(int argc, char **argv) {
     double secondClock = 0.0;
     double startTime = glfwGetTime();
     double previousTime = startTime;
+
+    audioManager.startSoundtrack();
 
     while (!windowManager.isClosed()) {
         double currentTime = glfwGetTime();
@@ -151,6 +156,9 @@ int main(int argc, char **argv) {
             secondClock = 0.0;
             numFramesInSecond = 0;
         }
+
+        // All audio updating occurs here.
+        audioManager.update();
     }
 
     return EXIT_SUCCESS;

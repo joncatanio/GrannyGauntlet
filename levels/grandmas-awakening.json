@@ -3,41 +3,29 @@
    "level-shaders": [
       {
          "name": "Phong",
-<<<<<<< 678a7567b1118afe499b003031fbbe261ca9cc44
          "file-prefix": "phong",
          "default": true
       },
-    {
-      "name": "CookTorrance",
-      "file-prefix": "cook_torr",
-      "default": false
-    },
-    {
-      "name": "Toon",
-      "file-prefix": "toon",
-      "default": false
-    },
-    {
-        "name": "Cubemap",
-        "file-prefix": "cubemap",
+      {
+        "name": "CookTorrance",
+        "file-prefix": "cook_torr",
         "default": false
-    },
-    {
-      "name": "Billboard",
-      "file-prefix": "billboard"
-    }
-=======
-         "file-prefix": "phong"
       },
       {
-        "name": "Cubemap",
-        "file-prefix": "cubemap"
+        "name": "Toon",
+        "file-prefix": "toon",
+        "default": false
+      },
+      {
+          "name": "Cubemap",
+          "file-prefix": "cubemap",
+          "default": false
       },
       {
         "name": "Billboard",
-        "file-prefix": "billboard"
+        "file-prefix": "billboard",
+        "default": false
       }
->>>>>>> Initial Billboard implementation with 3d objects
    ],
    "level-shapes": [
       {

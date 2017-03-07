@@ -1,5 +1,8 @@
 #include "Texture.h"
 #include "GLSL.h"
+#include <iostream>
+
+
 
 Texture::Texture() {}
 
@@ -30,20 +33,22 @@ void Texture::loadTexture(std::string path, std::string newName) {
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
+
     glBindTexture(GL_TEXTURE_2D, 0);
 
 }
 
-void Texture::bind(int newUnit)
+void Texture::bind(int newUnit, const std::shared_ptr<Program> prog)
 {
     unit = newUnit;
-    glActiveTexture(GL_TEXTURE0 + unit);
+    glActiveTexture(GL_TEXTURE1 + unit);
     glBindTexture(GL_TEXTURE_2D, tid);
-    //glUniform1i(0, unit);
+    GLint texPos = prog->getUniform("textureMap");
+    glUniform1i(texPos, 1 + unit);
 }
 
 void Texture::unbind() {
-    glActiveTexture(GL_TEXTURE0 + unit);
+    glActiveTexture(GL_TEXTURE1 + unit);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

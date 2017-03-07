@@ -20,6 +20,14 @@
          "filename": "cube.obj"
       },
       {
+         "name": "Tex_Cube",
+         "filename": "tex_cube.obj"
+      },
+      {
+         "name": "Sponza",
+         "filename": "sponza.obj"
+      },
+      {
          "name": "Sphere",
          "filename": "sphere.obj"
       },
@@ -368,13 +376,13 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 1000.0,
-            "y": 0.01,
-            "z": 1000.0
+            "x": 100.0,
+            "y": 0.1,
+            "z": 100.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Tex_Cube",
             "shader": "Phong",
             "material": "Silver"
          },
@@ -417,7 +425,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -25.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": -20.0
          },
          "dir": {
@@ -436,7 +444,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -447,7 +455,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -30.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": 20.0
          },
          "dir": {
@@ -466,7 +474,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -507,7 +515,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -10.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": 20.0
          },
          "dir": {
@@ -526,7 +534,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -597,7 +605,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -60.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": 35.0
          },
          "dir": {
@@ -616,7 +624,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -687,7 +695,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 30.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": -20.0
          },
          "dir": {
@@ -706,7 +714,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -777,7 +785,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -50.0,
-            "y": 2.5,
+            "y": 1.2,
             "z": 87.0
          },
          "dir": {
@@ -796,7 +804,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -867,7 +875,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": -15.0
          },
          "dir": {
@@ -886,7 +894,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -927,7 +935,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 30.0,
-            "y": 5.1,
+            "y": 2.2,
             "z": -45.0
          },
          "dir": {
@@ -946,7 +954,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },
@@ -1017,7 +1025,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
-            "y": 3.0,
+            "y": 1.0,
             "z": -90.0
          },
          "dir": {
@@ -1036,7 +1044,7 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "Sponza",
             "shader": "Phong",
             "material": "Cyan Rubber"
          },

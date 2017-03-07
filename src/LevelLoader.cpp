@@ -102,9 +102,14 @@ int LevelLoader::parseShaders(json shaders) {
       ShaderManager& shaderManager = ShaderManager::instance();
 
       for (json shader : shaders) {
+         std::string shaderName = shader["name"];
+
          if (shaderManager.createIsomorphicShader(resourceManager,
-             shader["name"], shader["file-prefix"]) == 0) {
+             shaderName, shader["file-prefix"]) == 0) {
             return 1;
+         }
+         if (shader["default"]) {
+             shaderManager.setDefaultShader(shaderName);
          }
       }
       // load shadow pass shader

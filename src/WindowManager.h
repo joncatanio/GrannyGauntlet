@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "GameManager.h"
+#include "ShaderManager.h"
 
 class WindowManager {
 public:
@@ -26,6 +27,9 @@ public:
 
 	// Updates the window according to any changes processed during run-time
 	void update();
+
+	// Checks for user setting changes and updates the game state accordingly
+	void checkForUserChanges();
 
 	// Swap front and back buffers
 	void swapBuffers();

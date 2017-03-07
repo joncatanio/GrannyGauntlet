@@ -278,7 +278,6 @@ void GameWorld::addBunnyToGameWorld() {
 	ShaderManager& shaderManager = ShaderManager::instance();
    ShapeManager& shapeManager = ShapeManager::instance();
    MaterialManager& materialManager = MaterialManager::instance();
-	std::shared_ptr<Program> progPhong = shaderManager.getShaderProgram("Phong");
 
 	// Get a random start location between (-10, 0, -10) and (10, 0, 10)
 	float randomStartX = (std::rand() % 20) - 10.0f;
@@ -295,7 +294,7 @@ void GameWorld::addBunnyToGameWorld() {
 
 	BunnyPhysicsComponent* bunnyPhysicsComp = new BunnyPhysicsComponent();
 	BunnyRenderComponent* bunnyRenderComp = new BunnyRenderComponent(
-      shapeManager.getShape("Bunny"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Bunny"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
 
 	std::shared_ptr<GameObject> bunnyObj = std::make_shared<GameObject>(
 		GameObjectType::DYNAMIC_OBJECT, 

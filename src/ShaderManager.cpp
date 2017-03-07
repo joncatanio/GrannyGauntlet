@@ -3,7 +3,12 @@
 
 ShaderManager& ShaderManager::instance() {
 	static ShaderManager *instance = new ShaderManager();
+
 	return *instance;
+}
+
+void ShaderManager::setDefaultShader(const std::string& shaderProgramName) {
+	shaderPrograms[DefaultShader] = shaderPrograms.at(shaderProgramName);
 }
 
 const std::string& ShaderManager::getBoundShaderName() {
@@ -126,13 +131,13 @@ const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shad
 	boundShaderName = shaderProgramName;
 	glUseProgram(shaderToBind->getPid());
 
-    shaderToBind->bindTextures();
+    //shaderToBind->bindTextures();
 
 	return shaderToBind;
 }
 
 void ShaderManager::unbindShader() {
-	shaderPrograms.at(boundShaderName)->unbindTextures();
+	//shaderPrograms.at(boundShaderName)->unbindTextures();
     boundShaderName = "";
 	glUseProgram(NO_SHADER);
 }
@@ -167,13 +172,6 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 			glUniform3f(shaderProgram->getUniform("directionLights[" + std::to_string(i) + "].orientation"), light->orientation.x, light->orientation.y, light->orientation.z);
 		}
 
-		// Bind material properties
-		glUniform3f(shaderProgram->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);
-		glUniform3f(shaderProgram->getUniform("MatDif"), material->rDif, material->gDif, material->bDif);
-		glUniform3f(shaderProgram->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
-		glUniform1f(shaderProgram->getUniform("MatShiny"), material->shininess);
-
-
         // Calculate and bind light transorms and shadow Map
         glm::mat4 lightP = calculateLightProjection(directionalLights.at(0));
         glm::mat4 lightV = calculateLightView(directionalLights.at(0));
@@ -204,7 +202,7 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
 		// Draw bunny
 		// TODO(rgarmsen): Make shape not need the shader program
-		shape->draw(shaderProgram);
+		shape->draw(shaderProgram, material);
 
 		M->popMatrix();
 
@@ -246,7 +244,6 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		GameWorld& gameWorld = gameManager.getGameWorld();
 
 		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
-		int numDirectionLights = directionalLights.size();
 
         std::shared_ptr<Light> light = directionalLights.at(0);
 
@@ -262,11 +259,12 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 
 		M->translate(objToRender->getPosition());
 		M->scale(objToRender->getScale());
-		M->rotate(objToRender->getYAxisRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 rotation = objToRender->transform.getRotate();
+        M->rotateMat4(rotation);
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-		shape->draw(shaderProgram);
+		shape->draw(shaderProgram, nullptr);
 
 		M->popMatrix();
 
@@ -334,4 +332,8 @@ LightType ShaderManager::stringToLightType(std::string type) {
 
 ShaderManager::ShaderManager() {
 	boundShaderName = "";
+
+	// Put the default shader pair into the map of pairs (it will be set to the default once a default shader is loaded)
+	std::pair<std::string, std::shared_ptr<Program>> newShaderProgram(DefaultShader, nullptr);
+	shaderPrograms.insert(newShaderProgram);
 }

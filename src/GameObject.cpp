@@ -68,10 +68,11 @@ void GameObject::initComponents() {
 }
 
 void GameObject::createMarkerObject() {
+	ShaderManager& shaderManager = ShaderManager::instance();
     ShapeManager& shapeManager = ShapeManager::instance();
     MaterialManager& materialManager = MaterialManager::instance();
     AimRenderComponent* arrowRenderComponent = new AimRenderComponent(
-            shapeManager.getShape("Arrow"), "Phong", materialManager.getMaterial("Bright Green"));
+            shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Bright Green"));
     MarkerPhysicsComponent* markerPhysicsComponent = new MarkerPhysicsComponent();
 
 

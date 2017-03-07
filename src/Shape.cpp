@@ -27,7 +27,10 @@ void Shape::loadMesh(const string &meshName) {
 	vector<tinyobj::shape_t> shapes;
 	vector<tinyobj::material_t> objMaterials;
 	string errStr;
-	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str());
+
+    string mtlBase = "../resources/";
+
+	bool rc = tinyobj::LoadObj(shapes, objMaterials, errStr, meshName.c_str(), mtlBase.c_str());
 	if(!rc) {
 		cerr << errStr << endl;
 	} else {
@@ -40,6 +43,46 @@ void Shape::loadMesh(const string &meshName) {
             if (norBuf[i].size() == 0) {
                 calculateNormals(i);
             }
+
+            //TODO(nurgan) check if that assumption hold
+            // theoreteically each face can have its own material.
+            // as it always seems to be the case anyways, we assume one material is used for a whole SHAPE.
+            int shapeMaterialID = shapes[i].mesh.material_ids[0];
+
+            if(shapeMaterialID < 0 || shapeMaterialID > objMaterials.size() - 1) {
+                // no material
+                materialPresent.push_back(false);
+                textureNames.push_back("");
+                materials.push_back(nullptr);
+            } else {
+
+                materialPresent.push_back(true);
+
+                std::shared_ptr<Material> material = std::make_shared<Material>();
+                *material = {
+                        objMaterials[shapeMaterialID].ambient[0], objMaterials[shapeMaterialID].ambient[1], objMaterials[shapeMaterialID].ambient[2],
+                        objMaterials[shapeMaterialID].diffuse[0], objMaterials[shapeMaterialID].diffuse[1], objMaterials[shapeMaterialID].diffuse[2],
+                        objMaterials[shapeMaterialID].specular[0], objMaterials[shapeMaterialID].specular[1], objMaterials[shapeMaterialID].specular[2],
+                        objMaterials[i].shininess
+                };
+
+                materials.push_back(material);
+
+                string shapeTextureName = objMaterials[shapeMaterialID].diffuse_texname;
+
+                textureNames.push_back(shapeTextureName);
+
+                //first check if there is a texture name
+                if(shapeTextureName != "") {
+
+                    if (textures.count(shapeTextureName) == 0) {
+                        Texture *texture = new Texture();
+                        texture->loadTexture("../resources/" + shapeTextureName, shapeTextureName);
+                        textures[shapeTextureName] = texture;
+                    }
+                }
+            }
+
         }
 
 		findAndSetMinAndMax();
@@ -134,10 +177,10 @@ void Shape::calculateNormals(int i) {
 void Shape::resize() {
 	float scaleX, scaleY, scaleZ;
 	float shiftX, shiftY, shiftZ;
-	float epsilon = 0.001;
 
 	// From min and max compute necessary scale and shift for each dimension
 	float maxExtent, xExtent, yExtent, zExtent;
+    maxExtent = 0.0f;
 	xExtent = max.x - min.x;
 	yExtent = max.y - min.y;
 	zExtent = max.z - min.z;
@@ -244,9 +287,10 @@ void Shape::init() {
 
     }
 
+
 }
 
-void Shape::draw(const shared_ptr<Program> prog) const {
+void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defaultMtl) {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 
@@ -283,8 +327,27 @@ void Shape::draw(const shared_ptr<Program> prog) const {
         // Bind element buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eleBufID[i]);
 
+        if(materialPresent[i]) {
+           bindMtl(prog, materials[i]);
+        } else {
+            bindMtl(prog, defaultMtl);
+        }
+
+        // check if texture for shape
+        if(textureNames[i] != "") {
+            textures[textureNames[i]]->bind(0, prog);
+            glUniform1i(prog->getUniform("textureActive"), 1);
+        } else {
+            glUniform1i(prog->getUniform("textureActive"), 0);
+        }
+
         // Draw
         glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
+
+
+        if(textureNames[i] != "") {
+            textures[textureNames[i]]->unbind();
+        }
 
     }
     // Disable and unbind
@@ -299,8 +362,20 @@ void Shape::draw(const shared_ptr<Program> prog) const {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+
+
+
 }
 
+void Shape::bindMtl(const std::shared_ptr<Program> prog, std::shared_ptr<Material> material) {
+    if(material != nullptr) {
+        glUniform3f(prog->getUniform("MatAmb"), material->rAmb, material->gAmb, material->bAmb);
+        glUniform3f(prog->getUniform("MatDif"), material->rDif, material->gDif, material->bDif);
+        glUniform3f(prog->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
+        glUniform1f(prog->getUniform("MatShiny"), material->shininess);
+    }
+
+}
 
 glm::vec3& Shape::getMin() {
 	return this->min;

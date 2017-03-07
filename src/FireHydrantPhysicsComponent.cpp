@@ -38,6 +38,25 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->setPosition(newPos);
    }
 
+   // All fracturing updating happens here
+   if (holder_->fracture) {
+      if (holder_->velocity == 0.0f) {
+         world.rmDynamicGameObject(holder_);
+      }
+
+      std::shared_ptr<std::vector<glm::vec3>> fractureDirections = holder_->getFragmentDirs();
+      std::shared_ptr<std::vector<glm::vec3>> fracturePositions = holder_->getFragmentPos();
+      int numFrags = fracturePositions->size();
+
+      for (int i = 0; i < numFrags; i++) {
+         glm::vec3 newFractPos = fracturePositions->at(i) + (holder_->velocity *
+            fractureDirections->at(i) * deltaTime);
+         
+         newFractPos += glm::vec3(0.0, yVelocity * deltaTime, 0.0);
+         fracturePositions->at(i) = newFractPos;
+      }
+   }
+
    std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
    if (!objsHit.empty()) {
       std::shared_ptr<GameObject> objHit = objsHit[0];
@@ -55,6 +74,12 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          // Initialize animation parameters.
          animated = true;
          animRotAxis = rotAxis;
+
+         // Initialize fracture variables if the player hits the object hard enough
+         if (objHit->velocity >= 10) {
+            holder_->fracture = true;
+            holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
+         }
 
          // Play sound effect.
          AudioManager& audioManager = AudioManager::instance();

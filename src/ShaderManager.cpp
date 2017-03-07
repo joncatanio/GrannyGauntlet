@@ -185,26 +185,30 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
         glUniform1i(shaderProgram->getUniform("shadowMapTex"), 0);
 
-		// Set up and bind model transform
-		M->pushMatrix();
-		M->loadIdentity();
+      if (objToRender->fracture) {
+         shape->fracture(shaderProgram, material, M, objToRender);
+      } else {
+         // Set up and bind model transform
+         M->pushMatrix();
+         M->loadIdentity();
 
-		M->translate(objToRender->getPosition());
-		M->scale(objToRender->getScale());
+         M->translate(objToRender->getPosition());
+         M->scale(objToRender->getScale());
 
-      glm::mat4 rotation = objToRender->transform.getRotate();
-		M->rotateMat4(rotation);
+         glm::mat4 rotation = objToRender->transform.getRotate();
+         M->rotateMat4(rotation);
 
-		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+         glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
-		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
+         glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
+         glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
 
-		// Draw bunny
-		// TODO(rgarmsen): Make shape not need the shader program
-		shape->draw(shaderProgram, material);
+	   	// Draw bunny
+		   // TODO(rgarmsen): Make shape not need the shader program
+   		shape->draw(shaderProgram, material);
 
-		M->popMatrix();
+         M->popMatrix();
+      }
 
 
 #ifdef DEBUG_BB
@@ -223,7 +227,7 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 		      M->scale(0.25);
             glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
-            shapeToDraw->draw(shaderProgram);
+            shapeToDraw->draw(shaderProgram, material);
             M->popMatrix();
          }
       }

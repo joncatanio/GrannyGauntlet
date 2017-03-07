@@ -63,10 +63,13 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             cookieState.hits++;
             cookieState.hitPositions.push_back(holder_->getPosition());
             if( objHit->cookieDeliverable) {
+
+				// Visual effects due to hit
                 objHit->changeMaterial(materialManager.getMaterial("Red Rubber"));
-
                 objHit->triggerDeliveryAnimation();
+				objHit->spawnHitBillboardEffect(holder_->getPosition());
 
+				// Score effects due to hit
                 float score = calculateScore();
                 GameManager& gameManager = GameManager::instance();
                 gameManager.reportScore(score);
@@ -76,6 +79,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
                 std::cout << "HIT." << " Score on hit: " << score << " Time bump: " << timeBump << std::endl;
 
+				// Other game state changes due to hit
                 gameManager.increaseTime(timeBump);
                 objHit->cookieDeliverable = false;
             }

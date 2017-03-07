@@ -29,8 +29,8 @@ public:
 
 private:
 
-    Image* image;
-    GLuint tid;
+	GLuint tid;
+	Image* image;
     int unit;
     GLint handle;
 

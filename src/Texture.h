@@ -14,6 +14,8 @@ public:
     virtual ~Texture();
 
     std::string name;
+	GLuint tid;
+	Image* image;
 
     // loads the texture under the specified path. channels = channels per pixel, 3 for RGB, 4 for RGBA
     void loadTexture(std::string path, std::string newName);
@@ -25,8 +27,6 @@ public:
 
 private:
 
-    Image* image;
-    GLuint tid;
     int unit;
     GLint handle;
 

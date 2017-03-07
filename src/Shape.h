@@ -31,7 +31,7 @@ public:
 	void draw(const std::shared_ptr<Program> prog, std::shared_ptr<Material> defaultMtl);
    std::shared_ptr<std::vector<glm::vec3>> calcFragmentDir(glm::vec3 direction);
    void fracture(const std::shared_ptr<Program> prog, std::shared_ptr<Material> defaultMtl,
-      std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj) const;
+      std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj);
 	glm::vec3& getMin();
 	glm::vec3& getMax();
 	void findAndSetMinAndMax(glm::mat4 orientTransform = glm::mat4(1.0f));

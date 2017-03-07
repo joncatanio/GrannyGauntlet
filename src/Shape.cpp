@@ -396,7 +396,7 @@ std::shared_ptr<std::vector<glm::vec3>> Shape::calcFragmentDir(glm::vec3 directi
 }
 
 void Shape::fracture(const std::shared_ptr<Program> prog, std::shared_ptr<Material> defaultMtl,
-   std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj) const {
+   std::shared_ptr<MatrixStack> M, std::shared_ptr<GameObject> obj) {
 	int h_pos, h_nor, h_tex;
 	h_pos = h_nor = h_tex = -1;
 

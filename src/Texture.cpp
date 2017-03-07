@@ -17,7 +17,7 @@ void Texture::loadTexture(std::string path, std::string newName) {
     glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &tid);
     glBindTexture(GL_TEXTURE_2D, tid);
-
+	std::cout << "HERE1 " << path << std::endl;
     if(image->components == 3) {
         // RGB texture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLubyte*) image->getImageData());
@@ -25,6 +25,7 @@ void Texture::loadTexture(std::string path, std::string newName) {
         // RBGA texture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLubyte*) image->getImageData());
     }
+	std::cout << "HERE2 " << newName << std::endl;
 
     // generate MipMap and set minification ang magnification filter
     glGenerateMipmap(GL_TEXTURE_2D);

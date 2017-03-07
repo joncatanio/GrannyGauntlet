@@ -27,7 +27,7 @@ BillboardRenderComponent::BillboardRenderComponent(std::shared_ptr<Shape> shape,
 		1, 0
 	};
 	glBindBuffer(GL_ARRAY_BUFFER, texBufIDRef);
-	glBufferData(GL_ARRAY_BUFFER, 2 * sizeof(float), &(billboardTex[0]), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), &(billboardTex[0]), GL_STATIC_DRAW);
 
 	// Unbind the arrays
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -41,7 +41,8 @@ BillboardRenderComponent::~BillboardRenderComponent() {
 void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 	ShaderManager& shaderManager = ShaderManager::instance();
 	const std::shared_ptr<Program> shaderProgram = shaderManager.bindShader(shaderName_);
-	billboardTexture_->bind(0);
+	billboardTexture_->bind(0, shaderProgram);
+	glUniform1i(shaderProgram->getUniform("textureActive"), 1);
 
 	glBindVertexArray(vaoID);
 	GLint h_pos = shaderManager.getShaderProgram(shaderName_)->getAttribute("vertPos");
@@ -60,6 +61,14 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDrawArrays(GL_TRIANGLES, 1, 4);
 	billboardTexture_->unbind();
+
+	if (h_tex != -1) {
+		GLSL::disableVertexAttribArray(h_tex);
+	}
+
+	GLSL::disableVertexAttribArray(h_pos);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	shaderManager.unbindShader();
 }
 

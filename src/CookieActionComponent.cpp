@@ -14,19 +14,20 @@ CookieActionComponent::CookieActionComponent() {
 
     aimInputComponent = new AimInputComponent();
 
+	ShaderManager& shaderManager = ShaderManager::instance();
     ShapeManager& shapeManager = ShapeManager::instance();
     MaterialManager& materialManager = MaterialManager::instance();
 
     AimRenderComponent* aimRenderComponent = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent1 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent2 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent3 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent4 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
 
 
 
@@ -140,10 +141,10 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
 
     if (aimInputComponent->toggleThrow) {
         if (totalTime >= previousCookieTime + 0.5) {
-
+			ShaderManager& shaderManager = ShaderManager::instance();
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
             BunnyRenderComponent *renderComp = new BunnyRenderComponent(
-               shapeManager.getShape("Sphere"), "Phong", materialManager.getMaterial("Bronze"));
+               shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Bronze"));
 
             std::shared_ptr<GameObject> cookieObj = std::make_shared<GameObject>(
                     GameObjectType::DYNAMIC_OBJECT,

@@ -83,9 +83,6 @@ void Shape::loadMesh(const string &meshName) {
                 }
             }
 
-
-
-
         }
 
 		findAndSetMinAndMax();

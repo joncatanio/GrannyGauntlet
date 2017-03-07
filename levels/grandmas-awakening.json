@@ -3,11 +3,18 @@
    "level-shaders": [
       {
          "name": "Phong",
-         "file-prefix": "phong"
+         "file-prefix": "phong",
+         "default": true
+      },
+      {
+         "name": "CookTorrance",
+         "file-prefix": "cook_torr",
+         "default": false
       },
       {
          "name": "Cubemap",
-         "file-prefix": "cubemap"
+         "file-prefix": "cubemap",
+         "default": false
       }
    ],
    "level-shapes": [
@@ -345,7 +352,7 @@
          "render-component": {
             "name": "PlayerRenderComponent",
             "shape": "Lowpolycar",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Pearl"
          },
          "action-component": {
@@ -379,7 +386,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Tex_Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Silver"
          },
          "deliverable": false
@@ -441,7 +448,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -471,7 +478,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -501,7 +508,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -531,7 +538,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -561,7 +568,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -591,7 +598,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -621,7 +628,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -651,7 +658,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -681,7 +688,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -711,7 +718,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -741,7 +748,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -771,7 +778,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -801,7 +808,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -831,7 +838,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -861,7 +868,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -891,7 +898,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -921,7 +928,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -951,7 +958,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -981,7 +988,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -1011,7 +1018,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -1041,7 +1048,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Sponza",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -1071,7 +1078,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -1101,7 +1108,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Cyan Rubber"
          },
          "deliverable": true
@@ -1131,7 +1138,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1161,7 +1168,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1191,7 +1198,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1221,7 +1228,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1251,7 +1258,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1281,7 +1288,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1311,7 +1318,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1341,7 +1348,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1371,7 +1378,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1401,7 +1408,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1431,7 +1438,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1461,7 +1468,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1491,7 +1498,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1521,7 +1528,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1551,7 +1558,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1581,7 +1588,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Cube",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -1611,7 +1618,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1641,7 +1648,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1671,7 +1678,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1701,7 +1708,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1731,7 +1738,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1761,7 +1768,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "BubbleTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1791,7 +1798,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1821,7 +1828,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1851,7 +1858,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1881,7 +1888,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1911,7 +1918,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1941,7 +1948,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -1971,7 +1978,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2001,7 +2008,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2031,7 +2038,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2061,7 +2068,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2091,7 +2098,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2121,7 +2128,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FirTree",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Emerald"
          },
          "deliverable": false
@@ -2153,7 +2160,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2183,7 +2190,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2213,7 +2220,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2243,7 +2250,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2273,7 +2280,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2303,7 +2310,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2333,7 +2340,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2363,7 +2370,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2393,7 +2400,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2423,7 +2430,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2453,7 +2460,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false
@@ -2483,7 +2490,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Phong",
+            "shader": "Default",
             "material": "Ruby"
          },
          "deliverable": false

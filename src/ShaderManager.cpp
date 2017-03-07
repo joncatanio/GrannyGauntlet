@@ -3,7 +3,12 @@
 
 ShaderManager& ShaderManager::instance() {
 	static ShaderManager *instance = new ShaderManager();
+
 	return *instance;
+}
+
+void ShaderManager::setDefaultShader(const std::string& shaderProgramName) {
+	shaderPrograms[DefaultShader] = shaderPrograms.at(shaderProgramName);
 }
 
 const std::string& ShaderManager::getBoundShaderName() {
@@ -239,7 +244,6 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		GameWorld& gameWorld = gameManager.getGameWorld();
 
 		const std::vector<std::shared_ptr<Light>>& directionalLights = gameWorld.getDirectionalLights();
-		int numDirectionLights = directionalLights.size();
 
         std::shared_ptr<Light> light = directionalLights.at(0);
 
@@ -328,4 +332,8 @@ LightType ShaderManager::stringToLightType(std::string type) {
 
 ShaderManager::ShaderManager() {
 	boundShaderName = "";
+
+	// Put the default shader pair into the map of pairs (it will be set to the default once a default shader is loaded)
+	std::pair<std::string, std::shared_ptr<Program>> newShaderProgram(DefaultShader, nullptr);
+	shaderPrograms.insert(newShaderProgram);
 }

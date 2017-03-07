@@ -255,7 +255,8 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 
 		M->translate(objToRender->getPosition());
 		M->scale(objToRender->getScale());
-		M->rotate(objToRender->getYAxisRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 rotation = objToRender->transform.getRotate();
+        M->rotateMat4(rotation);
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 

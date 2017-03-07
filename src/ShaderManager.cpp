@@ -229,9 +229,10 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 }
 
 void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
-	const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
+	const std::shared_ptr<Material> material, const std::shared_ptr<Texture> billboardTexture, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V,
+	std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
-		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
+		const std::shared_ptr<Program> shaderProgram = getShaderProgram(shaderName);
 
 		// Bind perspective and view tranforms
 		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
@@ -256,12 +257,15 @@ void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, con
 		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
 
 		// Draw billboard
-		shape->draw(shaderProgram);
+		//shape->draw(shaderProgram);
+
+		//billboardTexture->bind(0);
+		
 
 		M->popMatrix();
 
-		glBindTexture(GL_TEXTURE_2D, 0);
-		unbindShader();
+		//glBindTexture(GL_TEXTURE_2D, 0);
+		//unbindShader();
 	}
 }
 

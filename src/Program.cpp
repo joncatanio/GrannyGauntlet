@@ -93,6 +93,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	//TODO(nurgan) remove from default attributs
 	addUniform("cubemap");
 
+	// TODO(rgarmsen2295): Remove from default attributes
+	addUniform("billboardTex");
+
 	addUniform("shadowMapTex");
 	addUniform("textureMap");
 

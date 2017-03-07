@@ -2,13 +2,13 @@
 
 in vec3 vTexCoord;
 
-uniform samplerCube cubemap;
+uniform sampler2D billboardTex;
 
 out vec4 color;
 
 void main() {
  
-	color = texture(cubemap, vTexCoord);
+	color = texture(billboardTex, vTexCoord.xy);
 	//color = vec4(1.0, 0.3, 0.3, 1.0);
 }
 

@@ -51,10 +51,8 @@ void WindowManager::checkForUserChanges() {
 
         std::cout << "Switched to " << shaderManager.CookTorranceShader << " shader!" << std::endl;
     } else if (isKeyPressed(GLFW_KEY_T)) {
-        // TODO(rgarmsen2295): Add the Toon shader
-
         // Use the "Toon" shader as the current default
-        //shaderManager.setDefaultShader(shaderManager.ToonShader);
+        shaderManager.setDefaultShader(shaderManager.ToonShader);
 
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
     }

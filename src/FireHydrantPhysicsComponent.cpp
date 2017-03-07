@@ -2,6 +2,7 @@
 
 #include "GameManager.h"
 #include "GameObject.h"
+#include "AudioManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 FireHydrantPhysicsComponent::FireHydrantPhysicsComponent() {}
@@ -79,6 +80,10 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
             holder_->fracture = true;
             holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
          }
+
+         // Play sound effect.
+         AudioManager& audioManager = AudioManager::instance();
+         audioManager.playEffect("FireHydrant Clank");
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();

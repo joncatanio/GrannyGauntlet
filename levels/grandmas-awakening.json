@@ -368,6 +368,26 @@
          "deliverable": false
       }
    ],
+   "soundtrack": [
+      {
+         "name": "Wii Understand",
+         "filename": "WiiUnderstand.mp3"
+      },
+      {
+         "name": "Able Sisters",
+         "filename": "AbleSisters.mp3"
+      },
+      {
+         "name": "HairInTheDrain",
+         "filename": "HairInTheDrain.mp3"
+      }
+   ],
+   "soundeffects": [
+      {
+         "name": "FireHydrant Clank",
+         "filename": "firehydrantclank.mp3"
+      }
+   ],
    "static-objects": [
       {
          "object-name": "ground plane",

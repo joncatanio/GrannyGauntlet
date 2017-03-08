@@ -64,9 +64,9 @@ include_directories(${FMOD_DIR}/api/lowlevel/inc)
 if(WIN32)
    target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.a)
 else(APPLE)
-   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.dylib)
+   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/x86_64/libfmod.so)
 else()
-   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.a)
+   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/x86_64/libfmod.so)
 endif()
 
 # OS specific options and libraries

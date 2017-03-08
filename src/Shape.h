@@ -1,6 +1,8 @@
 #ifndef _SHAPE_H_
 #define _SHAPE_H_
 
+#define _USE_MATH_DEFINES
+
 #include <cfloat>
 #include <memory>
 #include <string>

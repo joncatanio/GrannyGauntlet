@@ -55,14 +55,14 @@ else()
   target_link_libraries(${CMAKE_PROJECT_NAME} ${GLEW_DIR}/lib/libGLEW.a)
 endif()
 
-# FMOD bullshit
+# Get the FMOD environment variable.
 set(FMOD_DIR "$ENV{FMOD_DIR}")
-if (NOT GLEW_DIR)
+if (NOT FMOD_DIR)
    message(FATAL_ERROR "Please point the environment variable FMOD_DIR to the root directory of your FMOD installation.")
 endif()
 include_directories(${FMOD_DIR}/api/lowlevel/inc)
 if(WIN32)
-   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.a)
+   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/fmod_vc.lib)
 else(APPLE)
    target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.dylib)
 else()

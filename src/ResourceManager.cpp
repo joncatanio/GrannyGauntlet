@@ -30,6 +30,16 @@ std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename) {
    return shape;
 }
 
+std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename, const std::string manualTexture) {
+	std::shared_ptr<Shape> shape = std::make_shared<Shape>();
+
+	shape->loadMesh(resourceDirectory + filename, manualTexture);
+	shape->resize();
+	shape->init();
+
+	return shape;
+}
+
 ResourceManager::ResourceManager() {
 	resourceDirectory = "";
 }

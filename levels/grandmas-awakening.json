@@ -38,7 +38,8 @@
       },
       {
          "name": "House05",
-         "filename": "House_05.obj"
+         "filename": "House_05.obj",
+         "manual_texture": "test.png"
       },
       {
          "name": "Tex_Cube",

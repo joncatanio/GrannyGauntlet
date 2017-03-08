@@ -23,7 +23,7 @@ Shape::~Shape()
 {
 }
 
-void Shape::loadMesh(const string &meshName) {
+void Shape::loadMesh(const string &meshName, std::string manualTexture) {
 	// Load geometry
 	// Some obj files contain material information.
 	// We'll ignore them for this assignment.
@@ -84,6 +84,12 @@ void Shape::loadMesh(const string &meshName) {
                         textures[shapeTextureName] = texture;
                     }
                 }
+            }
+
+            if(manualTexture != "") {
+                manualTexturePresent = true;
+                manualTex = new Texture();
+                manualTex->loadTexture(manualTexture, manualTexture);
             }
 
         }
@@ -300,6 +306,11 @@ void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defau
 
     glBindVertexArray(vaoID);
 
+    if(manualTexturePresent) {
+        manualTex->bind(0, prog);
+        glUniform1i(prog->getUniform("textureActive"), 1);
+    }
+
     int bufNum = posBuf.size();
     // Send the position array to the GPU
     for(int i = 0; i < bufNum; i++) {
@@ -338,23 +349,28 @@ void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defau
         }
 
         // check if texture for shape
-        if(textureNames[i] != "") {
-            textures[textureNames[i]]->bind(0, prog);
-            glUniform1i(prog->getUniform("textureActive"), 1);
-        } else {
-            glUniform1i(prog->getUniform("textureActive"), 0);
+        if(!manualTexturePresent) {
+            if (textureNames[i] != "") {
+                textures[textureNames[i]]->bind(0, prog);
+                glUniform1i(prog->getUniform("textureActive"), 1);
+            } else {
+                glUniform1i(prog->getUniform("textureActive"), 0);
+            }
         }
-
         // Draw
         glDrawElements(GL_TRIANGLES, (int) eleBuf[i].size(), GL_UNSIGNED_INT, (const void *) 0);
 
-
-        if(textureNames[i] != "") {
-            textures[textureNames[i]]->unbind();
+        if(!manualTexturePresent) {
+            if (textureNames[i] != "") {
+                textures[textureNames[i]]->unbind();
+            }
         }
-
     }
     // Disable and unbind
+    if(manualTexturePresent) {
+        manualTex->unbind();
+    }
+
     if (h_tex != -1) {
         GLSL::disableVertexAttribArray(h_tex);
     }

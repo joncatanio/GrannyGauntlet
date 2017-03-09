@@ -12,8 +12,13 @@ ShapeManager::ShapeManager() {
 ShapeManager::~ShapeManager() {}
 
 int ShapeManager::createShape(ResourceManager& resourceManager,
-   std::string name, std::string filename) {
-   std::shared_ptr<Shape> shape = resourceManager.loadShape(filename);
+   std::string name, std::string filename, std::string manualTexture) {
+   std::shared_ptr <Shape> shape;
+   if(manualTexture == "") {
+      shape = resourceManager.loadShape(filename);
+   } else {
+      shape = resourceManager.loadShape(filename, manualTexture);
+   }
 
    if (shape == nullptr) {
       return 1;

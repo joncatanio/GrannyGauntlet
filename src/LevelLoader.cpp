@@ -128,11 +128,19 @@ int LevelLoader::parseShapes(json shapes) {
    if (shapes != nullptr) {
       ShapeManager& shapeManager = ShapeManager::instance();
 
+
       for (json shape : shapes) {
-         if (shapeManager.createShape(resourceManager, shape["name"],
-             shape["filename"])) {
-            return 1;
-         }
+          if(shape["manual_texture"] == nullptr) {
+              if (shapeManager.createShape(resourceManager, shape["name"],
+                                           shape["filename"])) {
+                  return 1;
+              }
+          } else {
+              if (shapeManager.createShape(resourceManager, shape["name"],
+                                           shape["filename"], shape["manual_texture"])) {
+                  return 1;
+              }
+          }
       }
 
       if (shapeManager.createShape(resourceManager, "Arrow", "arrow.obj")) {

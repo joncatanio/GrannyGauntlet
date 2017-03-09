@@ -24,6 +24,7 @@ public:
 
    // Loads, resizes, and initializes shape then returns it.
    std::shared_ptr<Shape> loadShape(const std::string filename);
+	std::shared_ptr<Shape> loadShape(const std::string filename, const std::string manualTexture);
 
 private:
 

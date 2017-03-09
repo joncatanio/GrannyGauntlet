@@ -66,7 +66,7 @@ if(WIN32)
 else(APPLE)
    target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.dylib)
 else()
-   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/libfmod.a)
+   target_link_libraries(${CMAKE_PROJECT_NAME} ${FMOD_DIR}/api/lowlevel/lib/x86_64/libfmod.so)
 endif()
 
 # OS specific options and libraries

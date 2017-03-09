@@ -26,7 +26,7 @@ class Shape
 public:
 	Shape();
 	virtual ~Shape();
-	void loadMesh(const std::string &meshName);
+	void loadMesh(const std::string &meshName, std::string manualTexture = "");
 	void calculateNormals(int i);
 	void init();
 	void resize();
@@ -55,10 +55,16 @@ private:
    // For fracturing objects
    float randFloat(float a, float b);
 
+	// Textures via mtl file
     std::vector<std::string> textureNames = std::vector<std::string>();
     std::map<std::string, Texture*> textures;
     std::vector<bool> materialPresent = std::vector<bool>();
     std::vector<std::shared_ptr<Material>> materials;
+
+	// Textures "manually" provided via level JSON
+	bool manualTexturePresent = false;
+	std::string manualTexturePath;
+	Texture* manualTex;
 
 	glm::vec3 min;
 	glm::vec3 max;

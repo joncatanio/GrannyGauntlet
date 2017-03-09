@@ -66,7 +66,6 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             if( objHit->cookieDeliverable) {
 
 				// Visual effects due to hit
-                objHit->changeMaterial(materialManager.getMaterial("Red Rubber"));
                 objHit->triggerDeliveryAnimation();
 				objHit->spawnHitBillboardEffect(holder_->getPosition());
                // Play sound effect.

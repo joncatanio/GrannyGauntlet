@@ -130,7 +130,7 @@ int LevelLoader::parseShapes(json shapes) {
 
 
       for (json shape : shapes) {
-          if(shape["manual_texture"] == NULL) {
+          if(shape["manual_texture"] == nullptr) {
               if (shapeManager.createShape(resourceManager, shape["name"],
                                            shape["filename"])) {
                   return 1;

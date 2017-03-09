@@ -33,21 +33,58 @@
          "filename": "cube.obj"
       },
       {
+         "name": "House01",
+         "filename": "House_01.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House02",
+         "filename": "House_02.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House03",
+         "filename": "House_03.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
          "name": "House04",
-         "filename": "House_04.obj"
+         "filename": "House_04.obj",
+         "manual_texture": "ColorPalette_4k.png"
       },
       {
          "name": "House05",
          "filename": "House_05.obj",
-         "manual_texture": "test.png"
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House06",
+         "filename": "House_06.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House07",
+         "filename": "House_07.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House08",
+         "filename": "House_08.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House09",
+         "filename": "House_09.obj",
+         "manual_texture": "ColorPalette_4k.png"
+      },
+      {
+         "name": "House10",
+         "filename": "House_10.obj",
+         "manual_texture": "ColorPalette_4k.png"
       },
       {
          "name": "Tex_Cube",
          "filename": "tex_cube.obj"
-      },
-      {
-         "name": "Sponza",
-         "filename": "sponza.obj"
       },
       {
          "name": "Sphere",
@@ -75,6 +112,25 @@
       }
    ],
    "level-materials": [
+      {
+         "name": "white",
+         "ambient": {
+            "r": 0.3,
+            "g": 0.3,
+            "b": 0.3
+         },
+         "diffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+         },
+         "specular": {
+            "r": 0.7,
+            "g": 0.7,
+            "b": 0.7
+         },
+         "shininess": 40.0
+      },
       {
          "name": "Obsidian",
          "ambient": {
@@ -481,18 +537,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House01",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -511,18 +567,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House02",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -541,18 +597,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House03",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -571,18 +627,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House04",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -601,18 +657,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House05",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -631,18 +687,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House06",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -661,18 +717,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House07",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -691,18 +747,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House08",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -721,18 +777,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House09",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -751,18 +807,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House10",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -781,18 +837,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House01",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -811,18 +867,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "House05",
+            "shape": "House02",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -831,7 +887,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -50.0,
-            "y": 1.2,
+            "y": 5.1,
             "z": 87.0
          },
          "dir": {
@@ -841,18 +897,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 2.5,
-            "y": 2.5,
-            "z": 2.5
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House03",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -871,18 +927,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.25,
-            "y": 5.25,
-            "z": 5.25
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House04",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -910,9 +966,9 @@
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "House04",
+            "shape": "House05",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -931,18 +987,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House06",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -961,18 +1017,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House07",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -991,18 +1047,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House08",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -1011,7 +1067,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -65.0,
-            "y": 4.0,
+            "y": 5.2,
             "z": -60.0
          },
          "dir": {
@@ -1021,18 +1077,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 4.0,
-            "y": 4.0,
-            "z": 4.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House09",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -1041,7 +1097,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -60.0,
-            "y": 4.0,
+            "y": 5.2,
             "z": -80.0
          },
          "dir": {
@@ -1051,18 +1107,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 4.0,
-            "y": 4.0,
-            "z": 4.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House10",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -1071,7 +1127,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
-            "y": 1.0,
+            "y": 5.2,
             "z": -90.0
          },
          "dir": {
@@ -1081,18 +1137,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 3.0,
-            "y": 3.0,
-            "z": 3.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Sponza",
+            "shape": "House01",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -1101,7 +1157,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 45.0,
-            "y": 3.0,
+            "y": 5.2,
             "z": -90.0
          },
          "dir": {
@@ -1111,18 +1167,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 3.0,
-            "y": 3.0,
-            "z": 3.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House02",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },
@@ -1141,18 +1197,18 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 6.0,
-            "y": 6.0,
-            "z": 6.0
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
          },
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "Cube",
+            "shape": "House03",
             "shader": "Default",
-            "material": "Cyan Rubber"
+            "material": "white"
          },
          "deliverable": true
       },

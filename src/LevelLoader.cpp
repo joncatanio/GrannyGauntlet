@@ -130,12 +130,17 @@ int LevelLoader::parseShapes(json shapes) {
 
 
       for (json shape : shapes) {
-          //TODO(nurgan) check if present, and load manual texture if present
-          std::cout << shape["manual_texture"] << std::endl;
-         if (shapeManager.createShape(resourceManager, shape["name"],
-             shape["filename"])) {
-            return 1;
-         }
+          if(shape["manual_texture"] == NULL) {
+              if (shapeManager.createShape(resourceManager, shape["name"],
+                                           shape["filename"])) {
+                  return 1;
+              }
+          } else {
+              if (shapeManager.createShape(resourceManager, shape["name"],
+                                           shape["filename"], shape["manual_texture"])) {
+                  return 1;
+              }
+          }
       }
 
       if (shapeManager.createShape(resourceManager, "Arrow", "arrow.obj")) {

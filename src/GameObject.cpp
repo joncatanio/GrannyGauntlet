@@ -199,21 +199,14 @@ void GameObject::performAction(double deltaTime, double totalTime) {
 }
 
 void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
-	static bool areTexturesLoaded = false;
-	static std::shared_ptr<Texture> billboardTexture;
-
-	if (!areTexturesLoaded) {
-		billboardTexture = std::make_shared<Texture>();
-		billboardTexture->loadTexture("../resources/billboard/pow-text-stuff.jpg", "billboardTex");
-	}
-
 	GameManager& gameManager = GameManager::instance();
 	GameWorld& world = gameManager.getGameWorld();
 
 	MaterialManager& materialManager = MaterialManager::instance();
 	ShapeManager& shapeManager = ShapeManager::instance();
+	ShaderManager& shaderManagar = ShaderManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), billboardTexture);
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManagar.getBillboardTexture("pow_text_jpg"));
 	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,

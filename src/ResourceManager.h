@@ -26,6 +26,8 @@ public:
    std::shared_ptr<Shape> loadShape(const std::string filename);
 	std::shared_ptr<Shape> loadShape(const std::string filename, const std::string manualTexture);
 
+	std::shared_ptr<Texture> loadTexture(const std::string relativePathToTexture);
+
 private:
 
 	// The directory to parse resources from

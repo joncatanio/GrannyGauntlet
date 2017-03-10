@@ -26,13 +26,7 @@ void Program::addAttribute(const std::string& name) {
 void Program::addUniform(const std::string& name) {
 	uniforms[name] = GLSL::getUniformLocation(pid, name.c_str(),true);
 }
-/*
-void Program::addTexture(Texture* texture) {
-	GLint handle = GLSL::getUniformLocation(pid, texture->name.c_str());
-	texture->setHandle(handle);
-	textures[name] = texture;
-}
-*/
+
 GLuint Program::getPid() {
 	return pid;
 }
@@ -46,25 +40,7 @@ GLint Program::getUniform(const std::string& name) const {
 	GLint uniformLocation = uniforms.at(name);
 	return uniformLocation;
 }
-/*
-Texture* Program::getTexture(const std::string &name) const {
-	Texture *texture = textures.at(name);
-	return texture;
-}
 
-void Program::bindTextures() {
-    int unit = 0;
-    for (auto it : textures) {
-        it.second->bind(unit++);
-    }
-}
-
-void Program::unbindTextures() {
-    for (auto it : textures) {
-        it.second->unbind();
-    }
-}
-*/
 void Program::addDefaultAttributesAndUniforms() {
 
 	// Adds transform uniforms
@@ -92,9 +68,6 @@ void Program::addDefaultAttributesAndUniforms() {
 
 	//TODO(nurgan) remove from default attributs
 	addUniform("cubemap");
-
-	// TODO(rgarmsen2295): Remove from default attributes
-	addUniform("billboardTex");
 
 	addUniform("shadowMapTex");
 	addUniform("textureMap");

@@ -84,6 +84,12 @@ public:
 	// Returns the program ID on success, 0 on failure
 	GLuint createIsomorphicShader(ResourceManager& resourceManager, const std::string& shaderName, const std::string& shaderResourcePrefix);
 
+	// Adds a new billboard texture to the internal list
+	void addNewBillboard(std::string name, std::shared_ptr<Texture> texture);
+
+	// Returns a shared_ptr to the texture with the given name
+	std::shared_ptr<Texture> getBillboardTexture(std::string name);
+
 	// Finds the shader program with the given name and binds it.
 	// Throws an |out_of_range| exception if no shader program with that name is found
 	const std::shared_ptr<Program> bindShader(const std::string& shaderProgramName);
@@ -124,6 +130,9 @@ private:
 
 	// A hash map of the currently linked shader programs. The key is the shader program name and the value is a pointer to the Program
 	std::unordered_map<std::string, std::shared_ptr<Program>> shaderPrograms;
+
+	// A hash map of the currently loaded textures that are meant to be used as a billboard
+	std::unordered_map<std::string, std::shared_ptr<Texture>> billboards;
 
 	// Calculate the View Matrix for the given light (for Shadow Mapping)
 	glm::mat4 calculateLightView(std::shared_ptr<Light> light);

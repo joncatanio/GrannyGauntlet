@@ -126,6 +126,15 @@ GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, c
 	return createShaderProgram(shaderName, shaderName, shaderName);
 }
 
+void ShaderManager::addNewBillboard(std::string name, std::shared_ptr<Texture> texture) {
+	std::pair<std::string, std::shared_ptr<Texture>> newBillboard(name, texture);
+	billboards.insert(newBillboard);
+}
+
+std::shared_ptr<Texture> ShaderManager::getBillboardTexture(std::string name) {
+	return billboards.at(name);
+}
+
 const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shaderProgramName) {
 	std::shared_ptr<Program> shaderToBind = shaderPrograms.at(shaderProgramName);
 	boundShaderName = shaderProgramName;

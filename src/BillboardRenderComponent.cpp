@@ -59,18 +59,6 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 		glVertexAttribPointer(h_tex, 2, GL_FLOAT, GL_FALSE, 0, (const void *)0);
 	}
 
-	GameManager& gameManager = GameManager::instance();
-	Camera& camera = gameManager.getCamera();
-	std::shared_ptr<MatrixStack> VWithoutRotation = std::make_shared<MatrixStack>();
-	glm::mat4 viewMatrix;
-	glm::vec3 look = glm::normalize(-camera.getLookAt());
-	glm::vec3 right = glm::cross(camera.getUp(), look);
-	viewMatrix[0] = glm::vec4(right, 0.0f);
-	viewMatrix[1] = glm::vec4(glm::cross(look, right), 0.0f);
-	viewMatrix[2] = glm::vec4(look, 0.0f);
-
-	VWithoutRotation->multMatrix(viewMatrix);
-
 	shaderManager.renderBillboard(holder_, shaderName_, billboardTexture_, P, V, M);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDrawArrays(GL_TRIANGLES, 3, 3);

@@ -127,8 +127,6 @@ GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, c
 }
 
 void ShaderManager::addNewBillboard(std::string name, std::shared_ptr<Texture> texture, bool addToRandomList) {
-
-	// Add to the primary hash map
 	std::pair<std::string, std::shared_ptr<Texture>> newBillboard(name, texture);
 	billboards.insert(newBillboard);
 

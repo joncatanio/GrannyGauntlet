@@ -77,13 +77,19 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 
          // Initialize fracture variables if the player hits the object hard enough
          if (objHit->velocity >= 10) {
+			// Do effects once on hit
+			if (!holder_->fracture) {
+				// Spawn billboard
+				holder_->spawnHitBillboardEffect(holder_->getPosition());
+
+				// Play sound effect.
+				AudioManager& audioManager = AudioManager::instance();
+				audioManager.playEffect("FireHydrant Clank");
+			}
+
             holder_->fracture = true;
             holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
          }
-
-         // Play sound effect.
-         AudioManager& audioManager = AudioManager::instance();
-         audioManager.playEffect("FireHydrant Clank");
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
          BoundingBox* objBB = objHit->getBoundingBox();

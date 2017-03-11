@@ -206,7 +206,7 @@ void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
 	ShapeManager& shapeManager = ShapeManager::instance();
 	ShaderManager& shaderManagar = ShaderManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManagar.getBillboardTexture("pow_text_jpg"));
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManagar.getRandomBillboardTexture());
 	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,

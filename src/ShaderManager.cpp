@@ -126,13 +126,24 @@ GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, c
 	return createShaderProgram(shaderName, shaderName, shaderName);
 }
 
-void ShaderManager::addNewBillboard(std::string name, std::shared_ptr<Texture> texture) {
+void ShaderManager::addNewBillboard(std::string name, std::shared_ptr<Texture> texture, bool addToRandomList) {
+
+	// Add to the primary hash map
 	std::pair<std::string, std::shared_ptr<Texture>> newBillboard(name, texture);
 	billboards.insert(newBillboard);
+
+	if (addToRandomList) {
+		randomBillboards.push_back(texture);
+	}
 }
 
 std::shared_ptr<Texture> ShaderManager::getBillboardTexture(std::string name) {
 	return billboards.at(name);
+}
+
+std::shared_ptr<Texture> ShaderManager::getRandomBillboardTexture() {
+	int randomIndex = rand() % randomBillboards.size();
+	return randomBillboards.at(randomIndex);
 }
 
 const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shaderProgramName) {
@@ -140,13 +151,10 @@ const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shad
 	boundShaderName = shaderProgramName;
 	glUseProgram(shaderToBind->getPid());
 
-    //shaderToBind->bindTextures();
-
 	return shaderToBind;
 }
 
 void ShaderManager::unbindShader() {
-	//shaderPrograms.at(boundShaderName)->unbindTextures();
     boundShaderName = "";
 	glUseProgram(NO_SHADER);
 }

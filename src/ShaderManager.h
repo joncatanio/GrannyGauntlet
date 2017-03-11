@@ -85,10 +85,16 @@ public:
 	GLuint createIsomorphicShader(ResourceManager& resourceManager, const std::string& shaderName, const std::string& shaderResourcePrefix);
 
 	// Adds a new billboard texture to the internal list
-	void addNewBillboard(std::string name, std::shared_ptr<Texture> texture);
+	// If addToRandomList is true, the texture is also added to the list of textures that are
+	// valid to be randomly picked by |getRandomBillboard|
+	void addNewBillboard(std::string name, std::shared_ptr<Texture> texture, bool addToRandomList);
 
 	// Returns a shared_ptr to the texture with the given name
 	std::shared_ptr<Texture> getBillboardTexture(std::string name);
+
+	// Returns a shared_ptr to a valid random (see |addNewBillboard|) billboard texture
+	// Typically used when wanting to create a billboard for a hit effect
+	std::shared_ptr<Texture> getRandomBillboardTexture();
 
 	// Finds the shader program with the given name and binds it.
 	// Throws an |out_of_range| exception if no shader program with that name is found
@@ -133,6 +139,9 @@ private:
 
 	// A hash map of the currently loaded textures that are meant to be used as a billboard
 	std::unordered_map<std::string, std::shared_ptr<Texture>> billboards;
+
+	// Array of billboards meant to be picked at from random
+	std::vector<std::shared_ptr<Texture>> randomBillboards;
 
 	// Calculate the View Matrix for the given light (for Shadow Mapping)
 	glm::mat4 calculateLightView(std::shared_ptr<Light> light);

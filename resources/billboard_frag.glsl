@@ -10,7 +10,7 @@ void main() {
  
 	vec4 colorTemp = texture(textureMap, texCoord);
 
-	if (colorTemp.r >= 0.9 && colorTemp.g >= 0.9 && colorTemp.b >= 0.9) {
+	if ((colorTemp.r >= 0.9 && colorTemp.g >= 0.9 && colorTemp.b >= 0.9) || colorTemp.w < 1.0) {
 		discard;
 	}
 

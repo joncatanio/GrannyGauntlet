@@ -401,7 +401,13 @@
    "billboards": [
       {
          "name": "pow_text_jpg",
-         "texture": "billboard/pow-text-stuff.jpg"
+         "texture": "billboard/pow-text-stuff.jpg",
+         "random": true
+      },
+      {
+         "name": "pow_text_png",
+         "texture": "billboard/powtext.png",
+         "random": true
       }
    ],
    "characters": [

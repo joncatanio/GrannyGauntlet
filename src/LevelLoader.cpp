@@ -163,12 +163,12 @@ int LevelLoader::parseBillboards(json billboards) {
 		ShaderManager& shaderManager = ShaderManager::instance();
 
 		for (json billboard : billboards) {
-			if (billboard["name"] == nullptr || billboard["texture"] == nullptr) {
+			if (billboard["name"] == nullptr || billboard["texture"] == nullptr || billboard["random"] == nullptr) {
 				return 1;
 			}
 
 			std::shared_ptr<Texture> billboardTexture = resourceManager.loadTexture(billboard["texture"]);
-			shaderManager.addNewBillboard(billboard["name"], billboardTexture);
+			shaderManager.addNewBillboard(billboard["name"], billboardTexture, billboard["random"]);
 		}
 	}
 

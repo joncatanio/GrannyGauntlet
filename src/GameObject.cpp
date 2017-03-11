@@ -225,7 +225,7 @@ void GameObject::spawnPlayerHitBillboardEffect(glm::vec3& positionOfHit) {
 	world.addDynamicGameObject(billboardEffect);
 }
 
-void GameObject::spawnCookieHitBillboardEffect(glm::vec3& positionOfHit) {
+void GameObject::spawnCookieHitBillboardEffect(glm::vec3& positionOfHit, float score) {
 	GameManager& gameManager = GameManager::instance();
 	GameWorld& world = gameManager.getGameWorld();
 

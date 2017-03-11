@@ -91,8 +91,8 @@ public:
 	// Spawns a billboard effect indicating that the object was hit by the player
 	void spawnPlayerHitBillboardEffect(glm::vec3& positionOfHit);
 
-	// Spawns a billboard effect indicating that the deliverable object was hit by a cookie
-	void spawnCookieHitBillboardEffect(glm::vec3& positionOfHit);
+	// Spawns a billboard effect indicating that the deliverable object was hit by a cookie and the score given
+	void spawnCookieHitBillboardEffect(glm::vec3& positionOfHit, float score);
 
 	// Changes the active shader for the object
 	void changeShader(const std::string& newShaderName);

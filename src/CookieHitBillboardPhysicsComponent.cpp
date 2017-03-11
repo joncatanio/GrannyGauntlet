@@ -18,6 +18,5 @@ void CookieHitBillboardPhysicsComponent::updatePhysics(float deltaTime) {
 		glm::vec3 newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
 
 		holder_->setPosition(newPosition);
-		//updateBoundingBox();
 	}
 }

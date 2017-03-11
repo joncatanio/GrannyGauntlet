@@ -15,6 +15,5 @@ void PlayerHitBillboardPhysicsComponent::updatePhysics(float deltaTime) {
 	}
 	else {
 		holder_->setScale(glm::vec3(1.0) + glm::vec3(sin(currentLifeTime * M_PI)));
-		//updateBoundingBox();
 	}
 }

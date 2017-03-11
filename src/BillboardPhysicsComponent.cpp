@@ -28,9 +28,11 @@ void BillboardPhysicsComponent::updatePhysics(float deltaTime) {
 	}
 	else {
 		glm::vec3 oldPosition = holder_->getPosition();
-		glm::vec3 newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
+		//glm::vec3 newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
 
-		holder_->setPosition(newPosition);
+		//holder_->setPosition(newPosition);
+		holder_->setScale(glm::vec3(1.0) + glm::vec3(sin(currentLifeTime * M_PI)));
+
 		updateBoundingBox();
 	}
 }

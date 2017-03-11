@@ -92,7 +92,7 @@ public:
 	// Returns a shared_ptr to the texture with the given name
 	std::shared_ptr<Texture> getBillboardTexture(std::string name);
 
-	// Returns a shared_ptr to a valid random (see |addNewBillboard|) billboard texture
+	// Returns a shared_ptr to a valid random billboard texture (see |addNewBillboard|)
 	// Typically used when wanting to create a billboard for a hit effect
 	std::shared_ptr<Texture> getRandomBillboardTexture();
 
@@ -108,13 +108,13 @@ public:
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 	// Renders the given object as a billboard
-	void renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
-		const std::shared_ptr<Material> material, const std::shared_ptr<Texture> billboardTexture, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V,
-		std::shared_ptr<MatrixStack> M);
+	void renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Texture> billboardTexture,
+	 std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 	// Render the given object to the shadowmap
 	void renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
 						  std::shared_ptr<MatrixStack> M);
+
 	// Returns an actual LightType enum value of the given string
 	static LightType stringToLightType(std::string type);
 

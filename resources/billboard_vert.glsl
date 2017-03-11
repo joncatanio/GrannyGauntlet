@@ -4,16 +4,18 @@ layout(location = 0) in vec4 vertPos;
 layout(location = 1) in vec2 vertTex;
 
 uniform mat4 P;
-uniform mat4 M;
-uniform mat4 V;
+
+// Camera space sans rotation (the magic that causes the image to billboard)
+uniform mat4 billboardTransform;
+
 out vec2 texCoord;
 
 void main() {
 
-	// Set the position of the vertex in homogeneous space
-	gl_Position = P * (V * M * vec4(0.0, 0.0, 0.0, 1.0) + vec4(vertPos.xy, 0.0, 1.0));
+	// Set the position of the vertex to always be relative to the camera
+	gl_Position = P * billboardTransform * vec4(vertPos.xy, 0.0, 1.0);
 
-	// texture coordinates
+	// Resize to be in texel space (0, 1) and flip Y values
 	vec2 vertTemp = vec2(vertPos.x, -vertPos.y) * 0.5 + 0.5;
 	texCoord = vertTemp;
 }

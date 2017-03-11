@@ -3,14 +3,14 @@
 
 #include "PhysicsComponent.h"
 
-class BillboardPhysicsComponent : public PhysicsComponent {
+class PlayerHitBillboardPhysicsComponent : public PhysicsComponent {
 public:
 
-	BillboardPhysicsComponent();
+	PlayerHitBillboardPhysicsComponent() {}
 
-	~BillboardPhysicsComponent();
+	~PlayerHitBillboardPhysicsComponent() {}
 
-	void initObjectPhysics();
+	void initObjectPhysics() {}
 
 	void updatePhysics(float deltaTime);
 

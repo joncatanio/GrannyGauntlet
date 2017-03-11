@@ -400,12 +400,12 @@
    ],
    "billboards": [
       {
-         "name": "pow_text_jpg",
+         "name": "PowTextJpg",
          "texture": "billboard/pow-text-stuff.jpg",
          "random": true
       },
       {
-         "name": "pow_text_png",
+         "name": "PowTextPng",
          "texture": "billboard/powtext.png",
          "random": true
       }

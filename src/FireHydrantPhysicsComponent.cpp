@@ -80,7 +80,7 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
 			// Do effects once on hit
 			if (!holder_->fracture) {
 				// Spawn billboard
-				holder_->spawnHitBillboardEffect(holder_->getPosition());
+				holder_->spawnPlayerHitBillboardEffect(holder_->getPosition());
 
 				// Play sound effect.
 				AudioManager& audioManager = AudioManager::instance();

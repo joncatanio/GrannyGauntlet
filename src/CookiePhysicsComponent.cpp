@@ -67,7 +67,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
 				// Visual effects due to hit
                 objHit->triggerDeliveryAnimation();
-				objHit->spawnHitBillboardEffect(holder_->getPosition());
+				objHit->spawnCookieHitBillboardEffect(holder_->getPosition());
                // Play sound effect.
                AudioManager& audioManager = AudioManager::instance();
                audioManager.playEffect("Boing");

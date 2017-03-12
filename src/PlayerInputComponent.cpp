@@ -36,6 +36,11 @@ void PlayerInputComponent::pollGamepad() {
     * For our purposes y-joy = x-world & x-joy = z-world
     */
    float xComponent = axes[1], zComponent = -axes[0];
+
+#ifdef _WIN32
+   xComponent = -xComponent;
+#endif
+
    // Two driving modes: reverse and drive.
    bool modeChangeAvailable = !holder_->toggleMovement;
 

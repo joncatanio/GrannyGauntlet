@@ -75,8 +75,8 @@ bool ViewFrustum::cull(std::shared_ptr<GameObject> obj) {
    /* Every object needs to have a bounding box in order to cull.
     * If an object doesn't have a bounding box, cull it so we don't create
     * unseen problems with culling. */
-   BoundingBox* objBox = obj->getBoundingBox();
-   if (objBox == NULL) {
+   std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
+   if (objBox == nullptr) {
       return false;
    }
    vec3 box[] = {objBox->min_, objBox->max_};

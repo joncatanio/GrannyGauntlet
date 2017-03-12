@@ -3,10 +3,21 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
+#include "PlayerBoundingSphere.h"
 
 PlayerPhysicsComponent::PlayerPhysicsComponent() {}
 
 PlayerPhysicsComponent::~PlayerPhysicsComponent() {}
+
+void PlayerPhysicsComponent::initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt) {
+#ifdef USE_PLAYER_BOUNDING_SPHERE
+	boundBox_ = std::make_shared<PlayerBoundingSphere>(PlayerBoundingSphere(minBoundPt, maxBoundPt));
+#else
+	boundBox_ = std::make_shared<BoundingBox>(BoundingBox(minBoundPt, maxBoundPt));
+#endif
+
+	updateBoundingBox();
+}
 
 void PlayerPhysicsComponent::initObjectPhysics() {
    updateBoundingBox();
@@ -28,8 +39,8 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
          GameObjectType objTypeHit = objHit->type;
 
          if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-            BoundingBox* objHitBB = objHit->getBoundingBox();
-            glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox());
+            std::shared_ptr<BoundingBox> objHitBB = objHit->getBoundingBox();
+            glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox(), 0.1f);
 
             if (normalOfObjHit.x != 0.0f) {
                newPosition.x = oldPosition.x;

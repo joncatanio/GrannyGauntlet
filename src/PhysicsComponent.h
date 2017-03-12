@@ -14,13 +14,13 @@ public:
 	virtual ~PhysicsComponent() {}
 
 	// Initializes the internal bounding box based off the passed min and max points
-	void initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt);
+	virtual void initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt);
 
 	// Updates the object's bounding box according to the holding object's current transform
 	void updateBoundingBox();
 
 	// Returns a reference to the object's bounding box
-	BoundingBox& getBoundingBox();
+	std::shared_ptr<BoundingBox> getBoundingBox();
 
 	// Initializes the object's physics specific to the implementing component
 	virtual void initObjectPhysics() = 0;
@@ -31,10 +31,10 @@ public:
 	// starts the delivery animation
 	virtual void startDeliveryAnimation() = 0;
 
-private:
+protected:
 
 	// The bounding box associated with the object
-	BoundingBox boundBox_;
+	std::shared_ptr<BoundingBox> boundBox_;
 
 };
 

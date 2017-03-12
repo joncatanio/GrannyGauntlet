@@ -92,10 +92,10 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          }
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-         BoundingBox* objBB = objHit->getBoundingBox();
-         BoundingBox* thisBB = holder_->getBoundingBox();
+         std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
+         std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
 
-         glm::vec3 normal = objBB->calcReflNormal(*thisBB);
+         glm::vec3 normal = objBB->calcReflNormal(thisBB, 1.5f);
          holder_->direction = glm::reflect(holder_->direction, normal);
          animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
 

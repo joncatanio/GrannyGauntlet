@@ -23,7 +23,7 @@ void OctreeNode::createEnclosingRegionForRoot() {
 
    // Find the smallest min and max from every object that will be in the tree
    for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
-      if (obj->getBoundingBox() != NULL) {
+      if (obj->getBoundingBox() != nullptr) {
          glm::vec3& objMin = obj->getBoundingBox()->min_;
          glm::vec3& objMax = obj->getBoundingBox()->max_;
 
@@ -41,10 +41,10 @@ void OctreeNode::createEnclosingRegionForRoot() {
 }
 
 bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
-   BoundingBox* objBoundBox = obj->getBoundingBox();
+   std::shared_ptr<BoundingBox> objBoundBox = obj->getBoundingBox();
 
    // Object has no bounding box
-   if (objBoundBox == NULL) {
+   if (objBoundBox == nullptr) {
       return false;
    }
 

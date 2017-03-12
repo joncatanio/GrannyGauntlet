@@ -114,7 +114,7 @@ public:
 
     // Returns the BoundingBox associated with the object if it exists, otherwise returns |NULL|
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
-    BoundingBox* getBoundingBox();
+    std::shared_ptr<BoundingBox> getBoundingBox();
 
 private:
 

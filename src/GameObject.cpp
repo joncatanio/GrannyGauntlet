@@ -106,9 +106,9 @@ glm::vec3& GameObject::getScale() {
 void GameObject::setOrientAngle(float orientAngle) {
 	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
 
-   BoundingBox* objectBB = getBoundingBox();
+	std::shared_ptr<BoundingBox> objectBB = getBoundingBox();
 
-   if (objectBB != NULL) {
+   if (objectBB != nullptr) {
       MatrixTransform orientTransform;
       orientTransform.setRotate(orientAngle, yAxis);
       render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
@@ -139,9 +139,9 @@ void GameObject::setScale(glm::vec3& newScale) {
 void GameObject::setYAxisRotation(float angle) {
 	static glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
 
-	BoundingBox* objectBB = getBoundingBox();
+	std::shared_ptr<BoundingBox> objectBB = getBoundingBox();
 
-   if (objectBB != NULL) {
+   if (objectBB != nullptr) {
       //MatrixTransform orientTransform;
       //orientTransform.setRotate(angle, yAxis);
       //render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
@@ -244,17 +244,17 @@ RenderComponent* GameObject::getRenderComponent() {
 bool GameObject::checkIntersection(std::shared_ptr<GameObject> otherObj) {	
 	PhysicsComponent* otherObjPhysics = otherObj->physics_;
 	if (physics_ != NULL && otherObjPhysics != NULL) {
-		return physics_->getBoundingBox().checkIntersection(otherObjPhysics->getBoundingBox());
+		return physics_->getBoundingBox()->checkIntersection(otherObjPhysics->getBoundingBox());
 	}
 
 	return false;
 }
 
-BoundingBox* GameObject::getBoundingBox() {
+std::shared_ptr<BoundingBox> GameObject::getBoundingBox() {
    if (physics_) {
-      return &physics_->getBoundingBox();
+      return physics_->getBoundingBox();
    }
-   return NULL;
+   return nullptr;
 }
 
 void GameObject::triggerDeliveryAnimation() {

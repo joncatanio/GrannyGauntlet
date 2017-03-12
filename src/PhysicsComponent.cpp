@@ -3,15 +3,15 @@
 #include "GameObject.h"
 
 void PhysicsComponent::initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt) {
-	boundBox_ = BoundingBox(minBoundPt, maxBoundPt);
+	boundBox_ = std::make_shared<BoundingBox>(BoundingBox(minBoundPt, maxBoundPt));
 	updateBoundingBox();
 }
 
 void PhysicsComponent::updateBoundingBox() {
 	MatrixTransform& transform = holder_->transform;
-	boundBox_.update(transform.getBoundingBoxTransform());
+	boundBox_->update(transform.getBoundingBoxTransform());
 }
 
-BoundingBox& PhysicsComponent::getBoundingBox() {
+std::shared_ptr<BoundingBox> PhysicsComponent::getBoundingBox() {
 	return boundBox_;
 }

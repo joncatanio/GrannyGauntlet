@@ -6,8 +6,10 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include <algorithm>
 #include <float.h>
 #include <iostream>
+#include <memory>
 
 class BoundingBox {
 public:
@@ -37,13 +39,15 @@ public:
 	~BoundingBox() {}
 
 	// Checks if the BoundingBox intersects with the passed BoundingBox's coordinates
-	virtual bool checkIntersection(BoundingBox& other);
+	virtual bool checkIntersection(std::shared_ptr<BoundingBox> other);
 
    // Checks which side of `this` bounding box was hit and creates normal for reflection
-   glm::vec3 calcReflNormal(BoundingBox& other);
+   glm::vec3 calcReflNormal(std::shared_ptr<BoundingBox> other, float epsilon);
 
 	// Updates the bounding box min, max, and boxPoints based on the passed transform
-	void update(glm::mat4& transform);
+	virtual void update(glm::mat4& transform);
+
+	virtual bool isPlayer();
 };
 
 #endif

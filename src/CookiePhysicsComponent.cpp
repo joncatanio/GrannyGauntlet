@@ -49,11 +49,11 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
         if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
 
-            BoundingBox* objBB = objHit->getBoundingBox();
-            BoundingBox* cookieBB = holder_->getBoundingBox();
+            std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
+            std::shared_ptr<BoundingBox> cookieBB = holder_->getBoundingBox();
             MaterialManager materialManager = MaterialManager::instance();
 
-            glm::vec3 normal = objBB->calcReflNormal(*cookieBB);
+            glm::vec3 normal = objBB->calcReflNormal(cookieBB, 1.5f);
             holder_->direction = glm::reflect(holder_->direction, normal);
 
             newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);

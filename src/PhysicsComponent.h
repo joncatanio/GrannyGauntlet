@@ -20,7 +20,7 @@ public:
 	void updateBoundingBox();
 
 	// Returns a reference to the object's bounding box
-	BoundingBox& getBoundingBox();
+	std::shared_ptr<BoundingBox> getBoundingBox();
 
 	// Initializes the object's physics specific to the implementing component
 	virtual void initObjectPhysics() = 0;
@@ -34,7 +34,7 @@ public:
 protected:
 
 	// The bounding box associated with the object
-	BoundingBox boundBox_;
+	std::shared_ptr<BoundingBox> boundBox_;
 
 };
 

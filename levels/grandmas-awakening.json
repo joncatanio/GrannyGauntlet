@@ -1105,6 +1105,37 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
+            "x": -63.0,
+            "y": 5.0,
+            "z": 55.5
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
+         },
+         "yAxis-rotation-deg": 90.0,
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "House04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
             "x": 62.0,
             "y": 5.0,
             "z": -67.0

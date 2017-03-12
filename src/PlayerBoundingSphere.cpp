@@ -27,9 +27,6 @@ bool PlayerBoundingSphere::checkIntersection(std::shared_ptr<BoundingBox> other)
 
 	// Check if the the distance to the closest point is smaller than the radius
 	float distance = glm::length(closestPointBoxToSphere - center_);
-	/*float distance = std::sqrt((x - center_.x) * (x - center_.x) +
-		(y - center_.y) * (y - center_.y) +
-		(z - center_.z) * (z - center_.z));*/
 
 	return distance < radius_;
 }

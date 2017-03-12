@@ -53,10 +53,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
             if (normalOfObjHit.z != 0.0f) {
                newPosition.z = oldPosition.z;
             }
-
-			if (normalOfObjHit.x != 0.0f && normalOfObjHit.z != 0.0f) {
-				newPosition = oldPosition + glm::normalize(glm::vec3(normalOfObjHit.x, 0.0f, normalOfObjHit.z)) * glm::vec3(5.0);
-			}
          }
          if (objTypeHit == GameObjectType::FINISH_OBJECT) {
             GameManager::instance().gameOver_ = true;

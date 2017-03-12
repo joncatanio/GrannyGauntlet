@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 
+#include <iostream>
+
 PlayerPhysicsComponent::PlayerPhysicsComponent() {}
 
 PlayerPhysicsComponent::~PlayerPhysicsComponent() {}
@@ -53,4 +55,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
          updateBoundingBox();
       }
    }
+
+   std::cout << "Location - x: " << holder_->getPosition().x << " z: " << holder_->getPosition().z << std::endl;
 }

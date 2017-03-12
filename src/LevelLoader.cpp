@@ -207,6 +207,10 @@ int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
             createGameObject(gameObj, GameObjectType::STATIC_OBJECT); 
 
          staticGameObj->initComponents();
+         if (gameObj["yAxis-rotation-deg"] != nullptr) {
+            float yRotRad = static_cast<float>(gameObj["yAxis-rotation-deg"]) * M_PI / 180.0f;
+            staticGameObj->setYAxisRotation(yRotRad);
+         }
          world.addStaticGameObject(staticGameObj);
       }
    }

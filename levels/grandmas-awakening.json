@@ -35,52 +35,52 @@
       {
          "name": "House01",
          "filename": "House_01.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House02",
          "filename": "House_02.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House03",
          "filename": "House_03.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House04",
          "filename": "House_04.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House05",
          "filename": "House_05.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House06",
          "filename": "House_06.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House07",
          "filename": "House_07.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House08",
          "filename": "House_08.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House09",
          "filename": "House_09.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "House10",
          "filename": "House_10.obj",
-         "manual_texture": "ColorPalette_4k.png"
+         "manual_texture": "ColorPalette_0.5k.png"
       },
       {
          "name": "Tex_Cube",
@@ -103,12 +103,64 @@
          "filename": "FireHydrantLow.obj"
       },
       {
-         "name": "BubbleTree",
-         "filename": "bubbletree.obj"
+         "name": "FirTree01",
+         "filename": "Forest_A_FirTree_01.obj"
       },
       {
-         "name": "FirTree",
-         "filename": "firtree.obj"
+         "name": "FirTree03",
+         "filename": "Forest_A_FirTree_03.obj"
+      },
+      {
+         "name": "FirTree04",
+         "filename": "Forest_A_FirTree_04.obj"
+      },
+      {
+         "name": "FirTree07",
+         "filename": "Forest_A_FirTree_07.obj"
+      },
+      {
+         "name": "FirTree09",
+         "filename": "Forest_A_FirTree_09.obj"
+      },
+      {
+         "name": "FirTree14",
+         "filename": "Forest_A_FirTree_14.obj"
+      },
+      {
+         "name": "FirTree20",
+         "filename": "Forest_A_FirTree_20.obj"
+      },
+      {
+         "name": "CTree12",
+         "filename": "Forest_C_Tree_12.obj"
+      },
+      {
+         "name": "CTree14",
+         "filename": "Forest_C_Tree_14.obj"
+      },
+      {
+         "name": "CTree15",
+         "filename": "Forest_C_Tree_15.obj"
+      },
+      {
+         "name": "Rock01",
+         "filename": "Forest_B_Rock_01.obj"
+      },
+      {
+         "name": "Rock03",
+         "filename": "Forest_B_Rock_03.obj"
+      },
+      {
+         "name": "Rock05",
+         "filename": "Forest_B_Rock_05.obj"
+      },
+      {
+         "name": "Rock07",
+         "filename": "Forest_B_Rock_07.obj"
+      },
+      {
+         "name": "DeadTree03",
+         "filename": "Forest_B_DeadTree_03.obj"
       }
    ],
    "level-materials": [
@@ -526,9 +578,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -25.0,
-            "y": 2.2,
-            "z": -20.0
+            "x": -20.0,
+            "y": 6.4,
+            "z": -22.0
          },
          "dir": {
             "x": 0.0,
@@ -541,6 +593,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -556,9 +609,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -30.0,
-            "y": 2.2,
-            "z": 20.0
+            "x": -29.0,
+            "y": 8.9,
+            "z": 22.0
          },
          "dir": {
             "x": 0.0,
@@ -571,6 +624,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 180.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -587,8 +641,8 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
-            "y": 5.1,
-            "z": -20.0
+            "y": 5.0,
+            "z": -24.0
          },
          "dir": {
             "x": 0.0,
@@ -601,6 +655,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -616,9 +671,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -10.0,
-            "y": 2.2,
-            "z": 20.0
+            "x": -5.0,
+            "y": 5.0,
+            "z": 22.0
          },
          "dir": {
             "x": 0.0,
@@ -631,6 +686,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 180.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -646,9 +702,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -60.0,
-            "y": 5.1,
-            "z": -5.0
+            "x": -63.0,
+            "y": 7.0,
+            "z": -12.0
          },
          "dir": {
             "x": 0.0,
@@ -661,6 +717,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 180.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -676,9 +733,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -60.0,
-            "y": 5.1,
-            "z": 15.0
+            "x": -62.0,
+            "y": 5.0,
+            "z": 12.0
          },
          "dir": {
             "x": 0.0,
@@ -691,6 +748,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -706,8 +764,8 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -60.0,
-            "y": 2.2,
+            "x": -62.0,
+            "y": 4.1,
             "z": 35.0
          },
          "dir": {
@@ -721,6 +779,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -736,7 +795,7 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -30.0,
+            "x": -29.0,
             "y": 5.1,
             "z": 45.0
          },
@@ -751,6 +810,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": -90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -766,9 +826,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 25.0,
-            "y": 5.1,
-            "z": 20.0
+            "x": 24.0,
+            "y": 5.4,
+            "z": 21.1
          },
          "dir": {
             "x": 0.0,
@@ -781,6 +841,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 180.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -796,9 +857,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 30.0,
-            "y": 2.2,
-            "z": -20.0
+            "x": 29.5,
+            "y": 6.1,
+            "z": -23.0
          },
          "dir": {
             "x": 0.0,
@@ -811,6 +872,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -826,9 +888,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 40.0,
-            "y": 5.1,
-            "z": 20.0
+            "x": 41.0,
+            "y": 6.4,
+            "z": 20.5
          },
          "dir": {
             "x": 0.0,
@@ -841,6 +903,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 180.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -856,9 +919,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 10.0,
-            "y": 2.5,
-            "z": -20.0
+            "x": 6.0,
+            "y": 8.9,
+            "z": -23.0
          },
          "dir": {
             "x": 0.0,
@@ -871,6 +934,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -886,9 +950,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -50.0,
-            "y": 5.1,
-            "z": 87.0
+            "x": -62.0,
+            "y": 5.0,
+            "z": 73.0
          },
          "dir": {
             "x": 0.0,
@@ -901,6 +965,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -916,9 +981,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -25.0,
-            "y": 5.25,
-            "z": 72.0
+            "x": -27.5,
+            "y": 5.0,
+            "z": 67.0
          },
          "dir": {
             "x": 0.0,
@@ -931,6 +996,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": -90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -947,7 +1013,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 60.0,
-            "y": 5.2,
+            "y": 7.0,
             "z": 5.0
          },
          "dir": {
@@ -961,6 +1027,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -976,9 +1043,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 60.0,
-            "y": 2.2,
-            "z": -15.0
+            "x": 61.0,
+            "y": 5.0,
+            "z": -22.0
          },
          "dir": {
             "x": 0.0,
@@ -991,6 +1058,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": -90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1006,9 +1074,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 60.0,
-            "y": 5.1,
-            "z": -35.0
+            "x": 63.0,
+            "y": 4.1,
+            "z": -45.0
          },
          "dir": {
             "x": 0.0,
@@ -1021,6 +1089,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": -90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1036,8 +1105,39 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
+            "x": 62.0,
+            "y": 5.0,
+            "z": -67.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
+         },
+         "yAxis-rotation-deg": -90.0,
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "House06",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
             "x": 30.0,
-            "y": 2.2,
+            "y": 5.1,
             "z": -45.0
          },
          "dir": {
@@ -1051,6 +1151,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1066,9 +1167,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -65.0,
-            "y": 5.2,
-            "z": -60.0
+            "x": -61.0,
+            "y": 5.4,
+            "z": -55.0
          },
          "dir": {
             "x": 0.0,
@@ -1081,6 +1182,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1096,9 +1198,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -60.0,
-            "y": 5.2,
-            "z": -80.0
+            "x": -61.0,
+            "y": 4.1,
+            "z": -38.0
          },
          "dir": {
             "x": 0.0,
@@ -1111,6 +1213,69 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 90.0,
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "House07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 15.5,
+            "y": 5.0,
+            "z": -90.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "House04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "house",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -61.0,
+            "y": 6.1,
+            "z": -75.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 10.0,
+            "y": 10.0,
+            "z": 10.0
+         },
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1127,7 +1292,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
-            "y": 5.2,
+            "y": 6.4,
             "z": -90.0
          },
          "dir": {
@@ -1141,6 +1306,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1156,9 +1322,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 45.0,
-            "y": 5.2,
-            "z": -90.0
+            "x": 40.0,
+            "y": 8.9,
+            "z": -92.0
          },
          "dir": {
             "x": 0.0,
@@ -1171,6 +1337,7 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
@@ -1186,9 +1353,9 @@
          "object-name": "house",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -20.0,
-            "y": 6.0,
-            "z": -87.0
+            "x": -12.0,
+            "y": 5.0,
+            "z": -90.0
          },
          "dir": {
             "x": 0.0,
@@ -1201,12 +1368,13 @@
             "y": 10.0,
             "z": 10.0
          },
+         "yAxis-rotation-deg": 0.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "House03",
+            "shape": "House06",
             "shader": "Default",
             "material": "white"
          },
@@ -1217,7 +1385,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 40.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -35.0
          },
          "dir": {
@@ -1228,7 +1396,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 25
          },
          "physics-component": {
@@ -1247,7 +1415,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 50.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -35.0
          },
          "dir": {
@@ -1258,7 +1426,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 45
          },
          "physics-component": {
@@ -1277,7 +1445,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -5.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -10.75
          },
          "dir": {
@@ -1288,7 +1456,7 @@
          "vel": 0.0,
          "scale": {
             "x": 45.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1307,7 +1475,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -40.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": 45.0
          },
          "dir": {
@@ -1318,7 +1486,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 35
          },
          "physics-component": {
@@ -1337,7 +1505,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -50.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": 35.0
          },
          "dir": {
@@ -1348,7 +1516,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 45
          },
          "physics-component": {
@@ -1367,7 +1535,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 5.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": 10.75
          },
          "dir": {
@@ -1378,7 +1546,7 @@
          "vel": 0.0,
          "scale": {
             "x": 45.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1397,7 +1565,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -50.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -57.125
          },
          "dir": {
@@ -1408,7 +1576,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 22.125
          },
          "physics-component": {
@@ -1427,7 +1595,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -20.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -35.0
          },
          "dir": {
@@ -1438,7 +1606,7 @@
          "vel": 0.0,
          "scale": {
             "x": 30.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1457,7 +1625,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -19.25,
-            "y": 0.5,
+            "y": 0.15,
             "z": -60.0
          },
          "dir": {
@@ -1468,7 +1636,7 @@
          "vel": 0.0,
          "scale": {
             "x": 15.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1487,7 +1655,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -19.25,
-            "y": 0.5,
+            "y": 0.15,
             "z": -44.0
          },
          "dir": {
@@ -1498,7 +1666,7 @@
          "vel": 0.0,
          "scale": {
             "x": 15.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1517,7 +1685,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -33.50,
-            "y": 0.5,
+            "y": 0.15,
             "z": -52.25
          },
          "dir": {
@@ -1528,7 +1696,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 8.5
          },
          "physics-component": {
@@ -1547,7 +1715,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -5.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -52.25
          },
          "dir": {
@@ -1558,7 +1726,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 8.5
          },
          "physics-component": {
@@ -1577,7 +1745,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 10.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -48.25
          },
          "dir": {
@@ -1588,7 +1756,7 @@
          "vel": 0.0,
          "scale": {
             "x": 0.75,
-            "y": 1.0,
+            "y": 0.15,
             "z": 12.5
          },
          "physics-component": {
@@ -1607,7 +1775,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 25.75,
-            "y": 0.5,
+            "y": 0.15,
             "z": -60.00
          },
          "dir": {
@@ -1618,7 +1786,7 @@
          "vel": 0.0,
          "scale": {
             "x": 15.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1637,7 +1805,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 0.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": -79.25
          },
          "dir": {
@@ -1648,7 +1816,7 @@
          "vel": 0.0,
          "scale": {
             "x": 50.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1667,7 +1835,7 @@
          "object-type": "FINISH_OBJECT",
          "pos": {
             "x": -45.0,
-            "y": 0.5,
+            "y": 0.15,
             "z": 79.25
          },
          "dir": {
@@ -1678,7 +1846,7 @@
          "vel": 0.0,
          "scale": {
             "x": 5.0,
-            "y": 1.0,
+            "y": 0.15,
             "z": 0.75
          },
          "physics-component": {
@@ -1693,12 +1861,12 @@
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree01 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -10.0,
+            "x": -27.50,
             "y": 5.0,
-            "z": -52.25
+            "z": -55.0
          },
          "dir": {
             "x": 0.0,
@@ -1711,24 +1879,21 @@
             "y": 5.0,
             "z": 5.0
          },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree01",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree03 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 35.0,
-            "y": 5.0,
-            "z": -85.0
+            "x": -51.50,
+            "y": 6.0,
+            "z": -87.0
          },
          "dir": {
             "x": 0.0,
@@ -1737,28 +1902,25 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.0,
-            "y": 5.0,
-            "z": 5.0
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree03",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree04 By House",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -10.0,
-            "y": 7.5,
-            "z": -20.0
+            "x": -12.50,
+            "y": 2.0,
+            "z": -47.0
          },
          "dir": {
             "x": 0.0,
@@ -1767,28 +1929,25 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 7.5,
-            "y": 7.5,
-            "z": 7.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree04",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree07 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -53.0,
-            "y": 4.5,
-            "z": 77.5
+            "x": -11.70,
+            "y": 6.0,
+            "z": -57.0
          },
          "dir": {
             "x": 0.0,
@@ -1797,28 +1956,25 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 4.5,
-            "y": 4.5,
-            "z": 4.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree07",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree09 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -35.0,
-            "y": 2.5,
-            "z": 73.5
+            "x": -10.50,
+            "y": 8.0,
+            "z": -53.0
          },
          "dir": {
             "x": 0.0,
@@ -1827,26 +1983,50 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 2.5,
-            "y": 2.5,
-            "z": 2.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 8.0,
+            "y": 8.0,
+            "z": 8.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree09",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "bubble tree",
+         "object-name": "FirTree14 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -32.0,
+            "x": -27.70,
+            "y": 6.0,
+            "z": -27.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree14",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree20 Main Planter",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -30.70,
             "y": 3.5,
             "z": -47.0
          },
@@ -1861,204 +2041,21 @@
             "y": 3.5,
             "z": 3.5
          },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "BubbleTree",
+            "shape": "FirTree20",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "fir tree",
+         "object-name": "CTree12 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -30.0,
-            "y": 5.5,
-            "z": -52.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 5.5,
-            "y": 5.5,
-            "z": 5.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 15.0,
-            "y": 6.75,
-            "z": -87.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 6.75,
-            "y": 6.75,
-            "z": 6.75
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 11.0,
-            "y": 2.75,
-            "z": -88.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 2.75,
-            "y": 2.75,
-            "z": 2.75
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 4.0,
-            "y": 2.5,
-            "z": -89.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 2.5,
-            "y": 2.5,
-            "z": 2.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -37.0,
-            "y": 2.5,
-            "z": 70.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 2.5,
-            "y": 2.5,
-            "z": 2.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -44.0,
-            "y": 1.5,
-            "z": 95.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.5,
-            "y": 1.5,
-            "z": 1.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": 25.0,
+            "x": -25.70,
             "y": 3.5,
-            "z": -90.0
+            "z": -47.0
          },
          "dir": {
             "x": 0.0,
@@ -2071,24 +2068,21 @@
             "y": 3.5,
             "z": 3.5
          },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FirTree",
+            "shape": "CTree12",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "fir tree",
+         "object-name": "CTree15 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 52.5,
-            "y": 5.5,
-            "z": 17.0
+            "x": -19.70,
+            "y": 2.5,
+            "z": -56.0
          },
          "dir": {
             "x": 0.0,
@@ -2097,28 +2091,25 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 5.5,
-            "y": 5.5,
-            "z": 5.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FirTree",
+            "shape": "CTree15",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "fir tree",
+         "object-name": "Rock03 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -20.0,
-            "y": 8.5,
-            "z": -50.0
+            "x": -30.0,
+            "y": 1.0,
+            "z": -57.5
          },
          "dir": {
             "x": 0.0,
@@ -2127,28 +2118,25 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 8.5,
-            "y": 8.5,
-            "z": 8.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FirTree",
+            "shape": "Rock03",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "fir tree",
+         "object-name": "Rock01 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -23.0,
-            "y": 1.5,
-            "z": -52.0
+            "x": -15.0,
+            "y": 0.0,
+            "z": -49.5
          },
          "dir": {
             "x": 0.0,
@@ -2157,57 +2145,24 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 1.5,
-            "y": 1.5,
-            "z": 1.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 7.0,
+            "y": 7.0,
+            "z": 7.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FirTree",
+            "shape": "Rock01",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
          },
          "deliverable": false
       },
       {
-         "object-name": "fir tree",
+         "object-name": "Rock05 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": 10.0,
-            "y": 10.0,
-            "z": 20.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 10.0,
-            "y": 10.0,
-            "z": 10.0
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FirTree",
-            "shader": "Default",
-            "material": "Emerald"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fir tree",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -19.0,
-            "y": 1.5,
+            "x": -9.0,
+            "y": 0.0,
             "z": -48.0
          },
          "dir": {
@@ -2217,18 +2172,177 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 1.5,
-            "y": 1.5,
-            "z": 1.5
-         },
-         "physics-component": {
-            "name": "WallPhysicsComponent"
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FirTree",
+            "shape": "Rock05",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock07 Main Planter",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 17.0,
+            "y": 0.0,
+            "z": -55.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 54.0,
+            "y": 5.0,
+            "z": 13.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 56.0,
+            "y": 4.0,
+            "z": 8.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree14",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 50.0,
+            "y": 3.6,
+            "z": 22.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.6,
+            "y": 3.6,
+            "z": 3.6
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree14",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 51.0,
+            "y": 1.0,
+            "z": 16.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "DeadTree03 Main Planter",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -25.0,
+            "y": 3.0,
+            "z": -50.5
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "DeadTree03",
+            "shader": "Default",
+            "material": "white"
          },
          "deliverable": false
       }

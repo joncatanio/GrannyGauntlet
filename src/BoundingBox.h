@@ -37,7 +37,7 @@ public:
 	~BoundingBox() {}
 
 	// Checks if the BoundingBox intersects with the passed BoundingBox's coordinates
-	bool checkIntersection(BoundingBox& other);
+	virtual bool checkIntersection(BoundingBox& other);
 
    // Checks which side of `this` bounding box was hit and creates normal for reflection
    glm::vec3 calcReflNormal(BoundingBox& other);

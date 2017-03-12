@@ -142,10 +142,10 @@ void GameObject::setYAxisRotation(float angle) {
 	BoundingBox* objectBB = getBoundingBox();
 
    if (objectBB != NULL) {
-      MatrixTransform orientTransform;
-      orientTransform.setRotate(angle, yAxis);
-      render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
-      physics_->initBoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
+      //MatrixTransform orientTransform;
+      //orientTransform.setRotate(angle, yAxis);
+      //render_->getShape()->findAndSetMinAndMax(orientTransform.getTransform());
+      //physics_->initBoundingBox(render_->getShape()->getMin(), render_->getShape()->getMax());
    }
 
 	yRotationAngle_ = angle;

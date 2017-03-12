@@ -9,6 +9,8 @@ public:
 
    ~PlayerPhysicsComponent();
 
+   void initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt);
+
    void initObjectPhysics();
 
    void updatePhysics(float deltaTime);

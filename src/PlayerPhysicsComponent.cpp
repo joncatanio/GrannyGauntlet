@@ -3,10 +3,17 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
+#include "PlayerBoundingSphere.h"
 
 PlayerPhysicsComponent::PlayerPhysicsComponent() {}
 
 PlayerPhysicsComponent::~PlayerPhysicsComponent() {}
+
+void PlayerPhysicsComponent::initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt) {
+	std::cout << "HERE@@" << std::endl;
+	boundBox_ = PlayerBoundingSphere(minBoundPt, maxBoundPt);
+	updateBoundingBox();
+}
 
 void PlayerPhysicsComponent::initObjectPhysics() {
    updateBoundingBox();
@@ -42,6 +49,10 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
             if (normalOfObjHit.z != 0.0f) {
                newPosition.z = oldPosition.z;
             }
+
+			/*if (normalOfObjHit.x != 0.0f && normalOfObjHit.z != 0.0f) {
+				newPosition = oldPosition + glm::normalize(glm::vec3(normalOfObjHit.x, 0.0f, normalOfObjHit.z)) * glm::vec3(5.0);
+			}*/
          }
          if (objTypeHit == GameObjectType::FINISH_OBJECT) {
             GameManager::instance().gameOver_ = true;

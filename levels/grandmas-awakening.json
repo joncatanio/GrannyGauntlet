@@ -115,6 +115,14 @@
          "filename": "Forest_A_FirTree_04.obj"
       },
       {
+         "name": "FirTree05",
+         "filename": "Forest_A_FirTree_05.obj"
+      },
+      {
+         "name": "FirTree06",
+         "filename": "Forest_A_FirTree_06.obj"
+      },
+      {
          "name": "FirTree07",
          "filename": "Forest_A_FirTree_07.obj"
       },
@@ -123,12 +131,28 @@
          "filename": "Forest_A_FirTree_09.obj"
       },
       {
+         "name": "FirTree13",
+         "filename": "Forest_A_FirTree_13.obj"
+      },
+      {
          "name": "FirTree14",
          "filename": "Forest_A_FirTree_14.obj"
       },
       {
          "name": "FirTree20",
          "filename": "Forest_A_FirTree_20.obj"
+      },
+      {
+         "name": "CTree06",
+         "filename": "Forest_C_Tree_06.obj"
+      },
+      {
+         "name": "CTree08",
+         "filename": "Forest_C_Tree_08.obj"
+      },
+      {
+         "name": "CTree11",
+         "filename": "Forest_C_Tree_11.obj"
       },
       {
          "name": "CTree12",
@@ -151,6 +175,10 @@
          "filename": "Forest_B_Rock_03.obj"
       },
       {
+         "name": "Rock04",
+         "filename": "Forest_B_Rock_04.obj"
+      },
+      {
          "name": "Rock05",
          "filename": "Forest_B_Rock_05.obj"
       },
@@ -159,8 +187,16 @@
          "filename": "Forest_B_Rock_07.obj"
       },
       {
+         "name": "DeadTree02",
+         "filename": "Forest_B_DeadTree_02.obj"
+      },
+      {
          "name": "DeadTree03",
          "filename": "Forest_B_DeadTree_03.obj"
+      },
+      {
+         "name": "DeadTree05",
+         "filename": "Forest_B_DeadTree_05.obj"
       }
    ],
    "level-materials": [
@@ -622,7 +658,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": -29.0,
-            "y": 8.9,
+            "y": 6.9,
             "z": 22.0
          },
          "dir": {
@@ -632,9 +668,9 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 10.0,
-            "y": 10.0,
-            "z": 10.0
+            "x": 8.0,
+            "y": 8.0,
+            "z": 8.0
          },
          "yAxis-rotation-deg": 180.0,
          "physics-component": {
@@ -932,7 +968,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 6.0,
-            "y": 8.9,
+            "y": 6.9,
             "z": -23.0
          },
          "dir": {
@@ -942,9 +978,9 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 10.0,
-            "y": 10.0,
-            "z": 10.0
+            "x": 8.0,
+            "y": 8.0,
+            "z": 8.0
          },
          "yAxis-rotation-deg": 0.0,
          "physics-component": {
@@ -1366,7 +1402,7 @@
          "object-type": "STATIC_OBJECT",
          "pos": {
             "x": 40.0,
-            "y": 8.9,
+            "y": 6.9,
             "z": -92.0
          },
          "dir": {
@@ -1376,9 +1412,9 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 10.0,
-            "y": 10.0,
-            "z": 10.0
+            "x": 8.0,
+            "y": 8.0,
+            "z": 8.0
          },
          "yAxis-rotation-deg": 0.0,
          "physics-component": {
@@ -2015,9 +2051,9 @@
          "object-name": "FirTree09 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
-            "x": -10.50,
-            "y": 8.0,
-            "z": -53.0
+            "x": -9.50,
+            "y": 4.5,
+            "z": -50.50
          },
          "dir": {
             "x": 0.0,
@@ -2026,9 +2062,9 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 8.0,
-            "y": 8.0,
-            "z": 8.0
+            "x": 4.5,
+            "y": 4.5,
+            "z": 4.5
          },
          "render-component": {
             "name": "WallRenderComponent",
@@ -2363,6 +2399,1282 @@
          "deliverable": false
       },
       {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 14.0,
+            "y": 3.0,
+            "z": -48.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "DeadTree05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 17.0,
+            "y": 4.0,
+            "z": -35.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "DeadTree05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 3.25,
+            "y": 4.0,
+            "z": -90.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 2.0,
+            "y": 0.8,
+            "z": -83.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -6.8,
+            "y": 5.0,
+            "z": -20.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.0,
+            "y": 5.0,
+            "z": 5.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree13",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -9.5,
+            "y": 6.0,
+            "z": -25.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree13",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -7.5,
+            "y": 0.8,
+            "z": -22.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree06",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 29.5,
+            "y": 2.5,
+            "z": -90.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.0,
+            "y": 6.0,
+            "z": 6.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree06",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 27.5,
+            "y": 0.8,
+            "z": -85.25
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 11.02,
+            "y": 6.5,
+            "z": 23.39
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 6.5,
+            "y": 6.5,
+            "z": 6.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -51.9,
+            "y": 5.5,
+            "z": -16.8
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 5.5,
+            "y": 5.5,
+            "z": 5.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -53.0,
+            "y": 0.8,
+            "z": -12.8
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "DeadTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -60.1,
+            "y": 3.5,
+            "z": -19.2
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.5,
+            "y": 3.5,
+            "z": 3.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "DeadTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -60.1,
+            "y": 4.2,
+            "z": -26.7
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.2,
+            "y": 4.2,
+            "z": 4.2
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -55.03,
+            "y": 3.2,
+            "z": -48.73
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 3.2
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree12",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -23.94,
+            "y": 3.2,
+            "z": -84.36
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 3.2
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree12",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -31.77,
+            "y": 2.5,
+            "z": -81.65
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.5,
+            "y": 2.5,
+            "z": 2.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -34.37,
+            "y": 3.5,
+            "z": 37.73
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.5,
+            "y": 3.5,
+            "z": 3.5
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -57.33,
+            "y": 2.8,
+            "z": 60.76
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.8,
+            "y": 2.8,
+            "z": 2.8
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree07",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -23.41,
+            "y": 4.8,
+            "z": 56.48
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.8,
+            "y": 4.8,
+            "z": 4.8
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree07",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -33.31,
+            "y": 1.8,
+            "z": 95.33
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.8,
+            "y": 1.8,
+            "z": 1.8
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -37.19,
+            "y": 1.0,
+            "z": 96.26
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree09",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -39.19,
+            "y": 1.7,
+            "z": 96.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.7,
+            "y": 1.7,
+            "z": 1.7
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree09",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -41.19,
+            "y": 1.0,
+            "z": 95.26
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree20",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -43.19,
+            "y": 1.4,
+            "z": 95.7
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.4,
+            "y": 1.4,
+            "z": 1.4
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree20",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree07",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -46.19,
+            "y": 1.3,
+            "z": 94.7
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.3,
+            "y": 1.3,
+            "z": 1.3
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree06",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -52.83,
+            "y": 2.1,
+            "z": 90.37
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.1,
+            "y": 2.1,
+            "z": 2.1
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree06",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -33.75,
+            "y": 3.1,
+            "z": 81.56
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.1,
+            "y": 3.1,
+            "z": 3.1
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree09",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -51.18,
+            "y": 0.8,
+            "z": 98.01
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.8
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree09",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree09",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -58.4,
+            "y": 4.3,
+            "z": 81.58
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.3,
+            "y": 4.3,
+            "z": 4.3
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree09",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree11",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -17.77,
+            "y": 4.3,
+            "z": 23.56
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.3,
+            "y": 4.3,
+            "z": 4.3
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree11",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree11",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -68.45,
+            "y": 4.7,
+            "z": 24.90
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.7,
+            "y": 4.7,
+            "z": 4.7
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree11",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 34.97,
+            "y": 4.0,
+            "z": -56.84
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.0,
+            "y": 4.0,
+            "z": 4.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 57.47,
+            "y": 4.3,
+            "z": -83.16
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.3,
+            "y": 4.3,
+            "z": 4.3
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 53.91,
+            "y": 0.7,
+            "z": -89.15
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.3,
+            "y": 3.3,
+            "z": 3.3
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree14",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 63.24,
+            "y": 4.2,
+            "z": -55.5
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.2,
+            "y": 4.2,
+            "z": 4.2
+         },
+         "yAxis-rotation-deg": 90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree14",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree03",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 59.78,
+            "y": 3.4,
+            "z": -33.6
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.4,
+            "y": 3.4,
+            "z": 3.4
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree03",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 56.30,
+            "y": 0.5,
+            "z": -35.91
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
+         },
+         "yAxis-rotation-deg": 90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree12",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 62.85,
+            "y": 3.5,
+            "z": -10.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.5,
+            "y": 3.5,
+            "z": 3.5
+         },
+         "yAxis-rotation-deg": 90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree12",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "FirTree07",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 31.35,
+            "y": 3.4,
+            "z": -34.8
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.4,
+            "y": 3.4,
+            "z": 3.4
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FirTree07",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock04",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": 28.39,
+            "y": 0.5,
+            "z": -36.62
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+         },
+         "yAxis-rotation-deg": -90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock04",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "CTree11",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -72.45,
+            "y": 4.4,
+            "z": -65.39
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 4.4,
+            "y": 4.4,
+            "z": 4.4
+         },
+         "yAxis-rotation-deg": 90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "CTree11",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "DeadTree02",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -31.77,
+            "y": 3.4,
+            "z": -15.96
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.4,
+            "y": 3.4,
+            "z": 3.4
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "DeadTree02",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -28.74,
+            "y": 0.5,
+            "z": 33.85
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 2.0,
+            "y": 2.0,
+            "z": 2.0
+         },
+         "yAxis-rotation-deg": -90.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock05",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -27.96,
+            "y": 1.1,
+            "z": -93.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock05",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "Rock01",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -31.08,
+            "y": 0.5,
+            "z": 88.07
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.0,
+            "y": 3.0,
+            "z": 3.0
+         },
+         "yAxis-rotation-deg": 45.0,
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Rock01",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "DeadTree02",
+         "object-type": "STATIC_OBJECT",
+         "pos": {
+            "x": -27.26,
+            "y": 3.7,
+            "z": 78.29
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 3.7,
+            "y": 3.7,
+            "z": 3.7
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "DeadTree02",
+            "shader": "Default",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
          "object-name": "DeadTree03 Main Planter",
          "object-type": "STATIC_OBJECT",
          "pos": {
@@ -2395,9 +3707,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": 0.0,
+            "x": -1.33,
             "y": 1.0,
-            "z": 0.0
+            "z": -53.97
          },
          "dir": {
             "x": 0.0,
@@ -2425,9 +3737,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": 0.0,
+            "x": -35.28,
             "y": 1.0,
-            "z": 2.0
+            "z": -59.43
          },
          "dir": {
             "x": 0.0,
@@ -2455,9 +3767,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": 0.0,
+            "x": -19.02,
             "y": 1.0,
-            "z": 4.0
+            "z": 8.98
          },
          "dir": {
             "x": 0.0,
@@ -2485,9 +3797,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": 0.0,
+            "x": 16.31,
             "y": 1.0,
-            "z": 6.0
+            "z": -9.05
          },
          "dir": {
             "x": 0.0,
@@ -2515,219 +3827,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": 0.0,
+            "x": -41.85,
             "y": 1.0,
-            "z": 8.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -2.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -4.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -6.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": -45.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -37.0,
-            "y": 1.0,
-            "z": -60.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 30.0,
-            "y": 1.0,
-            "z": -65.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Default",
-            "material": "Ruby"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -43.0,
-            "y": 1.0,
-            "z": 23.0
+            "z": 31.55
          },
          "dir": {
             "x": 0.0,

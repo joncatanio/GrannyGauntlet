@@ -33,7 +33,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       holder_->setPosition(newPosition);
       updateBoundingBox();
 
-      /*
       // Check player collision against static objects
       GameWorld& world = GameManager::instance().getGameWorld();
       std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
@@ -65,8 +64,6 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       if (!objsHit.empty()) {
          holder_->setPosition(newPosition);
          updateBoundingBox();
-      } */
+      }
    }
-
-   std::cout << "Location - x: " << holder_->getPosition().x << " z: " << holder_->getPosition().z << std::endl;
 }

@@ -40,7 +40,6 @@ bool BoundingBox::checkIntersection(std::shared_ptr<BoundingBox> other) {
 
 glm::vec3 BoundingBox::calcReflNormal(std::shared_ptr<BoundingBox> other, float epsilon) {
    glm::vec3 normal = glm::vec3(0.0, 0.0, 0.0);
-   //float epsilon = 0.1f;
 
    if (other->isPlayer()) {
 	   std::shared_ptr<PlayerBoundingSphere> sphereBound = std::static_pointer_cast<PlayerBoundingSphere>(other);

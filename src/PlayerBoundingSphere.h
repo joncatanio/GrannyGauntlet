@@ -27,10 +27,11 @@ public:
 
 	~PlayerBoundingSphere();
 
-	// Checks if the BoundingBox intersects with the passed BoundingBox's coordinates
+	// Checks if the BoundingSphere intersects with the passed BoundingBox's coordinates
 	bool checkIntersection(std::shared_ptr<BoundingBox> other);
 
 	// Updates the bounding box min, max, and boxPoints based on the passed transform
+	// Also, updates the sphere center
 	void update(glm::mat4& transform);
 
 	bool isPlayer();

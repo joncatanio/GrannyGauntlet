@@ -86,8 +86,8 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          audioManager.playEffect("FireHydrant Clank");
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-		 std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
-		 std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
+         std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
+         std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
 
          glm::vec3 normal = objBB->calcReflNormal(thisBB, 1.5f);
          holder_->direction = glm::reflect(holder_->direction, normal);

@@ -10,8 +10,6 @@ PlayerPhysicsComponent::PlayerPhysicsComponent() {}
 PlayerPhysicsComponent::~PlayerPhysicsComponent() {}
 
 void PlayerPhysicsComponent::initBoundingBox(glm::vec3& minBoundPt, glm::vec3& maxBoundPt) {
-	std::cout << "HERE@@" << std::endl;
-
 #ifdef USE_PLAYER_BOUNDING_SPHERE
 	boundBox_ = std::make_shared<PlayerBoundingSphere>(PlayerBoundingSphere(minBoundPt, maxBoundPt));
 #else
@@ -41,7 +39,7 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
          GameObjectType objTypeHit = objHit->type;
 
          if (objTypeHit == GameObjectType::STATIC_OBJECT) {
-			 std::shared_ptr<BoundingBox> objHitBB = objHit->getBoundingBox();
+            std::shared_ptr<BoundingBox> objHitBB = objHit->getBoundingBox();
             glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox(), 0.1f);
 
             if (normalOfObjHit.x != 0.0f) {
@@ -56,9 +54,9 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
                newPosition.z = oldPosition.z;
             }
 
-			/*if (normalOfObjHit.x != 0.0f && normalOfObjHit.z != 0.0f) {
+			if (normalOfObjHit.x != 0.0f && normalOfObjHit.z != 0.0f) {
 				newPosition = oldPosition + glm::normalize(glm::vec3(normalOfObjHit.x, 0.0f, normalOfObjHit.z)) * glm::vec3(5.0);
-			}*/
+			}
          }
          if (objTypeHit == GameObjectType::FINISH_OBJECT) {
             GameManager::instance().gameOver_ = true;

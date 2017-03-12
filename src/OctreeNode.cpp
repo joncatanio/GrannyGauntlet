@@ -41,7 +41,7 @@ void OctreeNode::createEnclosingRegionForRoot() {
 }
 
 bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
-	std::shared_ptr<BoundingBox> objBoundBox = obj->getBoundingBox();
+   std::shared_ptr<BoundingBox> objBoundBox = obj->getBoundingBox();
 
    // Object has no bounding box
    if (objBoundBox == nullptr) {

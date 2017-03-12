@@ -1,5 +1,5 @@
-#include "BillboardPhysicsComponent.h"
 #include "BillboardRenderComponent.h"
+#include "CookieHitBillboardPhysicsComponent.h"
 #include "GameObject.h"
 #include "GameManager.h"
 #include "AimRenderComponent.h"
@@ -7,6 +7,7 @@
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
+#include "PlayerHitBillboardPhysicsComponent.h"
 
 GameObject::GameObject(GameObjectType objType,
 	glm::vec3 startPosition,
@@ -198,23 +199,16 @@ void GameObject::performAction(double deltaTime, double totalTime) {
     }
 }
 
-void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
-	static bool areTexturesLoaded = false;
-	static std::shared_ptr<Texture> billboardTexture;
-
-	if (!areTexturesLoaded) {
-		billboardTexture = std::make_shared<Texture>();
-		billboardTexture->loadTexture("../resources/billboard/pow-text-stuff.jpg", "billboardTex");
-	}
-
+void GameObject::spawnPlayerHitBillboardEffect(glm::vec3& positionOfHit) {
 	GameManager& gameManager = GameManager::instance();
 	GameWorld& world = gameManager.getGameWorld();
 
 	MaterialManager& materialManager = MaterialManager::instance();
 	ShapeManager& shapeManager = ShapeManager::instance();
+	ShaderManager& shaderManager = ShaderManager::instance();
 	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
-		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), billboardTexture);
-	BillboardPhysicsComponent* billboardPhysicsComponent = new BillboardPhysicsComponent();
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManager.getRandomBillboardTexture());
+	PlayerHitBillboardPhysicsComponent* PlayerHitbillboardPhysicsComponent = new PlayerHitBillboardPhysicsComponent();
 
 	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
 		positionOfHit,
@@ -222,7 +216,33 @@ void GameObject::spawnHitBillboardEffect(glm::vec3& positionOfHit) {
 		5.0f,
 		glm::vec3(1.0f),
 		nullptr,
-		billboardPhysicsComponent,
+		PlayerHitbillboardPhysicsComponent,
+		billboardRenderComponent,
+		nullptr
+		);
+	billboardEffect->initComponents();
+
+	world.addDynamicGameObject(billboardEffect);
+}
+
+void GameObject::spawnCookieHitBillboardEffect(glm::vec3& positionOfHit, float score) {
+	GameManager& gameManager = GameManager::instance();
+	GameWorld& world = gameManager.getGameWorld();
+
+	MaterialManager& materialManager = MaterialManager::instance();
+	ShapeManager& shapeManager = ShapeManager::instance();
+	ShaderManager& shaderManager = ShaderManager::instance();
+	BillboardRenderComponent* billboardRenderComponent = new BillboardRenderComponent(
+		shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), shaderManager.getBillboardTexture("PowTextJpg"));
+	CookieHitBillboardPhysicsComponent* cookieHitbillboardPhysicsComponent = new CookieHitBillboardPhysicsComponent();
+
+	std::shared_ptr<GameObject> billboardEffect = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+		positionOfHit,
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		5.0f,
+		glm::vec3(1.0f),
+		nullptr,
+		cookieHitbillboardPhysicsComponent,
 		billboardRenderComponent,
 		nullptr
 		);

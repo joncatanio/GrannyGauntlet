@@ -398,6 +398,18 @@
          "shininess": 10.0
       }
    ],
+   "billboards": [
+      {
+         "name": "PowTextJpg",
+         "texture": "billboard/pow-text-stuff.jpg",
+         "random": true
+      },
+      {
+         "name": "PowTextPng",
+         "texture": "billboard/powtext.png",
+         "random": true
+      }
+   ],
    "characters": [
       {
          "object-name": "granny",

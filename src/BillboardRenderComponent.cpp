@@ -59,7 +59,7 @@ void BillboardRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_
 		glVertexAttribPointer(h_tex, 2, GL_FLOAT, GL_FALSE, 0, (const void *)0);
 	}
 
-	shaderManager.renderBillboard(holder_, shaderName_, shape_, material_, billboardTexture_, P, V, M);
+	shaderManager.renderBillboard(holder_, shaderName_, billboardTexture_, P, V, M);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDrawArrays(GL_TRIANGLES, 3, 3);
 	billboardTexture_->unbind();

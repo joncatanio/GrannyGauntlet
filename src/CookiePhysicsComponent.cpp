@@ -64,15 +64,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
             cookieState.hits++;
             cookieState.hitPositions.push_back(holder_->getPosition());
             if( objHit->cookieDeliverable) {
-
-				// Visual effects due to hit
-                objHit->triggerDeliveryAnimation();
-				objHit->spawnHitBillboardEffect(holder_->getPosition());
-               // Play sound effect.
-               AudioManager& audioManager = AudioManager::instance();
-               audioManager.playEffect("Boing");
    
-
 				// Score effects due to hit
                 float score = calculateScore();
                 GameManager& gameManager = GameManager::instance();
@@ -80,6 +72,14 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
                 float timeBump = ((score - cookieState.scored)/500.0) + 1.0;
                 cookieState.scored += score;
+
+				// Visual effects due to hit
+				objHit->triggerDeliveryAnimation();
+				objHit->spawnCookieHitBillboardEffect(holder_->getPosition(), score);
+
+				// Play sound effect.
+				AudioManager& audioManager = AudioManager::instance();
+				audioManager.playEffect("Boing");
 
                 std::cout << "HIT." << " Score on hit: " << score << " Time bump: " << timeBump << std::endl;
 

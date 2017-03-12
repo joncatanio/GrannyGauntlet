@@ -3,14 +3,14 @@
 
 #include "PhysicsComponent.h"
 
-class BillboardPhysicsComponent : public PhysicsComponent {
+class PlayerHitBillboardPhysicsComponent : public PhysicsComponent {
 public:
 
-	BillboardPhysicsComponent();
+	PlayerHitBillboardPhysicsComponent() {}
 
-	~BillboardPhysicsComponent();
+	~PlayerHitBillboardPhysicsComponent() {}
 
-	void initObjectPhysics();
+	void initObjectPhysics() {}
 
 	void updatePhysics(float deltaTime);
 
@@ -18,7 +18,7 @@ public:
 
 private:
 
-	const double maxLifeTime = 3.0;
+	const double maxLifeTime = 1.0;
 
 	double currentLifeTime = 0.0;
 };

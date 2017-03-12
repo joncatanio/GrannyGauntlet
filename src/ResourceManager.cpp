@@ -40,6 +40,13 @@ std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename, co
 	return shape;
 }
 
+std::shared_ptr<Texture> ResourceManager::loadTexture(const std::string relativePathToTexture) {
+	std::shared_ptr<Texture> texture = std::make_shared<Texture>();
+	texture->loadTexture(resourceDirectory + relativePathToTexture, relativePathToTexture);
+
+	return texture;
+}
+
 ResourceManager::ResourceManager() {
 	resourceDirectory = "";
 }

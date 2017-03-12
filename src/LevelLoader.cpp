@@ -57,6 +57,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
       return res;
    }
 
+   if ((res = parseBillboards(level["billboards"]))) {
+	   std::cerr << "Error parsing billboards." << std::endl;
+	   return res;
+   }
+
    if ((res = parseMaterials(level["level-materials"]))) {
       std::cerr << "Error parsing materials." << std::endl;
       return res;
@@ -149,6 +154,25 @@ int LevelLoader::parseShapes(json shapes) {
    }
 
    return 0;
+}
+
+int LevelLoader::parseBillboards(json billboards) {
+	ResourceManager& resourceManager = ResourceManager::instance();
+
+	if (billboards != nullptr) {
+		ShaderManager& shaderManager = ShaderManager::instance();
+
+		for (json billboard : billboards) {
+			if (billboard["name"] == nullptr || billboard["texture"] == nullptr || billboard["random"] == nullptr) {
+				return 1;
+			}
+
+			std::shared_ptr<Texture> billboardTexture = resourceManager.loadTexture(billboard["texture"]);
+			shaderManager.addNewBillboard(billboard["name"], billboardTexture, billboard["random"]);
+		}
+	}
+
+	return 0;
 }
 
 int LevelLoader::parseMaterials(json materials) {

@@ -84,6 +84,18 @@ public:
 	// Returns the program ID on success, 0 on failure
 	GLuint createIsomorphicShader(ResourceManager& resourceManager, const std::string& shaderName, const std::string& shaderResourcePrefix);
 
+	// Adds a new billboard texture to the internal list
+	// If addToRandomList is true, the texture is also added to the list of textures that are
+	// valid to be randomly picked by |getRandomBillboard|
+	void addNewBillboard(std::string name, std::shared_ptr<Texture> texture, bool addToRandomList);
+
+	// Returns a shared_ptr to the texture with the given name
+	std::shared_ptr<Texture> getBillboardTexture(std::string name);
+
+	// Returns a shared_ptr to a valid random billboard texture (see |addNewBillboard|)
+	// Typically used when wanting to create a billboard for a hit effect
+	std::shared_ptr<Texture> getRandomBillboardTexture();
+
 	// Finds the shader program with the given name and binds it.
 	// Throws an |out_of_range| exception if no shader program with that name is found
 	const std::shared_ptr<Program> bindShader(const std::string& shaderProgramName);
@@ -96,13 +108,13 @@ public:
  	 const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 	// Renders the given object as a billboard
-	void renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
-		const std::shared_ptr<Material> material, const std::shared_ptr<Texture> billboardTexture, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V,
-		std::shared_ptr<MatrixStack> M);
+	void renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Texture> billboardTexture,
+	 std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M);
 
 	// Render the given object to the shadowmap
 	void renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
 						  std::shared_ptr<MatrixStack> M);
+
 	// Returns an actual LightType enum value of the given string
 	static LightType stringToLightType(std::string type);
 
@@ -124,6 +136,12 @@ private:
 
 	// A hash map of the currently linked shader programs. The key is the shader program name and the value is a pointer to the Program
 	std::unordered_map<std::string, std::shared_ptr<Program>> shaderPrograms;
+
+	// A hash map of the currently loaded textures that are meant to be used as a billboard
+	std::unordered_map<std::string, std::shared_ptr<Texture>> billboards;
+
+	// Array of billboards meant to be picked at from random
+	std::vector<std::shared_ptr<Texture>> randomBillboards;
 
 	// Calculate the View Matrix for the given light (for Shadow Mapping)
 	glm::mat4 calculateLightView(std::shared_ptr<Light> light);

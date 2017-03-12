@@ -1,23 +1,10 @@
-#include "BillboardPhysicsComponent.h"
+#include "CookieHitBillboardPhysicsComponent.h"
 
 #include "GameManager.h"
 #include "GameObject.h"
 #include "GameWorld.h"
-#include "MaterialManager.h"
 
-BillboardPhysicsComponent::BillboardPhysicsComponent() {
-
-}
-
-BillboardPhysicsComponent::~BillboardPhysicsComponent() {
-
-}
-
-void BillboardPhysicsComponent::initObjectPhysics() {
-
-}
-
-void BillboardPhysicsComponent::updatePhysics(float deltaTime) {
+void CookieHitBillboardPhysicsComponent::updatePhysics(float deltaTime) {
 	currentLifeTime += deltaTime;
 
 	if (currentLifeTime > maxLifeTime) {
@@ -31,6 +18,5 @@ void BillboardPhysicsComponent::updatePhysics(float deltaTime) {
 		glm::vec3 newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
 
 		holder_->setPosition(newPosition);
-		updateBoundingBox();
 	}
 }

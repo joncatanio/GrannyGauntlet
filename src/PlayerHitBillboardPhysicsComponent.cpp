@@ -14,6 +14,7 @@ void PlayerHitBillboardPhysicsComponent::updatePhysics(float deltaTime) {
 		world.rmDynamicGameObject(holder_);
 	}
 	else {
-		holder_->setScale(glm::vec3(1.0) + glm::vec3(sin(currentLifeTime * M_PI)));
+		glm::vec3 newScale = glm::vec3(0.25f) + glm::vec3(sin(currentLifeTime * M_PI));
+		holder_->setScale(newScale);
 	}
 }

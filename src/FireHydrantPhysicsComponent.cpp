@@ -75,16 +75,16 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          animated = true;
          animRotAxis = rotAxis;
 
+		 // Play sound effect.
+		 AudioManager& audioManager = AudioManager::instance();
+		 audioManager.playEffect("FireHydrant Clank");
+
          // Initialize fracture variables if the player hits the object hard enough
          if (objHit->velocity >= 10) {
 			// Do effects once on hit
 			if (!holder_->fracture) {
 				// Spawn billboard
 				holder_->spawnPlayerHitBillboardEffect(holder_->getPosition());
-
-				// Play sound effect.
-				AudioManager& audioManager = AudioManager::instance();
-				audioManager.playEffect("FireHydrant Clank");
 			}
 
             holder_->fracture = true;

@@ -126,18 +126,33 @@ GLuint ShaderManager::createIsomorphicShader(ResourceManager& resourceManager, c
 	return createShaderProgram(shaderName, shaderName, shaderName);
 }
 
+void ShaderManager::addNewBillboard(std::string name, std::shared_ptr<Texture> texture, bool addToRandomList) {
+	std::pair<std::string, std::shared_ptr<Texture>> newBillboard(name, texture);
+	billboards.insert(newBillboard);
+
+	if (addToRandomList) {
+		randomBillboards.push_back(texture);
+	}
+}
+
+std::shared_ptr<Texture> ShaderManager::getBillboardTexture(std::string name) {
+	return billboards.at(name);
+}
+
+std::shared_ptr<Texture> ShaderManager::getRandomBillboardTexture() {
+	int randomIndex = rand() % randomBillboards.size();
+	return randomBillboards.at(randomIndex);
+}
+
 const std::shared_ptr<Program> ShaderManager::bindShader(const std::string& shaderProgramName) {
 	std::shared_ptr<Program> shaderToBind = shaderPrograms.at(shaderProgramName);
 	boundShaderName = shaderProgramName;
 	glUseProgram(shaderToBind->getPid());
 
-    //shaderToBind->bindTextures();
-
 	return shaderToBind;
 }
 
 void ShaderManager::unbindShader() {
-	//shaderPrograms.at(boundShaderName)->unbindTextures();
     boundShaderName = "";
 	glUseProgram(NO_SHADER);
 }
@@ -237,18 +252,13 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 	}
 }
 
-void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
-	const std::shared_ptr<Material> material, const std::shared_ptr<Texture> billboardTexture, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V,
-	std::shared_ptr<MatrixStack> M) {
+void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Texture> billboardTexture, 
+	std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
 		const std::shared_ptr<Program> shaderProgram = getShaderProgram(shaderName);
 
 		// Bind perspective and view tranforms
 		glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, glm::value_ptr(P->topMatrix()));
-		glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, glm::value_ptr(V->topMatrix()));
-
-		GameManager& gameManager = GameManager::instance();
-		Camera& camera = gameManager.getCamera();
 
 		// Set up and bind model transform
 		M->pushMatrix();
@@ -257,15 +267,20 @@ void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, con
 		M->translate(objToRender->getPosition());
 		M->scale(objToRender->getScale());
 
-		glm::mat4 rotation = objToRender->transform.getRotate();
-		M->rotateMat4(rotation);
+		glm::mat4 cameraSpaceTransform = V->topMatrix() * M->topMatrix();
 
-		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+		// Get the scale components from the camera space transform to remove the rotation aspect
+		float xScale = glm::length(cameraSpaceTransform[0]);
+		float yScale = glm::length(cameraSpaceTransform[1]);
+		float zScale = glm::length(cameraSpaceTransform[2]);
 
-		glm::mat4 tiM = glm::transpose(glm::inverse(M->topMatrix()));
-		glUniformMatrix4fv(shaderProgram->getUniform("tiM"), 1, GL_FALSE, glm::value_ptr(tiM));
-		
+		glm::mat4 billboardTransform;
+		billboardTransform[0] = glm::vec4(xScale, 0.0f, 0.0f, 0.0f);
+		billboardTransform[1] = glm::vec4(0.0f, yScale, 0.0f, 0.0f);
+		billboardTransform[2] = glm::vec4(0.0f, 0.0f, zScale, 0.0f);
+		billboardTransform[3] = cameraSpaceTransform[3];
 
+		glUniformMatrix4fv(shaderProgram->getUniform("billboardTransform"), 1, GL_FALSE, glm::value_ptr(billboardTransform));
 		M->popMatrix();
 	}
 }

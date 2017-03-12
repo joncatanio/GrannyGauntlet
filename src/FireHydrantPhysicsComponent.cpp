@@ -75,21 +75,27 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          animated = true;
          animRotAxis = rotAxis;
 
+		 // Play sound effect.
+		 AudioManager& audioManager = AudioManager::instance();
+		 audioManager.playEffect("FireHydrant Clank");
+
          // Initialize fracture variables if the player hits the object hard enough
          if (objHit->velocity >= 10) {
+			// Do effects once on hit
+			if (!holder_->fracture) {
+				// Spawn billboard
+				holder_->spawnPlayerHitBillboardEffect(holder_->getPosition());
+			}
+
             holder_->fracture = true;
             holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
          }
-
-         // Play sound effect.
-         AudioManager& audioManager = AudioManager::instance();
-         audioManager.playEffect("FireHydrant Clank");
       } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                  objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-         BoundingBox* objBB = objHit->getBoundingBox();
-         BoundingBox* thisBB = holder_->getBoundingBox();
+         std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
+         std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
 
-         glm::vec3 normal = objBB->calcReflNormal(*thisBB);
+         glm::vec3 normal = objBB->calcReflNormal(thisBB, 1.5f);
          holder_->direction = glm::reflect(holder_->direction, normal);
          animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
 

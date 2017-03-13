@@ -5,6 +5,8 @@
 #include "GameWorld.h"
 #include "PlayerBoundingSphere.h"
 
+#include <iostream>
+
 PlayerPhysicsComponent::PlayerPhysicsComponent() {}
 
 PlayerPhysicsComponent::~PlayerPhysicsComponent() {}

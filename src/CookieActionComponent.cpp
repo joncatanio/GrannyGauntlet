@@ -115,7 +115,6 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     aimInputComponent->pollInput();
     double timeDown = aimInputComponent->pressTime;
     double chargeTime = aimInputComponent->getChargeTime();
-    std::cout << "Charge Time: " << chargeTime << std::endl;
     timeDown = std::min(timeDown, 1.5) / 2.0;
     timeDown = 0.5 + timeDown;
 

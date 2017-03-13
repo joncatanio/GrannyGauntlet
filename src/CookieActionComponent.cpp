@@ -173,22 +173,23 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
         }
     }
 
-    glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 0.5f;
-    gameObj2->setPosition(aimTarget2);
-    if (chargeTime > 0.01 && chargeTime <= 0.3) {
-        gameObj2->changeMaterial(materialManager.getMaterial("Emerald"));
-    }
 
-    glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 1.0f;
+    glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 0.5f;
     gameObj->setPosition(aimTarget);
-    if (chargeTime > 0.3 && chargeTime <= 0.6) {
+    if (chargeTime > 0.01 && chargeTime <= 0.3) {
         gameObj->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
-    glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.5f;
+    glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.0f;
     gameObj1->setPosition(aimTarget1);
-    if (chargeTime > 0.6 && chargeTime <= 0.9) {
+    if (chargeTime > 0.3 && chargeTime <= 0.6) {
         gameObj1->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
+
+    glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 1.5f;
+    gameObj2->setPosition(aimTarget2);
+    if (chargeTime > 0.6 && chargeTime <= 0.9) {
+        gameObj2->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
     glm::vec3 aimTarget3 = holder_->getPosition() + throwDirection * 2.0f;

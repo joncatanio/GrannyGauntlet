@@ -55,54 +55,54 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
          newFractPos += glm::vec3(0.0, yVelocity * deltaTime, 0.0);
          fracturePositions->at(i) = newFractPos;
       }
-   }
+   } else {
+      std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
+      if (!objsHit.empty()) {
+         std::shared_ptr<GameObject> objHit = objsHit[0];
+         GameObjectType objTypeHit = objHit->type;
+         
+         if (objTypeHit == GameObjectType::PLAYER) {
+            glm::vec3 reactDir = objHit->direction;
+            glm::vec3 rotAxis = glm::cross(objHit->direction, glm::vec3(0, 1, 0));
+            // Give the direction of the hydrant a vertical component.
+            reactDir = glm::rotate(reactDir, (float)(M_PI / 6.0f), rotAxis);
 
-   std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
-   if (!objsHit.empty()) {
-      std::shared_ptr<GameObject> objHit = objsHit[0];
-      GameObjectType objTypeHit = objHit->type;
-      
-      if (objTypeHit == GameObjectType::PLAYER) {
-         glm::vec3 reactDir = objHit->direction;
-         glm::vec3 rotAxis = glm::cross(objHit->direction, glm::vec3(0, 1, 0));
-         // Give the direction of the hydrant a vertical component.
-         reactDir = glm::rotate(reactDir, (float)(M_PI / 6.0f), rotAxis);
+            holder_->direction = reactDir;
+            holder_->velocity = objHit->velocity * 2.0;
 
-         holder_->direction = reactDir;
-         holder_->velocity = objHit->velocity * 2.0;
+            // Initialize animation parameters.
+            animated = true;
+            animRotAxis = rotAxis;
 
-         // Initialize animation parameters.
-         animated = true;
-         animRotAxis = rotAxis;
+          // Play sound effect.
+          AudioManager& audioManager = AudioManager::instance();
+          audioManager.playEffect("FireHydrant Clank");
 
-         // Initialize fracture variables if the player hits the object hard enough
-         if (objHit->velocity >= 10) {
-			// Do effects once on hit
-			if (!holder_->fracture) {
-				// Spawn billboard
-				holder_->spawnPlayerHitBillboardEffect(holder_->getPosition());
+            // Initialize fracture variables if the player hits the object hard enough
+            if (objHit->velocity >= 10) {
+            // Do effects once on hit
+            if (!holder_->fracture) {
+               // Spawn billboard
+               holder_->spawnPlayerHitBillboardEffect(holder_->getPosition());
+            }
 
-				// Play sound effect.
-				AudioManager& audioManager = AudioManager::instance();
-				audioManager.playEffect("FireHydrant Clank");
-			}
+               holder_->fracture = true;
+               holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
+            }
+         } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
+                    objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
+            std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
+            std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
 
-            holder_->fracture = true;
-            holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
+            glm::vec3 normal = objBB->calcReflNormal(thisBB, 1.5f);
+            holder_->direction = glm::reflect(holder_->direction, normal);
+            animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
+
+            newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
+            newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
+            holder_->setPosition(newPosition);
+            updateBoundingBox();
          }
-      } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
-                 objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
-         std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();
-         std::shared_ptr<BoundingBox> thisBB = holder_->getBoundingBox();
-
-         glm::vec3 normal = objBB->calcReflNormal(thisBB, 1.5f);
-         holder_->direction = glm::reflect(holder_->direction, normal);
-         animRotAxis = glm::cross(holder_->direction, glm::vec3(0, 1, 0));
-
-         newPosition = oldPosition + (holder_->velocity * holder_->direction * deltaTime);
-         newPosition += glm::vec3(0.0, yVelocity* deltaTime, 0.0);
-         holder_->setPosition(newPosition);
-         updateBoundingBox();
       }
    }
 

@@ -114,7 +114,8 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
 
     aimInputComponent->pollInput();
     double timeDown = aimInputComponent->pressTime;
-    timeDown = std::min(timeDown, 1.0) / 2.0;
+    double chargeTime = aimInputComponent->getChargeTime();
+    timeDown = std::min(timeDown, 1.5) / 2.0;
     timeDown = 0.5 + timeDown;
 
     /* Restrict the aim motion to the half-sphere in front of the player. */
@@ -161,21 +162,45 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
             gameManager.getGameWorld().addDynamicGameObject(cookieObj);
 
             previousCookieTime = totalTime;
+            aimInputComponent->pressTime = 0.0;
+
+            // Reset the material of the aiming objects
+            gameObj->changeMaterial(materialManager.getMaterial("Brass"));
+            gameObj1->changeMaterial(materialManager.getMaterial("Brass"));
+            gameObj2->changeMaterial(materialManager.getMaterial("Brass"));
+            gameObj3->changeMaterial(materialManager.getMaterial("Brass"));
+            gameObj4->changeMaterial(materialManager.getMaterial("Brass"));
         }
     }
 
-    glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 1.0f;
+
+    glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 0.5f;
     gameObj->setPosition(aimTarget);
+    if (chargeTime > 0.01 && chargeTime <= 0.3) {
+        gameObj->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
 
-    glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.5f;
+    glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.0f;
     gameObj1->setPosition(aimTarget1);
+    if (chargeTime > 0.3 && chargeTime <= 0.6) {
+        gameObj1->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
 
-    glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 0.5f;
+    glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 1.5f;
     gameObj2->setPosition(aimTarget2);
+    if (chargeTime > 0.6 && chargeTime <= 0.9) {
+        gameObj2->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
 
     glm::vec3 aimTarget3 = holder_->getPosition() + throwDirection * 2.0f;
     gameObj3->setPosition(aimTarget3);
+    if (chargeTime > 0.9 && chargeTime <= 1.2) {
+        gameObj3->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
 
     glm::vec3 aimTarget4 = holder_->getPosition() + throwDirection * 2.5f;
     gameObj4->setPosition(aimTarget4);
+    if (chargeTime > 1.2) {
+        gameObj4->changeMaterial(materialManager.getMaterial("Emerald"));
+    }
 }

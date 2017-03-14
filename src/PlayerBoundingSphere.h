@@ -1,5 +1,5 @@
-#ifndef BOUNDING_VOLUME_H
-#define BOUNDING_VOLUME_H
+#ifndef PLAYER_BOUNDING_SPHERE_H
+#define PLAYER_BOUNDING_SPHERE_H
 
 #include "glm/glm.hpp"
 #include "glm/vec4.hpp"

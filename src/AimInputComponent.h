@@ -10,6 +10,7 @@ public:
     ~AimInputComponent();
 
     void pollInput();
+    double getChargeTime();
 
     bool toggleXRotation;
     bool toggleYRotation;

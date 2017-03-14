@@ -19,11 +19,11 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::init(float numberOfParticles, glm::vec3 position) {
 
 
-    //numberOfParticles_ = numberOfParticles;
+    numberOfParticles_ = numberOfParticles;
     position_ = position;
 
     for(int i = 0; i < numberOfParticles_; i++) {
-        std::shared_ptr<Particle> particle = std::make_shared<Particle>(position_);
+        std::shared_ptr<Particle> particle = std::make_shared<Particle>(position_, particleMinLiveTime, particleMaxLiveTime, particleMaxXYVelocity);
         particles.push_back(particle);
         particle->load();
     }
@@ -32,15 +32,14 @@ void ParticleSystem::init(float numberOfParticles, glm::vec3 position) {
     glBindVertexArray(VertexArrayID);
     glGenBuffers(1, &pointsbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, pointsbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, numberOfParticles_ * 3, NULL, GL_STREAM_DRAW);
 
     glGenBuffers(1, &lifebuffer);
     glBindBuffer(GL_ARRAY_BUFFER, lifebuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(lifes), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, numberOfParticles_, NULL, GL_STREAM_DRAW);
 
-    //texture = new Texture();
-    //texture.loadTexture("../resources/water_atlas.jpg", "water_atlas");
     texture.loadTexture("../resources/water_atlas.jpg", "water_atlas");
+
 }
 
 class ParticleSorter {
@@ -60,38 +59,38 @@ public:
 };
 ParticleSorter sorter;
 
-void ParticleSystem::update(float t, float tDiff, std::shared_ptr<MatrixStack> V) {
-    //std::cout << "update" << std::endl;
-    //update the particles
-    for(auto &particle : particles) {
-        particle->update(t, tDiff, gravity);
-
-        //std::cout << particle->getPosition().x << " " << particle->getPosition().y << " " << particle->getPosition().z << std::endl;
+void ParticleSystem::update(float totalTime, float deltaTime, std::shared_ptr<MatrixStack> V) {
+    lifeTime += deltaTime;
+    if(lifeTime > lifespan) {
+        GameManager::instance().getGameWorld().rmParticleSystem(shared_from_this());
     }
-    //t += tDiff;
-
-    // Sort the particles by Z
+    for(auto &particle : particles) {
+        if (lifeTime >= lifespan - dieOffSpan) {
+            float dieOff = (lifespan - lifeTime) / dieOffSpan;
+            dieOff = std::max(0.3f, dieOff);
+            particle->update(totalTime, deltaTime, gravity, dieOff);
+        } else {
+            particle->update(totalTime, deltaTime, gravity);
+        }
+    }
+    // sort by z, dependent on player camera
     auto temp = std::make_shared<MatrixStack>();
-    //temp->rotate(camRot, vec3(0, 1, 0));
     sorter.C = V->topMatrix();
     sort(particles.begin(), particles.end(), sorter);
 
 
-    //
+    GLfloat points[numberOfParticles_ * 3];
+    GLfloat lifes[numberOfParticles_];
 
     glm::vec3 pos;
-
-    //go through all the particles and update the CPU buffer
     for (int i = 0; i < numberOfParticles_; i++) {
         pos = particles[i]->getPosition();
         points[i*3+0] = pos.x;
         points[i*3+1] = pos.y;
         points[i*3+2] = pos.z;
-        lifes[i] = particles[i]->getLifePercent(t);
-        //std::cout << particles[i]->getLifePercent(t) << std::endl;
+        lifes[i] = particles[i]->getLifePercent(totalTime);
     }
 
-    //update the GPU data
     glBindBuffer(GL_ARRAY_BUFFER, pointsbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(points), NULL, GL_STREAM_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*numberOfParticles_*3, points);
@@ -107,14 +106,12 @@ void ParticleSystem::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<Matrix
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glPointSize(50.0f);
+    scaleParticles();
 
-    //prog->bind();
     ShaderManager& shaderManager = ShaderManager::instance();
     const std::shared_ptr<Program> shaderProgram = shaderManager.bindShader("Particle");
 
     texture.bind(0, shaderProgram);
-
 
     glUniformMatrix4fv(shaderProgram->getUniform("P"), 1, GL_FALSE, value_ptr(P->topMatrix()));
     glUniformMatrix4fv(shaderProgram->getUniform("V"), 1, GL_FALSE, value_ptr(V->topMatrix()));
@@ -131,7 +128,6 @@ void ParticleSystem::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<Matrix
 
     glVertexAttribDivisor(0, 1);
     glVertexAttribDivisor(1, 1);
-    // Draw the points !
     glDrawArraysInstanced(GL_POINTS, 0, 1, numberOfParticles_);
 
     glVertexAttribDivisor(0, 0);
@@ -142,7 +138,33 @@ void ParticleSystem::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<Matrix
     glDisable(GL_BLEND);
     texture.unbind();
 
-    //prog->unbind();
     shaderManager.unbindShader();
 
+}
+
+void ParticleSystem::scaleParticles() {
+
+    glm::vec3 eye = GameManager::instance().getCamera().getEye();
+    float distToPs = distance(glm::vec2(position_.x, position_.z), glm::vec2(eye.x, eye.z));
+
+    float pSize;
+    float sUnit = (maxParticleSize - minParticleSize) / maxScaleDist;
+
+    if(distToPs >= maxScaleDist){
+        pSize = minParticleSize;
+    } else {
+        float distScale = distToPs - maxScaleDist;
+        distScale *= -1;
+        pSize = minParticleSize + distScale * sUnit;
+    }
+
+    glPointSize(pSize);
+}
+
+float ParticleSystem::getMaxRadius() {
+    return particleMaxXYVelocity * particleMaxLiveTime;
+}
+
+glm::vec3 ParticleSystem::getPosition() {
+    return position_;
 }

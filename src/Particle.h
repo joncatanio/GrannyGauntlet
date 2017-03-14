@@ -16,25 +16,29 @@
 class Particle
 {
 public:
-    Particle(glm::vec3 startPos);
+    Particle(glm::vec3 startPos, float particleMinLiveTime, float particleMaxLiveTime, float particleMaxXYVelocity);
     virtual ~Particle();
     void load();
     void rebirth(float t);
     void update(float t, float tDiff, float g);
-    const glm::vec3 &getPosition() const { return x; };
-    const glm::vec3 &getDirection() const { return direction; };
-    const float &getVelocity() const { return v; };
+    void update(float t, float tDiff, float g, float dieOffPercentage);
+    const glm::vec3 &getPosition() const { return position; };
+    const glm::vec3 &getVelocity() const { return velocity; };
     float getLifePercent(float t);
 
 private:
-    float m; // mass
-    glm::vec3 x; // position
-    float v; // velocity
-    glm::vec3 direction;
-    float lifespan; // how long this particle lives
-    float tEnd;     // time this particle dies
+    float mass;
+    glm::vec3 position;
+    glm::vec3 velocity;
+    float lifespan;
+    float tEnd;
     float scale;
     glm::vec3 startPosition;
+    float dieOffPercentage_ = 1.0;
+
+    float particleMinLiveTime_;
+    float particleMaxLiveTime_;
+    float particleMaxXYVelocity_;
 };
 
 #endif

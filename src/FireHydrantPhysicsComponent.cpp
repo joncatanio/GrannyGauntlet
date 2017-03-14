@@ -95,7 +95,7 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
                glm::vec3 psPos = holder_->getPosition();
                psPos = glm::vec3(psPos.x, 0.0f, psPos.z);
                 std::shared_ptr<ParticleSystem> ps = std::make_shared<ParticleSystem>();
-                ps->init(100.0, psPos);
+                ps->init(300.0, psPos);
                world.addParticleSystem(ps);
 
                untouched = false;

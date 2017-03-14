@@ -9,15 +9,17 @@ float randFloat(float l, float h)
     return (1.0f - r) * l + r * h;
 }
 
-Particle::Particle(glm::vec3 startPos) :
-        m(1.0f),
-        x(0.0f, 0.0f, 0.0f),
-        v(0.0f),
-        direction(0.0f, 0.0f, 0.0f),
+Particle::Particle(glm::vec3 startPos, float particleMinLiveTime, float particleMaxLiveTime, float particleMaxXYVelocity) :
+        mass(1.0f),
+        position(0.0f, 0.0f, 0.0f),
+        velocity(0.0f, 0.0f, 0.0f),
         lifespan(1.0f),
         tEnd(0.0f),
         scale(1.0f),
-        startPosition(startPos)
+        startPosition(startPos),
+        particleMinLiveTime_(particleMinLiveTime),
+        particleMaxLiveTime_(particleMaxLiveTime),
+        particleMaxXYVelocity_(particleMaxXYVelocity)
 {
 }
 
@@ -34,15 +36,14 @@ void Particle::load()
 /* all particles born at the origin */
 void Particle::rebirth(float t)
 {
-    m = 1.0f;
-    x = glm::vec3(startPosition.x, startPosition.y, startPosition.z);
-    //x.z = randFloat(-3.0, -2.0);
+    mass = 1.0f;
+    position = glm::vec3(startPosition.x, startPosition.y, startPosition.z);
+    velocity = glm::vec3(dieOffPercentage_ * randFloat(-particleMaxXYVelocity_, particleMaxXYVelocity_),
+                         dieOffPercentage_ * randFloat(3.0f, 4.0f),
+                         dieOffPercentage_ * randFloat(-particleMaxXYVelocity_, particleMaxXYVelocity_));
 
-    v = randFloat(3.0f, 4.0f);
-    direction = glm::vec3(randFloat(-0.3, 0.3), 1.0f, randFloat(-0.3, 0.3));
-    direction = glm::normalize(direction);
-
-    lifespan = randFloat(1.0f, 1.5f);
+    lifespan = randFloat(dieOffPercentage_ * particleMinLiveTime_,
+                         dieOffPercentage_ * particleMaxLiveTime_);
 
 
     tEnd = t + lifespan;
@@ -55,10 +56,22 @@ void Particle::update(float t, float tDiff, float g)
         rebirth(t);
     }
 
-    //very simple update
-    x += tDiff * v * direction;
+    position += tDiff * velocity;
 
-    v += tDiff * m * g;
+    velocity = glm::vec3(velocity.x, velocity.y + tDiff * mass * g, velocity.z);
+
+}
+
+void Particle::update(float t, float tDiff, float g, float dieOffPercentage)
+{
+    dieOffPercentage_ = dieOffPercentage;
+    if(t > tEnd) {
+        rebirth(t);
+    }
+
+    position += tDiff * velocity;
+
+    velocity = glm::vec3(velocity.x, velocity.y + tDiff * mass * g, velocity.z);
 
 }
 

@@ -66,6 +66,9 @@ public:
 	// Adds a Particle System to the World's internal list of Particle Systems
 	void addParticleSystem(std::shared_ptr<ParticleSystem> particleSystem);
 
+    // Removes a Particle System from the World's internal list of Particle Systems
+    void rmParticleSystem(std::shared_ptr<ParticleSystem> particleSystem);
+
 	// Gets the current total number of non-static GameObjects in the world
 	int getNumDynamicGameObjects();
 
@@ -124,7 +127,7 @@ private:
 	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
 
 	// Collection of Particle Systems in the world
-	std::vector<std::shared_ptr<ParticleSystem>> particleSystems;
+	std::vector<std::shared_ptr<ParticleSystem>> particleSystems_;
 
 	// Queue of dynamic objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToAdd_;
@@ -132,11 +135,17 @@ private:
 	// Queue of static objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToAdd_;
 
+    // Queue of particle systems added to the world but that have yet to be added to the vector
+    std::queue<std::shared_ptr<ParticleSystem>> particleSystemsToAdd_;
+
 	// Queue of dynamic objects removed to the world but that have yet to be removed to the vector
 	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToRemove_;
 
 	// Queue of static objects removed to the world but that have yet to be removed to the vector
 	std::queue<std::shared_ptr<GameObject>> staticGameObjectsToRemove_;
+
+    // Queue of particle systems removed to the world but that have yet to be removed to the vector
+    std::queue<std::shared_ptr<ParticleSystem>> particleSystemsToRemove_;
 
 	// Octree of static objects that are in the world - these objects should never move.
 	// If they do, the tree must be rebuilt

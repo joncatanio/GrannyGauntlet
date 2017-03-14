@@ -11,6 +11,7 @@ AimInputComponent::AimInputComponent() {
     toggleThrow = false;
     triggerAvailable = true;
     actionHoldDown = false;
+    pressStart = 0.0;
 }
 
 AimInputComponent::~AimInputComponent() {
@@ -122,4 +123,12 @@ void AimInputComponent::pollKeyboard() {
             actionHoldDown = false;
         }
     }
+}
+
+double AimInputComponent::getChargeTime() {
+   if (actionHoldDown) {
+      return glfwGetTime() - pressStart;
+   }
+
+   return 0.0;
 }

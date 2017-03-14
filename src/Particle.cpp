@@ -15,7 +15,6 @@ Particle::Particle(glm::vec3 startPos, float particleMinLiveTime, float particle
         velocity(0.0f, 0.0f, 0.0f),
         lifespan(1.0f),
         tEnd(0.0f),
-        scale(1.0f),
         startPosition(startPos),
         particleMinLiveTime_(particleMinLiveTime),
         particleMaxLiveTime_(particleMaxLiveTime),
@@ -29,11 +28,9 @@ Particle::~Particle()
 
 void Particle::load()
 {
-    // Random initialization
     rebirth(0.0f);
 }
 
-/* all particles born at the origin */
 void Particle::rebirth(float t)
 {
     mass = 1.0f;
@@ -47,7 +44,6 @@ void Particle::rebirth(float t)
 
 
     tEnd = t + lifespan;
-    scale = randFloat(0.2, 1.0f);
 }
 
 void Particle::update(float t, float tDiff, float g)

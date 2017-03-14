@@ -7,12 +7,8 @@ out vec4 Outcolor;
 
 void main()
 {
-	//float alpha = texture(alphaTexture, gl_PointCoord).r;
-	//Outcolor = vec4(partCol.rgb, partCol.a*alpha);
-
 	   vec2 pointCoord = gl_PointCoord * 0.25;
        float scale = floor(life * 16.0);
-       //float scale = 0.0;
 
        if(scale  >= 12.0){
           pointCoord.y = pointCoord.y + 0.75;

@@ -32,7 +32,6 @@ private:
     glm::vec3 velocity;
     float lifespan;
     float tEnd;
-    float scale;
     glm::vec3 startPosition;
     float dieOffPercentage_ = 1.0;
 

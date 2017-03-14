@@ -60,6 +60,10 @@ void GameWorld::addAreaLight(const std::shared_ptr<Light> newLight) {
 	areaLights.push_back(newLight);
 }
 
+void GameWorld::addParticleSystem(std::shared_ptr <ParticleSystem> particleSystem) {
+	particleSystems.push_back(particleSystem);
+}
+
 int GameWorld::getNumDynamicGameObjects() {
 	return dynamicGameObjects_.size();
 }
@@ -127,6 +131,16 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		obj->update(deltaTime);
 	}
 
+    Camera& camera = GameManager::instance().getCamera();
+    std::shared_ptr<MatrixStack> V = std::make_shared<MatrixStack>();
+	V->pushMatrix();
+	V->loadIdentity();
+	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
+    for (std::shared_ptr<ParticleSystem> ps : particleSystems) {
+        ps->update(totalTime, deltaTime, V);
+    }
+
+
 	updateInternalGameObjectLists();
 	updateCount++;
 }
@@ -178,6 +192,14 @@ void GameWorld::drawGameObjects() {
 		   obj->draw(P, M, V);
       }
 	}
+
+    for (std::shared_ptr<ParticleSystem> ps : particleSystems) {
+        //if (!viewFrustum.cull(obj)) {
+        ps->draw(P, M, V);
+        //}
+    }
+
+
 	renderCount++;
 
    #ifdef DEBUG

@@ -25,6 +25,9 @@
 #pragma comment(lib, "opengl32.lib")
 #endif
 
+// ###
+#include "ParticleSystem.h"
+
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
 
@@ -94,6 +97,13 @@ int main(int argc, char **argv) {
     world.init();
 
     gameManager.setTime(1500.0);
+
+
+    // ###
+    std::shared_ptr<ParticleSystem> ps = std::make_shared<ParticleSystem>();
+    ps->init(100.0, glm::vec3(0.0, 0.0, 2.0));
+    //ps->update(0.0, 0.0);
+    world.addParticleSystem(ps);
 
     // Loop until the user closes the window
     int numFramesInSecond = 0;

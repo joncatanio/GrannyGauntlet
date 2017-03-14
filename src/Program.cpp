@@ -83,8 +83,11 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("MatSpc");
 	addUniform("MatShiny");
 
-	// Adds vertex position and normal uniforms
+	// Adds vertex position and normal attributes
 	addAttribute("vertPos");
 	addAttribute("vertNor");
 	addAttribute("vertTex");
+
+	//TODO(nurgan) remove from default
+	addAttribute("lifePercent");
 }

@@ -20,6 +20,7 @@
 #include "PlayerInputComponent.h"
 #include "PlayerPhysicsComponent.h"
 #include "PlayerRenderComponent.h"
+#include "ParticleSystem.h"
 
 // Forward-declare the Light struct in ShaderManager.h
 struct Light;
@@ -61,6 +62,9 @@ public:
 
 	// Adds a new area light to the current world
 	void addAreaLight(const std::shared_ptr<Light> newLight);
+
+	// Adds a Particle System to the World's internal list of Particle Systems
+	void addParticleSystem(std::shared_ptr<ParticleSystem> particleSystem);
 
 	// Gets the current total number of non-static GameObjects in the world
 	int getNumDynamicGameObjects();
@@ -118,6 +122,9 @@ private:
 
 	// Collection of static geometry in the world - these should never move
 	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
+
+	// Collection of Particle Systems in the world
+	std::vector<std::shared_ptr<ParticleSystem>> particleSystems;
 
 	// Queue of dynamic objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToAdd_;

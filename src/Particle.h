@@ -16,14 +16,15 @@
 class Particle
 {
 public:
-    Particle();
+    Particle(glm::vec3 startPos);
     virtual ~Particle();
     void load();
     void rebirth(float t);
-    void update(float t, float h, float g);
+    void update(float t, float tDiff, float g);
     const glm::vec3 &getPosition() const { return x; };
     const glm::vec3 &getDirection() const { return direction; };
     const float &getVelocity() const { return v; };
+    float getLifePercent(float t);
 
 private:
     float m; // mass
@@ -33,6 +34,7 @@ private:
     float lifespan; // how long this particle lives
     float tEnd;     // time this particle dies
     float scale;
+    glm::vec3 startPosition;
 };
 
 #endif

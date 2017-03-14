@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "AudioManager.h"
+#include "ParticleSystem.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 FireHydrantPhysicsComponent::FireHydrantPhysicsComponent() {}
@@ -89,6 +90,17 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
                holder_->fracture = true;
                holder_->setFragmentDirs(holder_->getRenderComponent()->getShape()->calcFragmentDir(reactDir));
             }
+
+            if(untouched) {
+               glm::vec3 psPos = holder_->getPosition();
+               psPos = glm::vec3(psPos.x, 0.0f, psPos.z);
+                std::shared_ptr<ParticleSystem> ps = std::make_shared<ParticleSystem>();
+                ps->init(100.0, psPos);
+               world.addParticleSystem(ps);
+
+               untouched = false;
+            }
+
          } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                     objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
             std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();

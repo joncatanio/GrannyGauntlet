@@ -25,6 +25,11 @@
          "name": "Billboard",
          "file-prefix": "billboard",
          "default": false
+      },
+      {
+         "name": "Particle",
+         "file-prefix": "particle",
+         "default": false
       }
    ],
    "level-shapes": [

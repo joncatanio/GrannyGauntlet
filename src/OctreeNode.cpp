@@ -31,7 +31,7 @@ void OctreeNode::createEnclosingRegionForRoot() {
          min.y = objMin.y < min.y ? objMin.y : min.y;
          min.z = objMin.z < min.z ? objMin.z : min.z;
 
-		 // Small heuristic to better match GG world construction (no objects that are in upper 4 octants exclusively by default)
+         // Small heuristic to better match GG world construction (no objects that are in upper 4 octants exclusively by default)
          max.x = objMax.x + (objMax.x * 4) > max.x ? objMax.x + (objMax.x * 4) : max.x;
          max.y = objMax.y + (objMax.y * 4) > max.y ? objMax.y + (objMax.y * 4) : max.y;
          max.z = objMax.z + (objMax.z * 4) > max.z ? objMax.z + (objMax.z * 4) : max.z;
@@ -107,7 +107,6 @@ void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<Matri
 	for (OctreeNode& child : children_) {
 		if (child.enclosingRegion_ != nullptr) {
 			if (!viewFrustum.cull(child.enclosingRegion_)) {
-				//std::cout << "HERE" << std::endl;
 				child.cullAndDrawObjs(viewFrustum, P, M, V);
 			}
 		}
@@ -146,10 +145,6 @@ void OctreeNode::buildTreeNode() {
       return;
    }
    
-   std::cout << "HERE" << std::endl;
-   std::cout << "Region Min: " << regionMin.x << " " << regionMin.y << " " << regionMin.z << std::endl;
-   std::cout << "Region Max: " << regionMax.x << " " << regionMax.y << " " << regionMax.z << std::endl;
-
    glm::vec3 childMin;
    glm::vec3 childMax;
 
@@ -209,8 +204,6 @@ void OctreeNode::buildTreeNode() {
       objsRemoved.pop();
       objsNotInTree_.remove(objToRemove);
    }
-
-   std::cout << "objsNotInTree: " << objsNotInTree_.size() << std::endl;
 
    // Move all objects that don't fit perfectly into a child node into the list for this node
    // as this is the smallest enclosing space it fits perfectly into

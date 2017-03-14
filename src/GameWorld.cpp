@@ -183,7 +183,7 @@ void GameWorld::drawGameObjects() {
    // Calculate view frustum planes
    viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
-	// Draw non-static objects
+	// Draw dynamic objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 
 		/* Every object needs to have a bounding box in order to cull.
@@ -255,7 +255,7 @@ void GameWorld::drawVFCViewport() {
    V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 8, 0), camera.getNoSpringEye(),
       camera.getLookAt() - camera.getNoSpringEye());
 
-   // Draw non-static objects
+   // Draw dynamic objects
    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 
 	   /* Every object needs to have a bounding box in order to cull.

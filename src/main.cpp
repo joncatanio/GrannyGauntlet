@@ -25,6 +25,7 @@
 #pragma comment(lib, "opengl32.lib")
 #endif
 
+
 // Where the resources are loaded from
 std::string resourceDirectory = "../resources/";
 

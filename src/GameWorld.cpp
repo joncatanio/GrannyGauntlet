@@ -185,24 +185,29 @@ void GameWorld::drawGameObjects() {
 
 	// Draw non-static objects
 	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-      if (!viewFrustum.cull(obj)) {
-		   obj->draw(P, M, V);
-      }
+
+		/* Every object needs to have a bounding box in order to cull.
+		* If an object doesn't have a bounding box, cull it so we don't create
+		* unseen problems with culling. */
+		std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
+		if (objBox != nullptr) {
+			if (!viewFrustum.cull(objBox)) {
+				obj->draw(P, M, V);
+			}
+		}
+		else {
+			obj->draw(P, M, V);
+		}
 	}
 
 	// Draw static objects
-	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
-      if (!viewFrustum.cull(obj)) {
-		   obj->draw(P, M, V);
-      }
-	}
+	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
 
     for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
         if (!viewFrustum.cull(ps)) {
             ps->draw(P, M, V);
         }
     }
-
 
 	renderCount++;
 
@@ -250,19 +255,25 @@ void GameWorld::drawVFCViewport() {
    V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 8, 0), camera.getNoSpringEye(),
       camera.getLookAt() - camera.getNoSpringEye());
 
-	// Draw non-static objects
-	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-      if (!viewFrustum.cull(obj)) {
-		   obj->draw(P, M, V);
-      }
-	}
+   // Draw non-static objects
+   for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 
-	// Draw static objects
-	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
-      if (!viewFrustum.cull(obj)) {
+	   /* Every object needs to have a bounding box in order to cull.
+	   * If an object doesn't have a bounding box, cull it so we don't create
+	   * unseen problems with culling. */
+	   std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
+	   if (objBox != nullptr) {
+		   if (!viewFrustum.cull(objBox)) {
+			   obj->draw(P, M, V);
+		   }
+	   }
+	   else {
 		   obj->draw(P, M, V);
-      }
-	}
+	   }
+   }
+
+   // Draw static objects
+   staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
 }
 
 std::vector<std::shared_ptr<GameObject>> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {

@@ -10,6 +10,7 @@
 #include "glm/glm.hpp"
 
 #include "GameObject.h"
+#include "ViewFrustum.h"
 
 /* 
  * Spatial data structure used to store static objects in the world
@@ -39,13 +40,17 @@ public:
    // Returns an object that intersects with the past object. Returns |nullptr| if no such object exists
    std::vector<std::shared_ptr<GameObject>> checkIntersection(std::shared_ptr<GameObject> objToCheck);
 
+   // Draws all objects within the given view frustum
+   void cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P,
+	   std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
+
 private:
 
    // The children whose parent is this node
    std::vector<OctreeNode> children_;
 
    // The representation of the region of space contained within the octree
-   BoundingBox enclosingRegion_;
+   std::shared_ptr<BoundingBox> enclosingRegion_;
 
    // The objects within the current Octree node enclosure
    std::vector<std::shared_ptr<GameObject>> objsEnclosed_;

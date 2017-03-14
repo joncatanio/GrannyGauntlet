@@ -13,8 +13,9 @@ public:
 
    void extractPlanes(glm::mat4 P, glm::mat4 V);
 
-   bool cull(std::shared_ptr<GameObject> obj);
-    bool cull(std::shared_ptr<ParticleSystem> obj);
+   bool cull(std::shared_ptr<ParticleSystem> obj);
+
+   bool cull(std::shared_ptr<BoundingBox> objBox);
 
 private:
    std::array<glm::vec4, 6> planes;

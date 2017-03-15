@@ -16,6 +16,6 @@ void main() {
 	gl_Position = P * billboardTransform * vec4(vertPos.xy, 0.0, 1.0);
 
 	// Resize to be in texel space (0, 1) and flip Y values
-	vec2 vertTemp = vec2(vertPos.x, -vertPos.y) * 0.5 + 0.5;
+	vec2 vertTemp = vertPos.xy * 0.5 + 0.5;
 	texCoord = vertTemp;
 }

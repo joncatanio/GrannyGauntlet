@@ -35,52 +35,52 @@
       {
          "name": "House01",
          "filename": "House_01.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House02",
          "filename": "House_02.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House03",
          "filename": "House_03.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House04",
          "filename": "House_04.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House05",
          "filename": "House_05.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House06",
          "filename": "House_06.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House07",
          "filename": "House_07.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House08",
          "filename": "House_08.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House09",
          "filename": "House_09.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "House10",
          "filename": "House_10.obj",
-         "manual_texture": "ColorPalette_0.5k.png"
+         "manual_texture": "ColorPalette_0.5K.png"
       },
       {
          "name": "Tex_Cube",
@@ -104,99 +104,123 @@
       },
       {
          "name": "FirTree01",
-         "filename": "Forest_A_FirTree_01.obj"
+         "filename": "Forest_A_FirTree_01.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree03",
-         "filename": "Forest_A_FirTree_03.obj"
+         "filename": "Forest_A_FirTree_03.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree04",
-         "filename": "Forest_A_FirTree_04.obj"
+         "filename": "Forest_A_FirTree_04.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree05",
-         "filename": "Forest_A_FirTree_05.obj"
+         "filename": "Forest_A_FirTree_05.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree06",
-         "filename": "Forest_A_FirTree_06.obj"
+         "filename": "Forest_A_FirTree_06.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree07",
-         "filename": "Forest_A_FirTree_07.obj"
+         "filename": "Forest_A_FirTree_07.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree09",
-         "filename": "Forest_A_FirTree_09.obj"
+         "filename": "Forest_A_FirTree_09.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree13",
-         "filename": "Forest_A_FirTree_13.obj"
+         "filename": "Forest_A_FirTree_13.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree14",
-         "filename": "Forest_A_FirTree_14.obj"
+         "filename": "Forest_A_FirTree_14.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "FirTree20",
-         "filename": "Forest_A_FirTree_20.obj"
+         "filename": "Forest_A_FirTree_20.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree06",
-         "filename": "Forest_C_Tree_06.obj"
+         "filename": "Forest_C_Tree_06.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree08",
-         "filename": "Forest_C_Tree_08.obj"
+         "filename": "Forest_C_Tree_08.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree11",
-         "filename": "Forest_C_Tree_11.obj"
+         "filename": "Forest_C_Tree_11.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree12",
-         "filename": "Forest_C_Tree_12.obj"
+         "filename": "Forest_C_Tree_12.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree14",
-         "filename": "Forest_C_Tree_14.obj"
+         "filename": "Forest_C_Tree_14.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "CTree15",
-         "filename": "Forest_C_Tree_15.obj"
+         "filename": "Forest_C_Tree_15.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "Rock01",
-         "filename": "Forest_B_Rock_01.obj"
+         "filename": "Forest_B_Rock_01.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "Rock03",
-         "filename": "Forest_B_Rock_03.obj"
+         "filename": "Forest_B_Rock_03.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "Rock04",
-         "filename": "Forest_B_Rock_04.obj"
+         "filename": "Forest_B_Rock_04.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "Rock05",
-         "filename": "Forest_B_Rock_05.obj"
+         "filename": "Forest_B_Rock_05.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "Rock07",
-         "filename": "Forest_B_Rock_07.obj"
+         "filename": "Forest_B_Rock_07.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "DeadTree02",
-         "filename": "Forest_B_DeadTree_02.obj"
+         "filename": "Forest_B_DeadTree_02.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "DeadTree03",
-         "filename": "Forest_B_DeadTree_03.obj"
+         "filename": "Forest_B_DeadTree_03.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       },
       {
          "name": "DeadTree05",
-         "filename": "Forest_B_DeadTree_05.obj"
+         "filename": "Forest_B_DeadTree_05.obj",
+         "manual_texture": "Forest_1x1_Green_DIFF.jpg"
       }
    ],
    "level-materials": [

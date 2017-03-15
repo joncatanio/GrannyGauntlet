@@ -26,6 +26,7 @@ Image::Image(std::string path) {
     std::string imgType = tokens.back();
     std::transform(imgType.begin(), imgType.end(), imgType.begin(), ::toupper);
 
+    stbi_set_flip_vertically_on_load(true);
     // load with or without alpha channel
     //TODO(nurgan) find out what formats besides PNG use an alpha channel
     if(imgType == "PNG"){

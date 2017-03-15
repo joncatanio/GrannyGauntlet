@@ -20,6 +20,7 @@ public:
 private:
    float gravity;
    float yVelocity;
+   bool untouched = true;
 
    /* Animation data */
    bool animated;

@@ -102,3 +102,22 @@ bool ViewFrustum::cull(std::shared_ptr<GameObject> obj) {
 
    return false;
 }
+
+bool ViewFrustum::cull(std::shared_ptr <ParticleSystem> obj) {
+	float radius = obj->getMaxRadius();
+	vec4 plane;
+    vec3 point = obj->getPosition();
+
+	for (unsigned int i = 0; i < planes.size(); ++i) {
+		plane = planes[i];
+
+		float dist = plane.x * point.x + plane.y * point.y + plane.z * point.z + plane.w;
+
+		if (dist < -radius){
+			return true;
+		}
+
+	}
+
+	return false;
+}

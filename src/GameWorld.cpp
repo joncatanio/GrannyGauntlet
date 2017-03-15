@@ -60,6 +60,14 @@ void GameWorld::addAreaLight(const std::shared_ptr<Light> newLight) {
 	areaLights.push_back(newLight);
 }
 
+void GameWorld::addParticleSystem(std::shared_ptr <ParticleSystem> particleSystem) {
+	//particleSystems.push_back(particleSystem);
+    particleSystemsToAdd_.push(particleSystem);
+}
+void GameWorld::rmParticleSystem(std::shared_ptr <ParticleSystem> particleSystem) {
+    particleSystemsToRemove_.push(particleSystem);
+}
+
 int GameWorld::getNumDynamicGameObjects() {
 	return dynamicGameObjects_.size();
 }
@@ -127,6 +135,16 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
 		obj->update(deltaTime);
 	}
 
+    Camera& camera = GameManager::instance().getCamera();
+    std::shared_ptr<MatrixStack> V = std::make_shared<MatrixStack>();
+	V->pushMatrix();
+	V->loadIdentity();
+	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
+    for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
+        ps->update(totalTime, deltaTime, V);
+    }
+
+
 	updateInternalGameObjectLists();
 	updateCount++;
 }
@@ -178,6 +196,14 @@ void GameWorld::drawGameObjects() {
 		   obj->draw(P, M, V);
       }
 	}
+
+    for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
+        if (!viewFrustum.cull(ps)) {
+            ps->draw(P, M, V);
+        }
+    }
+
+
 	renderCount++;
 
    #ifdef DEBUG
@@ -331,6 +357,11 @@ void GameWorld::updateInternalGameObjectLists() {
 		staticGameObjectsToAdd_.pop();
 	}
 
+    while (!particleSystemsToAdd_.empty()) {
+        particleSystems_.push_back(particleSystemsToAdd_.front());
+        particleSystemsToAdd_.pop();
+    }
+
    while (!dynamicGameObjectsToRemove_.empty()) {
       std::shared_ptr<GameObject> obj = dynamicGameObjectsToRemove_.front();
       dynamicGameObjects_.erase(std::remove(dynamicGameObjects_.begin(),
@@ -346,4 +377,12 @@ void GameWorld::updateInternalGameObjectLists() {
 
       staticGameObjectsToRemove_.pop();
    }
+
+    while (!particleSystemsToRemove_.empty()) {
+        std::shared_ptr<ParticleSystem> obj = particleSystemsToRemove_.front();
+        particleSystems_.erase(std::remove(particleSystems_.begin(),
+                                             particleSystems_.end(), obj), particleSystems_.end());
+
+        particleSystemsToRemove_.pop();
+    }
 }

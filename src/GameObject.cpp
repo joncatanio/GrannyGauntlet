@@ -27,6 +27,8 @@ GameObject::GameObject(GameObjectType objType,
    fracture(false),
 	orientAngle_(0),
 	yRotationAngle_(0),
+   maxForwardVel(12.0f),
+   maxBackwardVel(5.0f),
 	render_(render),
 	input_(input),
 	physics_(physics),
@@ -165,6 +167,9 @@ void GameObject::update(double deltaTime) {
     if (cookieDeliverable) {
         arrow_->update(deltaTime);
     }
+
+   // Currently only used for PLAYER types to update internal power state
+   updatePowerups(deltaTime);
 }
 
 void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
@@ -304,4 +309,18 @@ std::shared_ptr<std::vector<glm::vec3>> GameObject::getFragmentDirs() {
 
 std::shared_ptr<std::vector<glm::vec3>> GameObject::getFragmentPos() {
    return fragPos_;
+}
+
+void GameObject::initPowerup(std::string type, float time) {
+   if (type == "speed") {
+      speedPowerRemaining = time;
+      maxForwardVel = 18.0f;
+   }
+}
+
+void GameObject::updatePowerups(double deltaTime) {
+   speedPowerRemaining -= deltaTime;
+   if (speedPowerRemaining < 0) {
+      maxForwardVel = 12.0f;
+   }
 }

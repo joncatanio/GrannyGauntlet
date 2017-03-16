@@ -64,12 +64,12 @@ void PlayerInputComponent::pollGamepad() {
       // Determine driving mode and set velocity based on mode.
       if ((modeChangeAvailable && xComponent > 0) || inReverse) {
          inReverse = true;
-         holder_->velocity = magnitude * -5.0f; // Reverse
+         holder_->velocity = magnitude * -holder_->maxBackwardVel; // Reverse
 
          camera.calcCamAndPlayerOrient(dirGamepad, true);
       } else {
          inReverse = false;
-         holder_->velocity = magnitude * 12.0f; // Drive
+         holder_->velocity = magnitude * holder_->maxForwardVel; // Drive
 
          camera.calcCamAndPlayerOrient(dirGamepad, false);
       }

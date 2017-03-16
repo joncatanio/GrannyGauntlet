@@ -79,8 +79,11 @@ void ParticleSystem::update(float totalTime, float deltaTime, std::shared_ptr<Ma
     sort(particles.begin(), particles.end(), sorter);
 
 
-    GLfloat points[numberOfParticles_ * 3];
-    GLfloat lifes[numberOfParticles_];
+	size_t sizeOfPoints = numberOfParticles_ * 3 * sizeof(GLfloat);
+	GLfloat *points = (GLfloat *) malloc(sizeOfPoints);
+
+	size_t sizeOfLifes = numberOfParticles_ * sizeof(GLfloat);
+	GLfloat *lifes = (GLfloat *) malloc(sizeOfLifes);
 
     glm::vec3 pos;
     for (int i = 0; i < numberOfParticles_; i++) {
@@ -92,13 +95,15 @@ void ParticleSystem::update(float totalTime, float deltaTime, std::shared_ptr<Ma
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, pointsbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeOfPoints, NULL, GL_STREAM_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*numberOfParticles_*3, points);
     glBindBuffer(GL_ARRAY_BUFFER, lifebuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(lifes), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeOfLifes, NULL, GL_STREAM_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float)*numberOfParticles_, lifes);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+	free(points);
+	free(lifes);
 }
 
 void ParticleSystem::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {

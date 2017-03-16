@@ -24,8 +24,14 @@ private:
     bool animated = false;
     float animTime = 0.0;
     const float animDuration = 2.0;
-    glm::vec3 originalScale;
+    glm::vec3 originalPosition;
 
+    float velocity = 0.0;
+    float startVelocity = 20.0;
+    float gravity = -50.0;
+
+    int numberOfJumps;
+    int maxJumps = 2;
 };
 
 #endif

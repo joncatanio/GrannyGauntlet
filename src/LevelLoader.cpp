@@ -187,6 +187,11 @@ int LevelLoader::parseMaterials(json materials) {
             mat["specular"]["r"], mat["specular"]["g"], mat["specular"]["b"],
             mat["shininess"]
          };
+          if(mat["alpha"] == nullptr){
+              material->alpha = 1.0;
+          } else {
+              material->alpha = mat["alpha"];
+          }
 
          materialManager.addMaterial(mat["name"], material);
       }

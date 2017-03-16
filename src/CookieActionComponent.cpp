@@ -19,15 +19,15 @@ CookieActionComponent::CookieActionComponent() {
     MaterialManager& materialManager = MaterialManager::instance();
 
     AimRenderComponent* aimRenderComponent = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent1 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent2 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent3 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
     AimRenderComponent* aimRenderComponent4 = new AimRenderComponent(
-      shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
+      shapeManager.getShape("Arrow"), shaderManager.DefaultShader, materialManager.getMaterial("Brass"));
 
 
 
@@ -36,7 +36,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
-            glm::vec3(0.1),
+            glm::vec3(0.15),
             nullptr,
             nullptr,
             aimRenderComponent,
@@ -48,7 +48,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
-            glm::vec3(0.1),
+            glm::vec3(0.15),
             nullptr,
             nullptr,
             aimRenderComponent1,
@@ -60,7 +60,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
-            glm::vec3(0.1),
+            glm::vec3(0.15),
             nullptr,
             nullptr,
             aimRenderComponent2,
@@ -72,7 +72,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
-            glm::vec3(0.1),
+            glm::vec3(0.15),
             nullptr,
             nullptr,
             aimRenderComponent3,
@@ -84,7 +84,7 @@ CookieActionComponent::CookieActionComponent() {
             glm::vec3(0.0),
             glm::vec3(0.0),
             0.0,
-            glm::vec3(0.1),
+            glm::vec3(0.15),
             nullptr,
             nullptr,
             aimRenderComponent4,
@@ -174,33 +174,48 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     }
 
 
+
     glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 0.5f;
     gameObj->setPosition(aimTarget);
+    setAimRotation(gameObj, gameManager );
     if (chargeTime > 0.01 && chargeTime <= 0.3) {
         gameObj->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
     glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.0f;
     gameObj1->setPosition(aimTarget1);
+    setAimRotation(gameObj1, gameManager);
     if (chargeTime > 0.3 && chargeTime <= 0.6) {
         gameObj1->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
     glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 1.5f;
     gameObj2->setPosition(aimTarget2);
+    setAimRotation(gameObj2, gameManager);
     if (chargeTime > 0.6 && chargeTime <= 0.9) {
         gameObj2->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
     glm::vec3 aimTarget3 = holder_->getPosition() + throwDirection * 2.0f;
     gameObj3->setPosition(aimTarget3);
+    setAimRotation(gameObj3, gameManager);
     if (chargeTime > 0.9 && chargeTime <= 1.2) {
         gameObj3->changeMaterial(materialManager.getMaterial("Emerald"));
     }
 
     glm::vec3 aimTarget4 = holder_->getPosition() + throwDirection * 2.5f;
     gameObj4->setPosition(aimTarget4);
+    setAimRotation(gameObj4, gameManager);
     if (chargeTime > 1.2) {
         gameObj4->changeMaterial(materialManager.getMaterial("Emerald"));
     }
+
+}
+
+void CookieActionComponent::setAimRotation(std::shared_ptr <GameObject> obj, GameManager& gameManager) {
+    std::shared_ptr<GameObject> player = gameManager.getPlayer();
+    float playerRot = player->getYAxisRotation() - player->getOrientAngle() + yRot;
+
+    obj->setYAxisRotation(playerRot);
+    obj->addRotation(xRot, glm::vec3(1.0, 0.0, 0.0));
 }

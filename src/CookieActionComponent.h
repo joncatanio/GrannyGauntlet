@@ -39,6 +39,8 @@ private:
     float startVelocity = 20.0f;
     double previousCookieTime = 0.0;
 
+    void setAimRotation(std::shared_ptr<GameObject> obj, GameManager& gameManager);
+
 };
 
 #endif

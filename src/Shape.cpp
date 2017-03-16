@@ -535,6 +535,7 @@ void Shape::bindMtl(const std::shared_ptr<Program> prog, std::shared_ptr<Materia
         glUniform3f(prog->getUniform("MatDif"), material->rDif, material->gDif, material->bDif);
         glUniform3f(prog->getUniform("MatSpc"), material->rSpc, material->gSpc, material->bSpc);
         glUniform1f(prog->getUniform("MatShiny"), material->shininess);
+        glUniform1f(prog->getUniform("MatAlpha"), material->alpha);
     }
 
 }

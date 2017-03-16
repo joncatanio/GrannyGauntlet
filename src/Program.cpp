@@ -82,6 +82,7 @@ void Program::addDefaultAttributesAndUniforms() {
 	addUniform("MatDif");
 	addUniform("MatSpc");
 	addUniform("MatShiny");
+	addUniform("MatAlpha");
 
 	// Adds vertex position and normal attributes
 	addAttribute("vertPos");

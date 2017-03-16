@@ -15,6 +15,7 @@ typedef struct {
 	GLfloat rDif, gDif, bDif;
 	GLfloat rSpc, gSpc, bSpc;
 	GLfloat shininess;
+	GLfloat alpha;
 } Material;
 
 class MaterialManager {

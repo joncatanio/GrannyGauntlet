@@ -27,6 +27,8 @@ public:
 	float velocity;
 	MatrixTransform transform;
 	GameObjectType type;
+   float maxForwardVel;
+   float maxBackwardVel;
 
     // Properties for player moveable objects
     bool toggleMovement;
@@ -119,6 +121,9 @@ public:
     // TRY TO AVOID USING THIS IF POSSIBLE, SHOULD BE REMOVED AT SOME POINT, BB LOGIC ONLY IN PHYSICSCOMPONENT
     std::shared_ptr<BoundingBox> getBoundingBox();
 
+   // Initializes a new powerup that is held in the GameObject internal state
+   void initPowerup(std::string type, float time);
+
 private:
 
     // The current position of the object in world space
@@ -157,6 +162,9 @@ private:
     // The fractured objects current position.
     std::shared_ptr<std::vector<glm::vec3>> fragPos_;
 
+    // Power-up state and modifiers
+    double speedPowerRemaining;
+    void updatePowerups(double detlaTime);
 };
 
 #endif

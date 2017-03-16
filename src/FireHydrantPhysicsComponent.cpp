@@ -101,6 +101,9 @@ void FireHydrantPhysicsComponent::updatePhysics(float deltaTime) {
                untouched = false;
             }
 
+            // Initialize the power-up
+            objHit->initPowerup("speed", 3.0);
+
          } else if (objTypeHit == GameObjectType::STATIC_OBJECT ||
                     objTypeHit == GameObjectType::DYNAMIC_OBJECT) {
             std::shared_ptr<BoundingBox> objBB = objHit->getBoundingBox();

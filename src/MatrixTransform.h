@@ -23,6 +23,8 @@ public:
 
 	void setRotate(float angle, const glm::vec3& axis);
 
+   void setCarRot(float angle, const glm::vec3& axis);
+
    void addRotation(float angle, const glm::vec3& axis);
 private:
 
@@ -32,6 +34,8 @@ private:
 	glm::mat4 translate_;
 	glm::mat4 scale_;
 	glm::mat4 rotate_;
+
+   glm::mat4 carTiltRot_;
 
 	void updateTransform();
 };

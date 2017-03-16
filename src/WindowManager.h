@@ -81,6 +81,9 @@ private:
 
 	void updateFramebuffer();
 
+	//TODO(nurgan) better solution
+	bool mWasPressed = false;
+
 	// Initializes general boiler-plate GLFW code
 	int initializeGLFW();
 };

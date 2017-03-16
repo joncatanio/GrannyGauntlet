@@ -11,6 +11,7 @@
 
 // Manager headers
 #include "ResourceManager.h"
+#include "TextureManager.h"
 #include "ShaderManager.h"
 #include "ShapeManager.h"
 #include "MaterialManager.h"
@@ -54,6 +55,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
 
    if ((res = parseShapes(level["level-shapes"]))) {
       std::cerr << "Error parsing shapes." << std::endl;
+      return res;
+   }
+
+   if ((res = parseTextures(level["level-textures"]))) {
+      std::cerr << "Error parsing textures." << std::endl;
       return res;
    }
 
@@ -133,27 +139,51 @@ int LevelLoader::parseShapes(json shapes) {
    if (shapes != nullptr) {
       ShapeManager& shapeManager = ShapeManager::instance();
 
-
+       std::vector<std::string> empty;
       for (json shape : shapes) {
+          std::vector<std::string> manualTextures;
           if(shape["manual_texture"] == nullptr) {
               if (shapeManager.createShape(resourceManager, shape["name"],
-                                           shape["filename"])) {
+                                           shape["filename"], empty)) {
                   return 1;
               }
           } else {
+
+              for (std::string texName : shape["manual_texture"]) {
+                  manualTextures.push_back(texName);
+              }
               if (shapeManager.createShape(resourceManager, shape["name"],
-                                           shape["filename"], shape["manual_texture"])) {
+                                           shape["filename"], manualTextures)) {
                   return 1;
               }
+
           }
       }
 
-      if (shapeManager.createShape(resourceManager, "Arrow", "arrow.obj")) {
+
+      if (shapeManager.createShape(resourceManager, "Arrow", "arrow.obj", empty)) {
           return 1;
       }
    }
 
    return 0;
+}
+
+int LevelLoader::parseTextures(json textures) {
+   ResourceManager& resourceManager = ResourceManager::instance();
+
+   if (textures != nullptr) {
+      TextureManager &textureManager = TextureManager::instance();
+
+      for(json texture : textures) {
+         if (textureManager.createTexture(resourceManager, texture["name"], texture["filename"])) {
+            return 1;
+         }
+      }
+
+      return 0;
+
+   }
 }
 
 int LevelLoader::parseBillboards(json billboards) {

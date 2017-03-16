@@ -26,7 +26,7 @@ class Shape
 public:
 	Shape();
 	virtual ~Shape();
-	void loadMesh(const std::string &meshName, std::string manualTexture = "");
+	void loadMesh(const std::string &meshName, std::vector<std::string> manualTextures);
 	void calculateNormals(int i);
 	void init();
 	void resize();
@@ -63,8 +63,8 @@ private:
 
 	// Textures "manually" provided via level JSON
 	bool manualTexturePresent = false;
-	std::string manualTexturePath;
-	Texture* manualTex;
+	//std::string manualTextureName;
+    std::vector<std::string> manualTextureNames;
 
 	glm::vec3 min;
 	glm::vec3 max;

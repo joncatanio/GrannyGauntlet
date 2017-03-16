@@ -1,5 +1,7 @@
 #include "WindowManager.h"
 
+#include "TextureManager.h"
+
 WindowManager::~WindowManager() {
 	glfwDestroyWindow(window_);
 	glfwTerminate();
@@ -38,6 +40,7 @@ void WindowManager::update() {
 
 void WindowManager::checkForUserChanges() {
     ShaderManager& shaderManager = ShaderManager::instance();
+    TextureManager& textureManager = TextureManager::instance();
 
     // Check for shader setting changes
     if (isKeyPressed(GLFW_KEY_P)) {
@@ -55,6 +58,14 @@ void WindowManager::checkForUserChanges() {
         shaderManager.setDefaultShader(shaderManager.ToonShader);
 
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
+    }
+
+    if (isKeyPressed(GLFW_KEY_M) && !mWasPressed) {
+        textureManager.increaseTextureToggle();
+        mWasPressed = true;
+    }
+    if (!isKeyPressed(GLFW_KEY_M)) {
+        mWasPressed = false;
     }
 
     if (isKeyPressed(GLFW_KEY_ESCAPE)) {

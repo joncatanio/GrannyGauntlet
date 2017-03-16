@@ -21,6 +21,7 @@ private:
 
    int parseShaders(nlohmann::json shaders);
    int parseShapes(nlohmann::json shapes);
+    int parseTextures(nlohmann::json textures);
    int parseBillboards(nlohmann::json billboards);
    int parseMaterials(nlohmann::json materials);
    int parseCharacters(GameWorld &world, std::shared_ptr<GameObject> &player,

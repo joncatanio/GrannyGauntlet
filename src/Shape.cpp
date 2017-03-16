@@ -4,6 +4,7 @@
 #include "GLSL.h"
 #include "Program.h"
 #include "GameObject.h"
+#include "TextureManager.h"
 
 #include <glm/gtx/rotate_vector.hpp>
 
@@ -23,7 +24,7 @@ Shape::~Shape()
 {
 }
 
-void Shape::loadMesh(const string &meshName, std::string manualTexture) {
+void Shape::loadMesh(const string &meshName, std::vector<std::string> manualTextures) {
 	// Load geometry
 	// Some obj files contain material information.
 	// We'll ignore them for this assignment.
@@ -86,11 +87,9 @@ void Shape::loadMesh(const string &meshName, std::string manualTexture) {
                 }
             }
 
-            // check if a manual texture is given and load it
-            if(manualTexture != "") {
+            if(manualTextures.size() > 0) {
                 manualTexturePresent = true;
-                manualTex = new Texture();
-                manualTex->loadTexture(mtlBase + manualTexture, manualTexture);
+                manualTextureNames = manualTextures;
             }
 
         }
@@ -307,8 +306,17 @@ void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defau
 
     glBindVertexArray(vaoID);
 
+    TextureManager textureManager = TextureManager::instance();
+    int t = textureManager.getTextureToggle();
     if(manualTexturePresent) {
-        manualTex->bind(0, prog);
+
+        if(manualTextureNames.size() == 1) {
+            t = 0;
+        } else {
+            t = t % (manualTextureNames.size()) ;
+        }
+
+        TextureManager::instance().getTexture(manualTextureNames[t])->bind(0,prog);
         glUniform1i(prog->getUniform("textureActive"), 1);
     }
 
@@ -369,7 +377,7 @@ void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defau
     }
     // Disable and unbind
     if(manualTexturePresent) {
-        manualTex->unbind();
+        TextureManager::instance().getTexture(manualTextureNames[t])->unbind();
     }
 
     if (h_tex != -1) {
@@ -419,8 +427,17 @@ void Shape::fracture(const std::shared_ptr<Program> prog, std::shared_ptr<Materi
 
    glBindVertexArray(vaoID);
 
+    TextureManager textureManager = TextureManager::instance();
+    int t = textureManager.getTextureToggle();
     if(manualTexturePresent) {
-        manualTex->bind(0, prog);
+
+        if(manualTextureNames.size() == 1) {
+            t = 0;
+        } else {
+            t = t % (manualTextureNames.size()) ;
+        }
+
+        TextureManager::instance().getTexture(manualTextureNames[t])->bind(0,prog);
         glUniform1i(prog->getUniform("textureActive"), 1);
     }
 
@@ -497,7 +514,7 @@ void Shape::fracture(const std::shared_ptr<Program> prog, std::shared_ptr<Materi
    }
     // Disable and unbind
     if(manualTexturePresent) {
-        manualTex->unbind();
+        TextureManager::instance().getTexture(manualTextureNames[t])->unbind();
     }
 
    if (h_tex != -1) {

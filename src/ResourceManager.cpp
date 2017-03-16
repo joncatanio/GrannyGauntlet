@@ -19,21 +19,10 @@ std::shared_ptr<std::string> ResourceManager::loadShader(const std::string& shad
 
 	return shaderSource;
 }
-
-std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename) {
-   std::shared_ptr<Shape> shape = std::make_shared<Shape>();
-
-   shape->loadMesh(resourceDirectory + filename);
-   shape->resize();
-   shape->init();
-
-   return shape;
-}
-
-std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename, const std::string manualTexture) {
+std::shared_ptr<Shape> ResourceManager::loadShape(const std::string filename, std::vector<std::string> manualTextures) {
 	std::shared_ptr<Shape> shape = std::make_shared<Shape>();
 
-	shape->loadMesh(resourceDirectory + filename, manualTexture);
+	shape->loadMesh(resourceDirectory + filename, manualTextures);
 	shape->resize();
 	shape->init();
 

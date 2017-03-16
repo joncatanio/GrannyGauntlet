@@ -6,7 +6,7 @@ OctreeNode::OctreeNode() {
 
 OctreeNode::OctreeNode(OctreeNode* parent,  glm::vec3& min, glm::vec3& max) {
    parent_ = parent;
-   enclosingRegion_ = BoundingBox(min, max);
+   enclosingRegion_ = std::make_shared<BoundingBox>(min, max);
 }
 
 OctreeNode::~OctreeNode() {
@@ -31,13 +31,14 @@ void OctreeNode::createEnclosingRegionForRoot() {
          min.y = objMin.y < min.y ? objMin.y : min.y;
          min.z = objMin.z < min.z ? objMin.z : min.z;
 
-         max.x = objMax.x < max.x ? objMax.x : max.x;
-         max.y = objMax.y < max.y ? objMax.y : max.y;
-         max.z = objMax.z < max.z ? objMax.z : max.z;
+         // Small heuristic to better match GG world construction (no objects that are in upper 4 octants exclusively by default)
+         max.x = objMax.x + (objMax.x * 4) > max.x ? objMax.x + (objMax.x * 4) : max.x;
+         max.y = objMax.y + (objMax.y * 4) > max.y ? objMax.y + (objMax.y * 4) : max.y;
+         max.z = objMax.z + (objMax.z * 4) > max.z ? objMax.z + (objMax.z * 4) : max.z;
       }
    }
 
-   enclosingRegion_ = BoundingBox(min, max);
+   enclosingRegion_ = std::make_shared<BoundingBox>(min, max);
 }
 
 bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
@@ -49,18 +50,16 @@ bool OctreeNode::contains(const std::shared_ptr<GameObject> obj) {
    }
 
    // Make sure each point of the object's bounding box is within the node's enclosing region
-   for (int i = 0; i < 8; ++i) {
-      if (enclosingRegion_.min_.x >= objBoundBox->boxPoints[i].x 
-       && enclosingRegion_.min_.y >= objBoundBox->boxPoints[i].y
-       && enclosingRegion_.min_.z >= objBoundBox->boxPoints[i].z
-       && enclosingRegion_.max_.x <= objBoundBox->boxPoints[i].x
-       && enclosingRegion_.max_.y <= objBoundBox->boxPoints[i].y
-       && enclosingRegion_.max_.z <= objBoundBox->boxPoints[i].z) {
-         return false;
-      }
+   if (enclosingRegion_->min_.x <= objBoundBox->min_.x
+	   && enclosingRegion_->min_.y <= objBoundBox->min_.y
+	   && enclosingRegion_->min_.z <= objBoundBox->min_.z
+	   && enclosingRegion_->max_.x >= objBoundBox->max_.x
+	   && enclosingRegion_->max_.y >= objBoundBox->max_.y
+	   && enclosingRegion_->max_.z >= objBoundBox->max_.z) {
+      return true;
    }
 
-   return true;
+   return false;
 }
 
 void OctreeNode::buildTree() {
@@ -83,12 +82,11 @@ std::vector<std::shared_ptr<GameObject>> OctreeNode::checkIntersection(std::shar
 
    // Check for a child that contains the object and recursively call it's |checkIntersection| method
    for (OctreeNode& child : children_) {
-      if (child.contains(objToCheck)) {
+	  if (objToCheck->getBoundingBox()->checkIntersection(child.enclosingRegion_)) {
          std::vector<std::shared_ptr<GameObject>> childHitObjs = child.checkIntersection(objToCheck);
          hitObjs.insert(hitObjs.end(), 
           std::make_move_iterator(childHitObjs.begin()),
           std::make_move_iterator(childHitObjs.end()));
-         break;
       }
    }
 
@@ -101,10 +99,36 @@ std::vector<std::shared_ptr<GameObject>> OctreeNode::checkIntersection(std::shar
 
    return hitObjs;
 }
+
+void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P,
+	std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
+
+	// Check for a child that contains the object and recursively call it's |checkIntersection| method
+	for (OctreeNode& child : children_) {
+		if (child.enclosingRegion_ != nullptr) {
+			if (!viewFrustum.cull(child.enclosingRegion_)) {
+				child.cullAndDrawObjs(viewFrustum, P, M, V);
+			}
+		}
+	}
+
+	// Check all the objects belonging to this node (since the object must be contained within)
+	for (std::shared_ptr<GameObject> objInTree : objsEnclosed_) {
+		std::shared_ptr<BoundingBox> boundBox = objInTree->getBoundingBox();
+		if (boundBox != nullptr) {
+			if (!viewFrustum.cull(boundBox)) {
+				objInTree->draw(P, M, V);
+			}
+		}
+		else {
+			objInTree->draw(P, M, V);
+		}
+	}
+}
    
 void OctreeNode::buildTreeNode() {
-   glm::vec3& regionMin = enclosingRegion_.min_;
-   glm::vec3& regionMax = enclosingRegion_.max_;
+   glm::vec3& regionMin = enclosingRegion_->min_;
+   glm::vec3& regionMax = enclosingRegion_->max_;
 
    // Calculate the center of the current region
    glm::vec3 regionDim(regionMax - regionMin);
@@ -112,7 +136,7 @@ void OctreeNode::buildTreeNode() {
    glm::vec3 centerOfRegion(regionMin + halfRegionDim);
 
    // If region is a minimum  size, stop dividing and put everything left in here
-   if (std::abs(regionDim.x) <= 1.0f && std::abs(regionDim.y) <= 1.0f && std::abs(regionDim.z) < 1.0f) {
+   if (std::abs(regionDim.x) <= 1.0f && std::abs(regionDim.y) <= 1.0f && std::abs(regionDim.z) <= 1.0f) {
       for (std::shared_ptr<GameObject> obj : objsNotInTree_) {
          objsEnclosed_.push_back(obj);
       }
@@ -125,7 +149,7 @@ void OctreeNode::buildTreeNode() {
    glm::vec3 childMax;
 
    // Build each octant child of the current node
-   childMin = enclosingRegion_.min_;
+   childMin = regionMin;
    childMax = centerOfRegion;
    children_.emplace_back(this, childMin, childMax);
 

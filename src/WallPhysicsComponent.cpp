@@ -27,19 +27,29 @@ void WallPhysicsComponent::updatePhysics(float deltaTime) {
 
 void WallPhysicsComponent::startDeliveryAnimation() {
     animated = true;
-    originalScale = holder_->getScale();
+    originalPosition = holder_->getPosition();
+    velocity = startVelocity;
+    numberOfJumps = 0;
 }
 
 void WallPhysicsComponent::updateAnimation(float deltaTime) {
-    animTime += deltaTime;
-    if(animTime >= 2.0) {
-        holder_->setScale(originalScale);
-        animated = false;
-    } else {
-        float animSin = fabs(sin(animTime * M_PI));
-        float xzScale = 1.0 - animSin / 2.0;
-        float yScale = 1.0 + animSin;
-        glm::vec3 animScale = glm::vec3(originalScale.x * xzScale, originalScale.y * yScale, originalScale.z * xzScale);
-        holder_->setScale(animScale);
+
+    glm::vec3 currentPosition = holder_->getPosition();
+
+    if (currentPosition.y < originalPosition.y - 0.00001) {
+        numberOfJumps++;
+        holder_->setPosition(originalPosition);
+        velocity = startVelocity;
+        if (numberOfJumps == maxJumps) {
+            animated = false;
+            return;
+        }
     }
+
+    glm::vec3 newPosition = glm::vec3(originalPosition.x, holder_->getPosition().y + deltaTime * velocity,
+                                          originalPosition.z);
+
+    holder_->setPosition(newPosition);
+    velocity += deltaTime * gravity;
+
 }

@@ -26,7 +26,7 @@ glm::mat4& MatrixTransform::getTransform() {
 }
 
 glm::mat4 MatrixTransform::getRotate() {
-   return rotate_ * carTiltRot_;
+   return carTiltRot_ * rotate_;
 }
 
 void MatrixTransform::setTranslation(glm::vec3& offset) {
@@ -61,5 +61,5 @@ void MatrixTransform::addRotation(float angle, const glm::vec3& axis) {
 
 void MatrixTransform::updateTransform() {
    boundingBoxTransform_ = translate_ * scale_;
-   transform_ = translate_ * rotate_ * carTiltRot_ * scale_;
+   transform_ = translate_ * carTiltRot_ * rotate_ * scale_;
 }

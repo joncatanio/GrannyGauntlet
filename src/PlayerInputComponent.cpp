@@ -28,6 +28,7 @@ void PlayerInputComponent::pollGamepad() {
    Camera& camera = gameManager.getCamera();
    int count;
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+   float tiltAngle = 0.0; // Player car tilt
 
    /* For PS4 and Xbox One controllers the axes count will be 6.
     * Indices [0, 1] refer to the left joysticks x and y axes respectively.
@@ -72,8 +73,18 @@ void PlayerInputComponent::pollGamepad() {
          holder_->velocity = magnitude * holder_->maxForwardVel; // Drive
 
          camera.calcCamAndPlayerOrient(dirGamepad, false);
+
+         // Tilt car and play screech sound
+         if (dirGamepad.x > -0.30 && dirGamepad.z > 0) {
+            // Lift right wheels
+            tiltAngle = dirGamepad.x + 0.30;
+         } else if (dirGamepad.x > -0.30 && dirGamepad.z < 0) {
+            // Lift left wheels
+            tiltAngle = -(dirGamepad.x + 0.30);
+         }
       }
    }
+   holder_->setCarRot(tiltAngle);
 }
 
 void PlayerInputComponent::pollKeyboard() {

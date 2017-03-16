@@ -61,7 +61,6 @@ void GameWorld::addAreaLight(const std::shared_ptr<Light> newLight) {
 }
 
 void GameWorld::addParticleSystem(std::shared_ptr <ParticleSystem> particleSystem) {
-	//particleSystems.push_back(particleSystem);
     particleSystemsToAdd_.push(particleSystem);
 }
 void GameWorld::rmParticleSystem(std::shared_ptr <ParticleSystem> particleSystem) {
@@ -203,6 +202,7 @@ void GameWorld::drawGameObjects() {
 	// Draw static objects
 	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
 
+	// Draw particles
     for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
         if (!viewFrustum.cull(ps)) {
             ps->draw(P, M, V);

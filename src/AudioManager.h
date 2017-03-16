@@ -55,6 +55,9 @@ private:
    // The channel of the current soundtrack song.
    FMOD::Channel* stChannel_;
 
+   // Channel of current soundeffect.
+   FMOD::Channel* eChannel_;
+
    // A map of all sound effects, these are gathered from the JSON level.
    std::unordered_map<std::string, FMOD::Sound*> soundeffects_;
 

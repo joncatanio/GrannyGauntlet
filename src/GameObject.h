@@ -74,6 +74,8 @@ public:
 
     void addRotation(float angle, const glm::vec3& axis);
 
+    void setCarRot(float angle);
+
     void changeMaterial(std::shared_ptr<Material> newMaterial);
 
     RenderComponent* getRenderComponent();

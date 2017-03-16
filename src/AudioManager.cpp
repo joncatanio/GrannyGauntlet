@@ -7,7 +7,8 @@ AudioManager& AudioManager::instance() {
 
 AudioManager::AudioManager() :
    system_(NULL),
-   stChannel_(NULL) {
+   stChannel_(NULL),
+   eChannel_(NULL) {
    FMOD_RESULT result;
    unsigned int version;
    int numDrivers;
@@ -135,7 +136,17 @@ void AudioManager::addEffect(std::string name, std::string filename) {
 void AudioManager::playEffect(std::string effectName) {
    FMOD_RESULT result;
    FMOD::Sound* sound = soundeffects_.at(effectName);
+   bool isPlaying = false;
 
-   result = system_->playSound(sound, 0, false, 0);
-   FMODErrorCheck(result);
+   if (eChannel_) {
+      result = eChannel_->isPlaying(&isPlaying);
+      if (result != FMOD_OK && result != FMOD_ERR_INVALID_HANDLE) {
+         FMODErrorCheck(result);
+      }
+   }
+
+   if (!isPlaying) {
+      result = system_->playSound(sound, 0, false, &eChannel_);
+      FMODErrorCheck(result);
+   }
 }

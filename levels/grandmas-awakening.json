@@ -589,6 +589,10 @@
       {
          "name": "Boing",
          "filename": "boing.mp3"
+      },
+      {
+         "name": "Tire Screech",
+         "filename": "tirescreech.mp3"
       }
    ],
    "static-objects": [

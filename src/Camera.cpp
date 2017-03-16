@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "GameObject.h"
+#include "AudioManager.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 // Ninety degrees in radians
@@ -123,10 +124,26 @@ void Camera::update(float deltaTime) {
    glm::vec3 springAccel = (-springConstant * displacement) -
       (dampingConstant * cameraVelocity);
 
+   // Rotate the car on sharp turns
+   if (glm::length(displacement) >= 5.0) {
+      AudioManager& audioManager = AudioManager::instance();
+      audioManager.playEffect("Tire Screech");
+
+      player->setCarRot(M_PI / 3.0);
+   } else {
+      player->setCarRot(0.0);
+   }
+
    cameraVelocity += springAccel * deltaTime;
    setEye(Eye + (cameraVelocity * deltaTime));
    
    if (Eye.y < 1) {
       setEye(glm::vec3(Eye.x, 1, Eye.z));
    }
+
+   std::cout << "Player Dir - x: " << player->direction.x << " y: " << player->direction.y << " z: " << player->direction.z << std::endl;
+   std::cout << "Displacement - " << glm::length(displacement) << std::endl;
+   std::cout << "Spring Accel - x: " << springAccel.x << " y: " << springAccel.y << " z: " << springAccel.z << std::endl;
+   std::cout << "Camera Vel - x: " << cameraVelocity.x << " y: " << cameraVelocity.y << " z: " << cameraVelocity.z << std::endl;
+   std::cout << "Eye - x: " << Eye.x << " y: " << Eye.y << " z: " << Eye.z << std::endl;
 }

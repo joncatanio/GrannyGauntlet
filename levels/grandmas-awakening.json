@@ -584,8 +584,8 @@
          "action-component": {
             "name": "CookieActionComponent"
          },
-         "yAxis-rotation-deg": -45.0,
-         "orient-angle-deg": -45.0,
+         "yAxis-rotation-deg": 180.0,
+         "orient-angle-deg": 180.0,
          "deliverable": false
       }
    ],

@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 #include "WindowManager.h"
+#include "AudioManager.h"
 
 PlayerInputComponent::PlayerInputComponent() :
    inReverse(false) {
@@ -25,6 +26,7 @@ void PlayerInputComponent::pollInput() {
 
 void PlayerInputComponent::pollGamepad() {
    GameManager& gameManager = GameManager::instance();
+   AudioManager& audioManager = AudioManager::instance();
    Camera& camera = gameManager.getCamera();
    int count;
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
@@ -81,6 +83,13 @@ void PlayerInputComponent::pollGamepad() {
          } else if (dirGamepad.x > -0.30 && dirGamepad.z < 0) {
             // Lift left wheels
             tiltAngle = -(dirGamepad.x + 0.30);
+         }
+
+         /* TODO (noj) all sound effects are on the same channel so if the user
+            hits a hydrant and screeches at the same time it will not play both. */
+         // Play sound if tilted enough
+         if (dirGamepad.x > -0.05 && magnitude > 1.0) {
+            audioManager.playEffect("Tire Screech");
          }
       }
    }

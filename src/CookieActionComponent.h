@@ -38,6 +38,8 @@ private:
     float yRot = 0.0;
     float startVelocity = 20.0f;
     double previousCookieTime = 0.0;
+    glm::vec3 smallScale = glm::vec3(0.15);
+    glm::vec3 largeScale = glm::vec3(0.2);
 
     void setAimRotation(std::shared_ptr<GameObject> obj, GameManager& gameManager);
 

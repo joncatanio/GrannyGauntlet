@@ -93,7 +93,8 @@
       },
       {
          "name": "Sphere",
-         "filename": "sphere.obj"
+         "filename": "sphere2.obj",
+         "manual_texture": "cookie_texture.jpg"
       },
       {
          "name": "Lowpolycar",

@@ -145,7 +145,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
 			ShaderManager& shaderManager = ShaderManager::instance();
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
             BunnyRenderComponent *renderComp = new BunnyRenderComponent(
-               shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("Bronze"));
+               shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("white"));
 
             std::shared_ptr<GameObject> cookieObj = std::make_shared<GameObject>(
                     GameObjectType::DYNAMIC_OBJECT,

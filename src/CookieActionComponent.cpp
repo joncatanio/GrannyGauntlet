@@ -170,9 +170,13 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
             gameObj2->changeMaterial(materialManager.getMaterial("Brass"));
             gameObj3->changeMaterial(materialManager.getMaterial("Brass"));
             gameObj4->changeMaterial(materialManager.getMaterial("Brass"));
+            gameObj->setScale(smallScale);
+            gameObj1->setScale(smallScale);
+            gameObj2->setScale(smallScale);
+            gameObj3->setScale(smallScale);
+            gameObj4->setScale(smallScale);
         }
     }
-
 
 
     glm::vec3 aimTarget = holder_->getPosition() + throwDirection * 0.5f;
@@ -180,6 +184,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     setAimRotation(gameObj, gameManager );
     if (chargeTime > 0.01 && chargeTime <= 0.3) {
         gameObj->changeMaterial(materialManager.getMaterial("Emerald"));
+        gameObj->setScale(largeScale);
     }
 
     glm::vec3 aimTarget1 = holder_->getPosition() + throwDirection * 1.0f;
@@ -187,6 +192,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     setAimRotation(gameObj1, gameManager);
     if (chargeTime > 0.3 && chargeTime <= 0.6) {
         gameObj1->changeMaterial(materialManager.getMaterial("Emerald"));
+        gameObj1->setScale(largeScale);
     }
 
     glm::vec3 aimTarget2 = holder_->getPosition() + throwDirection * 1.5f;
@@ -194,6 +200,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     setAimRotation(gameObj2, gameManager);
     if (chargeTime > 0.6 && chargeTime <= 0.9) {
         gameObj2->changeMaterial(materialManager.getMaterial("Emerald"));
+        gameObj2->setScale(largeScale);
     }
 
     glm::vec3 aimTarget3 = holder_->getPosition() + throwDirection * 2.0f;
@@ -201,6 +208,8 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     setAimRotation(gameObj3, gameManager);
     if (chargeTime > 0.9 && chargeTime <= 1.2) {
         gameObj3->changeMaterial(materialManager.getMaterial("Emerald"));
+        gameObj3->setScale(largeScale);
+
     }
 
     glm::vec3 aimTarget4 = holder_->getPosition() + throwDirection * 2.5f;
@@ -208,6 +217,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     setAimRotation(gameObj4, gameManager);
     if (chargeTime > 1.2) {
         gameObj4->changeMaterial(materialManager.getMaterial("Emerald"));
+        gameObj4->setScale(largeScale);
     }
 
 }
@@ -217,5 +227,5 @@ void CookieActionComponent::setAimRotation(std::shared_ptr <GameObject> obj, Gam
     float playerRot = player->getYAxisRotation() - player->getOrientAngle() + yRot;
 
     obj->setYAxisRotation(playerRot);
-    obj->addRotation(xRot, glm::vec3(1.0, 0.0, 0.0));
+    obj->addRotation(xRot, glm::vec3(0.0, 0.0, -1.0));
 }

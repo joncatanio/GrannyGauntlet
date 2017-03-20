@@ -1,9 +1,12 @@
 #include "WindowManager.h"
+#include "imgui.h"
+#include "imgui_impl_glfw_gl3.h"
 
 #include "TextureManager.h"
 
 WindowManager::~WindowManager() {
 	glfwDestroyWindow(window_);
+   ImGui_ImplGlfwGL3_Shutdown();
 	glfwTerminate();
 }
 
@@ -36,6 +39,9 @@ void WindowManager::update() {
 	aspect_ = getAspectRatio();
 
     checkForUserChanges();
+
+   ImGui_ImplGlfwGL3_NewFrame();
+   ImGui::Text("Hello, world");
 }
 
 void WindowManager::checkForUserChanges() {
@@ -75,6 +81,7 @@ void WindowManager::checkForUserChanges() {
 }
 
 void WindowManager::swapBuffers() {
+   ImGui::Render();
 	glfwSwapBuffers(window_);
 }
 
@@ -175,6 +182,8 @@ int WindowManager::initializeGLFW() {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return -1;
     }
+
+    ImGui_ImplGlfwGL3_Init(window_, true);
 
     // Weird bootstrap of glGetError
     glGetError();

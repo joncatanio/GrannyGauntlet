@@ -40,6 +40,11 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     }
 
     //TODO(nurgan) make the cookie "spin" when it is in the air
+    if(animated){
+        animRotAxis = glm::cross(holder_->direction, glm::vec3(0, -1, 0));
+        updateAnimation(deltaTime);
+    }
+
 
     // If we hit anything, stop "forward"
     std::vector<std::shared_ptr<GameObject>> objsHit = world.checkCollision(holder_);
@@ -131,4 +136,12 @@ float CookiePhysicsComponent::distanceTraveled() {
     }
 
     return distance;
+}
+
+void CookiePhysicsComponent::updateAnimation(float deltaTime) {
+    if (holder_->velocity == 0.0f) {
+        animated = false;
+    } else {
+        holder_->addRotation(deltaTime * animSpeed, animRotAxis);
+    }
 }

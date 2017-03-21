@@ -4,6 +4,7 @@
 #include "ShapeManager.h"
 #include "MaterialManager.h"
 #include "AimRenderComponent.h"
+#include "CookieRenderComponent.h"
 #include <glm/gtx/rotate_vector.hpp>
 
 /*
@@ -144,7 +145,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
         if (totalTime >= previousCookieTime + 0.5) {
 			ShaderManager& shaderManager = ShaderManager::instance();
             CookiePhysicsComponent *cookiePhysicsComp = new CookiePhysicsComponent();
-            BunnyRenderComponent *renderComp = new BunnyRenderComponent(
+            CookieRenderComponent *renderComp = new CookieRenderComponent(
                shapeManager.getShape("Sphere"), shaderManager.DefaultShader, materialManager.getMaterial("white"));
 
             std::shared_ptr<GameObject> cookieObj = std::make_shared<GameObject>(

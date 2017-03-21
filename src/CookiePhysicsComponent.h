@@ -23,6 +23,8 @@ public:
 
     void updatePhysics(float deltaTime);
 
+    void updateAnimation(float deltaTime);
+
     void startDeliveryAnimation() {};
 
 private:
@@ -32,6 +34,11 @@ private:
     CookieState cookieState;
     float calculateScore();
     float distanceTraveled();
+
+    /* Animation data */
+    bool animated = true;
+    glm::vec3 animRotAxis;
+    const float animSpeed = 5.0;
 };
 
 #endif

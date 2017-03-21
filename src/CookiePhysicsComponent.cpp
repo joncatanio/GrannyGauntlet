@@ -39,7 +39,6 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
         holder_->velocity = 0.0f;
     }
 
-    //TODO(nurgan) make the cookie "spin" when it is in the air
     if(animated){
         animRotAxis = glm::cross(holder_->direction, glm::vec3(0, -1, 0));
         updateAnimation(deltaTime);

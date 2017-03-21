@@ -17,5 +17,5 @@ void CookieRenderComponent::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr
 
 void CookieRenderComponent::renderShadow(std::shared_ptr <MatrixStack> M) {
 	ShaderManager& shaderManager = ShaderManager::instance();
-	shaderManager.renderShadowPass(holder_, shape_, M);
+	shaderManager.renderShadowPass(holder_, shape_, M, true);
 }

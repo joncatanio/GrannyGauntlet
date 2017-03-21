@@ -113,7 +113,7 @@ public:
 
 	// Render the given object to the shadowmap
 	void renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
-						  std::shared_ptr<MatrixStack> M);
+						  std::shared_ptr<MatrixStack> M, bool rotateBeforeScale = false);
 
 	// Returns an actual LightType enum value of the given string
 	static LightType stringToLightType(std::string type);

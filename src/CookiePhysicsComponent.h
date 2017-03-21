@@ -38,7 +38,7 @@ private:
     /* Animation data */
     bool animated = true;
     glm::vec3 animRotAxis;
-    const float animSpeed = 5.0;
+    const float animSpeed = 10.0;
 };
 
 #endif

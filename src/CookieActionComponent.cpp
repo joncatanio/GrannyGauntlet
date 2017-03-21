@@ -111,7 +111,7 @@ void CookieActionComponent::checkAndPerformAction(double deltaTime, double total
     GameManager& gameManager = GameManager::instance();
     ShapeManager& shapeManager = ShapeManager::instance();
     MaterialManager& materialManager = MaterialManager::instance();
-    glm::vec3 initialScale(0.5f, 0.1f, 0.5f);
+    glm::vec3 initialScale(0.2f, 0.025f, 0.2f);
 
     aimInputComponent->pollInput();
     double timeDown = aimInputComponent->pressTime;

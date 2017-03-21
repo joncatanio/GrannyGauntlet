@@ -81,6 +81,10 @@ private:
 
 	void updateFramebuffer();
 
+   // GUI functions and variables
+   void updateGui();
+   bool score_window;
+
 	//TODO(nurgan) better solution
 	bool mWasPressed = false;
 

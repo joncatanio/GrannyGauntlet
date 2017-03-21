@@ -84,3 +84,6 @@ void GameManager::showScore() {
 	std::cout << "SCORE " << score_ << std::endl;
 }
 
+float GameManager::getScore() {
+   return score_;
+}

@@ -1,4 +1,5 @@
 #include "WindowManager.h"
+#include "GameManager.h"
 #include "imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 
@@ -40,8 +41,22 @@ void WindowManager::update() {
 
     checkForUserChanges();
 
+   updateGui();
+}
+
+void WindowManager::updateGui() {
    ImGui_ImplGlfwGL3_NewFrame();
-   ImGui::Text("Hello, world");
+
+   if (score_window) {
+      ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
+         ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+         ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
+
+      ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiSetCond_FirstUseEver);
+      ImGui::Begin("score_window", &score_window, flags);
+      ImGui::Text("Score: %d", static_cast<int>(GameManager::instance().getScore()));
+      ImGui::End();
+   }
 }
 
 void WindowManager::checkForUserChanges() {
@@ -127,7 +142,8 @@ void WindowManager::updateCursorPosition(float newX, float newY) {
 
 WindowManager::WindowManager()
 	: currentCursorX_(0),
-	currentCursorY_(0) {
+	currentCursorY_(0),
+   score_window(true) {
 
 }
 
@@ -183,7 +199,10 @@ int WindowManager::initializeGLFW() {
         return -1;
     }
 
+    // ImGui Initiliazation
     ImGui_ImplGlfwGL3_Init(window_, true);
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->AddFontFromFileTTF("../resources/fonts/Roboto-Medium.ttf", 35.0f);
 
     // Weird bootstrap of glGetError
     glGetError();

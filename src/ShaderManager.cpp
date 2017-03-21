@@ -158,7 +158,7 @@ void ShaderManager::unbindShader() {
 }
 
 void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const std::string& shaderName, const std::shared_ptr<Shape> shape,
- const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
+ const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M, bool rotateBeforeScale) {
 	if (objToRender != NULL) {
 
 		if(material->alpha != 1.0) {
@@ -214,10 +214,16 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
          M->loadIdentity();
 
          M->translate(objToRender->getPosition());
-         M->scale(objToRender->getScale());
+		  if(!rotateBeforeScale) {
+			  M->scale(objToRender->getScale());
+		  }
 
          glm::mat4 rotation = objToRender->transform.getRotate();
          M->rotateMat4(rotation);
+
+		  if(rotateBeforeScale) {
+			  M->scale(objToRender->getScale());
+		  }
 
          glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 
@@ -296,7 +302,7 @@ void ShaderManager::renderBillboard(std::shared_ptr<GameObject> objToRender, con
 }
 
 void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, const std::shared_ptr<Shape> shape,
-					  std::shared_ptr<MatrixStack> M){
+					  std::shared_ptr<MatrixStack> M, bool rotateBeforeScale){
 	if (objToRender != NULL) {
 
 		const std::shared_ptr<Program> shaderProgram = bindShader(ShaderManager::shadowPassShaderName);
@@ -320,9 +326,14 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		M->loadIdentity();
 
 		M->translate(objToRender->getPosition());
-		M->scale(objToRender->getScale());
+        if(!rotateBeforeScale) {
+            M->scale(objToRender->getScale());
+        }
         glm::mat4 rotation = objToRender->transform.getRotate();
         M->rotateMat4(rotation);
+        if(rotateBeforeScale) {
+            M->scale(objToRender->getScale());
+        }
 
 		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
 

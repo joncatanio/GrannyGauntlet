@@ -249,11 +249,11 @@ void GameWorld::drawVFCViewport() {
    glViewport(0, 0, (windowManager.getViewHeight() / 3.0),
       windowManager.getViewHeight() / 3.0);
    P->pushMatrix();
-   P->ortho(-15.0f, 15.0f, -15.0f, 15.0f, 2.1f, 100.0f);
+   P->ortho(-50.0f, 50.0f, -50.0f, 50.0f, 2.1f, 101.0f);
    V->pushMatrix();
    V->loadIdentity();
-   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 55.0, 0), camera.getNoSpringEye(),
-      camera.getLookAt() - camera.getNoSpringEye());
+   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 100.0, 0), camera.getNoSpringEye(),
+      glm::vec3(-1, 0, 0));
 
    // Draw dynamic objects
    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {

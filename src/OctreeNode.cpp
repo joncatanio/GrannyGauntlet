@@ -117,11 +117,13 @@ void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, bool cull, std::share
 		std::shared_ptr<BoundingBox> boundBox = objInTree->getBoundingBox();
 		if (boundBox != nullptr) {
 			if (!cull || !viewFrustum.cull(boundBox)) {
-				objInTree->draw(P, M, V);
+				   objInTree->draw(P, M, V);
 			}
 		}
 		else {
-			objInTree->draw(P, M, V);
+         if (!(!cull && objInTree->type == GameObjectType::SKY_BOX)) {
+			   objInTree->draw(P, M, V);
+         }
 		}
 	}
 }

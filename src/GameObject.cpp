@@ -283,6 +283,8 @@ void GameObject::triggerDeliveryAnimation() {
 GameObjectType GameObject::stringToType(std::string type) {
 	if(type == "PLAYER") {
 		return GameObjectType::PLAYER;
+   } else if(type == "SKY_BOX") {
+      return GameObjectType::SKY_BOX;
 	} else if(type == "STATIC_OBJECT") {
 		return GameObjectType::STATIC_OBJECT;
 	} else if(type == "DYNAMIC_OBJECT") {

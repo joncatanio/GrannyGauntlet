@@ -321,25 +321,29 @@ void ShaderManager::renderShadowPass(std::shared_ptr<GameObject> objToRender, co
 		glUniformMatrix4fv(shaderProgram->getUniform("lightP"), 1, GL_FALSE, glm::value_ptr(lightP));
 		glUniformMatrix4fv(shaderProgram->getUniform("lightV"), 1, GL_FALSE, glm::value_ptr(lightV));
 
-		// Set up and bind model transform
-		M->pushMatrix();
-		M->loadIdentity();
+        if (objToRender->fracture) {
+            shape->fracture(shaderProgram, nullptr, M, objToRender);
+        } else {
+            // Set up and bind model transform
+            M->pushMatrix();
+            M->loadIdentity();
 
-		M->translate(objToRender->getPosition());
-        if(!rotateBeforeScale) {
-            M->scale(objToRender->getScale());
+            M->translate(objToRender->getPosition());
+            if (!rotateBeforeScale) {
+                M->scale(objToRender->getScale());
+            }
+            glm::mat4 rotation = objToRender->transform.getRotate();
+            M->rotateMat4(rotation);
+            if (rotateBeforeScale) {
+                M->scale(objToRender->getScale());
+            }
+
+            glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
+
+            shape->draw(shaderProgram, nullptr);
+
+            M->popMatrix();
         }
-        glm::mat4 rotation = objToRender->transform.getRotate();
-        M->rotateMat4(rotation);
-        if(rotateBeforeScale) {
-            M->scale(objToRender->getScale());
-        }
-
-		glUniformMatrix4fv(shaderProgram->getUniform("M"), 1, GL_FALSE, glm::value_ptr(M->topMatrix()));
-
-		shape->draw(shaderProgram, nullptr);
-
-		M->popMatrix();
 
 		unbindShader();
 

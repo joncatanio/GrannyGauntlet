@@ -1,9 +1,13 @@
 #include "WindowManager.h"
+#include "GameManager.h"
+#include "imgui.h"
+#include "imgui_impl_glfw_gl3.h"
 
 #include "TextureManager.h"
 
 WindowManager::~WindowManager() {
 	glfwDestroyWindow(window_);
+   ImGui_ImplGlfwGL3_Shutdown();
 	glfwTerminate();
 }
 
@@ -36,6 +40,41 @@ void WindowManager::update() {
 	aspect_ = getAspectRatio();
 
     checkForUserChanges();
+
+   updateGui();
+}
+
+void WindowManager::updateGui() {
+   ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
+      ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
+
+   ImGui_ImplGlfwGL3_NewFrame();
+
+   // Needed for changing the style of individual elements, see ImGuiCol_ in imgui.h
+   ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0, 0, 0, 0));
+   //ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.992, 0.376, 0.380, 1));
+   ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1, 1, 1, 1));
+
+   if (score_window) {
+      // Display the score
+      ImGui::SetNextWindowPos(ImVec2(25, 25), ImGuiSetCond_FirstUseEver);
+      ImGui::Begin("score_window", &score_window, flags);
+      ImGui::Text("SCORE: %d", static_cast<int>(GameManager::instance().getScore()));
+      ImGui::End();
+
+   }
+
+   if (time_window) {
+      // Display the time
+      ImGui::SetNextWindowPos(ImVec2(25, 65), ImGuiSetCond_FirstUseEver);
+      ImGui::Begin("time_window", &time_window, flags);
+      ImGui::Text("TIME REMAINING: %d", static_cast<int>(GameManager::instance().getTime()));
+      ImGui::End();
+   }
+
+   // Pop the style
+   ImGui::PopStyleColor(2);
 }
 
 void WindowManager::checkForUserChanges() {
@@ -75,6 +114,7 @@ void WindowManager::checkForUserChanges() {
 }
 
 void WindowManager::swapBuffers() {
+   ImGui::Render();
 	glfwSwapBuffers(window_);
 }
 
@@ -120,7 +160,9 @@ void WindowManager::updateCursorPosition(float newX, float newY) {
 
 WindowManager::WindowManager()
 	: currentCursorX_(0),
-	currentCursorY_(0) {
+	currentCursorY_(0),
+   score_window(true),
+   time_window(true) {
 
 }
 
@@ -175,6 +217,12 @@ int WindowManager::initializeGLFW() {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return -1;
     }
+
+    // ImGui Initiliazation
+    ImGui_ImplGlfwGL3_Init(window_, true);
+    ImGuiIO& io = ImGui::GetIO();
+    //io.Fonts->AddFontFromFileTTF("../resources/fonts/Roboto-Medium.ttf", 35.0f);
+    io.Fonts->AddFontFromFileTTF("../resources/fonts/sketch3d.otf", 40.0f);
 
     // Weird bootstrap of glGetError
     glGetError();

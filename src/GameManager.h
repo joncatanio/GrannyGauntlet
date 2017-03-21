@@ -51,6 +51,12 @@ public:
 	//Shows the score
 	void showScore();
 
+   // Gets the score
+   float getScore();
+
+   // Gets the time
+   float getTime();
+
     //Sets the initial timelimit
     void setTime(float time);
 

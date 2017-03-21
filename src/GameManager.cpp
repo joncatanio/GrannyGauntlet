@@ -84,3 +84,10 @@ void GameManager::showScore() {
 	std::cout << "SCORE " << score_ << std::endl;
 }
 
+float GameManager::getScore() {
+   return score_;
+}
+
+float GameManager::getTime() {
+   return time_;
+}

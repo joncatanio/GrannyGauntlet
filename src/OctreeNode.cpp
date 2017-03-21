@@ -100,14 +100,14 @@ std::vector<std::shared_ptr<GameObject>> OctreeNode::checkIntersection(std::shar
    return hitObjs;
 }
 
-void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P,
+void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, bool cull, std::shared_ptr<MatrixStack> P,
 	std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 
 	// Check for a child that contains the object and recursively call it's |checkIntersection| method
 	for (OctreeNode& child : children_) {
 		if (child.enclosingRegion_ != nullptr) {
-			if (!viewFrustum.cull(child.enclosingRegion_)) {
-				child.cullAndDrawObjs(viewFrustum, P, M, V);
+			if (!cull || !viewFrustum.cull(child.enclosingRegion_)) {
+				child.cullAndDrawObjs(viewFrustum, cull, P, M, V);
 			}
 		}
 	}
@@ -116,7 +116,7 @@ void OctreeNode::cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<Matri
 	for (std::shared_ptr<GameObject> objInTree : objsEnclosed_) {
 		std::shared_ptr<BoundingBox> boundBox = objInTree->getBoundingBox();
 		if (boundBox != nullptr) {
-			if (!viewFrustum.cull(boundBox)) {
+			if (!cull || !viewFrustum.cull(boundBox)) {
 				objInTree->draw(P, M, V);
 			}
 		}

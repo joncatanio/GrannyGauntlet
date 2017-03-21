@@ -32,6 +32,7 @@ uniform vec3 MatAmb;
 uniform vec3 MatDif;
 uniform vec3 MatSpc;
 uniform float MatShiny;
+uniform float MatAlpha;
 
 uniform mat4 M;
 uniform mat4 V;
@@ -205,5 +206,5 @@ void main() {
 
 
 	// Calculate the total color
-	color = shadowFactor * vec4(directionalLightColor, 1.0);
+	color = shadowFactor * vec4(directionalLightColor, MatAlpha);
 }

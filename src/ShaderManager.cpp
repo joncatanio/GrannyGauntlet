@@ -161,6 +161,12 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
  const std::shared_ptr<Material> material, std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> V, std::shared_ptr<MatrixStack> M) {
 	if (objToRender != NULL) {
 
+		if(material->alpha != 1.0) {
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
+
+
 		const std::shared_ptr<Program> shaderProgram = bindShader(shaderName);
 
 		// Bind perspective and view tranforms
@@ -221,6 +227,10 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 	   	// Draw bunny
 		   // TODO(rgarmsen): Make shape not need the shader program
    		shape->draw(shaderProgram, material);
+
+		  if(material->alpha != 1.0) {
+			  glDisable(GL_BLEND);
+		  }
 
          M->popMatrix();
       }

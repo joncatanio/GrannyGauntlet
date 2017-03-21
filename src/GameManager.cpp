@@ -87,3 +87,7 @@ void GameManager::showScore() {
 float GameManager::getScore() {
    return score_;
 }
+
+float GameManager::getTime() {
+   return time_;
+}

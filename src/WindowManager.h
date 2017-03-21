@@ -84,6 +84,7 @@ private:
    // GUI functions and variables
    void updateGui();
    bool score_window;
+   bool time_window;
 
 	//TODO(nurgan) better solution
 	bool mWasPressed = false;

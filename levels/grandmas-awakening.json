@@ -94,7 +94,7 @@
       {
          "name": "Sphere",
          "filename": "sphere2.obj",
-         "manual_texture": "cookie_texture.jpg"
+         "manual_texture": "Cookie_Texture"
       },
       {
          "name": "Lowpolycar",
@@ -249,6 +249,10 @@
       {
          "name": "Tree_Yellow",
          "filename": "Forest_1x1_Yellow_DIFF.jpg"
+      },
+      {
+         "name": "Cookie_Texture",
+         "filename": "cookie_texture.jpg"
       }
    ],
    "level-materials": [

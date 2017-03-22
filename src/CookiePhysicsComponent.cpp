@@ -84,7 +84,7 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
 				// Visual effects due to hit
 				objHit->triggerDeliveryAnimation();
-				objHit->changeShader("CookTorr");
+				objHit->changeShader("Default");
 				objHit->spawnCookieHitBillboardEffect(holder_->getPosition(), score);
 
 				// Play sound effect.

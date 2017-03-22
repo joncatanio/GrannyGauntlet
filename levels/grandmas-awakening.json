@@ -4,12 +4,12 @@
       {
          "name": "Phong",
          "file-prefix": "phong",
-         "default": true
+         "default": false
       },
       {
          "name": "CookTorrance",
          "file-prefix": "cook_torr",
-         "default": false
+         "default": true
       },
       {
          "name": "Toon",
@@ -34,6 +34,11 @@
       {
          "name": "Particle",
          "file-prefix": "particle",
+         "default": false
+      },
+      {
+         "name": "Greyscale",
+         "file-prefix": "greyscale",
          "default": false
       }
    ],
@@ -831,7 +836,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House01",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -862,7 +867,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House02",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -893,7 +898,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House03",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -924,7 +929,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House04",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -955,7 +960,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House05",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -986,7 +991,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House06",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1017,7 +1022,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House07",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1048,7 +1053,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House08",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1079,7 +1084,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House09",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1110,7 +1115,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House10",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1141,7 +1146,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House01",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1172,7 +1177,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House02",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1203,7 +1208,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House03",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1234,7 +1239,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House04",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1265,7 +1270,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House05",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1296,7 +1301,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House06",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1327,7 +1332,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House07",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1358,7 +1363,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House04",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1389,7 +1394,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House06",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1420,7 +1425,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House08",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1451,7 +1456,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House09",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1482,7 +1487,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House07",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1513,7 +1518,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House04",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1544,7 +1549,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House10",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1572,12 +1577,12 @@
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "House01",
-            "shader": "Default",
-            "material": "white"
-         },
+        "render-component": {
+          "name": "WallRenderComponent",
+          "shape": "House01",
+          "shader": "Greyscale",
+          "material": "white"
+        },
          "deliverable": true
       },
       {
@@ -1606,7 +1611,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House02",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true
@@ -1637,7 +1642,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "House06",
-            "shader": "Default",
+            "shader": "Greyscale",
             "material": "white"
          },
          "deliverable": true

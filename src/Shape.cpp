@@ -5,6 +5,7 @@
 #include "Program.h"
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "GameManager.h"
 
 #include <glm/gtx/rotate_vector.hpp>
 
@@ -313,7 +314,12 @@ void Shape::draw(const shared_ptr<Program> prog, std::shared_ptr<Material> defau
         if(manualTextureNames.size() == 1) {
             t = 0;
         } else {
-            t = t % (manualTextureNames.size()) ;
+            if(GameManager::instance().isInHellMode()) {
+                t = 1;
+            } else {
+                t = 0;
+            }
+            //t = t % (manualTextureNames.size()) ;
         }
 
         TextureManager::instance().getTexture(manualTextureNames[t])->bind(0,prog);

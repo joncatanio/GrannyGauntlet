@@ -117,122 +117,122 @@
       {
          "name": "FirTree01",
          "filename": "Forest_A_FirTree_01.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree03",
          "filename": "Forest_A_FirTree_03.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree04",
          "filename": "Forest_A_FirTree_04.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree05",
          "filename": "Forest_A_FirTree_05.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree06",
          "filename": "Forest_A_FirTree_06.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree07",
          "filename": "Forest_A_FirTree_07.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree09",
          "filename": "Forest_A_FirTree_09.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree13",
          "filename": "Forest_A_FirTree_13.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree14",
          "filename": "Forest_A_FirTree_14.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "FirTree20",
          "filename": "Forest_A_FirTree_20.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree06",
          "filename": "Forest_C_Tree_06.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree08",
          "filename": "Forest_C_Tree_08.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree11",
          "filename": "Forest_C_Tree_11.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree12",
          "filename": "Forest_C_Tree_12.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree14",
          "filename": "Forest_C_Tree_14.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "CTree15",
          "filename": "Forest_C_Tree_15.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "Rock01",
          "filename": "Forest_B_Rock_01.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "Rock03",
          "filename": "Forest_B_Rock_03.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "Rock04",
          "filename": "Forest_B_Rock_04.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "Rock05",
          "filename": "Forest_B_Rock_05.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "Rock07",
          "filename": "Forest_B_Rock_07.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "DeadTree02",
          "filename": "Forest_B_DeadTree_02.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "DeadTree03",
          "filename": "Forest_B_DeadTree_03.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       },
       {
          "name": "DeadTree05",
          "filename": "Forest_B_DeadTree_05.obj",
-         "manual_texture": ["Tree_Green", "Tree_White", "Tree_Blue", "Tree_Yellow"]
+         "manual_texture": ["Tree_Yellow", "Tree_White"]
       }
    ],
    "level-textures": [
@@ -741,6 +741,69 @@
             "material": "Emerald"
          },
          "deliverable": true
+      },
+      {
+         "object-name": "hellbox",
+         "object-type": "HELL_BOX",
+         "pos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 100.0,
+            "y": 100.0,
+            "z": 100.0
+         },
+         "physics-component": {
+            "name": ""
+         },
+         "render-component": {
+            "name": "SkyboxRenderComponent",
+            "skybox-path": "skybox/hell/",
+            "file-extension": "jpg",
+            "shape": "Cube",
+            "shader": "Cubemap",
+            "material": "Emerald"
+         },
+         "deliverable": true
+      },
+      {
+         "object-name": "portalToHell",
+         "object-type": "PORTAL_TO_HELL",
+         "pos": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "WallPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "FireHydrant",
+            "shader": "Toon",
+            "material": "Ruby"
+         },
+         "deliverable": false
       },
       {
          "object-name": "house",

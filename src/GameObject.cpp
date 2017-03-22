@@ -291,6 +291,8 @@ GameObjectType GameObject::stringToType(std::string type) {
 		return GameObjectType::DYNAMIC_OBJECT;
 	} else if(type == "FINISH_OBJECT") {
 		return GameObjectType::FINISH_OBJECT;
+	} else if(type =="PORTAL_TO_HELL") {
+		return GameObjectType ::PORTAL_TO_HELL;
 	} else {
 		//default to static object
 		return GameObjectType::STATIC_OBJECT;

@@ -17,7 +17,7 @@
 #include "ActionComponent.h"
 #include "MaterialManager.h"
 
-enum class GameObjectType { PLAYER, SKY_BOX, STATIC_OBJECT, DYNAMIC_OBJECT, FINISH_OBJECT };
+enum class GameObjectType { PLAYER, SKY_BOX, HELL_BOX, PORTAL_TO_HELL, STATIC_OBJECT, DYNAMIC_OBJECT, FINISH_OBJECT };
 
 class GameObject : public std::enable_shared_from_this<GameObject> {
 public:

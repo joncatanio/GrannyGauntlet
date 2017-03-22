@@ -206,8 +206,9 @@ void GameWorld::drawGameObjects() {
         }
     }
 
-    // Draw static objects
-    staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
+	// Draw static objects
+	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, true, P, M, V);
+
 
     // Draw particles
     for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
@@ -265,31 +266,19 @@ void GameWorld::drawVFCViewport() {
    glViewport(0, 0, (windowManager.getViewHeight() / 3.0),
       windowManager.getViewHeight() / 3.0);
    P->pushMatrix();
-   P->ortho(-15.0f, 15.0f, -15.0f, 15.0f, 2.1f, 100.0f);
+   P->ortho(-50.0f, 50.0f, -50.0f, 50.0f, 2.1f, 101.0f);
    V->pushMatrix();
    V->loadIdentity();
-   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 8, 0), camera.getNoSpringEye(),
-      camera.getLookAt() - camera.getNoSpringEye());
+   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 100.0, 0), camera.getNoSpringEye(),
+      glm::vec3(-1, 0, 0));
 
    // Draw dynamic objects
    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-
-	   /* Every object needs to have a bounding box in order to cull.
-	   * If an object doesn't have a bounding box, cull it so we don't create
-	   * unseen problems with culling. */
-	   std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
-	   if (objBox != nullptr) {
-		   if (!viewFrustum.cull(objBox)) {
-			   obj->draw(P, M, V);
-		   }
-	   }
-	   else {
-		   obj->draw(P, M, V);
-	   }
+		obj->draw(P, M, V);
    }
 
    // Draw static objects
-   staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
+   staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, false, P, M, V);
 }
 
 std::vector<std::shared_ptr<GameObject>> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {

@@ -262,8 +262,12 @@ int LevelLoader::parseCharacters(GameWorld &world,
 int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
    if (staticObjs != nullptr) {
       for (json gameObj : staticObjs) {
-         std::shared_ptr<GameObject> staticGameObj =
-            createGameObject(gameObj, GameObjectType::STATIC_OBJECT); 
+         std::shared_ptr<GameObject> staticGameObj;
+         if (gameObj["object-type"] == "SKY_BOX") {
+            staticGameObj = createGameObject(gameObj, GameObjectType::SKY_BOX); 
+         } else {
+            staticGameObj = createGameObject(gameObj, GameObjectType::STATIC_OBJECT); 
+         }
 
          staticGameObj->initComponents();
          if (gameObj["yAxis-rotation-deg"] != nullptr) {

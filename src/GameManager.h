@@ -5,6 +5,7 @@
 #include "GameWorld.h"
 #include "ViewFrustum.h"
 #include "ShadowMap.h"
+#include "Menu.h"
 
 // Singleton class that handles any global game state not easily categorized into other areas
 class GameManager {
@@ -72,6 +73,18 @@ public:
 	// Returns the Shadow Map object
 	ShadowMap* getShadowMap();
 
+    // Sets the Menu Object
+    void setMenu(Menu* menu);
+
+    // Returns the Menu Object
+    Menu* getMenu();
+
+	// Toggles the menu state
+	void toggleMenu();
+
+	// Returns true if the game is currently in the menu
+	bool isInMenu();
+
     static constexpr float cullFarPlane = 100.0;
     static constexpr float camFarPlane = 300.0;
     static constexpr float nearPlane = 0.01;
@@ -90,9 +103,12 @@ private:
 
 	ShadowMap* shadowMap_;
 
+    Menu* menu_;
+
 	float score_ = 0.0;
 
     float time_;
+
 
 
 };

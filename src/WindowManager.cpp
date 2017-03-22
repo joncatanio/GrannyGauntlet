@@ -78,6 +78,7 @@ void WindowManager::updateGui() {
 }
 
 void WindowManager::checkForUserChanges() {
+    GameManager& gameManager = GameManager::instance();
     ShaderManager& shaderManager = ShaderManager::instance();
     TextureManager& textureManager = TextureManager::instance();
 
@@ -107,10 +108,57 @@ void WindowManager::checkForUserChanges() {
         mWasPressed = false;
     }
 
-    if (isKeyPressed(GLFW_KEY_ESCAPE)) {
+    if (!menuKeyWasPressed && isKeyPressed(GLFW_KEY_ESCAPE)) {
         // Should close the GLFW window
-        glfwSetWindowShouldClose(window_, GL_TRUE);
+        //glfwSetWindowShouldClose(window_, GL_TRUE);
+
+        menuKeyWasPressed = true;
+
+        if(!gameManager.getMenu()->isActive()) {
+            gameManager.getMenu()->toggleMenuActive();
+            gameManager.getMenu()->menuStartTime_ = glfwGetTime();
+        } else {
+            if(gameManager.getMenu()->isInPause()) {
+                gameManager.getMenu()->toggleMenuActive();
+                gameManager.getMenu()->leftMenuThisFrame_ = true;
+                gameManager.getMenu()->menuTime_ = glfwGetTime() - gameManager.getMenu()->menuStartTime_;
+            }
+        }
     }
+    if (menuKeyWasPressed && !isKeyPressed(GLFW_KEY_ESCAPE)) {
+        menuKeyWasPressed = false;
+    }
+
+
+    if(gameManager.getMenu()->isActive()) {
+        if(isKeyPressed(GLFW_KEY_UP) && !upWasPressed){
+            gameManager.getMenu()->selectedItemDown();
+            upWasPressed = true;
+        }
+        if(!isKeyPressed(GLFW_KEY_UP)) {
+            upWasPressed = false;
+        }
+
+        if(isKeyPressed(GLFW_KEY_DOWN) && !downWasPressed) {
+            gameManager.getMenu()->selectedItemUp();
+            downWasPressed = true;
+        }
+        if(!isKeyPressed(GLFW_KEY_DOWN)) {
+            downWasPressed = false;
+        }
+
+        if(isKeyPressed(GLFW_KEY_ENTER) && !spaceWasPressed) {
+            gameManager.getMenu()->performMenuAction();
+            spaceWasPressed = true;
+        }
+
+        if(!isKeyPressed(GLFW_KEY_ENTER)) {
+            spaceWasPressed = false;
+        }
+
+    }
+
+
 }
 
 void WindowManager::swapBuffers() {
@@ -293,4 +341,8 @@ static void resizeCallback(GLFWwindow* window, int width, int height) {
 
 static void errorCallback(int error, const char* description) {
     std::cerr << description << std::endl;
+}
+
+void WindowManager::close() {
+    glfwSetWindowShouldClose(window_, GL_TRUE);
 }

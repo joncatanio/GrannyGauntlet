@@ -583,7 +583,7 @@
          "render-component": {
             "name": "PlayerRenderComponent",
             "shape": "Lowpolycar",
-            "shader": "Default",
+            "shader": "CookTorrance",
             "material": "Pearl"
          },
          "action-component": {

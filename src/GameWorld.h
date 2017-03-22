@@ -51,6 +51,9 @@ public:
 	// Removes a GameObject to the World's internal list of static GameObjects (non-moving)
 	void rmStaticGameObject(std::shared_ptr<GameObject> obj);
 
+	// Sets the GameObject representing the menu
+	void setMenu(std::shared_ptr<GameObject> menu);
+
 	// Adds a new light of any type to the game world
 	void addLight(const std::shared_ptr<Light> newLight);
 
@@ -96,6 +99,9 @@ public:
 	// Calls the update function on all GameObjects in the world
 	void updateGameObjects(double deltaTime, double totalTime);
 
+    // Calls tghe update function on the menu
+    void updateMenu();
+
 	// Calls the draw function on all GameObjects in the world
 	void drawGameObjects();
 
@@ -128,6 +134,9 @@ private:
 
 	// Collection of Particle Systems in the world
 	std::vector<std::shared_ptr<ParticleSystem>> particleSystems_;
+
+	// GameObject that represents the menu
+	std::shared_ptr<GameObject> menu_;
 
 	// Queue of dynamic objects added to the world but that have yet to be added to the vector
 	std::queue<std::shared_ptr<GameObject>> dynamicGameObjectsToAdd_;

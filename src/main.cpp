@@ -16,6 +16,10 @@
 #include "WindowManager.h"
 #include "ShadowMap.h"
 
+#include "BillboardRenderComponent.h"
+#include "MenuBillboardPhysicsComponent.h"
+#include "TextureManager.h"
+
 #include "WallPhysicsComponent.h"
 #include "WallRenderComponent.h"
 #include "CookieActionComponent.h"
@@ -91,10 +95,15 @@ int main(int argc, char **argv) {
     ShadowMap* shadowMap = new ShadowMap();
     gameManager.setShadowMap(shadowMap);
 
+    // Create menu
+    Menu* menu = new Menu();
+    menu->init();
+    gameManager.setMenu(menu);
+
     // Add all static objects before this!!!
     world.init();
 
-    gameManager.setTime(1500.0);
+    gameManager.setTime(15.0);
 
     // Loop until the user closes the window
     int numFramesInSecond = 0;
@@ -106,34 +115,44 @@ int main(int argc, char **argv) {
 
     audioManager.startSoundtrack();
 
+
     while (!windowManager.isClosed()) {
-        double currentTime = glfwGetTime();
-        double elapsedTime = currentTime - previousTime;
-        previousTime = currentTime;
+
 
         // Poll for and process events
         windowManager.pollEvents();
 
-        while (elapsedTime > 0.0) {
-            double deltaTime = std::min(elapsedTime, dt);
-
-            // Update all game objects
-            world.updateGameObjects(deltaTime, totalTime);
-            camera.update(deltaTime);
-
-            gameManager.decreaseTime(deltaTime);
-
-            if(gameManager.gameOver_) {
-                gameManager.showScore();
-                return EXIT_SUCCESS;
+        if(!gameManager.getMenu()->isActive()) {
+            double currentTime = glfwGetTime();
+            double elapsedTime = currentTime - previousTime;
+            if(gameManager.getMenu()->leftMenuThisFrame_) {
+                gameManager.getMenu()->leftMenuThisFrame_ = false;
+                elapsedTime -= gameManager.getMenu()->menuTime_;
             }
+            previousTime = currentTime;
+
+            while (elapsedTime > 0.0) {
+                double deltaTime = std::min(elapsedTime, dt);
+
+                // Update all game objects
+                world.updateGameObjects(deltaTime, totalTime);
+                camera.update(deltaTime);
+
+                gameManager.decreaseTime(deltaTime);
+
+                if (gameManager.gameOver_) {
+                    gameManager.showScore();
+                    //return EXIT_SUCCESS;
+                }
 
 
-            elapsedTime -= deltaTime;
-            totalTime += deltaTime;
-            secondClock += deltaTime;
+                elapsedTime -= deltaTime;
+                totalTime += deltaTime;
+                secondClock += deltaTime;
+            }
+        } else {
+            world.updateMenu();
         }
-
         // Update the window in-case of resizing, etc.
         windowManager.update();
 

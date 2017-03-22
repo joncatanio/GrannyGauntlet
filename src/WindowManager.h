@@ -93,6 +93,7 @@ private:
 	bool menuKeyWasPressed = false;
 	bool upWasPressed = false;
 	bool downWasPressed = false;
+    bool spaceWasPressed = false;
 
 	// Initializes general boiler-plate GLFW code
 	int initializeGLFW();

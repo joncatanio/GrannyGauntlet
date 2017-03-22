@@ -186,39 +186,35 @@ void GameWorld::drawGameObjects() {
 	V->loadIdentity();
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
+    // Calculate view frustum planes
+    viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
+    // Draw dynamic objects
+    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 
-    //} else {
-        // Calculate view frustum planes
-        viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
-
-        // Draw dynamic objects
-        for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-
-            /* Every object needs to have a bounding box in order to cull.
-            * If an object doesn't have a bounding box, cull it so we don't create
-            * unseen problems with culling. */
-            std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
-            if (objBox != nullptr) {
-                if (!viewFrustum.cull(objBox)) {
-                    obj->draw(P, M, V);
-                }
-            }
-            else {
+        /* Every object needs to have a bounding box in order to cull.
+        * If an object doesn't have a bounding box, cull it so we don't create
+        * unseen problems with culling. */
+        std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
+        if (objBox != nullptr) {
+            if (!viewFrustum.cull(objBox)) {
                 obj->draw(P, M, V);
             }
         }
-
-        // Draw static objects
-        staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
-
-        // Draw particles
-        for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
-            if (!viewFrustum.cull(ps)) {
-                ps->draw(P, M, V);
-            }
+        else {
+            obj->draw(P, M, V);
         }
-    //}
+    }
+
+    // Draw static objects
+    staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
+
+    // Draw particles
+    for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
+        if (!viewFrustum.cull(ps)) {
+            ps->draw(P, M, V);
+        }
+    }
 
 	if(gameManager.getMenu()->isActive()) {
 		glDisable(GL_DEPTH_TEST);

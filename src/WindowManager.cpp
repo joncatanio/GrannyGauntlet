@@ -147,8 +147,13 @@ void WindowManager::checkForUserChanges() {
             downWasPressed = false;
         }
 
-        if(isKeyPressed(GLFW_KEY_SPACE)) {
+        if(isKeyPressed(GLFW_KEY_ENTER) && !spaceWasPressed) {
             gameManager.getMenu()->performMenuAction();
+            spaceWasPressed = true;
+        }
+
+        if(!isKeyPressed(GLFW_KEY_ENTER)) {
+            spaceWasPressed = false;
         }
 
     }

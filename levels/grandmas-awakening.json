@@ -27,6 +27,11 @@
          "default": false
       },
       {
+         "name": "Menu",
+         "file-prefix": "menu",
+         "default": false
+      },
+      {
          "name": "Particle",
          "file-prefix": "particle",
          "default": false
@@ -256,35 +261,35 @@
       },
       {
          "name": "lost1",
-         "filename": "menu/lost1.jpg"
+         "filename": "menu/lost1.png"
       },
       {
          "name": "lost2",
-         "filename": "menu/lost2.jpg"
+         "filename": "menu/lost2.png"
       },
       {
          "name": "won1",
-         "filename": "menu/win1.jpg"
+         "filename": "menu/win1.png"
       },
       {
          "name": "won2",
-         "filename": "menu/win2.jpg"
+         "filename": "menu/win2.png"
       },
       {
          "name": "pause1",
-         "filename": "menu/pause1.jpg"
+         "filename": "menu/pause1.png"
       },
       {
          "name": "pause2",
-         "filename": "menu/pause2.jpg"
+         "filename": "menu/pause2.png"
       },
       {
          "name": "start1",
-         "filename": "menu/start1.jpg"
+         "filename": "menu/start1.png"
       },
       {
          "name": "start2",
-         "filename": "menu/start2.jpg"
+         "filename": "menu/start2.png"
       }
    ],
    "level-materials": [

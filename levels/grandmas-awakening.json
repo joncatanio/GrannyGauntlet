@@ -654,6 +654,20 @@
          "filename": "HairInTheDrain.mp3"
       }
    ],
+   "hell-soundtrack": [
+      {
+         "name": "10 Miles Wide",
+         "filename": "10MilesWide.mp3"
+      },
+      {
+         "name": "Second & Sebring",
+         "filename": "secondandsebring.mp3"
+      },
+      {
+         "name": "F.C.P.R.E.M.I.X",
+         "filename": "fcpremix.mp3"
+      }
+   ],
    "soundeffects": [
       {
          "name": "FireHydrant Clank",

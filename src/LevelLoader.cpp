@@ -98,6 +98,11 @@ int LevelLoader::loadLevel(GameWorld &world, std::shared_ptr<GameObject> &player
       return res;
    }
 
+   if ((res = parseHellSoundtrack(level["hell-soundtrack"]))) {
+      std::cerr << "Error parsing hell-soundtrack." << std::endl;
+      return res;
+   }
+
    if ((res = parseSoundeffects(level["soundeffects"]))) {
       std::cerr << "Error parsing soundeffects." << std::endl;
       return res;
@@ -319,6 +324,18 @@ int LevelLoader::parseSoundtrack(json soundtrackObjs) {
    if (soundtrackObjs != nullptr) {
       for (json track : soundtrackObjs) {
          audioManager.addTrack(track["filename"]);
+      }
+   }
+
+   return 0;
+}
+
+int LevelLoader::parseHellSoundtrack(json soundtrackObjs) {
+   AudioManager& audioManager = AudioManager::instance();
+
+   if (soundtrackObjs != nullptr) {
+      for (json track : soundtrackObjs) {
+         audioManager.addAltTrack(track["filename"]);
       }
    }
 

@@ -23,6 +23,7 @@ void CookiePhysicsComponent::initObjectPhysics() {
 }
 
 void CookiePhysicsComponent::updatePhysics(float deltaTime) {
+
     GameWorld& world = GameManager::instance().getGameWorld();
 
     glm::vec3 oldPosition = holder_->getPosition();
@@ -67,11 +68,15 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 
             cookieState.hits++;
             cookieState.hitPositions.push_back(holder_->getPosition());
+            GameManager& gameManager = GameManager::instance();
             if( objHit->cookieDeliverable) {
    
 				// Score effects due to hit
                 float score = calculateScore();
-                GameManager& gameManager = GameManager::instance();
+                if(gameManager.isInHellMode()) {
+                    score = 666.0f;
+                }
+
                 gameManager.reportScore(score);
 
                 float timeBump = ((score - cookieState.scored)/500.0) + 1.0;
@@ -91,6 +96,8 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
                 gameManager.increaseTime(timeBump);
                 objHit->cookieDeliverable = false;
             }
+        } else if(objTypeHit == GameObjectType::PORTAL_TO_HELL) {
+            GameManager::instance().enterHell();
         }
     }
 }

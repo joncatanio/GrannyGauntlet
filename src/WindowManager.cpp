@@ -101,7 +101,8 @@ void WindowManager::checkForUserChanges() {
     }
 
     if (isKeyPressed(GLFW_KEY_M) && !mWasPressed) {
-        textureManager.increaseTextureToggle();
+        //textureManager.increaseTextureToggle();
+        gameManager.enterHell();
         mWasPressed = true;
     }
     if (!isKeyPressed(GLFW_KEY_M)) {
@@ -157,6 +158,7 @@ void WindowManager::checkForUserChanges() {
         }
 
     }
+
 
 
 }

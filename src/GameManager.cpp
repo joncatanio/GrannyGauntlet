@@ -1,5 +1,7 @@
 #include "GameManager.h"
 
+#include "AudioManager.h"
+
 GameManager& GameManager::instance() {
 	static GameManager *instance = new GameManager();
 	return *instance;
@@ -78,6 +80,16 @@ void GameManager::setMenu(Menu *menu) {
 Menu* GameManager::getMenu() {
     return  menu_;
 }
+
+void GameManager::enterHell() {
+    hellMode_ = true;
+    setTime(666.0f);
+}
+
+bool GameManager::isInHellMode() {
+    return hellMode_;
+}
+
 void GameManager::showScore() {
     if(gameOver_) {
         if(time_ <= 0.0) {

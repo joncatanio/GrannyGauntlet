@@ -10,6 +10,15 @@ public:
 
     ~Menu();
 
+    // Indicates if the menu was left this frame
+    bool leftMenuThisFrame_ = false;
+
+    // Time spent in menu
+    float menuTime_ = 0.0;
+
+    // Time when the menu was entered
+    float menuStartTime_ = 0.0;
+
     void init();
 
     void selectedItemUp();
@@ -20,7 +29,12 @@ public:
 
     void performMenuAction();
 
+    void toggleMenuActive();
+    bool isActive();
+
 private:
+
+    bool isActive_ = true;
 
     int selectedMenuItem = 0;
     bool inStartMenu = true;

@@ -123,11 +123,10 @@ void Menu::selectedItemDown() {
 
 void Menu::performMenuAction() {
     //TODO(nurgan) check for state
-    GameManager& gameManager = GameManager::instance();
     if(selectedMenuItem == 0) {
-        gameManager.toggleMenu();
-        gameManager.leftMenuThisFrame_ = true;
-        gameManager.menuTime_ = glfwGetTime() - gameManager.menuStartTime_;
+        toggleMenuActive();
+        leftMenuThisFrame_ = true;
+        menuTime_ = glfwGetTime() - menuStartTime_;
     } else if(selectedMenuItem == 1) {
         WindowManager::instance().close();
     }
@@ -139,4 +138,12 @@ void Menu::performMenuAction() {
 
     selectedMenuItem = 0;
     changeMenuItem();
+}
+
+void Menu::toggleMenuActive() {
+    isActive_ = !isActive_;
+}
+
+bool Menu::isActive() {
+    return isActive_;
 }

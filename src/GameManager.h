@@ -16,15 +16,6 @@ public:
 	// Indicates if the game if over
 	bool gameOver_ = false;
 
-    // Indicates if the menu was left this frame
-    bool leftMenuThisFrame_ = false;
-
-    // Time spent in menu
-    float menuTime_ = 0.0;
-
-    // Time when the menu was entered
-    float menuStartTime_ = 0.0;
-
 	// Returns the single instance of the GameManager
 	static GameManager& instance();
 
@@ -118,7 +109,7 @@ private:
 
     float time_;
 
-	bool displayMenu_ = true;
+
 
 };
 

@@ -71,14 +71,6 @@ ShadowMap* GameManager::getShadowMap() {
     return shadowMap_;
 }
 
-void GameManager::toggleMenu() {
-    displayMenu_ = !displayMenu_;
-}
-
-bool GameManager::isInMenu() {
-    return displayMenu_;
-}
-
 void GameManager::setMenu(Menu *menu) {
     menu_ = menu;
 }

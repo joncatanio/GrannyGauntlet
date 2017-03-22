@@ -122,12 +122,12 @@ int main(int argc, char **argv) {
         // Poll for and process events
         windowManager.pollEvents();
 
-        if(!gameManager.isInMenu()) {
+        if(!gameManager.getMenu()->isActive()) {
             double currentTime = glfwGetTime();
             double elapsedTime = currentTime - previousTime;
-            if(gameManager.leftMenuThisFrame_) {
-                gameManager.leftMenuThisFrame_ = false;
-                elapsedTime -= gameManager.menuTime_;
+            if(gameManager.getMenu()->leftMenuThisFrame_) {
+                gameManager.getMenu()->leftMenuThisFrame_ = false;
+                elapsedTime -= gameManager.getMenu()->menuTime_;
             }
             previousTime = currentTime;
 

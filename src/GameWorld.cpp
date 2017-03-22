@@ -187,9 +187,8 @@ void GameWorld::drawGameObjects() {
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
 
-    if(gameManager.isInMenu()) {
-        menu_->draw(P, M, V);
-    } else {
+
+    //} else {
         // Calculate view frustum planes
         viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
@@ -219,7 +218,13 @@ void GameWorld::drawGameObjects() {
                 ps->draw(P, M, V);
             }
         }
-    }
+    //}
+
+	if(gameManager.getMenu()->isActive()) {
+		glDisable(GL_DEPTH_TEST);
+		menu_->draw(P, M, V);
+		glEnable(GL_DEPTH_TEST);
+	}
 
 	renderCount++;
 

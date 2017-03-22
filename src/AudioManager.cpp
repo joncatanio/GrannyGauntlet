@@ -8,7 +8,8 @@ AudioManager& AudioManager::instance() {
 AudioManager::AudioManager() :
    system_(NULL),
    stChannel_(NULL),
-   eChannel_(NULL) {
+   eChannel_(NULL),
+   stPlaylistToggle(true) {
    FMOD_RESULT result;
    unsigned int version;
    int numDrivers;
@@ -67,12 +68,22 @@ void AudioManager::update() {
 
       // If invalid handle the song has finished and the channel was released 
       if (result == FMOD_ERR_INVALID_HANDLE) {
-         soundtrack_.push(soundtrack_.front());
-         soundtrack_.pop();
+         // Play from the proper soundtrack
+         if (stPlaylistToggle) {
+            soundtrack_.push(soundtrack_.front());
+            soundtrack_.pop();
 
-         result = system_->playSound(soundtrack_.front(), 0, false, &stChannel_);
-         FMODErrorCheck(result);
-         stChannel_->setMode(FMOD_LOOP_OFF);
+            result = system_->playSound(soundtrack_.front(), 0, false, &stChannel_);
+            FMODErrorCheck(result);
+            stChannel_->setMode(FMOD_LOOP_OFF);
+         } else {
+            altSoundtrack_.push(altSoundtrack_.front());
+            altSoundtrack_.pop();
+
+            result = system_->playSound(altSoundtrack_.front(), 0, false, &stChannel_);
+            FMODErrorCheck(result);
+            stChannel_->setMode(FMOD_LOOP_OFF);
+         }
       } else {
          FMODErrorCheck(result);
       }
@@ -91,6 +102,20 @@ void AudioManager::addTrack(std::string filename) {
    FMODErrorCheck(result);
 
    soundtrack_.push(sound);
+}
+
+void AudioManager::addAltTrack(std::string filename) {
+   FMOD_RESULT result;
+   FMOD::Sound *sound = NULL;
+
+   /* `createStream` should be used for any compressed files (mp3/wav) as it
+    * will buffer the file in chunks whereas `createSound` loads the entire
+    * file into memory and uncompresses it. That is fine for simple sounds. */
+   result = system_->createStream((audioPath_ + filename).c_str(),
+      FMOD_LOOP_NORMAL | FMOD_2D, 0, &sound);
+   FMODErrorCheck(result);
+
+   altSoundtrack_.push(sound);
 }
 
 void AudioManager::startSoundtrack() {
@@ -118,6 +143,31 @@ void AudioManager::pauseSoundtrack() {
       if (result != FMOD_OK && result != FMOD_ERR_INVALID_HANDLE) {
          FMODErrorCheck(result);
       }
+   }
+}
+
+void AudioManager::swapSoundtrack() {
+   FMOD_RESULT result;
+
+   // Flip the playlist toggle.
+   stPlaylistToggle = !stPlaylistToggle;
+
+   if (stChannel_) {
+      stChannel_->stop();
+   }
+
+   if (stPlaylistToggle) {
+      if (!soundtrack_.empty()) {
+         result = system_->playSound(soundtrack_.front(), 0, false, &stChannel_);
+         FMODErrorCheck(result);
+         stChannel_->setMode(FMOD_LOOP_OFF);
+      } 
+   } else {
+      if (!altSoundtrack_.empty()) {
+         result = system_->playSound(altSoundtrack_.front(), 0, false, &stChannel_);
+         FMODErrorCheck(result);
+         stChannel_->setMode(FMOD_LOOP_OFF);
+      } 
    }
 }
 

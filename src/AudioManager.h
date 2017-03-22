@@ -21,11 +21,17 @@ public:
    // Adds a song to the internal game soundtrack.
    void addTrack(std::string filename);
 
+   // Adds a song to the alternative internal game soundtrack.
+   void addAltTrack(std::string filename);
+
    // Starts the soundtrack.
    void startSoundtrack();
 
    // Pauses the soundtrack.
    void pauseSoundtrack();
+
+   // Swaps between alternative and regular soundtracks.
+   void swapSoundtrack();
 
    // Adds a sound effect. This loads the sound into memory so keep it small.
    void addEffect(std::string name, std::string filename);
@@ -34,6 +40,8 @@ public:
    void playEffect(std::string effectName);
 private:
    AudioManager();
+
+   bool stPlaylistToggle; // True for regular playlist, false for alt.
 
    inline void FMODErrorCheck(FMOD_RESULT result) {
       if (result != FMOD_OK) {
@@ -51,6 +59,9 @@ private:
 
    // Soundtrack of the game. Usually specified in the level loader.
    std::queue<FMOD::Sound*> soundtrack_;
+
+   // Alternative oundtrack of the game. Usually specified in the level loader.
+   std::queue<FMOD::Sound*> altSoundtrack_;
 
    // The channel of the current soundtrack song.
    FMOD::Channel* stChannel_;

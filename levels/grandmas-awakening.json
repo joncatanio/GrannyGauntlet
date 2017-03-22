@@ -778,9 +778,9 @@
          "object-name": "portalToHell",
          "object-type": "PORTAL_TO_HELL",
          "pos": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
+            "x": -27.96,
+            "y": 1.1,
+            "z": -93.57
          },
          "dir": {
             "x": 0.0,
@@ -3794,33 +3794,6 @@
             "z": 2.0
          },
          "yAxis-rotation-deg": -90.0,
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Rock05",
-            "shader": "Default",
-            "material": "white"
-         },
-         "deliverable": false
-      },
-      {
-         "object-name": "Rock05",
-         "object-type": "STATIC_OBJECT",
-         "pos": {
-            "x": -27.96,
-            "y": 1.1,
-            "z": -93.57
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 3.0,
-            "y": 3.0,
-            "z": 3.0
-         },
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "Rock05",

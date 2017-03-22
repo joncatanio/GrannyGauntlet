@@ -90,8 +90,6 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 				AudioManager& audioManager = AudioManager::instance();
 				audioManager.playEffect("Boing");
 
-                std::cout << "HIT." << " Score on hit: " << score << " Time bump: " << timeBump << std::endl;
-
 				// Other game state changes due to hit
                 gameManager.increaseTime(timeBump);
                 objHit->cookieDeliverable = false;

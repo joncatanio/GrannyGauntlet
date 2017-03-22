@@ -3,12 +3,12 @@
 
 #include "PhysicsComponent.h"
 
-class CookieHitBillboardPhysicsComponent : public PhysicsComponent {
+class MenuBillboardPhysicsComponent : public PhysicsComponent {
 public:
 
-	CookieHitBillboardPhysicsComponent() {}
+    MenuBillboardPhysicsComponent() {}
 
-	~CookieHitBillboardPhysicsComponent() {}
+	~MenuBillboardPhysicsComponent() {}
 
 	void initObjectPhysics() {}
 

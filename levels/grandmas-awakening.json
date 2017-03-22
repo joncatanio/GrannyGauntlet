@@ -27,6 +27,11 @@
          "default": false
       },
       {
+         "name": "Menu",
+         "file-prefix": "menu",
+         "default": false
+      },
+      {
          "name": "Particle",
          "file-prefix": "particle",
          "default": false
@@ -262,6 +267,38 @@
       {
          "name": "Ground_Hell",
          "filename": "ground_hell.jpg"
+      },
+      {
+         "name": "lost1",
+         "filename": "menu/lost1.png"
+      },
+      {
+         "name": "lost2",
+         "filename": "menu/lost2.png"
+      },
+      {
+         "name": "won1",
+         "filename": "menu/win1.png"
+      },
+      {
+         "name": "won2",
+         "filename": "menu/win2.png"
+      },
+      {
+         "name": "pause1",
+         "filename": "menu/pause1.png"
+      },
+      {
+         "name": "pause2",
+         "filename": "menu/pause2.png"
+      },
+      {
+         "name": "start1",
+         "filename": "menu/start1.png"
+      },
+      {
+         "name": "start2",
+         "filename": "menu/start2.png"
       }
    ],
    "level-materials": [
@@ -592,7 +629,7 @@
          "render-component": {
             "name": "PlayerRenderComponent",
             "shape": "Lowpolycar",
-            "shader": "Default",
+            "shader": "CookTorrance",
             "material": "Pearl"
          },
          "action-component": {
@@ -661,7 +698,7 @@
       },
       {
          "object-name": "skybox",
-         "object-type": "STATIC_OBJECT",
+         "object-type": "SKY_BOX",
          "pos": {
             "x": 0.0,
             "y": 0.0,
@@ -3824,7 +3861,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3833,9 +3870,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": -35.28,
+            "x": -48.28,
             "y": 1.0,
-            "z": -59.43
+            "z": -64.43
          },
          "dir": {
             "x": 0.0,
@@ -3854,7 +3891,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3884,7 +3921,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3914,7 +3951,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3944,7 +3981,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false

@@ -33,6 +33,10 @@ void GameWorld::rmStaticGameObject(std::shared_ptr<GameObject> obj) {
    staticGameObjectsToRemove_.push(obj);
 }
 
+void GameWorld::setMenu(std::shared_ptr <GameObject> menu) {
+    menu_ = menu;
+}
+
 void GameWorld::addLight(const std::shared_ptr<Light> light) {
 	switch(light->type) {
 		case LightType::POINT:
@@ -143,9 +147,12 @@ void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
         ps->update(totalTime, deltaTime, V);
     }
 
-
 	updateInternalGameObjectLists();
 	updateCount++;
+}
+
+void GameWorld::updateMenu() {
+	menu_->update(0.0);
 }
 
 void GameWorld::drawGameObjects() {
@@ -158,7 +165,7 @@ void GameWorld::drawGameObjects() {
 
 	WindowManager& windowManager = WindowManager::instance();
 
-	
+
 	// Create the matrix stacks
 	std::shared_ptr<MatrixStack> P = std::make_shared<MatrixStack>();
 	std::shared_ptr<MatrixStack> M = std::make_shared<MatrixStack>();
@@ -179,35 +186,45 @@ void GameWorld::drawGameObjects() {
 	V->loadIdentity();
 	V->lookAt(camera.getEye(), camera.getTarget(), camera.getUp());
 
-   // Calculate view frustum planes
-   viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
+    // Calculate view frustum planes
+    viewFrustum.extractPlanes(cullP->topMatrix(), V->topMatrix());
 
-	// Draw dynamic objects
-	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
+    // Draw dynamic objects
+    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
 
-		/* Every object needs to have a bounding box in order to cull.
-		* If an object doesn't have a bounding box, cull it so we don't create
-		* unseen problems with culling. */
-		std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
-		if (objBox != nullptr) {
-			if (!viewFrustum.cull(objBox)) {
-				obj->draw(P, M, V);
-			}
-		}
-		else {
-			obj->draw(P, M, V);
-		}
-	}
+        /* Every object needs to have a bounding box in order to cull.
+        * If an object doesn't have a bounding box, cull it so we don't create
+        * unseen problems with culling. */
+        std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
+        if (objBox != nullptr) {
+            if (!viewFrustum.cull(objBox)) {
+                obj->draw(P, M, V);
+            }
+        }
+        else {
+            obj->draw(P, M, V);
+        }
+    }
+    
+    // Draw static objects
+	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, true, P, M, V);
 
-	// Draw static objects
-	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
 
-	// Draw particles
+    // Draw particles
     for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
         if (!viewFrustum.cull(ps)) {
             ps->draw(P, M, V);
         }
     }
+
+	if(gameManager.getMenu()->isActive()) {
+		glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		menu_->draw(P, M, V);
+		glEnable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+	}
 
 	renderCount++;
 
@@ -249,31 +266,19 @@ void GameWorld::drawVFCViewport() {
    glViewport(0, 0, (windowManager.getViewHeight() / 3.0),
       windowManager.getViewHeight() / 3.0);
    P->pushMatrix();
-   P->ortho(-15.0f, 15.0f, -15.0f, 15.0f, 2.1f, 100.0f);
+   P->ortho(-50.0f, 50.0f, -50.0f, 50.0f, 2.1f, 101.0f);
    V->pushMatrix();
    V->loadIdentity();
-   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 8, 0), camera.getNoSpringEye(),
-      camera.getLookAt() - camera.getNoSpringEye());
+   V->lookAt(camera.getNoSpringEye() + glm::vec3(0, 100.0, 0), camera.getNoSpringEye(),
+      glm::vec3(-1, 0, 0));
 
    // Draw dynamic objects
    for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
-
-	   /* Every object needs to have a bounding box in order to cull.
-	   * If an object doesn't have a bounding box, cull it so we don't create
-	   * unseen problems with culling. */
-	   std::shared_ptr<BoundingBox> objBox = obj->getBoundingBox();
-	   if (objBox != nullptr) {
-		   if (!viewFrustum.cull(objBox)) {
-			   obj->draw(P, M, V);
-		   }
-	   }
-	   else {
-		   obj->draw(P, M, V);
-	   }
+		obj->draw(P, M, V);
    }
 
    // Draw static objects
-   staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, P, M, V);
+   staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, false, P, M, V);
 }
 
 std::vector<std::shared_ptr<GameObject>> GameWorld::checkCollision(std::shared_ptr<GameObject> objToCheck) {

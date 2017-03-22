@@ -583,7 +583,7 @@
          "render-component": {
             "name": "PlayerRenderComponent",
             "shape": "Lowpolycar",
-            "shader": "Default",
+            "shader": "CookTorrance",
             "material": "Pearl"
          },
          "action-component": {
@@ -3815,7 +3815,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3824,9 +3824,9 @@
          "object-name": "fire hydrant",
          "object-type": "DYNAMIC_OBJECT",
          "pos": {
-            "x": -35.28,
+            "x": -48.28,
             "y": 1.0,
-            "z": -59.43
+            "z": -64.43
          },
          "dir": {
             "x": 0.0,
@@ -3845,7 +3845,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3875,7 +3875,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3905,7 +3905,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false
@@ -3935,7 +3935,7 @@
          "render-component": {
             "name": "WallRenderComponent",
             "shape": "FireHydrant",
-            "shader": "Default",
+            "shader": "Toon",
             "material": "Ruby"
          },
          "deliverable": false

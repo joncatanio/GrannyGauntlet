@@ -111,14 +111,18 @@ void WindowManager::checkForUserChanges() {
     if (!menuKeyWasPressed && isKeyPressed(GLFW_KEY_ESCAPE)) {
         // Should close the GLFW window
         //glfwSetWindowShouldClose(window_, GL_TRUE);
-        gameManager.getMenu()->toggleMenuActive();
+
         menuKeyWasPressed = true;
 
-        if(gameManager.getMenu()->isActive()) {
+        if(!gameManager.getMenu()->isActive()) {
+            gameManager.getMenu()->toggleMenuActive();
             gameManager.getMenu()->menuStartTime_ = glfwGetTime();
         } else {
-            gameManager.getMenu()->leftMenuThisFrame_ = true;
-            gameManager.getMenu()->menuTime_ = glfwGetTime() - gameManager.getMenu()->menuStartTime_;
+            if(gameManager.getMenu()->isInPause()) {
+                gameManager.getMenu()->toggleMenuActive();
+                gameManager.getMenu()->leftMenuThisFrame_ = true;
+                gameManager.getMenu()->menuTime_ = glfwGetTime() - gameManager.getMenu()->menuStartTime_;
+            }
         }
     }
     if (menuKeyWasPressed && !isKeyPressed(GLFW_KEY_ESCAPE)) {

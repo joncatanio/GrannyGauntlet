@@ -26,11 +26,14 @@ public:
 
     void setStartMenu();
     void setPauseMenu();
+    void setWonMenu();
+    void setLostMenu();
 
     void performMenuAction();
 
     void toggleMenuActive();
     bool isActive();
+    bool isInPause();
 
 private:
 
@@ -38,6 +41,7 @@ private:
 
     int selectedMenuItem = 0;
     bool inStartMenu = true;
+    bool pauseMenuActive = false;
 
     std::vector<std::shared_ptr<GameObject>> currentMenu;
     std::vector<std::shared_ptr<GameObject>> startMenu;

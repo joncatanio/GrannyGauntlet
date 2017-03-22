@@ -81,11 +81,15 @@ Menu* GameManager::getMenu() {
 void GameManager::showScore() {
     if(gameOver_) {
         if(time_ <= 0.0) {
-            std::cout << "YOU LOST!" << std::endl;
+            //std::cout << "YOU LOST!" << std::endl;
+            menu_->setLostMenu();
+            menu_->toggleMenuActive();
         } else {
-            std::cout << "YOU WON!" << std::endl;
-            std::cout << "Time left: " << time_ << std::endl;
+            //std::cout << "YOU WON!" << std::endl;
+            //std::cout << "Time left: " << time_ << std::endl;
             reportScore(time_ * 100);
+            menu_->setWonMenu();
+            menu_->toggleMenuActive();
         }
     }
 	std::cout << "SCORE " << score_ << std::endl;

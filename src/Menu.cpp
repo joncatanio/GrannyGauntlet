@@ -29,7 +29,7 @@ void Menu::init() {
 
     MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentS1 = new MenuBillboardPhysicsComponent();
     BillboardRenderComponent* billboardRenderComponentS1 = new BillboardRenderComponent(
-            shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), textureManager.getTexture("start1"));
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("start1"));
     std::shared_ptr<GameObject> start1 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
                                                                          glm::vec3(0.0),
                                                                          glm::vec3(0.0f, 1.0f, 0.0f),
@@ -45,7 +45,7 @@ void Menu::init() {
 
     MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentS2 = new MenuBillboardPhysicsComponent();
     BillboardRenderComponent* billboardRenderComponentS2 = new BillboardRenderComponent(
-            shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), textureManager.getTexture("start2"));
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("start2"));
     std::shared_ptr<GameObject> start2 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
                                                                       glm::vec3(0.0),
                                                                       glm::vec3(0.0f, 1.0f, 0.0f),
@@ -61,7 +61,7 @@ void Menu::init() {
 
     MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentP1 = new MenuBillboardPhysicsComponent();
     BillboardRenderComponent* billboardRenderComponentP1 = new BillboardRenderComponent(
-            shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), textureManager.getTexture("pause1"));
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("pause1"));
     std::shared_ptr<GameObject> pause1 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
                                                                       glm::vec3(0.0),
                                                                       glm::vec3(0.0f, 1.0f, 0.0f),
@@ -77,7 +77,7 @@ void Menu::init() {
 
     MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentP2 = new MenuBillboardPhysicsComponent();
     BillboardRenderComponent* billboardRenderComponentP2 = new BillboardRenderComponent(
-            shapeManager.getShape("Cube"), "Billboard", materialManager.getMaterial("Bright Green"), textureManager.getTexture("pause2"));
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("pause2"));
     std::shared_ptr<GameObject> pause2 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
                                                                       glm::vec3(0.0),
                                                                       glm::vec3(0.0f, 1.0f, 0.0f),
@@ -92,7 +92,72 @@ void Menu::init() {
     pauseMenu.push_back(pause2);
 
 
+    MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentW1 = new MenuBillboardPhysicsComponent();
+    BillboardRenderComponent* billboardRenderComponentW1 = new BillboardRenderComponent(
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("won1"));
+    std::shared_ptr<GameObject> won1 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+                                                                      glm::vec3(0.0),
+                                                                      glm::vec3(0.0f, 1.0f, 0.0f),
+                                                                      0.0f,
+                                                                      glm::vec3(5.0f),
+                                                                      nullptr,
+                                                                      menuBillboardPhysicsComponentW1,
+                                                                      billboardRenderComponentW1,
+                                                                      nullptr
+    );
+    won1->initComponents();
+    winMenu.push_back(won1);
 
+    MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentW2 = new MenuBillboardPhysicsComponent();
+    BillboardRenderComponent* billboardRenderComponentW2 = new BillboardRenderComponent(
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("won2"));
+    std::shared_ptr<GameObject> won2 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+                                                                      glm::vec3(0.0),
+                                                                      glm::vec3(0.0f, 1.0f, 0.0f),
+                                                                      0.0f,
+                                                                      glm::vec3(5.0f),
+                                                                      nullptr,
+                                                                      menuBillboardPhysicsComponentW2,
+                                                                      billboardRenderComponentW2,
+                                                                      nullptr
+    );
+    won2->initComponents();
+    winMenu.push_back(won2);
+
+
+
+    MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentL1 = new MenuBillboardPhysicsComponent();
+    BillboardRenderComponent* billboardRenderComponentL1 = new BillboardRenderComponent(
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("lost1"));
+    std::shared_ptr<GameObject> lost1 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+                                                                      glm::vec3(0.0),
+                                                                      glm::vec3(0.0f, 1.0f, 0.0f),
+                                                                      0.0f,
+                                                                      glm::vec3(5.0f),
+                                                                      nullptr,
+                                                                      menuBillboardPhysicsComponentL1,
+                                                                      billboardRenderComponentL1,
+                                                                      nullptr
+    );
+    lost1->initComponents();
+    lostMenu.push_back(lost1);
+
+
+    MenuBillboardPhysicsComponent* menuBillboardPhysicsComponentL2 = new MenuBillboardPhysicsComponent();
+    BillboardRenderComponent* billboardRenderComponentL2 = new BillboardRenderComponent(
+            shapeManager.getShape("Cube"), "Menu", materialManager.getMaterial("Bright Green"), textureManager.getTexture("lost2"));
+    std::shared_ptr<GameObject> lost2 = std::make_shared<GameObject>(GameObjectType::DYNAMIC_OBJECT,
+                                                                      glm::vec3(0.0),
+                                                                      glm::vec3(0.0f, 1.0f, 0.0f),
+                                                                      0.0f,
+                                                                      glm::vec3(5.0f),
+                                                                      nullptr,
+                                                                      menuBillboardPhysicsComponentL2,
+                                                                      billboardRenderComponentL2,
+                                                                      nullptr
+    );
+    lost2->initComponents();
+    lostMenu.push_back(lost2);
 
     setStartMenu();
     gameManager.getGameWorld().setMenu(currentMenu[0]);
@@ -100,10 +165,26 @@ void Menu::init() {
 
 void Menu::setStartMenu() {
     currentMenu = startMenu;
+    pauseMenuActive = false;
+    changeMenuItem();
 }
 
 void Menu::setPauseMenu() {
     currentMenu = pauseMenu;
+    pauseMenuActive = true;
+    changeMenuItem();
+}
+
+void Menu::setWonMenu() {
+    currentMenu = winMenu;
+    pauseMenuActive = false;
+    changeMenuItem();
+}
+
+void Menu::setLostMenu() {
+    currentMenu = lostMenu;
+    pauseMenuActive = false;
+    changeMenuItem();
 }
 
 void Menu::changeMenuItem() {
@@ -133,7 +214,7 @@ void Menu::performMenuAction() {
 
     if(inStartMenu) {
         inStartMenu = false;
-        currentMenu = pauseMenu;
+        setPauseMenu();
     }
 
     selectedMenuItem = 0;
@@ -146,4 +227,8 @@ void Menu::toggleMenuActive() {
 
 bool Menu::isActive() {
     return isActive_;
+}
+
+bool Menu::isInPause() {
+    return pauseMenuActive;
 }

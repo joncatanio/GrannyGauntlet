@@ -222,8 +222,11 @@ void GameWorld::drawGameObjects() {
 
 	if(gameManager.getMenu()->isActive()) {
 		glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		menu_->draw(P, M, V);
 		glEnable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
 	}
 
 	renderCount++;

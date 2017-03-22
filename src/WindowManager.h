@@ -61,6 +61,8 @@ public:
 	// Updates the current cursor position to a new location
 	void updateCursorPosition(float newX, float newY);
 
+    // Closes the window
+    void close();
 private:
 
 	// Main application window (left as a normal pointer for easier use with GLFW functions)
@@ -88,6 +90,9 @@ private:
 
 	//TODO(nurgan) better solution
 	bool mWasPressed = false;
+	bool menuKeyWasPressed = false;
+	bool upWasPressed = false;
+	bool downWasPressed = false;
 
 	// Initializes general boiler-plate GLFW code
 	int initializeGLFW();

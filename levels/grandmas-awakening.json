@@ -251,8 +251,40 @@
          "filename": "Forest_1x1_Yellow_DIFF.jpg"
       },
       {
-         "name": "Cookie_Texture",
-         "filename": "cookie_texture.jpg"
+      "name": "Cookie_Texture",
+      "filename": "cookie_texture.jpg"
+      },
+      {
+         "name": "lost1",
+         "filename": "menu/lost1.jpg"
+      },
+      {
+         "name": "lost2",
+         "filename": "menu/lost2.jpg"
+      },
+      {
+         "name": "won1",
+         "filename": "menu/win1.jpg"
+      },
+      {
+         "name": "won2",
+         "filename": "menu/win2.jpg"
+      },
+      {
+         "name": "pause1",
+         "filename": "menu/pause1.jpg"
+      },
+      {
+         "name": "pause2",
+         "filename": "menu/pause2.jpg"
+      },
+      {
+         "name": "start1",
+         "filename": "menu/start1.jpg"
+      },
+      {
+         "name": "start2",
+         "filename": "menu/start2.jpg"
       }
    ],
    "level-materials": [

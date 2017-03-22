@@ -40,8 +40,9 @@ public:
    // Returns an object that intersects with the past object. Returns |nullptr| if no such object exists
    std::vector<std::shared_ptr<GameObject>> checkIntersection(std::shared_ptr<GameObject> objToCheck);
 
-   // Draws all objects within the given view frustum
-   void cullAndDrawObjs(ViewFrustum& viewFrustum, std::shared_ptr<MatrixStack> P,
+   // Draws all objects within the given view frustum, if nullptr is passed in
+   // as viewFrustum, all objects will be drawn
+   void cullAndDrawObjs(ViewFrustum& viewFrustum, bool cull, std::shared_ptr<MatrixStack> P,
 	   std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V);
 
 private:

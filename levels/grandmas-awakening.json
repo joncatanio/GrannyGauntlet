@@ -94,7 +94,8 @@
       },
       {
          "name": "Tex_Cube",
-         "filename": "tex_cube.obj"
+         "filename": "tex_cube.obj",
+         "manual_texture": ["Ground", "Ground_Hell"]
       },
       {
          "name": "Sphere",
@@ -256,8 +257,16 @@
          "filename": "Forest_1x1_Yellow_DIFF.jpg"
       },
       {
-      "name": "Cookie_Texture",
-      "filename": "cookie_texture.jpg"
+         "name": "Cookie_Texture",
+         "filename": "cookie_texture.jpg"
+      },
+      {
+         "name": "Ground",
+         "filename": "ground.jpg"
+      },
+      {
+         "name": "Ground_Hell",
+         "filename": "ground_hell.jpg"
       },
       {
          "name": "lost1",
@@ -711,7 +720,7 @@
          },
          "render-component": {
             "name": "SkyboxRenderComponent",
-            "skybox-path": "skybox/bluesky/",
+            "skybox-path": "skybox/toonsky/",
             "file-extension": "jpg",
             "shape": "Cube",
             "shader": "Cubemap",

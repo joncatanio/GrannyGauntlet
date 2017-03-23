@@ -1,0 +1,55 @@
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert3SG
+illum 4
+Kd 0.00 0.40 1.00
+Ka 0.00 0.00 0.00
+Tf 0.03 0.03 0.03
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd car_cartoon_free_style_wheel_chrome_vehicle_detail_auto_wheels_rim_tire_tires_alloy_titanium_auto_detail_rims_tyre.jpg
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl lambert6SG
+illum 4
+Kd 0.66 0.66 0.14
+Ka 0.00 0.00 0.00
+Tf 0.97 0.97 0.97
+bump headlight bump map.jpg -bm 1
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert11SG
+illum 4
+Kd 0.10 0.10 0.10
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl phong2SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl phong5SG
+illum 4
+Kd 0.33 0.07 0.07
+Ka 0.00 0.00 0.00
+Tf 0.85 0.85 0.85
+Ni 1.00
+Ks 0.50 0.50 0.50

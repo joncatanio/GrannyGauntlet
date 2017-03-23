@@ -35,6 +35,9 @@ public:
     bool isActive();
     bool isInPause();
 
+    std::vector<std::shared_ptr<GameObject>> currentMenu;
+    std::vector<std::shared_ptr<GameObject>> winMenu;
+
 private:
 
     bool isActive_ = true;
@@ -43,10 +46,8 @@ private:
     bool inStartMenu = true;
     bool pauseMenuActive = false;
 
-    std::vector<std::shared_ptr<GameObject>> currentMenu;
     std::vector<std::shared_ptr<GameObject>> startMenu;
     std::vector<std::shared_ptr<GameObject>> pauseMenu;
-    std::vector<std::shared_ptr<GameObject>> winMenu;
     std::vector<std::shared_ptr<GameObject>> lostMenu;
 
     void changeMenuItem();

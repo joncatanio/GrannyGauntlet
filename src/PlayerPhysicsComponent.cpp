@@ -57,7 +57,7 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
       for (auto objHit : objsHit) {
          GameObjectType objTypeHit = objHit->type;
 
-         if (objTypeHit == GameObjectType::STATIC_OBJECT) {
+         if (objTypeHit == GameObjectType::STATIC_OBJECT || objTypeHit == GameObjectType::FINISH_OBJECT) {
             std::shared_ptr<BoundingBox> objHitBB = objHit->getBoundingBox();
             glm::vec3 normalOfObjHit = objHitBB->calcReflNormal(getBoundingBox(), 0.1f);
 

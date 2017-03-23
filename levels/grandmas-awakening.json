@@ -233,6 +233,27 @@
          "name": "DeadTree05",
          "filename": "Forest_B_DeadTree_05.obj",
          "manual_texture": ["Tree_Yellow", "Tree_White"]
+      },
+      {
+         "name": "StreetLamp2",
+         "filename": "StreetLamp2.obj",
+         "manual_texture": "Grey_Concrete"
+      },
+      {
+         "name": "BabyStroller",
+         "filename": "baby_car_final_rounded.obj"
+      },
+      {
+         "name": "Mailbox",
+         "filename": "Mailbox_Toon.obj"
+      },
+      {
+         "name": "StopSign",
+         "filename": "stop_sign.obj"
+      },
+      {
+         "name": "GrandpaCar",
+         "filename": "grandpa_car.obj"
       }
    ],
    "level-textures": [
@@ -299,6 +320,10 @@
       {
          "name": "start2",
          "filename": "menu/start2.png"
+      },
+      {
+         "name": "Grey_Concrete",
+         "filename": "grey-concrete-texture"
       }
    ],
    "level-materials": [

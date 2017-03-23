@@ -598,6 +598,11 @@
          "name": "PowTextPng",
          "texture": "billboard/powtext.png",
          "random": true
+      },
+      {
+         "name": "KaPowJpg",
+         "texture": "billboard/kapow.jpg",
+         "random": true
       }
    ],
    "characters": [

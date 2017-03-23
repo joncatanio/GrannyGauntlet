@@ -34,7 +34,7 @@ private:
     std::shared_ptr<GameObject> gameObj4;
     AimInputComponent* aimInputComponent;
     std::shared_ptr<Shape> cookieShape;
-    float xRot = 0.0;
+    float xRot = M_PI / 6.0;
     float yRot = 0.0;
     float startVelocity = 20.0f;
     double previousCookieTime = 0.0;

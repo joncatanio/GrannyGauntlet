@@ -17,7 +17,7 @@
 #include "ActionComponent.h"
 #include "MaterialManager.h"
 
-enum class GameObjectType { PLAYER, SKY_BOX, STATIC_OBJECT, DYNAMIC_OBJECT, FINISH_OBJECT };
+enum class GameObjectType { PLAYER, SKY_BOX, HELL_BOX, PORTAL_TO_HELL, STATIC_OBJECT, DYNAMIC_OBJECT, FINISH_OBJECT };
 
 class GameObject : public std::enable_shared_from_this<GameObject> {
 public:
@@ -126,6 +126,9 @@ public:
    // Initializes a new powerup that is held in the GameObject internal state
    void initPowerup(std::string type, float time);
 
+    // Reset deliverability status
+    void resetDeliverable();
+
 private:
 
     // The current position of the object in world space
@@ -167,6 +170,9 @@ private:
     // Power-up state and modifiers
     double speedPowerRemaining;
     void updatePowerups(double detlaTime);
+
+    // Save if this house was deliverable
+    bool wasDeliverable_;
 };
 
 #endif

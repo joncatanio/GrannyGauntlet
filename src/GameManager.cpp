@@ -1,5 +1,7 @@
 #include "GameManager.h"
 
+#include "AudioManager.h"
+
 GameManager& GameManager::instance() {
 	static GameManager *instance = new GameManager();
 	return *instance;
@@ -45,7 +47,6 @@ void GameManager::printInfoToConsole(float currentFPS) {
 
 void GameManager::reportScore(float score) {
 	score_ += score;
-    std::cout << "Score: " << score_ << " (+" << score << ")" << std::endl;
 }
 
 void GameManager::setTime(float time) {
@@ -78,15 +79,26 @@ void GameManager::setMenu(Menu *menu) {
 Menu* GameManager::getMenu() {
     return  menu_;
 }
+
+void GameManager::enterHell() {
+    if(!hellMode_) {
+        hellMode_ = true;
+        currentWorld_->resetDeliverables();
+        AudioManager::instance().swapSoundtrack();
+        setTime(666.0f);
+    }
+}
+
+bool GameManager::isInHellMode() {
+    return hellMode_;
+}
+
 void GameManager::showScore() {
     if(gameOver_) {
         if(time_ <= 0.0) {
-            //std::cout << "YOU LOST!" << std::endl;
             menu_->setLostMenu();
             menu_->toggleMenuActive();
         } else {
-            //std::cout << "YOU WON!" << std::endl;
-            //std::cout << "Time left: " << time_ << std::endl;
             reportScore(time_ * 100);
             menu_->setWonMenu();
             menu_->toggleMenuActive();

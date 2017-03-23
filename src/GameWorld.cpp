@@ -1,5 +1,6 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <algorithm>
+#include <memory>
 
 #include "CookieActionComponent.h"
 #include "GameManager.h"
@@ -9,6 +10,7 @@
 #include "ShapeManager.h"
 #include "MaterialManager.h"
 #include "WindowManager.h"
+#include "SkyboxRenderComponent.h"
 
 GameWorld::GameWorld()
 	: updateCount(0),
@@ -35,6 +37,14 @@ void GameWorld::rmStaticGameObject(std::shared_ptr<GameObject> obj) {
 
 void GameWorld::setMenu(std::shared_ptr <GameObject> menu) {
     menu_ = menu;
+}
+
+void GameWorld::setSkybox(std::shared_ptr <GameObject> skybox) {
+    skybox_ = skybox;
+}
+
+void GameWorld::setHellbox(std::shared_ptr <GameObject> hellbox) {
+    hellbox_ = hellbox;
 }
 
 void GameWorld::addLight(const std::shared_ptr<Light> light) {
@@ -114,6 +124,7 @@ void GameWorld::init() {
 	}
 
 	staticGameObjectsTree_.buildTree();
+
 }
 
 void GameWorld::updateGameObjects(double deltaTime, double totalTime) {
@@ -209,6 +220,12 @@ void GameWorld::drawGameObjects() {
     // Draw static objects
 	staticGameObjectsTree_.cullAndDrawObjs(viewFrustum, true, P, M, V);
 
+    // Draw skybox
+    if(!gameManager.isInHellMode()) {
+        skybox_->draw(P, M, V);
+    } else {
+        hellbox_->draw(P, M, V);
+    }
 
     // Draw particles
     for (std::shared_ptr<ParticleSystem> ps : particleSystems_) {
@@ -401,4 +418,14 @@ void GameWorld::updateInternalGameObjectLists() {
 
         particleSystemsToRemove_.pop();
     }
+}
+
+void GameWorld::resetDeliverables() {
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
+		obj->resetDeliverable();
+	}
+
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+		obj->resetDeliverable();
+	}
 }

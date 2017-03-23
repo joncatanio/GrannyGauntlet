@@ -100,14 +100,6 @@ void WindowManager::checkForUserChanges() {
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
     }
 
-    if (isKeyPressed(GLFW_KEY_M) && !mWasPressed) {
-        textureManager.increaseTextureToggle();
-        mWasPressed = true;
-    }
-    if (!isKeyPressed(GLFW_KEY_M)) {
-        mWasPressed = false;
-    }
-
     if (!menuKeyWasPressed && isKeyPressed(GLFW_KEY_ESCAPE)) {
         // Should close the GLFW window
         //glfwSetWindowShouldClose(window_, GL_TRUE);
@@ -157,6 +149,7 @@ void WindowManager::checkForUserChanges() {
         }
 
     }
+
 
 
 }

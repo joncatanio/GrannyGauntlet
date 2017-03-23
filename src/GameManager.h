@@ -85,6 +85,12 @@ public:
 	// Returns true if the game is currently in the menu
 	bool isInMenu();
 
+	// Toggles the hell mode stat
+	void enterHell();
+
+	// Returns if in hellmode
+	bool isInHellMode();
+
     static constexpr float cullFarPlane = 100.0;
     static constexpr float camFarPlane = 300.0;
     static constexpr float nearPlane = 0.01;
@@ -109,7 +115,7 @@ private:
 
     float time_;
 
-
+	bool hellMode_ = false;
 
 };
 

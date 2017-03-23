@@ -267,10 +267,14 @@ int LevelLoader::parseCharacters(GameWorld &world,
 int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
    if (staticObjs != nullptr) {
       for (json gameObj : staticObjs) {
-         std::shared_ptr<GameObject> staticGameObj;
-         if (gameObj["object-type"] == "SKY_BOX") {
-            staticGameObj = createGameObject(gameObj, GameObjectType::SKY_BOX); 
-         } else {
+          std::shared_ptr<GameObject> staticGameObj;
+          if (gameObj["object-type"] == "SKY_BOX") {
+              staticGameObj = createGameObject(gameObj, GameObjectType::SKY_BOX);
+          } else if(gameObj["object-type"] == "HELL_BOX") {
+              staticGameObj = createGameObject(gameObj, GameObjectType::HELL_BOX);
+          } else if(gameObj["object-type"] == "PORTAL_TO_HELL") {
+              staticGameObj = createGameObject(gameObj, GameObjectType::PORTAL_TO_HELL);
+          }else {
             staticGameObj = createGameObject(gameObj, GameObjectType::STATIC_OBJECT); 
          }
 
@@ -279,9 +283,18 @@ int LevelLoader::parseStaticObjects(GameWorld &world, json staticObjs) {
             float yRotRad = static_cast<float>(gameObj["yAxis-rotation-deg"]) * M_PI / 180.0f;
             staticGameObj->setYAxisRotation(yRotRad);
          }
-         world.addStaticGameObject(staticGameObj);
+
+         if (gameObj["object-type"] == "SKY_BOX") {
+            world.setSkybox(staticGameObj);
+         } else if(gameObj["object-type"] == "HELL_BOX") {
+             world.setHellbox(staticGameObj);
+         } else {
+            world.addStaticGameObject(staticGameObj);
+         }
       }
    }
+
+
 
    return 0;
 }

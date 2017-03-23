@@ -24,6 +24,7 @@ GameObject::GameObject(GameObjectType objType,
 	type(objType),
 	toggleMovement(false),
       cookieDeliverable(deliverable),
+      wasDeliverable_(deliverable),
    fracture(false),
 	orientAngle_(0),
 	yRotationAngle_(0),
@@ -291,6 +292,8 @@ GameObjectType GameObject::stringToType(std::string type) {
 		return GameObjectType::DYNAMIC_OBJECT;
 	} else if(type == "FINISH_OBJECT") {
 		return GameObjectType::FINISH_OBJECT;
+	} else if(type =="PORTAL_TO_HELL") {
+		return GameObjectType::PORTAL_TO_HELL;
 	} else {
 		//default to static object
 		return GameObjectType::STATIC_OBJECT;
@@ -329,4 +332,8 @@ void GameObject::updatePowerups(double deltaTime) {
    if (speedPowerRemaining < 0) {
       maxForwardVel = 12.0f;
    }
+}
+
+void GameObject::resetDeliverable() {
+    cookieDeliverable = wasDeliverable_;
 }

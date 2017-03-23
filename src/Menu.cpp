@@ -205,9 +205,25 @@ void Menu::selectedItemDown() {
 void Menu::performMenuAction() {
     //TODO(nurgan) check for state
     if(selectedMenuItem == 0) {
-        toggleMenuActive();
-        leftMenuThisFrame_ = true;
-        menuTime_ = glfwGetTime() - menuStartTime_;
+		if (currentMenu == winMenu) {
+			WindowManager::instance().close();
+		}
+		else {
+			toggleMenuActive();
+			leftMenuThisFrame_ = true;
+			menuTime_ = glfwGetTime() - menuStartTime_;
+
+			GameManager& gameManager = GameManager::instance();
+			if (currentMenu == lostMenu && gameManager.getTime() <= 0.0f) {
+
+				// If the player has lost due to running out of time let them continue to explore
+				// but nullify the run
+				gameManager.increaseTime(9999.0f);
+				gameManager.reportScore(-999999.0f);
+				gameManager.gameOver_ = false;
+				setPauseMenu();
+			}
+		}
     } else if(selectedMenuItem == 1) {
         WindowManager::instance().close();
     }

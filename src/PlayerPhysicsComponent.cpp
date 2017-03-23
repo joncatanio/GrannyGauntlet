@@ -57,7 +57,13 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
             }
          }
          if (objTypeHit == GameObjectType::FINISH_OBJECT) {
-            GameManager::instance().gameOver_ = true;
+			 GameManager& gameManager = GameManager::instance();
+			gameManager.gameOver_ = true;
+
+			if (gameManager.getScore() < 0) {
+				// If the player has a negative score, don't give a time bonus
+				gameManager.setTime(1.0f);
+			}
          }
       }
 

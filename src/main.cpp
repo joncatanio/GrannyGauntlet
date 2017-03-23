@@ -115,9 +115,7 @@ int main(int argc, char **argv) {
 
     audioManager.startSoundtrack();
 
-
     while (!windowManager.isClosed()) {
-
 
         // Poll for and process events
         windowManager.pollEvents();
@@ -144,7 +142,6 @@ int main(int argc, char **argv) {
                     gameManager.showScore();
                     //return EXIT_SUCCESS;
                 }
-
 
                 elapsedTime -= deltaTime;
                 totalTime += deltaTime;

@@ -107,10 +107,11 @@ void WindowManager::checkForUserChanges() {
         shaderManager.setDefaultShader(shaderManager.ToonShader);
 
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
-    }
+    } 
 
     // Hacks
-    bool isDPadDownPressed = false, isDPadUpPressed = false, isPauseButtonPressed = false, isXBtnPressed;
+    bool isDPadDownPressed = false, isDPadUpPressed = false, isPauseButtonPressed = false, isXBtnPressed = false;
+    bool isRightJoyPressed = false;
     if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
        int count;
        const unsigned char* btns = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count);  
@@ -124,8 +125,18 @@ void WindowManager::checkForUserChanges() {
        isDPadUpPressed = btns[14] == GLFW_PRESS ? true : false;
        // X button
        isXBtnPressed = btns[1] == GLFW_PRESS ? true : false;
+       // Right joy button
+       isRightJoyPressed = btns[11] == GLFW_PRESS ? true : false;
     } else {
        isDPadUpPressed = isDPadDownPressed = isPauseButtonPressed = isXBtnPressed = false;
+    }
+
+    if (isKeyPressed(GLFW_KEY_O) || isRightJoyPressed) {
+        glm::vec3 startPos = glm::vec3(45.0, 0.7, -70.0);
+        gameManager.getPlayer()->setPosition(startPos);
+        if (gameManager.getScore() - 200 >= 0) {
+           gameManager.reportScore(-200);
+        }
     }
 
     if (!menuKeyWasPressed && (isKeyPressed(GLFW_KEY_ESCAPE) || isPauseButtonPressed)) {

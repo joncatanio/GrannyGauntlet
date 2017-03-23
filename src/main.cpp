@@ -104,6 +104,7 @@ int main(int argc, char **argv) {
     world.init();
 
     gameManager.setTime(15.0);
+	gameManager.setGlobalColorScale(1.0f);
 
     // Loop until the user closes the window
     int numFramesInSecond = 0;

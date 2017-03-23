@@ -114,3 +114,11 @@ float GameManager::getScore() {
 float GameManager::getTime() {
    return time_;
 }
+
+void GameManager::setGlobalColorScale(const float colorScale) {
+	globalColorScale_ = colorScale;
+}
+
+float GameManager::getGlobalColorScale() {
+	return globalColorScale_;
+}

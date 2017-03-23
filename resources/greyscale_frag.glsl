@@ -36,6 +36,8 @@ uniform vec3 MatSpc;
 uniform float MatShiny;
 uniform float MatAlpha;
 
+uniform float colorScale;
+
 uniform mat4 M;
 uniform mat4 V;
 
@@ -252,8 +254,10 @@ void main() {
 
 	// Calculate the total color
 	vec4 shadedColor = shadowFactor * vec4(directionalLightColor, MatAlpha);
-	
-	// Calculate the greyscale values for the color
-	float lumiosity = 0.21 * shadedColor.r + 0.72 * shadedColor.g + 0.07 * shadedColor.b;
-	color = vec4(vec3(lumiosity), 1.0);
+
+	// Calculate the greyscale color value
+	float greyColor = dot(shadedColor.xyz, vec3(0.3, 0.59, 0.11));
+
+	// Interpolate the shaded color dotted with the grey color over the current color amount
+    color = mix(vec4(vec3(greyColor), MatAmb), shadedColor, colorScale);
 }

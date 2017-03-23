@@ -39,6 +39,9 @@ public:
    // Object is being fractured
    bool fracture;
 
+   // Can the player move (hack hack hack)
+   bool canMove = false;
+
 	// Constructs a new GameObject using the given components.
 	// A NULL component will not be used
 	GameObject(GameObjectType objType,

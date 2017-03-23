@@ -17,10 +17,14 @@ PlayerInputComponent::~PlayerInputComponent() {
 }
 
 void PlayerInputComponent::pollInput() {
-   if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
-      pollGamepad();
-   } else {
-      pollKeyboard();
+
+   if (holder_->canMove) {
+      if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
+         pollGamepad();
+      }
+      else {
+         pollKeyboard();
+      }
    }
 }
 

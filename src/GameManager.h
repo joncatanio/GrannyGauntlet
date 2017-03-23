@@ -91,6 +91,12 @@ public:
 	// Returns if in hellmode
 	bool isInHellMode();
 
+	// Sets the global color scale for things like houses (greyscale mode)
+	void setGlobalColorScale(const float colorScale);
+
+	// Gets the global color scale for things like houses (greyscale mode)
+	float getGlobalColorScale();
+
     static constexpr float cullFarPlane = 100.0;
     static constexpr float camFarPlane = 300.0;
     static constexpr float nearPlane = 0.01;
@@ -116,6 +122,8 @@ private:
     float time_;
 
 	bool hellMode_ = false;
+
+	float globalColorScale_;
 
 };
 

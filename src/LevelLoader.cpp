@@ -7,6 +7,7 @@
 #include "PlayerRenderComponent.h"
 #include "CookieActionComponent.h"
 #include "FireHydrantPhysicsComponent.h"
+#include "FractureObjectPhysicsComponent.h"
 #include "SkyboxRenderComponent.h"
 
 // Manager headers
@@ -306,6 +307,11 @@ int LevelLoader::parseDynamicObjects(GameWorld &world, json dynamicObjs) {
             createGameObject(gameObj, GameObjectType::DYNAMIC_OBJECT); 
 
          dynamicGameObj->initComponents();
+		 if (gameObj["yAxis-rotation-deg"] != nullptr) {
+			 float yRotRad = static_cast<float>(gameObj["yAxis-rotation-deg"]) * M_PI / 180.0f;
+			 dynamicGameObj->setYAxisRotation(yRotRad);
+		 }
+
          world.addDynamicGameObject(dynamicGameObj);
       }
    }
@@ -424,6 +430,8 @@ PhysicsComponent* LevelLoader::getPhysicsComponent(json obj) {
       return new PlayerPhysicsComponent();
    } else if (componentName == "FireHydrantPhysicsComponent") {
       return new FireHydrantPhysicsComponent();
+   } else if (componentName == "FractureObjectPhysicsComponent") {
+	  return new FractureObjectPhysicsComponent();
    }
 
    return nullptr;

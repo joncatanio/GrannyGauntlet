@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib gg - baby car final rounded.mtl
+mtllib baby_car_final_rounded.mtl
 g default
 v -0.777645 0.394828 1.189231
 v -0.772729 0.389498 1.188182

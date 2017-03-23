@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib gg - stop sign.mtl
+mtllib stop_sign.mtl
 g default
 v 0.453405 7.443855 -0.050647
 v -0.453405 7.443855 -0.050647

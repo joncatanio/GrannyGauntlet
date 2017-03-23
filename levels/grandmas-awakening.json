@@ -4,12 +4,12 @@
       {
          "name": "Phong",
          "file-prefix": "phong",
-         "default": true
+         "default": false
       },
       {
          "name": "CookTorrance",
          "file-prefix": "cook_torr",
-         "default": false
+         "default": true
       },
       {
          "name": "Toon",
@@ -248,7 +248,7 @@
          "filename": "Mailbox_Toon.obj"
       },
       {
-         "name": "StopSign",
+         "name": "Stopsign",
          "filename": "stop_sign.obj"
       },
       {
@@ -818,15 +818,15 @@
             "y": 1.0,
             "z": 1.0
          },
-         "yAxis-rotation-deg": 0.0,
+         "yAxis-rotation-deg": 90.0,
          "physics-component": {
             "name": "WallPhysicsComponent"
          },
          "render-component": {
             "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
+            "shape": "BabyStroller",
+            "shader": "CookTorrance",
+            "material": "Obsidian"
          },
          "deliverable": false
       },
@@ -4058,6 +4058,347 @@
             "shape": "FireHydrant",
             "shader": "Toon",
             "material": "Ruby"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "BabyStrollerConnectorStreet",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 42.0,
+            "y": 1.1,
+            "z": -40.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BabyStroller",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "BabyStrollerMainStreet",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 5.0,
+            "y": 1.1,
+            "z": -5.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 25.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "BabyStroller",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "StopsignConnectorStreetEast",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 48.0,
+            "y": 1.1,
+            "z": -60.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Stopsign",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "StopsignConnectorStreetWest",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 42.0,
+            "y": 1.1,
+            "z": -10.57
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 180.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Stopsign",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxMainStreet1",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 22.0,
+            "y": 0.8,
+            "z": 9.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 90.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxMainStreet2",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -18.0,
+            "y": 0.8,
+            "z": -9.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 270.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxFinalSteet1",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -48.5,
+            "y": 0.8,
+            "z": 7.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxFinalSteet2",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -42.0,
+            "y": 0.8,
+            "z": 45.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 180.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxStartSteet1",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -48.5,
+            "y": 0.8,
+            "z": -42.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 0.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxStartSteet2",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": -15.0,
+            "y": 0.8,
+            "z": -78.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 270.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
+         },
+         "deliverable": false
+      },
+      {
+         "object-name": "MailboxStartSteet3",
+         "object-type": "DYNAMIC_OBJECT",
+         "pos": {
+            "x": 48.5,
+            "y": 0.8,
+            "z": -28.0
+         },
+         "dir": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+         },
+         "vel": 0.0,
+         "scale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+         },
+         "yAxis-rotation-deg": 180.0,
+         "physics-component": {
+            "name": "FractureObjectPhysicsComponent"
+         },
+         "render-component": {
+            "name": "WallRenderComponent",
+            "shape": "Mailbox",
+            "shader": "CookTorrance",
+            "material": "white"
          },
          "deliverable": false
       }

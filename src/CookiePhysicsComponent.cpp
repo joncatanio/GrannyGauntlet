@@ -91,7 +91,9 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
 				audioManager.playEffect("Boing");
 
 				// Other game state changes due to hit
-                gameManager.increaseTime(timeBump);
+                if(!gameManager.isInHellMode()) {
+                    gameManager.increaseTime(timeBump);
+                }
                 objHit->cookieDeliverable = false;
             }
         } else if(objTypeHit == GameObjectType::PORTAL_TO_HELL) {

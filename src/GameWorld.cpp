@@ -419,3 +419,13 @@ void GameWorld::updateInternalGameObjectLists() {
         particleSystemsToRemove_.pop();
     }
 }
+
+void GameWorld::resetDeliverables() {
+	for (std::shared_ptr<GameObject> obj : dynamicGameObjects_) {
+		obj->resetDeliverable();
+	}
+
+	for (std::shared_ptr<GameObject> obj : staticGameObjects_) {
+		obj->resetDeliverable();
+	}
+}

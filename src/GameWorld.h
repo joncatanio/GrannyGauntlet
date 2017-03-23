@@ -131,6 +131,9 @@ public:
 	// internal total of total bunny hits
 	void registerBunnyHit();
 
+	// Resets all deliverable Objects
+	void resetDeliverables();
+
 private:
 	// Collection of GameObjects in the world
 	std::vector<std::shared_ptr<GameObject>> dynamicGameObjects_;

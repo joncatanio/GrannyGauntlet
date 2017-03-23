@@ -83,6 +83,7 @@ Menu* GameManager::getMenu() {
 void GameManager::enterHell() {
     if(!hellMode_) {
         hellMode_ = true;
+        currentWorld_->resetDeliverables();
         AudioManager::instance().swapSoundtrack();
         setTime(666.0f);
     }

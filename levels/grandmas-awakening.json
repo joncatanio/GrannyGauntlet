@@ -236,8 +236,7 @@
       },
       {
          "name": "StreetLamp2",
-         "filename": "StreetLamp2.obj",
-         "manual_texture": "Grey_Concrete"
+         "filename": "StreetLamp2.obj"
       },
       {
          "name": "BabyStroller",
@@ -262,16 +261,8 @@
          "filename": "ColorPalette_0.5K.png"
       },
       {
-         "name": "Tree_Green",
-         "filename": "Forest_1x1_Green_DIFF.jpg"
-      },
-      {
          "name": "Tree_White",
          "filename": "Forest_1x1_White.jpg"
-      },
-      {
-         "name": "Tree_Blue",
-         "filename": "Forest_1x1_Blue_DIFF.jpg"
       },
       {
          "name": "Tree_Yellow",
@@ -320,10 +311,6 @@
       {
          "name": "start2",
          "filename": "menu/start2.png"
-      },
-      {
-         "name": "Grey_Concrete",
-         "filename": "grey-concrete-texture"
       }
    ],
    "level-materials": [
@@ -804,7 +791,7 @@
          "object-type": "PORTAL_TO_HELL",
          "pos": {
             "x": -27.96,
-            "y": 1.1,
+            "y": 0.77,
             "z": -93.57
          },
          "dir": {
@@ -814,9 +801,9 @@
          },
          "vel": 0.0,
          "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
+            "x": 0.75,
+            "y": 0.75,
+            "z": 0.75
          },
          "yAxis-rotation-deg": 90.0,
          "physics-component": {
@@ -3910,499 +3897,979 @@
          "deliverable": false
       }
    ],
-   "dynamic-objects": [
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -1.33,
-            "y": 1.0,
-            "z": -53.97
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
-         },
-         "deliverable": false
+  "dynamic-objects": [
+    {
+      "object-name": "fire hydrant",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -1.33,
+        "y": 1.0,
+        "z": -53.97
       },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -48.28,
-            "y": 1.0,
-            "z": -64.43
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
-         },
-         "deliverable": false
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
       },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -19.02,
-            "y": 1.0,
-            "z": 8.98
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
-         },
-         "deliverable": false
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 16.31,
-            "y": 1.0,
-            "z": -9.05
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
-         },
-         "deliverable": false
+      "physics-component": {
+        "name": "FireHydrantPhysicsComponent"
       },
-      {
-         "object-name": "fire hydrant",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -41.85,
-            "y": 1.0,
-            "z": 31.55
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "physics-component": {
-            "name": "FireHydrantPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "FireHydrant",
-            "shader": "Toon",
-            "material": "Ruby"
-         },
-         "deliverable": false
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "FireHydrant",
+        "shader": "Toon",
+        "material": "Ruby"
       },
-      {
-         "object-name": "BabyStrollerConnectorStreet",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 42.0,
-            "y": 1.1,
-            "z": -40.57
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 0.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "BabyStroller",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "deliverable": false
+    },
+    {
+      "object-name": "fire hydrant",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -48.28,
+        "y": 1.0,
+        "z": -64.43
       },
-      {
-         "object-name": "BabyStrollerMainStreet",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 5.0,
-            "y": 1.1,
-            "z": -5.57
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 25.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "BabyStroller",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
       },
-      {
-         "object-name": "StopsignConnectorStreetEast",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 48.0,
-            "y": 1.1,
-            "z": -60.57
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 0.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Stopsign",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
-      {
-         "object-name": "StopsignConnectorStreetWest",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 42.0,
-            "y": 1.1,
-            "z": -10.57
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 180.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Stopsign",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "physics-component": {
+        "name": "FireHydrantPhysicsComponent"
       },
-      {
-         "object-name": "MailboxMainStreet1",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 22.0,
-            "y": 0.8,
-            "z": 9.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 90.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "FireHydrant",
+        "shader": "Toon",
+        "material": "Ruby"
       },
-      {
-         "object-name": "MailboxMainStreet2",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -18.0,
-            "y": 0.8,
-            "z": -9.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 270.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "deliverable": false
+    },
+    {
+      "object-name": "fire hydrant",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -19.02,
+        "y": 1.0,
+        "z": 8.98
       },
-      {
-         "object-name": "MailboxFinalSteet1",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -48.5,
-            "y": 0.8,
-            "z": 7.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 0.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
       },
-      {
-         "object-name": "MailboxFinalSteet2",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -42.0,
-            "y": 0.8,
-            "z": 45.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 180.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
-      {
-         "object-name": "MailboxStartSteet1",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -48.5,
-            "y": 0.8,
-            "z": -42.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 0.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "physics-component": {
+        "name": "FireHydrantPhysicsComponent"
       },
-      {
-         "object-name": "MailboxStartSteet2",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": -15.0,
-            "y": 0.8,
-            "z": -78.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 270.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "FireHydrant",
+        "shader": "Toon",
+        "material": "Ruby"
       },
-      {
-         "object-name": "MailboxStartSteet3",
-         "object-type": "DYNAMIC_OBJECT",
-         "pos": {
-            "x": 48.5,
-            "y": 0.8,
-            "z": -28.0
-         },
-         "dir": {
-            "x": 0.0,
-            "y": 1.0,
-            "z": 0.0
-         },
-         "vel": 0.0,
-         "scale": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0
-         },
-         "yAxis-rotation-deg": 180.0,
-         "physics-component": {
-            "name": "FractureObjectPhysicsComponent"
-         },
-         "render-component": {
-            "name": "WallRenderComponent",
-            "shape": "Mailbox",
-            "shader": "CookTorrance",
-            "material": "white"
-         },
-         "deliverable": false
-      }
-   ],
+      "deliverable": false
+    },
+    {
+      "object-name": "fire hydrant",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 16.31,
+        "y": 1.0,
+        "z": -9.05
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "physics-component": {
+        "name": "FireHydrantPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "FireHydrant",
+        "shader": "Toon",
+        "material": "Ruby"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "fire hydrant",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -41.85,
+        "y": 1.0,
+        "z": 31.55
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "physics-component": {
+        "name": "FireHydrantPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "FireHydrant",
+        "shader": "Toon",
+        "material": "Ruby"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "BabyStrollerConnectorStreet",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 42.0,
+        "y": 0.77,
+        "z": -40.57
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 0.75,
+        "y": 0.75,
+        "z": 0.75
+      },
+      "yAxis-rotation-deg": 0.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "BabyStroller",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "BabyStrollerMainStreet",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 5.0,
+        "y": 0.77,
+        "z": -5.57
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 0.75,
+        "y": 0.75,
+        "z": 0.75
+      },
+      "yAxis-rotation-deg": 25.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "BabyStroller",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StopsignConnectorStreetEast",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 48.0,
+        "y": 1.1,
+        "z": -60.57
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 0.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Stopsign",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StopsignConnectorStreetWest",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 42.0,
+        "y": 1.1,
+        "z": -10.57
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 180.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Stopsign",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxMainStreet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 22.0,
+        "y": 0.8,
+        "z": 9.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxMainStreet2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -18.0,
+        "y": 0.8,
+        "z": -9.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxFinalSteet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -48.5,
+        "y": 0.8,
+        "z": 7.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 0.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxFinalSteet2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -42.0,
+        "y": 0.8,
+        "z": 45.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 180.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxStartSteet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -48.5,
+        "y": 0.8,
+        "z": -42.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 0.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxStartSteet2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -15.0,
+        "y": 0.8,
+        "z": -78.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "MailboxConnectorStreet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 48.5,
+        "y": 0.8,
+        "z": -28.0
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "yAxis-rotation-deg": 180.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "Mailbox",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightStartStreet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 15.0,
+        "y": 2.0,
+        "z": -76.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightStartStreet2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 35.0,
+        "y": 2.0,
+        "z": -76.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightStartStreet3",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -5.0,
+        "y": 2.0,
+        "z": -76.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightStartStreet4",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -25.0,
+        "y": 2.0,
+        "z": -76.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetRight1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 15.0,
+        "y": 2.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetRight2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 35.0,
+        "y": 2.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetRight3",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -5.0,
+        "y": 2.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetRight4",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -25.0,
+        "y": 2.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetLeft1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 30.0,
+        "y": 2.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetLeft2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 10.0,
+        "y": 2.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetLeft3",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -10.0,
+        "y": 2.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetLeft4",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -30.0,
+        "y": 2.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "StreetLightMainStreetLeft5",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 45.0,
+        "y": 2.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "StreetLamp2",
+        "shader": "CookTorrance",
+        "material": "Silver"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "CarMainStreetLeft1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 38.0,
+        "y": 1.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "GrandpaCar",
+        "shader": "CookTorrance",
+        "material": "white"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "CarMainStreetLeft1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": 8.0,
+        "y": 1.0,
+        "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "GrandpaCar",
+        "shader": "CookTorrance",
+        "material": "Ruby"
+      },
+      "deliverable": false
+    }
+  ],
    "lights" : [
       {
          "light-name": "primary sun",

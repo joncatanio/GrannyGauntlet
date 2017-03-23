@@ -11,18 +11,6 @@ Ni 1.000000
 d 0.222222
 illum 3
 
-newmtl Material.002
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.150794 0.150794 0.150794
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Bump -bm 5.000000 grey-concrete-texture.jpg
-map_Kd grey-concrete-texture.jpg
-
 newmtl Metal
 Ns 96.078431
 Ka 0.063492 0.063492 0.063492

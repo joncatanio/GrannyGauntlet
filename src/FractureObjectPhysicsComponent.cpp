@@ -26,10 +26,10 @@ void FractureObjectPhysicsComponent::updatePhysics(float deltaTime) {
 	holder_->setPosition(newPosition);
 	updateBoundingBox();
 
-	if (holder_->getPosition().y > 1.0f) {
+	if (holder_->fracture && holder_->getPosition().y > 0.0f) {
 		yVelocity -= gravity * deltaTime;
 	}
-	else {
+	else if (holder_->velocity != 0.0) {
 		yVelocity = 0.0f;
 		holder_->velocity = 0.0f;
 

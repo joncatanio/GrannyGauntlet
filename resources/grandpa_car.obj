@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib gg- grandpa car final.mtl
+mtllib grandpa_car.mtl
 g default
 v -1.522195 0.814483 5.364766
 v -1.522195 0.809502 5.355009

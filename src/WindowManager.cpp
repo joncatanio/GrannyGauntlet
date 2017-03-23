@@ -100,14 +100,6 @@ void WindowManager::checkForUserChanges() {
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
     }
 
-    if (isKeyPressed(GLFW_KEY_M) && !mWasPressed) {
-        textureManager.increaseTextureToggle();
-        mWasPressed = true;
-    }
-    if (!isKeyPressed(GLFW_KEY_M)) {
-        mWasPressed = false;
-    }
-
     // Hacks
     bool isDPadDownPressed = false, isDPadUpPressed = false, isPauseButtonPressed = false, isXBtnPressed;
     if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
@@ -176,6 +168,7 @@ void WindowManager::checkForUserChanges() {
         }
 
     }
+
 
 
 }

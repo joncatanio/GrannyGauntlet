@@ -54,6 +54,12 @@ public:
 	// Sets the GameObject representing the menu
 	void setMenu(std::shared_ptr<GameObject> menu);
 
+    // Sets the Skybox
+    void setSkybox(std::shared_ptr<GameObject> skybox);
+
+	// Sets the Skybox for HellMode
+	void setHellbox(std::shared_ptr<GameObject> hellbox);
+
 	// Adds a new light of any type to the game world
 	void addLight(const std::shared_ptr<Light> newLight);
 
@@ -125,6 +131,9 @@ public:
 	// internal total of total bunny hits
 	void registerBunnyHit();
 
+	// Resets all deliverable Objects
+	void resetDeliverables();
+
 private:
 	// Collection of GameObjects in the world
 	std::vector<std::shared_ptr<GameObject>> dynamicGameObjects_;
@@ -168,6 +177,12 @@ private:
 
 	// List of the area lights currently in the world
 	std::vector<std::shared_ptr<Light>> areaLights;
+
+	// Hell Mode Skybox
+	std::shared_ptr<GameObject> hellbox_;
+
+    // Hell Mode Skybox
+    std::shared_ptr<GameObject> skybox_;
 
 	// Number of update iterations
 	unsigned long updateCount;

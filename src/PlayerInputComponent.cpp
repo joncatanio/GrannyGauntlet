@@ -28,8 +28,9 @@ void PlayerInputComponent::pollGamepad() {
    GameManager& gameManager = GameManager::instance();
    AudioManager& audioManager = AudioManager::instance();
    Camera& camera = gameManager.getCamera();
-   int count;
+   int count, btnCount;
    const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+   const unsigned char* btns = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &btnCount);
    float tiltAngle = 0.0; // Player car tilt
 
    /* For PS4 and Xbox One controllers the axes count will be 6.
@@ -39,6 +40,15 @@ void PlayerInputComponent::pollGamepad() {
     * For our purposes y-joy = x-world & x-joy = z-world
     */
    float xComponent = axes[1], zComponent = -axes[0];
+
+   // D-Pad up
+   if (btns[14] == GLFW_PRESS) {
+      camera.changeAlpha(-0.1);
+   }
+   // D-Pad down
+   if (btns[16] == GLFW_PRESS) {
+      camera.changeAlpha(0.1);
+   }
 
 #ifdef _WIN32
    xComponent = -xComponent;

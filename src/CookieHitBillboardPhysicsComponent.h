@@ -18,7 +18,7 @@ public:
 
 private:
 
-	const double maxLifeTime = 1000.25;
+	const double maxLifeTime = 1.25;
 
 	double currentLifeTime = 0.0;
 };

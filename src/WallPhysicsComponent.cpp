@@ -42,6 +42,9 @@ void WallPhysicsComponent::updateAnimation(float deltaTime) {
         velocity = startVelocity;
         if (numberOfJumps == maxJumps) {
             animated = false;
+            if(GameManager::instance().isInHellMode()) {
+                holder_->cookieDeliverable = true;
+            }
             return;
         }
     }

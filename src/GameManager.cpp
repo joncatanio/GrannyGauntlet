@@ -46,7 +46,9 @@ void GameManager::printInfoToConsole(float currentFPS) {
 }
 
 void GameManager::reportScore(float score) {
-	score_ += score;
+   if (!hellMode_) {
+	   score_ += score;
+   }
 }
 
 void GameManager::setTime(float time) {
@@ -54,10 +56,12 @@ void GameManager::setTime(float time) {
 }
 
 void GameManager::decreaseTime(float deltaTime) {
-    time_ -= deltaTime;
-	if(time_ <= 0.0) {
-		gameOver_ = true;
-	}
+   if (!hellMode_) {
+      time_ -= deltaTime;
+      if(time_ <= 0.0) {
+         gameOver_ = true;
+      }
+   }
 }
 
 void GameManager::increaseTime(float deltaTime) {
@@ -98,13 +102,12 @@ void GameManager::showScore() {
         if(time_ <= 0.0) {
             menu_->setLostMenu();
             menu_->toggleMenuActive();
-        } else {
+        } else if (menu_->currentMenu != menu_->winMenu) {
             reportScore(time_ * 100);
             menu_->setWonMenu();
             menu_->toggleMenuActive();
         }
     }
-	std::cout << "SCORE " << score_ << std::endl;
 }
 
 float GameManager::getScore() {

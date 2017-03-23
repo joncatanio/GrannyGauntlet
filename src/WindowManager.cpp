@@ -45,6 +45,7 @@ void WindowManager::update() {
 }
 
 void WindowManager::updateGui() {
+   GameManager& gameManager = GameManager::instance();
    ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar |
       ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
       ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
@@ -60,7 +61,11 @@ void WindowManager::updateGui() {
       // Display the score
       ImGui::SetNextWindowPos(ImVec2(25, 25), ImGuiSetCond_FirstUseEver);
       ImGui::Begin("score_window", &score_window, flags);
-      ImGui::Text("SCORE: %d", static_cast<int>(GameManager::instance().getScore()));
+      if (gameManager.isInHellMode()) {
+         ImGui::Text("SCORE: 666");
+      } else {
+         ImGui::Text("SCORE: %d", static_cast<int>(GameManager::instance().getScore()));
+      }
       ImGui::End();
 
    }
@@ -69,7 +74,11 @@ void WindowManager::updateGui() {
       // Display the time
       ImGui::SetNextWindowPos(ImVec2(25, 65), ImGuiSetCond_FirstUseEver);
       ImGui::Begin("time_window", &time_window, flags);
-      ImGui::Text("TIME REMAINING: %d", static_cast<int>(GameManager::instance().getTime()));
+      if (gameManager.isInHellMode()) {
+         ImGui::Text("TIME REMAINING: 666");
+      } else {
+         ImGui::Text("TIME REMAINING: %d", static_cast<int>(GameManager::instance().getTime()));
+      }
       ImGui::End();
    }
 

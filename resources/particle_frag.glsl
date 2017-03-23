@@ -1,6 +1,8 @@
 #version 330 core
 uniform sampler2D textureMap;
 
+uniform bool hellMode;
+
 in float life;
 
 out vec4 Outcolor;
@@ -28,7 +30,12 @@ void main()
 
     	float alpha = texture(textureMap, pointCoord).r;
 
-    vec3 color = (1.0 - life) * vec3(0.0, 0.0, 1.0) + life * vec3(0.0, 1.0, 1.0);
+     vec3 color;
+    if(hellMode) {
+        color = (1.0 - life) * vec3(1.0, 0.0, 0.0) + life * vec3(1.0, 1.0, 0.0);
+    } else {
+        color = (1.0 - life) * vec3(0.0, 0.0, 1.0) + life * vec3(0.0, 1.0, 1.0);
+    }
 
 	Outcolor = vec4(color, alpha);
 }

@@ -75,6 +75,8 @@ void Program::addDefaultAttributesAndUniforms() {
 	// I'd give this a TODO to remove but I don't think this is gonna change at this point
 	addUniform("colorScale");
 
+	addUniform("hellMode");
+
 	addUniform("shadowMapTex");
 	addUniform("textureMap");
 

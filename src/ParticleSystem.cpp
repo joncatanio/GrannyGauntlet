@@ -115,6 +115,8 @@ void ParticleSystem::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<Matrix
 
     ShaderManager& shaderManager = ShaderManager::instance();
     const std::shared_ptr<Program> shaderProgram = shaderManager.bindShader("Particle");
+    // hell mode
+    glUniform1i(shaderProgram->getUniform("hellMode"), GameManager::instance().isInHellMode());
 
     texture.bind(0, shaderProgram);
 

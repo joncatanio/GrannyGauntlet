@@ -206,6 +206,9 @@ void ShaderManager::renderObject(std::shared_ptr<GameObject> objToRender, const 
 
         glUniform1i(shaderProgram->getUniform("shadowMapTex"), 0);
 
+		float colorScale = gameManager.getGlobalColorScale();
+		glUniform1f(shaderProgram->getUniform("colorScale"), colorScale);
+
       if (objToRender->fracture) {
          shape->fracture(shaderProgram, material, M, objToRender);
       } else {

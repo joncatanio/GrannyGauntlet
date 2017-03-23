@@ -72,6 +72,9 @@ void Program::addDefaultAttributesAndUniforms() {
 	// TODO(rgarmsen2295): Remove from default attributes
 	addUniform("billboardTransform");
 
+	// I'd give this a TODO to remove but I don't think this is gonna change at this point
+	addUniform("colorScale");
+
 	addUniform("shadowMapTex");
 	addUniform("textureMap");
 

@@ -26,6 +26,23 @@ void PlayerPhysicsComponent::initObjectPhysics() {
 }
 
 void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
+	GameManager& gameManager = GameManager::instance();
+	float colorScale = gameManager.getGlobalColorScale();
+	colorScale = std::max(0.0f, colorScale - (deltaTime / 5.0f));
+	gameManager.setGlobalColorScale(colorScale);
+
+	if (!holder_->canMove) {
+
+		// Don't want player's time to go down while frozen
+		gameManager.increaseTime(deltaTime);
+
+		if (colorScale == 0.0f) {
+
+			// If the world is all greyed out, allow the player to start!
+			holder_->canMove = true;
+		}
+	}
+
    if (holder_->toggleMovement && holder_->velocity != 0.0f) {
       glm::vec3 oldPosition = holder_->getPosition();
       glm::vec3 newPosition = oldPosition + (holder_->velocity *

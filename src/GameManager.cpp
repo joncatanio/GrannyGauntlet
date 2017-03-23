@@ -56,7 +56,7 @@ void GameManager::setTime(float time) {
 void GameManager::decreaseTime(float deltaTime) {
     time_ -= deltaTime;
 	if(time_ <= 0.0) {
-		//gameOver_ = true;
+		gameOver_ = true;
 	}
 }
 

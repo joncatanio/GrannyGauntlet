@@ -1693,7 +1693,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1723,7 +1723,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1753,7 +1753,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1783,7 +1783,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1813,7 +1813,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1843,7 +1843,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1873,7 +1873,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1903,7 +1903,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1933,7 +1933,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1963,7 +1963,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -1993,7 +1993,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -2023,7 +2023,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -2053,7 +2053,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -2083,7 +2083,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },
@@ -2113,7 +2113,7 @@
             "name": "WallRenderComponent",
             "shape": "Cube",
             "shader": "Default",
-            "material": "Emerald"
+            "material": "Silver"
          },
          "deliverable": false
       },

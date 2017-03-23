@@ -90,6 +90,12 @@ void GameManager::enterHell() {
         currentWorld_->resetDeliverables();
         AudioManager::instance().swapSoundtrack();
         setTime(666.0f);
+
+        for (std::shared_ptr<GameObject> obj : currentWorld_->staticGameObjects_) {
+           if (obj->cookieDeliverable) {
+              obj->triggerDeliveryAnimation();
+           }
+        }
     }
 }
 

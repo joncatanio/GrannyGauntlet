@@ -30,10 +30,14 @@ void WallPhysicsComponent::startDeliveryAnimation() {
     originalPosition = holder_->getPosition();
     velocity = startVelocity;
     numberOfJumps = 0;
+
+    if (GameManager::instance().isInHellMode()) {
+      maxJumps = 200000;
+    }
 }
 
 void WallPhysicsComponent::updateAnimation(float deltaTime) {
-
+    GameManager& gameManager = GameManager::instance();
     glm::vec3 currentPosition = holder_->getPosition();
 
     if (currentPosition.y < originalPosition.y - 0.00001) {

@@ -4838,12 +4838,108 @@
       "deliverable": false
     },
     {
-      "object-name": "CarMainStreetLeft1",
+      "object-name": "CarMainStreetRight2",
       "object-type": "DYNAMIC_OBJECT",
       "pos": {
         "x": 8.0,
         "y": 1.0,
         "z": 8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 270.0,
+      "yAxis-rotation-deg": 270.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "GrandpaCar",
+        "shader": "CookTorrance",
+        "material": "Ruby"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "CarMainStreetRight1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -28.0,
+        "y": 1.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "GrandpaCar",
+        "shader": "CookTorrance",
+        "material": "Emerald"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "CarMainStreetRight2",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -5.0,
+        "y": 1.0,
+        "z": -8.5
+      },
+      "dir": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "vel": 0.0,
+      "scale": {
+        "x": 2.0,
+        "y": 2.0,
+        "z": 2.0
+      },
+      "orient-angle-deg": 90.0,
+      "yAxis-rotation-deg": 90.0,
+      "physics-component": {
+        "name": "FractureObjectPhysicsComponent"
+      },
+      "render-component": {
+        "name": "WallRenderComponent",
+        "shape": "GrandpaCar",
+        "shader": "CookTorrance",
+        "material": "Obsidian"
+      },
+      "deliverable": false
+    },
+    {
+      "object-name": "CarStartStreet1",
+      "object-type": "DYNAMIC_OBJECT",
+      "pos": {
+        "x": -8.0,
+        "y": 1.0,
+        "z": -77.0
       },
       "dir": {
         "x": 0.0,

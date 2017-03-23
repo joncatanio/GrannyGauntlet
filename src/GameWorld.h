@@ -134,12 +134,12 @@ public:
 	// Resets all deliverable Objects
 	void resetDeliverables();
 
+	// Collection of static geometry in the world - these should never move
+	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
+
 private:
 	// Collection of GameObjects in the world
 	std::vector<std::shared_ptr<GameObject>> dynamicGameObjects_;
-
-	// Collection of static geometry in the world - these should never move
-	std::vector<std::shared_ptr<GameObject>> staticGameObjects_;
 
 	// Collection of Particle Systems in the world
 	std::vector<std::shared_ptr<ParticleSystem>> particleSystems_;

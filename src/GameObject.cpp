@@ -278,7 +278,9 @@ std::shared_ptr<BoundingBox> GameObject::getBoundingBox() {
 }
 
 void GameObject::triggerDeliveryAnimation() {
-	physics_->startDeliveryAnimation();
+   if (physics_ != NULL) {
+	   physics_->startDeliveryAnimation();
+   }
 }
 
 GameObjectType GameObject::stringToType(std::string type) {

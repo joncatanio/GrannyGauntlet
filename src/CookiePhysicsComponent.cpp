@@ -7,7 +7,6 @@
 #include "GameWorld.h"
 
 CookiePhysicsComponent::CookiePhysicsComponent() {
-
 }
 
 CookiePhysicsComponent::~CookiePhysicsComponent() {
@@ -19,6 +18,7 @@ void CookiePhysicsComponent::initObjectPhysics() {
     gravity = 10.0;
     yVelocity = 0.0;
     epsilon = 0.5;
+    downTime = 0.0f;
     cookieState = {0, glfwGetTime(), holder_->getPosition(), std::vector<glm::vec3>(), 0.0};
 }
 
@@ -38,6 +38,11 @@ void CookiePhysicsComponent::updatePhysics(float deltaTime) {
     } else {
         yVelocity = 0.0f;
         holder_->velocity = 0.0f;
+        downTime += deltaTime;
+
+        if (downTime >= 5.0) {
+           world.rmDynamicGameObject(holder_);
+        }
     }
 
     if(animated){

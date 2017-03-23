@@ -34,6 +34,7 @@ private:
     CookieState cookieState;
     float calculateScore();
     float distanceTraveled();
+    float downTime;
 
     /* Animation data */
     bool animated = true;

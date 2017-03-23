@@ -35,6 +35,11 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
 	if (colorScale == 0.0f) {
 		holder_->canMove = true;
 	}
+	else if (!holder_->canMove) {
+
+		// Don't want player's time to go down while frozen
+		gameManager.increaseTime(deltaTime);
+	}
 
    if (holder_->toggleMovement && holder_->velocity != 0.0f) {
       glm::vec3 oldPosition = holder_->getPosition();

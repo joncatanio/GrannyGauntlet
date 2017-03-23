@@ -69,9 +69,9 @@ void GameObject::initComponents() {
 	    action_->initActionComponent();
 	}
 
-    if(cookieDeliverable) {
+    /*if(cookieDeliverable) {
         createMarkerObject();
-    }
+    }*/
 }
 
 void GameObject::createMarkerObject() {
@@ -169,9 +169,9 @@ void GameObject::update(double deltaTime) {
 		physics_->updatePhysics(deltaTime);
 	}
 
-    if (cookieDeliverable) {
+    /*if (cookieDeliverable) {
         arrow_->update(deltaTime);
-    }
+    }*/
 
    // Currently only used for PLAYER types to update internal power state
    updatePowerups(deltaTime);
@@ -180,10 +180,10 @@ void GameObject::update(double deltaTime) {
 void GameObject::draw(std::shared_ptr<MatrixStack> P, std::shared_ptr<MatrixStack> M, std::shared_ptr<MatrixStack> V) {
 	if (render_ != NULL) {
 		render_->draw(P, M, V);
-        if(cookieDeliverable) {
+        /*if(cookieDeliverable) {
             std::shared_ptr<MatrixStack> M2 = std::make_shared<MatrixStack>();
             arrow_->draw(P, M2, V);
-        }
+        }*/
 	}
 }
 

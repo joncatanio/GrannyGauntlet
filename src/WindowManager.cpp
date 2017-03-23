@@ -100,7 +100,26 @@ void WindowManager::checkForUserChanges() {
         std::cout << "Switched to " << shaderManager.ToonShader << " shader!" << std::endl;
     }
 
-    if (!menuKeyWasPressed && isKeyPressed(GLFW_KEY_ESCAPE)) {
+    // Hacks
+    bool isDPadDownPressed = false, isDPadUpPressed = false, isPauseButtonPressed = false, isXBtnPressed;
+    if (glfwJoystickPresent(GLFW_JOYSTICK_1)) {
+       int count;
+       const unsigned char* btns = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count);  
+
+       // PS4 controller specs
+       // Option button
+       isPauseButtonPressed = btns[9] == GLFW_PRESS ? true : false;
+       // D-Pad down
+       isDPadDownPressed = btns[16] == GLFW_PRESS ? true : false;
+       // D-Pad up
+       isDPadUpPressed = btns[14] == GLFW_PRESS ? true : false;
+       // X button
+       isXBtnPressed = btns[1] == GLFW_PRESS ? true : false;
+    } else {
+       isDPadUpPressed = isDPadDownPressed = isPauseButtonPressed = isXBtnPressed = false;
+    }
+
+    if (!menuKeyWasPressed && (isKeyPressed(GLFW_KEY_ESCAPE) || isPauseButtonPressed)) {
         // Should close the GLFW window
         //glfwSetWindowShouldClose(window_, GL_TRUE);
 
@@ -117,34 +136,34 @@ void WindowManager::checkForUserChanges() {
             }
         }
     }
-    if (menuKeyWasPressed && !isKeyPressed(GLFW_KEY_ESCAPE)) {
+    if (menuKeyWasPressed && !isKeyPressed(GLFW_KEY_ESCAPE) && !isPauseButtonPressed) {
         menuKeyWasPressed = false;
     }
 
 
     if(gameManager.getMenu()->isActive()) {
-        if(isKeyPressed(GLFW_KEY_UP) && !upWasPressed){
+        if((isKeyPressed(GLFW_KEY_UP) || isDPadUpPressed) && !upWasPressed){
             gameManager.getMenu()->selectedItemDown();
             upWasPressed = true;
         }
-        if(!isKeyPressed(GLFW_KEY_UP)) {
+        if(!isKeyPressed(GLFW_KEY_UP) && !isDPadUpPressed) {
             upWasPressed = false;
         }
 
-        if(isKeyPressed(GLFW_KEY_DOWN) && !downWasPressed) {
+        if((isKeyPressed(GLFW_KEY_DOWN) || isDPadDownPressed) && !downWasPressed) {
             gameManager.getMenu()->selectedItemUp();
             downWasPressed = true;
         }
-        if(!isKeyPressed(GLFW_KEY_DOWN)) {
+        if(!isKeyPressed(GLFW_KEY_DOWN) && !isDPadDownPressed) {
             downWasPressed = false;
         }
 
-        if(isKeyPressed(GLFW_KEY_ENTER) && !spaceWasPressed) {
+        if((isKeyPressed(GLFW_KEY_ENTER) || isXBtnPressed) && !spaceWasPressed) {
             gameManager.getMenu()->performMenuAction();
             spaceWasPressed = true;
         }
 
-        if(!isKeyPressed(GLFW_KEY_ENTER)) {
+        if(!isKeyPressed(GLFW_KEY_ENTER) && !isXBtnPressed) {
             spaceWasPressed = false;
         }
 

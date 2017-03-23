@@ -31,14 +31,16 @@ void PlayerPhysicsComponent::updatePhysics(float deltaTime) {
 	colorScale = std::max(0.0f, colorScale - (deltaTime / 5.0f));
 	gameManager.setGlobalColorScale(colorScale);
 
-	// If we're all greyed out, allow the player to start!
-	if (colorScale == 0.0f) {
-		holder_->canMove = true;
-	}
-	else if (!holder_->canMove) {
+	if (!holder_->canMove) {
 
 		// Don't want player's time to go down while frozen
 		gameManager.increaseTime(deltaTime);
+
+		if (colorScale == 0.0f) {
+
+			// If the world is all greyed out, allow the player to start!
+			holder_->canMove = true;
+		}
 	}
 
    if (holder_->toggleMovement && holder_->velocity != 0.0f) {

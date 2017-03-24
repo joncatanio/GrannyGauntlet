@@ -1,17 +1,45 @@
-body {
-   font-family: 'Open Sans', sans-serif;
-   margin: 50px 75px 50px 75px;
-}
-
-img {
-   width: 256px;
-   height: 256px;
+@font-face {
+   font-family: "Sketch3D";
+   src: url("fonts/sketch3d.otf") format("opentype");
 }
 
 #page_title {
-   font-size: 36px;
+   font-family: "Sketch3D";
+   font-size: 72px;
 }
 
 #page_author {
-   font-size: 22px;
+   font-size: 16px;
+}
+
+body {
+   font-family: 'Open Sans', sans-serif;
+   width: 850px;
+   margin: 40px auto 40px auto;
+}
+
+img {
+   width: 720px;
+   height: 382px;
+}
+
+h2 {
+   font-family: "Sketch3D";
+   font-size: 38px;
+}
+
+h3 {
+   font-style: italic;
+}
+
+a:link,
+a:visited {
+   color: #165788;
+   text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+   text-decoration: underline;
 }

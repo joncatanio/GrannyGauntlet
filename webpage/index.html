@@ -1,17 +1,150 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <title>Granny Gauntlet</title>
       <link rel="stylesheet" href="styles.css">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans"
          rel="stylesheet">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+      <link rel="shortcut icon" href="favicon.ico">
    </head>
    <body>
       <div id="page_title" align="center">
          Granny Gauntlet
       </div>
       <div id="page_author" align="center">
-         By: Jon Catanio, Alex Ehm, Reed Garmsen
+         Creators: Jon Catanio, Alex Ehm, Reed Garmsen
       </div>
+      <div id="game-links" align="center">
+         <i class="fa fa-github"></i>
+         <a style="margin-left: 8px"
+            href="https://github.com/joncatanio/GrannyGauntlet">GitHub Source</a>
+      </div>
+      <h2>Game Concept</h2>
+      <p>The idea for this game was sparked one day on Jon's way to class. When driving
+         to school he was almost ran off the road by an older driver. He thought
+         a wreckless driving game with a Grandma as the main character would
+         be hilariously fun. The game needed more than simply driving around,
+         we thought about what other things grandmas like to do. Well, our grandmas
+         bake cookies! Thus, Granny Gauntlet was born!</p>
+      <p>We decided to go with a toon style graphical game. With only a ten
+         week timeline we thought that is would be the best option to properly
+         scope the project and finish with a polished game. The best suited
+         art style for us was low-poly models and non-photorealistic
+         environments.</p>
+      <p>Mechanically our game is similar to old school games like Paperboy.
+         To emulate wreckless driving we did a lot of work on the camera, having
+         it be attached to a weak-spring system and allowing the car to tilt on turns.
+         The aiming attachment allows the player to shoot cookies 180 degrees
+         around the front of the player. For a more rich experience we decided
+         that Granny's cookies bring life back to the town. At the beginning
+         of the level the town will shift to greyscale, upon delivering cookies
+         the houses will regain their color!</p>
+      <h2>How to Play</h2>
+      <p>Granny Gauntlet may be played with a controller or mouse/keyboard. We
+         recommend playing with a controller as it seems to be more intuitive.</p>
+      <h3>Controller</h3>
+      <ul>
+         <li>Left Joystick - driving around, players can enter drive by pushing
+             the joystick forward, or reverse by pushing the joystick backward.
+         </li>
+         <li>Right Joystick - controls the aiming attachment.</li>
+         <li>Right Trigger - lobs a cookie from the vehicle. Tip: holding down
+             the trigger powers up the shot, the aiming component will begin
+             to change color indicating the level of power.</li>
+         <li>D-pad up/down - controls the camera's vertical position relative
+             to the vehicle. If the game is paused this controls selecting.</li>
+         <li>Right Trigger (Pressed) - tows car back to starting position if
+             Granny gets stuck, deducts points on use.</li>
+         <li>Option/Select - pauses the game.</li>
+      </ul>
+      <h3>Mouse/Keyboard</h3>
+      <ul>
+         <li>WASD - driving around.</li>
+         <li>IJKL - controls the aiming attachment.</li>
+         <li>O - tows car back to starting position if Granny gets stuck,
+             deducts points on use.</li>
+         <li>ESC - pauses the game.</li>
+      </ul>
+      <h2>Promo Vid</h2>
+      <iframe width="560" height="315"
+         src="https://www.youtube.com/embed/fbzmV-kpy-4?ecver=1" frameborder="0"
+         allowfullscreen></iframe>
+      <h2>Technologies</h2>
+      <ul>
+         <li>Entity Component System</li>
+         <li>Octree</li>
+         <li>AABB Collision Detection</li>
+         <li>Complex Collision Response: Object Fracturing</li>
+         <li>Hierarchical View Frustum Culling</li>
+         <li>Weak-Spring Camera System</li>
+         <li>Shadow Mapping</li>
+         <li>Cook Torrance, Phong, and Toon Shading</li>
+         <li>Particle Systems</li>
+         <li>Textured Modelling</li>
+         <li>Billboarding</li>
+         <li>Custom Physics / Rigid Body Character Motion</li>
+         <li>JSON Level Loader</li>
+         <li>Controller Support</li>
+         <li>Cross-Platform: Windows / OSX / Linux</li>
+      </ul>
+      <h2>Screenshots</h2>
+      <p>Below are screenshots of Granny Gauntlet, click any to enlarge.</p>
+      <div align="center">
+         <figure>
+            <a href="screenshots/CookieInFlight.png"><img
+               alt="Cookie in flight" src="screenshots/CookieInFlight.png"></a>
+            <figcaption>Cookie in flight</figcaption>
+         </figure>
+         <figure>
+            <a href="screenshots/drifting.png"><img alt="Player drifting"
+               src="screenshots/drifting.png"></a>
+            <figcaption>Player drifting</figcaption>
+         </figure>
+         <figure>
+            <a href="screenshots/fracturing1.png"><img alt="Fracturing fire
+               hydrant (notice fragment shadows to the left), billboard and
+               particles spawning"
+               src="screenshots/fracturing1.png"></a>
+            <figcaption>Fracturing fire hydrant (notice fragment shadows to the
+               left).<br>The billboard and particles are also spawning.</figcaption>
+         </figure>
+         <figure>
+            <a href="screenshots/fracturing2.png"><img alt="Fracturing baby crib"
+               src="screenshots/fracturing2.png"></a>
+            <figcaption>Fracturing baby crib</figcaption>
+         </figure>
+         <figure>
+            <a href="screenshots/HellModeParticles1.png"><img alt="Hell-mode
+               particle system from fire hydrant"
+               src="screenshots/HellModeParticles1.png"></a>
+            <figcaption>Hell-mode particle system from fire hydrant</figcaption>
+         </figure>
+         <figure>
+            <a href="screenshots/HellModeParticles2.png"><img alt="Hell-mode
+               particle system and aiming component mid-charge"
+               src="screenshots/HellModeParticles2.png"></a>
+            <figcaption>Hell-mode particle system and aiming component
+               mid-charge</figcaption>
+         </figure>
+      </div>
+      <h2>External Libraries</h2>
+      <ul>
+         <li><a href="http://www.fmod.com/">FMOD (Audio)</a></li>
+         <li><a href="https://github.com/ocornut/imgui">ImGui (GUI Text)</a></li>
+         <li>
+            <a href="https://syoyo.github.io/tinyobjloader/">Tiny Obj Loader</a></li>
+         </li>
+      </ul>
+      <h2>References</h2>
+      <ul>
+         <li><a href="http://www.fmod.org/documentation/#content/generated/common/introduction_web.html"
+            >FMOD Documentation</a></li>
+         <li><a href="https://www.amazon.com/Real-Time-Rendering-Third-Tomas-Akenine-Moller/dp/1568814240/ref=sr_1_1?ie=UTF8&qid=1490385434&sr=8-1&keywords=real+time+rendering">
+            Real-Time Rendering</a></li>
+         <li><a href="http://gafferongames.com/game-physics/spring-physics/">
+            Spring Physics Tutorial Used For Player Camera</a></li>
+      </ul>
       <h2>Contact</h2>
       <p>If needed feel free to contact me at joncatanio at gmail. Or check
          out <a href="http://joncatanio.com">my personal website</a> for other

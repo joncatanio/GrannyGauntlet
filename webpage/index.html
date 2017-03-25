@@ -54,7 +54,7 @@
              to change color indicating the level of power.</li>
          <li>D-pad up/down - controls the camera's vertical position relative
              to the vehicle. If the game is paused this controls selecting.</li>
-         <li>Right Trigger (Pressed) - tows car back to starting position if
+         <li>Right Joystick (Pressed) - tows car back to starting position if
              Granny gets stuck, deducts points on use.</li>
          <li>Option/Select - pauses the game.</li>
       </ul>
@@ -73,16 +73,17 @@
       <h2>Technologies</h2>
       <ul>
          <li>Entity Component System</li>
-         <li>Octree</li>
          <li>AABB Collision Detection</li>
+         <li>Hierarchical Collision Detection using an Octree</li>
          <li>Complex Collision Response: Object Fracturing</li>
-         <li>Hierarchical View Frustum Culling</li>
+         <li>Hierarchical View Frustum Culling using an Octree</li>
          <li>Weak-Spring Camera System</li>
          <li>Shadow Mapping</li>
          <li>Cook Torrance, Phong, and Toon Shading</li>
          <li>Particle Systems</li>
          <li>Textured Modelling</li>
          <li>Billboarding</li>
+         <li>Mini-map</li>
          <li>Custom Physics / Rigid Body Character Motion</li>
          <li>JSON Level Loader</li>
          <li>Controller Support</li>
@@ -130,6 +131,9 @@
       </div>
       <h2>External Libraries</h2>
       <ul>
+         <li><a href="http://glew.sourceforge.net/">GLEW (OpenGL Extensions)</a></li>
+         <li><a href="http://www.glfw.org/">GLFW (Windowing)</a></li>
+         <li><a href="http://glm.g-truc.net/0.9.8/index.html">GLM (Math)</a></li>
          <li><a href="http://www.fmod.com/">FMOD (Audio)</a></li>
          <li><a href="https://github.com/ocornut/imgui">ImGui (GUI Text)</a></li>
          <li>
@@ -144,10 +148,16 @@
             Real-Time Rendering</a></li>
          <li><a href="http://gafferongames.com/game-physics/spring-physics/">
             Spring Physics Tutorial Used For Player Camera</a></li>
+        <li><a href="https://www.gamedev.net/resources/_/technical/game-programming/introduction-to-octrees-r3529">
+            Octree Tutorial/Explanation</a></li>
+        <li><a href="http://ruh.li/GraphicsCookTorrance.html">
+            Cook-Torrance Math</a></li>
+        <li><a href="http://prideout.net/blog/?tag=toon-shader">
+            Simple Toon Shading Explanation</a></li>
       </ul>
       <h2>Contact</h2>
       <p>If needed feel free to contact me at joncatanio at gmail. Or check
          out <a href="http://joncatanio.com">my personal website</a> for other
-         methods.</p>
+         methods. Reed can be reached at rgarmsen2295 at gmail.</p>
    </body>
 </html>
